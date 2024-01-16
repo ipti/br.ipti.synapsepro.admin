@@ -42,7 +42,7 @@ interface PropsPadding {
 }
 
 export const Padding =styled.div<PropsPadding> `
-    padding: ${(props) => props.padding || "4px"};
+    padding: ${(props: any) => props.padding || "4px"};
 `;
 
 export const Container = styled.div`
@@ -50,7 +50,7 @@ export const Container = styled.div`
   height: auto;
   overflow-y: auto;
   width: 100%;
-  padding: 4%;
+  padding: 4% 16%;
   font-size: ${styles.typography.font.medium};
   font-family: ${styles.typography.types.inter};
 `;
