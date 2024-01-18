@@ -1,6 +1,6 @@
 import { RadioButton } from "primereact/radiobutton";
 import TextInput from "../../../Components/TextInput";
-import { Column } from "../../../Styles/styles";
+import { Column, Padding, Row } from "../../../Styles/styles";
 import { PropsRadioButtonCard } from "../../../Types/types";
 import { useState } from "react";
 
@@ -10,14 +10,15 @@ export default function RadioButtonCard({
   index,
 }: PropsRadioButtonCard) {
   return (
-    <div className="card flex justify-content w-full">
-      <div className="flex flex-column gap-3 w-full">
+    <div className="card ">
+      <div className="flex flex-column gap-3">
         {options?.map((item, indexRadioButton) => {
           return (
-            <div key={indexRadioButton} className="flex align-item">
+            <Row key={indexRadioButton}>
               <Column id="center">
                 <RadioButton name="item" />
               </Column>
+              <Padding padding="4px" />
               <ControllerInput
                 item={item}
                 editLabel={editLabel!}
@@ -25,7 +26,7 @@ export default function RadioButtonCard({
                 indexRadioButton={indexRadioButton}
               />
               {/* <label htmlFor={item.key} className="ml-2">{item.label}</label> */}
-            </div>
+            </Row>
           );
         })}
       </div>
