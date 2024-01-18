@@ -1,10 +1,13 @@
-import React from "react";
 
 
-import CreateForms from "./Pages/CreateForms";
+import AplicationProvider from "./Context/Aplication/context";
+import RoutesApp from "./Router/router";
 function App() {
   return (
-        <CreateForms />
+    <AplicationProvider>
+
+      <RoutesApp />
+    </AplicationProvider>
   );
 }
 

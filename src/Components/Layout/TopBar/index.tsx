@@ -1,5 +1,6 @@
 
 
+import { useNavigate } from "react-router-dom";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import LogoutTopBar from "./Logout";
 import { Back, Container } from "./style";
@@ -9,7 +10,7 @@ const TopBar = () => {
     const larguraTela = window.innerWidth;
 
 
-    
+    const history = useNavigate()
 
     return (
         <Container>
@@ -20,7 +21,7 @@ const TopBar = () => {
                             <i className="pi pi-bars" style={{ fontSize: '1.5rem' }} onClick={() => {}} />
                         </Column>
                         : null}
-                    <Back onClick={() => {}}>
+                    <Back onClick={() => {history(-1)}}>
                         <i className="pi pi-angle-left" style={{ fontSize: '1.2rem' }}></i>
                         <Padding padding="2px" />
                         Voltar

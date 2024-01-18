@@ -1,14 +1,15 @@
 import { RadioButton } from "primereact/radiobutton";
+import { useEffect, useState } from "react";
 import TextInput from "../../../Components/TextInput";
 import { Column, Padding, Row } from "../../../Styles/styles";
-import { PropsRadioButtonCard } from "../../../Types/types";
-import { useState } from "react";
+import { PropsRadioButtonCardCreate } from "../../../Types/types";
 
 export default function RadioButtonCard({
   options,
   editLabel,
   index,
-}: PropsRadioButtonCard) {
+  deleteOptions
+}: PropsRadioButtonCardCreate) {
   return (
     <div className="card ">
       <div className="flex flex-column gap-3">
@@ -19,12 +20,18 @@ export default function RadioButtonCard({
                 <RadioButton name="item" />
               </Column>
               <Padding padding="4px" />
-              <ControllerInput
-                item={item}
-                editLabel={editLabel!}
-                index={index}
-                indexRadioButton={indexRadioButton}
-              />
+              <Row id="space-between" style={{ width: "100%" }}>
+                <ControllerInput
+                  item={item}
+                  editLabel={editLabel!}
+                  index={index}
+                  indexRadioButton={indexRadioButton}
+                />
+                <Padding padding="4px" />
+                <Column id="center">
+                  <i className="pi pi-trash" style={{ cursor: "pointer" }} onClick={() => deleteOptions(index, indexRadioButton)} />
+                </Column>
+              </Row>
               {/* <label htmlFor={item.key} className="ml-2">{item.label}</label> */}
             </Row>
           );
@@ -51,14 +58,22 @@ const ControllerInput = ({
   indexRadioButton,
   item,
 }: ControllerInputProps) => {
-  const [label, setlabel] = useState(item?.label);
+  const [label, setlabel] = useState("");
+
+  useEffect(() => {
+    setlabel(item?.label)
+  }, [item?.label])
+  
+
   return (
-    <TextInput
-      value={label}
-      onBlur={() => {
-        editLabel!(index, indexRadioButton, label);
-      }}
-      onChange={(e) => setlabel(e.target.value)}
-    />
+    <div className="w-full">
+      <TextInput
+        value={label}
+        onBlur={() => {
+          editLabel!(index, indexRadioButton, label);
+        }}
+        onChange={(e) => setlabel(e.target.value)}
+      />
+    </div>
   );
 };
