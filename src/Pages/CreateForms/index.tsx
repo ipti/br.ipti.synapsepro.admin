@@ -13,7 +13,7 @@ import RadioButtonCard from "./RadioButtonCard";
 import { useNavigate } from "react-router-dom";
 
 const CreateForms = () => {
-  const {form, setform} = useContext(AplicationContext) as PropsAplicationContext
+  const { form, setform } = useContext(AplicationContext) as PropsAplicationContext
   const [openInput, setopenInput] = useState(false);
   const [multSelect, setMultSelect] = useState({ name: "Resposta Curta", type: "text" });
 
@@ -30,7 +30,7 @@ const CreateForms = () => {
       newData[index] = {
         ...newData[index],
         type: novoAtributo,
-        options: [{value: 1, label: "Options 1"},],
+        options: [{ value: 1, label: "Options 1" },],
       };
       set(newData);
     } else {
@@ -83,96 +83,107 @@ const CreateForms = () => {
   const history = useNavigate()
 
   return (
-      <Container>
-         {form.length > 0 ? <Button
-          label="Preview"
-          onClick={() =>
-            history("/view")
-          }
-        /> : null}
-        {form?.map((item, index) => {
-          return (
-            <Padding padding="4px" key={index}>
-              <Card>
-                <Padding padding="32px">
-                  <Row id="space-between">
-                    <Column id="center">
-                      {!openInput ? (
-                        <p
-                          onClick={() => {
-                            setopenInput(true);
-                          }}
-                        >
-                          {item.label}
-                        </p>
-                      ) : (
+    <Container>
+      {form.length > 0 ?
+        <Row id="end" style={{ gap: "4px" }}>
+          <Button
+            label="Preview"
+            onClick={() =>
+              history("/view")
+            }
+          />    <Button
+            label="Salvar"
+            onClick={() =>
+              history("/view")
+            }
+          />         </Row>
+        : null}
+      {form?.map((item, index) => {
+        return (
+          <Padding padding="4px" key={index}>
+            <Card>
+              <Padding padding="32px">
+                <Row id="space-between">
+                  <Column id="center">
+                    {!openInput ? (
+                      <p
+                        onClick={() => {
+                          setopenInput(true);
+                        }}
+                      >
+                        {item.label}
+                      </p>
+                    ) : (
+                      <Column style={{width: "100%"}}>
                         <TextAreaComponent
+                        
                           value={item.label}
                           onChange={(e) => handleTextLabel(e, index)}
                           onBlur={() => setopenInput(false)}
                         />
-                      )}
-                    </Column>
-                    <Column id="start">
-                      <DropdownComponent
-                        value={multSelect}
-                        placerholder="Selecione o Tipo"
-                        options={options}
-                        onChange={(e) => { setMultSelect(e.target.value); editType(index, e.target.value.type, setform, form) }
-                        }
-                      />
-                    </Column>
-                  </Row>
-                </Padding>
-                {item?.type === "text" ? (
-                  <Padding padding="32px">
-                    <TextInput placeholder="Resposta curta" />
-                  </Padding>
-                ) : item?.type === "text-long" ? (
-                  <Padding padding="32px">
-                    <TextAreaComponent placeholder="Resposta longa" />
-                  </Padding>
-                ) : item?.type === "mult" ? (
-                  <div>
-                    <RadioButtonCard
-                      index={index}
-                      deleteOptions={deleteOptions}
-                      editLabel={editlabelRadioButtonandBoxSelect}
-                      options={item.options}
+                      </Column>
+                    )}
+                  </Column>
+                  <Column id="start">
+                    <DropdownComponent
+                      value={multSelect}
+                      placerholder="Selecione o Tipo"
+                      options={options}
+                      onChange={(e) => { setMultSelect(e.target.value); editType(index, e.target.value.type, setform, form) }
+                      }
                     />
-                    <div>
-                      <Button
-                        onClick={() => {
-                          AddRadiosButtonandBoxSelect(index, setform, form);
-                        }}
-                        label="Adicionar"
-                      />
-                    </div>
-                  </div>
-                ) : item?.type === "select-box" ? (
+                  </Column>
+                </Row>
+              </Padding>
+              {item?.type === "text" ? (
+                <Padding padding="32px">
+                  <TextInput placeholder="Resposta curta" />
+                </Padding>
+              ) : item?.type === "text-long" ? (
+                <Padding padding="32px">
+                  <TextAreaComponent placeholder="Resposta longa" />
+                </Padding>
+              ) : item?.type === "mult" ? (
+                <div>
+                  <RadioButtonCard
+                    index={index}
+                    deleteOptions={deleteOptions}
+                    editLabel={editlabelRadioButtonandBoxSelect}
+                    options={item.options}
+                  />
                   <div>
-                    <BoxSelectCard index={index} deleteOptions={deleteOptions} options={item?.options} editLabel={editlabelRadioButtonandBoxSelect} />
-                    <div>
-                      <Button
-                        onClick={() => {
-                          AddRadiosButtonandBoxSelect(index, setform, form);
-                        }}
-                        label="Adicionar"
-                      />
-                    </div>
+                    <Button
+                      onClick={() => {
+                        AddRadiosButtonandBoxSelect(index, setform, form);
+                      }}
+                      label="Adicionar"
+                    />
                   </div>
-                ) : null}
-              </Card>
-            </Padding>
-          );
-        })}
-        <Button
-          label="Criar"
-          onClick={() =>
-            setform([...form, { type: "text", label: "Escreva aqui" }])
-          }
-        />
-      </Container>
+                </div>
+              ) : item?.type === "select-box" ? (
+                <div>
+                  <BoxSelectCard index={index} deleteOptions={deleteOptions} options={item?.options} editLabel={editlabelRadioButtonandBoxSelect} />
+                  <div>
+                    <Button
+                      onClick={() => {
+                        AddRadiosButtonandBoxSelect(index, setform, form);
+                      }}
+                      label="Adicionar"
+                    />
+                  </div>
+                </div>
+              ) : null}
+            </Card>
+          </Padding>
+        );
+      })}
+      <Button
+        label="Criar"
+        onClick={() =>
+          setform([...form, { type: "text", label: "Escreva aqui" }])
+        }
+      />
+    </Container>
   );
 };
 

@@ -5,12 +5,12 @@ import TextInput from "../../Components/TextInput";
 import { AplicationContext } from "../../Context/Aplication/context";
 import { Column, Container, Padding, Row } from "../../Styles/styles";
 import { PropsAplicationContext } from "../../Types/types";
-import BoxSelectCard from "../CreateForms/BoxSelectCard";
-import RadioButtonCard from "../CreateForms/RadioButtonCard";
+import CheckBoxCard from "./CheckBoxCard";
+import RadioButtonCard from "./RadioButtonCard";
 
 const ViewForms = () => {
 
-    const {form} = useContext(AplicationContext) as PropsAplicationContext
+    const { form } = useContext(AplicationContext) as PropsAplicationContext
 
 
     return (
@@ -42,15 +42,12 @@ const ViewForms = () => {
                             ) : item?.type === "mult" ? (
                                 <div>
                                     <RadioButtonCard
-                                        index={index}
-                                        deleteOptions={() => { }}
-                                        editLabel={() => { }}
                                         options={item.options}
                                     />
                                 </div>
                             ) : item?.type === "select-box" ? (
                                 <div>
-                                    <BoxSelectCard index={index} deleteOptions={() => { }} options={item?.options} editLabel={() => { }} />
+                                    <CheckBoxCard options={item?.options} />
 
                                 </div>
                             ) : null}
