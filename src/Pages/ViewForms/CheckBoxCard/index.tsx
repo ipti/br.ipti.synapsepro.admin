@@ -1,13 +1,9 @@
 
-import React, { useState } from "react";
-import { RadioButton } from "primereact/radiobutton";
-import { PropsRadioButtonCardView } from "../../../Types/types";
-import { Column } from "../../../Styles/styles";
 import CheckboxComponent from "../../../Components/Checkbox";
+import { Column } from "../../../Styles/styles";
+import { PropsRadioButtonCardView } from "../../../Types/types";
 
-export default function CheckBoxCard({ options }: PropsRadioButtonCardView) {
-
-    const [selectedCategory, setSelectedCategory] = useState();
+export default function CheckBoxCard({ options, handleChange, item }: PropsRadioButtonCardView) {
 
     return (
         <div className="card flex justify-content-start">
@@ -16,7 +12,7 @@ export default function CheckBoxCard({ options }: PropsRadioButtonCardView) {
                     return (
                         <div key={category.key} className="flex align-items-start">
                             <Column id="center">
-                                <CheckboxComponent />
+                                <CheckboxComponent checked={category.value} onChange={(e) => {handleChange!(e.checked, item.id)}} />
                             </Column>                            <Column id="center">
                                 <label htmlFor={category.key} className="ml-2">{category.label}</label>
                             </Column>

@@ -37,6 +37,9 @@ export interface PropsRadioButtonCardCreate {
 
 export interface PropsRadioButtonCardView {
     options?: Array<any>,
+    item?: any,
+    handleChange?: (e: any, id: number) => void,
+    form?: any
 }
 
 export interface PropsDropdown {

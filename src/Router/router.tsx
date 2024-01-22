@@ -9,7 +9,7 @@ const RoutesApp = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route element={<PrivateRoute Component={<CreateForms />} />} path="/" />
+                <Route element={<PrivateRoute Component={<CreateForms />} />} path="/"  />
                 <Route element={<PrivateRoute Component={<ViewForms />} />} path="/view" />
                 {/* <Route path="/*" element={<NotFoundPage />} /> */}
             </Routes>
