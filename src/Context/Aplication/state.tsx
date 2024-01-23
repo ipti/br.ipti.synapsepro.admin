@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { PropsForm } from "../../Types/types";
 
 const AplicationState = () => {
-    const [form, setform] = useState([{label: "Formulário Sem título", description: "", type: "title"}])
+    const [form, setform] = useState<PropsForm>({title: "Formulário Sem título", description: "", question: []})
     console.log(form)
 
     return {

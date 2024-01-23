@@ -7,9 +7,10 @@ import TextAreaComponent from "../../Components/TextArea";
 import TextInput from "../../Components/TextInput";
 import { AplicationContext } from "../../Context/Aplication/context";
 import { Column, Container, Padding, Row } from "../../Styles/styles";
-import { PropsAplicationContext } from "../../Types/types";
+import { PropsAplicationContext, PropsForm } from "../../Types/types";
 import BoxSelectCard from "./BoxSelectCard";
 import RadioButtonCard from "./RadioButtonCard";
+import { InputSwitch } from "primereact/inputswitch";
 import { useNavigate } from "react-router-dom";
 
 const CreateForms = () => {
@@ -43,52 +44,54 @@ const CreateForms = () => {
     { name: "Caixa de seleção", type: "select-box" },
   ];
 
-  const editType = (index: number, novoAtributo: any, set: any, form: any) => {
-    const newData = [...form];
+  const editType = (index: number, novoAtributo: any, set: any, form: PropsForm) => {
+    const newData = { ...form };
+
+
     if (novoAtributo === "mult" || novoAtributo === "select-box") {
       if (novoAtributo === "mult") {
 
-        newData[index] = {
-          ...newData[index],
+        newData.question[index] = {
+          ...newData.question[index],
           type: novoAtributo,
           options: [{ value: 1, label: "Options 1" }],
         };
         set(newData);
       }
       if (novoAtributo === "select-box") {
-        newData[index] = {
-          ...newData[index],
+        newData.question[index] = {
+          ...newData.question[index],
           type: novoAtributo,
-          options: [{id: gerarIdAleatorio(8), value: false, label: "Options 1" }],
+          options: [{ id: gerarIdAleatorio(8), value: false, label: "Options 1" }],
         };
         set(newData);
       }
     } else {
-      newData[index] = { ...newData[index], type: novoAtributo };
+      newData.question[index] = { ...newData.question[index], type: novoAtributo };
       set(newData);
     }
   }; // edita o tipo da questão
 
-  const AddRadiosButtonandBoxSelect = (index: number, set: any, form: any) => {
-    const newData = [...form];
+  const AddRadiosButtonandBoxSelect = (index: number, set: any, form: PropsForm) => {
+    const newData = { ...form };
     const lastposi =
-      form[index]?.options[form[index]?.options.length - 1]?.value;
-    form[index]?.options?.push({
+      newData.question[index]?.options[newData.question[index]?.options.length - 1]?.value;
+    newData.question[index]?.options?.push({
       value: lastposi + 1,
       label: `Options ${lastposi + 1}`,
     });
-    newData[index] = { ...newData[index], options: form[index]?.options };
+    newData.question[index] = { ...newData.question[index], options: newData.question[index]?.options };
     set(newData);
   }; // adiciona outra opção em questões objetivas
 
   const AddBoxSelect = (index: number, set: any, form: any) => {
-    const newData = [...form];
-    form[index]?.options?.push({
+    const newData = { ...form };
+    newData.question[index]?.options?.push({
       id: gerarIdAleatorio(8),
       value: false,
-      label: `Options ${form[index]?.options.length + 1}`,
+      label: `Options ${newData.question[index]?.options.length + 1}`,
     });
-    newData[index] = { ...newData[index], options: form[index]?.options };
+    newData.question[index] = { ...newData.question[index], options: newData.question[index]?.options };
     set(newData);
   }; // adiciona outra opção em questões objetivas
 
@@ -97,30 +100,48 @@ const CreateForms = () => {
     indexRadioButton: number,
     newLabel: string
   ) => {
-    const newData = [...form];
-    newData[index] = { ...newData[index], options: form[index]?.options };
-    newData[index].options[indexRadioButton].label = newLabel;
+    const newData = { ...form };
+    newData.question[index] = { ...newData.question[index], options: form.question[index]?.options };
+    newData.question[index].options[indexRadioButton].label = newLabel;
     setform(newData);
   }; // edita label do radiobutton
 
   const editLabelForm = (index: number, novoLabel: string) => {
-    const newData = [...form];
-    newData[index] = { ...newData[index], label: novoLabel };
+    const newData = { ...form };
+    newData.question[index] = { ...newData.question[index], label: novoLabel };
     setform(newData);
   }; // edit label form
+
+  const editIsRequiredForm = (index: number, isRequerid: boolean) => {
+    const newData = { ...form };
+    newData.question[index] = { ...newData.question[index], required: isRequerid };
+    setform(newData);
+  }; // edit requerid form
 
   const handleTextLabel = (e: any, index: number) => {
     editLabelForm(index, e.target.value);
   }; // edit textlabel
-  const handleTextDescription = (e: any, index: number) => {
-    const newData = [...form];
-    newData[index] = { ...newData[index], description: e.target.value };
+
+  const handleTitleLabel = (e: any) => {
+    const newData = { ...form, title: e.target.value };
     setform(newData);
   }; // edit textlabel
 
+
+  const handleTextDescription = (e: any) => {
+    const newData = { ...form, description: e.target.value };
+    setform(newData);
+  }; // edit description
+
   const deleteOptions = (index: number, indexRadioButton: number) => {
-    const newData = [...form];
-    newData[index].options?.splice(indexRadioButton, 1);
+    const newData = { ...form };
+    newData.question[index].options?.splice(indexRadioButton, 1);
+    setform(newData);
+  }; // delete options
+
+  const deleteQuestion = (indexRadioButton: number) => {
+    const newData = { ...form };
+    newData.question.splice(indexRadioButton, 1);
     setform(newData);
   }; // delete options
 
@@ -129,48 +150,50 @@ const CreateForms = () => {
 
   return (
     <Container>
-      {form.length > 0 ? (
+      {form ? (
         <Row id="end" style={{ gap: "4px" }}>
           <Button label="Preview" icon="pi pi-eye" onClick={() => history("/view")} />{" "}
           <Button label="Salvar" icon="pi pi-save" onClick={() => history("/view")} />{" "}
         </Row>
       ) : null}
+      <Padding padding="8px" />
+      <Card>
+        <Padding padding="16px">
+          {!openInput ? (
+            <h2
+              onClick={() => {
+                setopenInput(true);
+              }}
+            >
+              {form?.title}
+            </h2>
+          ) : (
+            <Column style={{ width: "100%" }}>
+              <TextInput
+                value={form.title}
+                onChange={(e) => handleTitleLabel(e)}
+                onBlur={() => setopenInput(false)}
+              />
+            </Column>
+          )}
+
+          <Padding padding="8px" />
+          <Column style={{ width: "100%" }}>
+            <TextAreaComponent
+              placeholder="Descrição do formulário"
+              value={form?.description}
+              onChange={(e) => handleTextDescription(e)}
+              onBlur={() => setopenInput(false)}
+            />
+          </Column>
+        </Padding>
+      </Card>
       <Padding padding="4px" />
-      {form?.map((item, index) => {
+      {form?.question.map((item, index) => {
         return (
           <Padding padding="4px" key={index}>
             {item?.type === "title" ? (
-              <Card>
-                <Padding padding="16px">
-                  {!openInput ? (
-                    <h2
-                      onClick={() => {
-                        setopenInput(true);
-                      }}
-                    >
-                      {item.label}
-                    </h2>
-                  ) : (
-                    <Column style={{ width: "100%" }}>
-                      <TextInput
-                        value={item.label}
-                        onChange={(e) => handleTextLabel(e, index)}
-                        onBlur={() => setopenInput(false)}
-                      />
-                    </Column>
-                  )}
-
-                  <Padding padding="8px" />
-                  <Column style={{ width: "100%" }}>
-                    <TextAreaComponent
-                      placeholder="Descrição do formulário"
-                      value={item.description}
-                      onChange={(e) => handleTextDescription(e, index)}
-                      onBlur={() => setopenInput(false)}
-                    />
-                  </Column>
-                </Padding>
-              </Card>
+              <></>
             ) : (
               <Card>
                 <Padding padding="16px">
@@ -223,14 +246,15 @@ const CreateForms = () => {
                       editLabel={editlabelRadioButtonandBoxSelect}
                       options={item.options}
                     />
-                    <div>
+                    <Padding padding="0 32px">
                       <Button
+                      icon="pi pi-plus"
                         onClick={() => {
                           AddRadiosButtonandBoxSelect(index, setform, form);
                         }}
                         label="Adicionar"
                       />
-                    </div>
+                    </Padding>
                   </div>
                 ) : item?.type === "select-box" ? (
                   <div>
@@ -240,16 +264,21 @@ const CreateForms = () => {
                       options={item?.options}
                       editLabel={editlabelRadioButtonandBoxSelect}
                     />
-                    <div>
+                    <Padding padding="8px">
                       <Button
                         onClick={() => {
                           AddBoxSelect(index, setform, form);
                         }}
                         label="Adicionar"
                       />
-                    </div>
+                    </Padding>
                   </div>
                 ) : null}
+                <div className="card flex align-items-center justify-content-end gap-2">
+                  <i className="pi pi-trash cursor-pointer"  onClick={() => deleteQuestion(index)} />
+                  <span>Obrigatória</span>
+                  <InputSwitch checked={item.required} onChange={(e) => editIsRequiredForm(index, e.target.value)} />
+                </div>
               </Card>
             )}
           </Padding>
@@ -261,15 +290,18 @@ const CreateForms = () => {
           label="Criar"
           icon="pi pi-plus"
           onClick={() =>
-            setform([
-              ...form,
-              {
-                type: "text",
-                label: "Escreva aqui",
-                id: gerarIdAleatorio(8),
-                required: false,
-              },
-            ])
+            setform((prevForm: any) => ({
+              ...prevForm,
+              question: [
+                ...prevForm.question,
+                {
+                  type: "text",
+                  label: "Escreva aqui",
+                  id: gerarIdAleatorio(8),
+                  required: false,
+                },
+              ],
+            }))
           }
         />
       </Row>

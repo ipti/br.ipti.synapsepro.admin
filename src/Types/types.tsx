@@ -1,7 +1,7 @@
 import { DropdownChangeEvent } from "primereact/dropdown";
 import { RadioButtonChangeEvent } from "primereact/radiobutton";
 import { SelectItemOptionsType } from "primereact/selectitem";
-import { ChangeEventHandler, Dispatch, FocusEventHandler, SetStateAction } from "react";
+import { ChangeEventHandler, FocusEventHandler } from "react";
 
 export interface PropsInputText {
     value?: string,
@@ -56,8 +56,12 @@ export interface PropsDropdown {
     placerholder?: string
 }
 
+export interface PropsForm {
+    title: string, description: string, question: Array<any>
+}
+
 export interface PropsAplicationContext {
-    form: Array<any>,
+    form: PropsForm,
     setform: any
 }
 

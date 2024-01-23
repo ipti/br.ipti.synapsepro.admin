@@ -15,7 +15,6 @@ const ViewForms = () => {
 
   const [formRespo, setFormResp] = useState(form ?? []);
 
-  console.log(formRespo)
 
   useEffect(() => {
     setFormResp(form)
@@ -24,19 +23,26 @@ const ViewForms = () => {
 
 
   const RespQuestion = (value: any, id: number) => {
-    console.log(value)
-    const newData = formRespo.map((item: any) =>
-      item.id === id ? { ...item, value: value } : item
-    );
+
+    const newData = { ...formRespo }
+
+
+    for (const option of newData.question) {
+      if (option.id === id) {
+        option.value = value
+      }
+    }
+
+    console.log(newData)
 
     setFormResp(newData);
   }
 
   const RespQuestionCheckBox = (value: any, id: number, idOptions: number) => {
-    console.log(idOptions)
-    const newData = formRespo.map((item: any) => {
+    const newData = { ...formRespo }
+    newData.question.map((item: any) => {
       if (item.id === id) {
-        for(const option of item.options) {
+        for (const option of item.options) {
           if (option.id === idOptions) {
             option.value = value
           }
@@ -52,36 +58,41 @@ const ViewForms = () => {
 
   return (
     <Container>
+      <Padding padding="4px">
+        <Card>
+          <Padding padding="16px">
+            <h2>{formRespo?.title}</h2>
+            {formRespo?.description ? (
+              <>
+                <Padding padding="8px" />
+                <p>{formRespo.description}</p>
+              </>
+            ) : null}
+          </Padding>
+        </Card>
+      </Padding>
       <Formik initialValues={{}} onSubmit={(values) => { }}>
         {({ values, setFieldValue }) => {
           return (
             <Form>
-              {formRespo?.map((item, index) => {
+              {formRespo?.question.map((item, index) => {
                 return (
                   <Padding padding="4px" key={index}>
-                    {item.type === "title" ? (
-                      <Card>
-                        <Padding padding="16px">
-                          <h2>{item?.label}</h2>
-                          {item?.description ? (
-                            <>
-                              <Padding padding="8px" />
-                              <p>{item.description}</p>
-                            </>
-                          ) : null}
-                        </Padding>
-                      </Card>
-                    ) : (
-                      <Card>
-                        <Padding padding="16px">
-                          <Row id="space-between">
-                            <Column id="center">
-                              <p>{item.label}</p>
-                            </Column>
-                            <Column id="start"></Column>
-                          </Row>
-                        </Padding>
-                        {item?.type === "text" ? (
+
+                    <Card>
+                      <Row id="end">
+                        
+                      </Row>
+                      <Padding padding="16px">
+                        <Row id="space-between">
+                          <Column id="center">
+                            <p>{item.label}</p>
+                          </Column>
+                         {item.required ?  <Column id="start"><h3 style={{ color: "red" }}>*</h3></Column> : null}
+                        </Row>
+                      </Padding>
+                      {
+                        item?.type === "text" ? (
                           <Padding padding="16px">
                             <TextInput placeholder="Resposta curta" value={item?.value} onChange={(e) => RespQuestion(e.target.value, item.id)} />
                           </Padding>
@@ -97,21 +108,22 @@ const ViewForms = () => {
                           <div>
                             <CheckBoxCard options={item?.options} item={item} handleChange={RespQuestionCheckBox} />
                           </div>
-                        ) : null}
-                      </Card>
-                    )}
-                  </Padding>
+                        ) : null
+                      }
+                    </Card >
+
+                  </Padding >
                 );
               })}
               <Padding padding="8px" />
               <Row id="end">
                 <Button icon="pi pi-send" label="Enviar" />
               </Row>
-            </Form>
+            </Form >
           );
         }}
-      </Formik>
-    </Container>
+      </Formik >
+    </Container >
   );
 };
 
