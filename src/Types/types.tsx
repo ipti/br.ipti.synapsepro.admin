@@ -35,6 +35,13 @@ export interface PropsRadioButtonCardCreate {
     index: number
 }
 
+export interface PropsCheckBoxCardView {
+    options?: Array<any>,
+    item?: any,
+    handleChange?: (e: any, id: number, idOptions: number) => void,
+    form?: any
+}
+
 export interface PropsRadioButtonCardView {
     options?: Array<any>,
     item?: any,

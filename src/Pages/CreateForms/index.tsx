@@ -22,6 +22,20 @@ const CreateForms = () => {
     type: "text",
   });
 
+  const gerarIdAleatorio = (tamanho: number) => {
+    const caracteres =
+      "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    let id = "";
+
+    for (let i = 0; i < tamanho; i++) {
+      const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+      id += caracteres.charAt(indiceAleatorio);
+    }
+
+    return id;
+  };
+
+
   const options = [
     { name: "Resposta Curta", type: "text" },
     { name: "Resposta Longa", type: "text-long" },
@@ -32,12 +46,23 @@ const CreateForms = () => {
   const editType = (index: number, novoAtributo: any, set: any, form: any) => {
     const newData = [...form];
     if (novoAtributo === "mult" || novoAtributo === "select-box") {
-      newData[index] = {
-        ...newData[index],
-        type: novoAtributo,
-        options: [{ value: 1, label: "Options 1" }],
-      };
-      set(newData);
+      if (novoAtributo === "mult") {
+
+        newData[index] = {
+          ...newData[index],
+          type: novoAtributo,
+          options: [{ value: 1, label: "Options 1" }],
+        };
+        set(newData);
+      }
+      if (novoAtributo === "select-box") {
+        newData[index] = {
+          ...newData[index],
+          type: novoAtributo,
+          options: [{id: gerarIdAleatorio(8), value: false, label: "Options 1" }],
+        };
+        set(newData);
+      }
     } else {
       newData[index] = { ...newData[index], type: novoAtributo };
       set(newData);
@@ -47,7 +72,7 @@ const CreateForms = () => {
   const AddRadiosButtonandBoxSelect = (index: number, set: any, form: any) => {
     const newData = [...form];
     const lastposi =
-    form[index]?.options[form[index]?.options.length - 1]?.value;
+      form[index]?.options[form[index]?.options.length - 1]?.value;
     form[index]?.options?.push({
       value: lastposi + 1,
       label: `Options ${lastposi + 1}`,
@@ -58,11 +83,10 @@ const CreateForms = () => {
 
   const AddBoxSelect = (index: number, set: any, form: any) => {
     const newData = [...form];
-    const lastposi =
-      form[index]?.options[form[index]?.options.length - 1]?.value;
     form[index]?.options?.push({
+      id: gerarIdAleatorio(8),
       value: false,
-      label: `Options ${lastposi + 1}`,
+      label: `Options ${form[index]?.options.length + 1}`,
     });
     newData[index] = { ...newData[index], options: form[index]?.options };
     set(newData);
@@ -100,18 +124,6 @@ const CreateForms = () => {
     setform(newData);
   }; // delete options
 
-  const gerarIdAleatorio = (tamanho: number) => {
-    const caracteres =
-      "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    let id = "";
-
-    for (let i = 0; i < tamanho; i++) {
-      const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
-      id += caracteres.charAt(indiceAleatorio);
-    }
-
-    return id;
-  };
 
   const history = useNavigate();
 
@@ -231,7 +243,7 @@ const CreateForms = () => {
                     <div>
                       <Button
                         onClick={() => {
-                          AddRadiosButtonandBoxSelect(index, setform, form);
+                          AddBoxSelect(index, setform, form);
                         }}
                         label="Adicionar"
                       />
@@ -255,7 +267,7 @@ const CreateForms = () => {
                 type: "text",
                 label: "Escreva aqui",
                 id: gerarIdAleatorio(8),
-                validate: { required: false },
+                required: false,
               },
             ])
           }

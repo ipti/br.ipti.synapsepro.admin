@@ -1,9 +1,9 @@
 
 import CheckboxComponent from "../../../Components/Checkbox";
 import { Column } from "../../../Styles/styles";
-import { PropsRadioButtonCardView } from "../../../Types/types";
+import { PropsCheckBoxCardView } from "../../../Types/types";
 
-export default function CheckBoxCard({ options, handleChange, item }: PropsRadioButtonCardView) {
+export default function CheckBoxCard({ options, handleChange, item }: PropsCheckBoxCardView) {
 
     return (
         <div className="card flex justify-content-start">
@@ -12,7 +12,7 @@ export default function CheckBoxCard({ options, handleChange, item }: PropsRadio
                     return (
                         <div key={category.key} className="flex align-items-start">
                             <Column id="center">
-                                <CheckboxComponent checked={category.value} onChange={(e) => {handleChange!(e.checked, item.id)}} />
+                                <CheckboxComponent checked={category.value} onChange={(e) => {handleChange!(e.checked, item.id, category.id)}} />
                             </Column>                            <Column id="center">
                                 <label htmlFor={category.key} className="ml-2">{category.label}</label>
                             </Column>

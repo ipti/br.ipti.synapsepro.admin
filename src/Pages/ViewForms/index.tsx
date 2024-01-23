@@ -16,27 +16,43 @@ const ViewForms = () => {
   const [formRespo, setFormResp] = useState(form ?? []);
 
   console.log(formRespo)
-  
+
   useEffect(() => {
     setFormResp(form)
   }, [form])
-  
+
 
 
   const RespQuestion = (value: any, id: number) => {
     console.log(value)
-    const newData = formRespo.map((item: any) => 
+    const newData = formRespo.map((item: any) =>
       item.id === id ? { ...item, value: value } : item
     );
-  
+
     setFormResp(newData);
+  }
+
+  const RespQuestionCheckBox = (value: any, id: number, idOptions: number) => {
+    console.log(idOptions)
+    const newData = formRespo.map((item: any) => {
+      if (item.id === id) {
+        for(const option of item.options) {
+          if (option.id === idOptions) {
+            option.value = value
+          }
+        }
+      }
+      return item
+    }
+    );
+    setFormResp(newData)
   }
 
   console.log(formRespo);
 
   return (
     <Container>
-      <Formik initialValues={{}} onSubmit={(values) => {}}>
+      <Formik initialValues={{}} onSubmit={(values) => { }}>
         {({ values, setFieldValue }) => {
           return (
             <Form>
@@ -67,7 +83,7 @@ const ViewForms = () => {
                         </Padding>
                         {item?.type === "text" ? (
                           <Padding padding="16px">
-                            <TextInput placeholder="Resposta curta" value={item?.value} onChange={(e) => RespQuestion(e.target.value, item.id)}/>
+                            <TextInput placeholder="Resposta curta" value={item?.value} onChange={(e) => RespQuestion(e.target.value, item.id)} />
                           </Padding>
                         ) : item?.type === "text-long" ? (
                           <Padding padding="16px">
@@ -79,7 +95,7 @@ const ViewForms = () => {
                           </div>
                         ) : item?.type === "select-box" ? (
                           <div>
-                            <CheckBoxCard options={item?.options} item={item} handleChange={RespQuestion} />
+                            <CheckBoxCard options={item?.options} item={item} handleChange={RespQuestionCheckBox} />
                           </div>
                         ) : null}
                       </Card>
