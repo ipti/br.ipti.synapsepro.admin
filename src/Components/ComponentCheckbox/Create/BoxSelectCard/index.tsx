@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import CheckboxComponent from "../../../Components/Checkbox";
-import TextInput from "../../../Components/TextInput";
-import { Column, Padding, Row } from "../../../Styles/styles";
-import { PropsRadioButtonCardCreate } from "../../../Types/types";
+import CheckboxComponent from "../../../Checkbox";
+import TextInput from "../../../TextInput";
+import { Column, Padding, Row } from "../../../../Styles/styles";
+import { PropsRadioButtonCardCreate } from "../../../../Types/types";
+import { ControllerCreateForm } from "../../../../Controller/controllerCreateForm";
 
 export default function BoxSelectCard({
     options,
-    editLabel,
     index,
-    deleteOptions
+    form, setform
+    
 }: PropsRadioButtonCardCreate) {
+
+    const props = ControllerCreateForm()
     return (
         <div className="card ">
             <div className="flex flex-column gap-3">
@@ -23,13 +26,14 @@ export default function BoxSelectCard({
                             <Row id="space-between" style={{ width: "100%" }}>
                                 <ControllerInput
                                     item={item}
-                                    editLabel={editLabel!}
                                     index={index}
+                                    form={form}
+                                    setform={setform}
                                     indexRadioButton={indexRadioButton}
                                 />
                                 <Padding padding="4px" />
                                 <Column id="center">
-                                    <i className="pi pi-trash" style={{ cursor: "pointer" }} onClick={() => deleteOptions(index, indexRadioButton)} />
+                                    <i className="pi pi-trash" style={{ cursor: "pointer" }} onClick={() => props.deleteOptions(index, indexRadioButton, form, setform)} />
                                 </Column>
                             </Row>
                         </Row>
@@ -42,22 +46,20 @@ export default function BoxSelectCard({
 
 interface ControllerInputProps {
     item: any;
-    editLabel: (
-        index: number,
-        indexRadioButton: number,
-        newLabel: string
-    ) => void;
     index: number;
     indexRadioButton: number;
+    form: any, setform: any
 }
 
 const ControllerInput = ({
-    editLabel,
     index,
     indexRadioButton,
     item,
+    form, setform
 }: ControllerInputProps) => {
     const [label, setlabel] = useState("");
+
+    const props = ControllerCreateForm()
 
     useEffect(() => {
         setlabel(item?.label)
@@ -68,7 +70,7 @@ const ControllerInput = ({
             <TextInput
                 value={label}
                 onBlur={() => {
-                    editLabel!(index, indexRadioButton, label);
+                    props.editlabelRadioButtonandBoxSelect!(index, indexRadioButton, label, form, setform);
                 }}
                 onChange={(e) => setlabel(e.target.value)}
             />

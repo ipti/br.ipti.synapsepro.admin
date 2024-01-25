@@ -2,6 +2,7 @@ import { DropdownChangeEvent } from "primereact/dropdown";
 import { RadioButtonChangeEvent } from "primereact/radiobutton";
 import { SelectItemOptionsType } from "primereact/selectitem";
 import { ChangeEventHandler, FocusEventHandler } from "react";
+import RenderForm from "../Components/ComponentMulti/Create";
 
 export interface PropsInputText {
     value?: string,
@@ -30,9 +31,9 @@ export interface PropsRadioButton {
 }
 export interface PropsRadioButtonCardCreate {
     options?: Array<any>,
-    editLabel?(index: number, indexRadioButton: number, newLabel: string): void,
-    deleteOptions: (index: number, indexRadioButton: number) => void,
-    index: number
+    index: number,
+    form: any,
+    setform: any
 }
 
 export interface PropsCheckBoxCardView {
@@ -65,3 +66,16 @@ export interface PropsAplicationContext {
     setform: any
 }
 
+export interface PropsComponentForm {
+    name: string,
+    type: string,
+    component: ({ form, index, item, setform }: PropsComponets) => JSX.Element
+}
+
+export interface PropsComponets {
+    index?: number, 
+    form?: any, 
+    item?: any, 
+    setform?: any, 
+
+}
