@@ -5,10 +5,13 @@ import TextInput from "../../Components/TextInput";
 import { AplicationContext } from "../../Context/Aplication/context";
 import { Column, Container, Padding, Row } from "../../Styles/styles";
 import { PropsAplicationContext } from "../../Types/types";
-import CheckBoxCard from "./CheckBoxCard";
-import RadioButtonCard from "./RadioButtonCard";
+import CheckBoxCard from "../../Components/ComponentCheckbox/View";
+import RadioButtonCard from "../../Components/ComponentMulti/View";
 import { Button } from "primereact/button";
 import { Form, Formik } from "formik";
+import RenderCheckBoxCard from "../../Components/ComponentCheckbox/View";
+import RenderRadioButtonCard from "../../Components/ComponentMulti/View";
+import RenderViewTextField from "../../Components/ComponentTextFiled/View";
 
 const ViewForms = () => {
   const { form } = useContext(AplicationContext) as PropsAplicationContext;
@@ -22,37 +25,6 @@ const ViewForms = () => {
 
 
 
-  const RespQuestion = (value: any, id: number) => {
-
-    const newData = { ...formRespo }
-
-
-    for (const option of newData.question) {
-      if (option.id === id) {
-        option.value = value
-      }
-    }
-
-    console.log(newData)
-
-    setFormResp(newData);
-  }
-
-  const RespQuestionCheckBox = (value: any, id: number, idOptions: number) => {
-    const newData = { ...formRespo }
-    newData.question.map((item: any) => {
-      if (item.id === id) {
-        for (const option of item.options) {
-          if (option.id === idOptions) {
-            option.value = value
-          }
-        }
-      }
-      return item
-    }
-    );
-    setFormResp(newData)
-  }
 
   console.log(formRespo);
 
@@ -93,25 +65,22 @@ const ViewForms = () => {
                       </Padding>
                       {
                         item?.type === "text" ? (
-                          <Padding padding="16px">
-                            <TextInput placeholder="Resposta curta" value={item?.value} onChange={(e) => RespQuestion(e.target.value, item.id)} />
-                          </Padding>
+                          <RenderViewTextField form={form} setFormResp={setFormResp} item={item} />
                         ) : item?.type === "text-long" ? (
                           <Padding padding="16px">
-                            <TextAreaComponent placeholder="Resposta longa" value={item?.value} onChange={(e) => RespQuestion(e.target.value, item.id)} />
+                            {/* <TextAreaComponent placeholder="Resposta longa" value={item?.value} onChange={(e) => RespQuestion(e.target.value, item.id)} /> */}
                           </Padding>
                         ) : item?.type === "mult" ? (
                           <div>
-                            <RadioButtonCard options={item.options} item={item} handleChange={RespQuestion} />
+                            <RenderRadioButtonCard options={item.options} item={item} form={formRespo} setFormResp={setFormResp} />
                           </div>
                         ) : item?.type === "select-box" ? (
                           <div>
-                            <CheckBoxCard options={item?.options} item={item} handleChange={RespQuestionCheckBox} />
+                            <RenderCheckBoxCard options={item?.options} item={item} form={formRespo} setform={setFormResp} />
                           </div>
                         ) : null
                       }
-                    </Card >
-
+                    </Card>
                   </Padding >
                 );
               })}

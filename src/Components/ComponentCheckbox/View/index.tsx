@@ -1,9 +1,9 @@
 
-import CheckboxComponent from "../../../Components/Checkbox";
+import CheckboxComponent from "../../Checkbox";
 import { Column } from "../../../Styles/styles";
 import { PropsCheckBoxCardView } from "../../../Types/types";
 
-export default function CheckBoxCard({ options, handleChange, item }: PropsCheckBoxCardView) {
+export default function RenderCheckBoxCard({ options, handleChange, item }: PropsCheckBoxCardView) {
 
     return (
         <div className="card flex justify-content-start">
