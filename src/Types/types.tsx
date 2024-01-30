@@ -1,7 +1,7 @@
 import { DropdownChangeEvent } from "primereact/dropdown";
 import { RadioButtonChangeEvent } from "primereact/radiobutton";
 import { SelectItemOptionsType } from "primereact/selectitem";
-import { ChangeEventHandler, FocusEventHandler } from "react";
+import { ChangeEventHandler, Dispatch, FocusEventHandler, SetStateAction } from "react";
 
 export interface PropsInputText {
     value?: string,
@@ -65,12 +65,31 @@ export interface PropsDropdown {
 }
 
 export interface PropsForm {
-    title: string, description: string, question: Array<any>
+    title?: string, description?: string, question?: Array<any>, id?: string
 }
 
 export interface PropsAplicationContext {
     form: PropsForm,
     setform: any
+}
+
+export interface FormsJson {
+    form: Array<PropsForm>
+}
+
+export interface CreateOrEditFormTypes {
+    form: PropsForm | undefined,
+    setform: Dispatch<SetStateAction<PropsForm | undefined>>
+}
+
+export interface ViewFormTypes {
+    form: PropsForm | undefined,
+    setform: Dispatch<SetStateAction<PropsForm | undefined>>
+}
+
+
+export interface FormListContextTypes {
+    forms: FormsJson | undefined
 }
 
 export interface PropsComponentForm {
@@ -80,9 +99,13 @@ export interface PropsComponentForm {
 }
 
 export interface PropsComponets {
-    index?: number, 
-    form?: any, 
-    item?: any, 
-    setform?: any, 
+    index?: number,
+    form?: any,
+    item?: any,
+    setform?: any,
 
+}
+
+export interface CardFormTypes {
+    item: PropsForm
 }

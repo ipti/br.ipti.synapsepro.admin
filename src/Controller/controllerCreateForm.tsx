@@ -8,12 +8,12 @@ export const ControllerCreateForm = () => {
 const AddRadiosButtonandBoxSelect = (index: number, set: any, form: PropsForm) => {
   const newData = { ...form };
   const lastposi =
-    newData.question[index]?.options[newData.question[index]?.options.length - 1]?.value;
-  newData.question[index]?.options?.push({
+    newData.question![index]?.options[newData.question![index]?.options.length - 1]?.value;
+  newData.question![index]?.options?.push({
     value: lastposi + 1,
     label: `Options ${lastposi + 1}`,
   });
-  newData.question[index] = { ...newData.question[index], options: newData.question[index]?.options };
+  newData.question![index] = { ...newData.question![index], options: newData.question![index]?.options };
   set(newData);
 }; // adiciona outra opção em questões objetivas
 
@@ -23,23 +23,23 @@ const editType = (index: number, novoAtributo: any, set: any, form: PropsForm) =
   if (novoAtributo === "mult" || novoAtributo === "checklist") {
     if (novoAtributo === "mult") {
 
-      newData.question[index] = {
-        ...newData.question[index],
+      newData.question![index] = {
+        ...newData.question![index],
         type: novoAtributo,
         options: [{ value: 1, label: "Options 1" }],
       };
       set(newData);
     }
     if (novoAtributo === "checklist") {
-      newData.question[index] = {
-        ...newData.question[index],
+      newData.question![index] = {
+        ...newData.question![index],
         type: novoAtributo,
         options: [{ id: gerarIdAleatorio(8), value: false, label: "Options 1" }],
       };
       set(newData);
     }
   } else {
-    newData.question[index] = { ...newData.question[index], type: novoAtributo };
+    newData.question![index] = { ...newData.question![index], type: novoAtributo };
     set(newData);
   }
 }; // edita o tipo da questão

@@ -6,20 +6,28 @@ import RenderCheckBoxCard from "../../Components/ComponentCheckbox/View";
 import RenderRadioButtonCard from "../../Components/ComponentMulti/View";
 import RenderViewTextField from "../../Components/ComponentTextFiled/View";
 import RenderViewTextLong from "../../Components/ComponentTextLong/View";
-import { AplicationContext } from "../../Context/Aplication/context";
+import ViewFormProvider, { ViewFormContext } from "../../Context/ViewForm/context";
 import { Column, Container, Padding, Row } from "../../Styles/styles";
-import { PropsAplicationContext } from "../../Types/types";
+import { ViewFormTypes } from "../../Types/types";
+
 
 const ViewForms = () => {
-  const { form } = useContext(AplicationContext) as PropsAplicationContext;
+  return (
+    <ViewFormProvider>
+      <ViewFormsPage />
+    </ViewFormProvider>
+  )
+}
 
-  const [formRespo, setFormResp] = useState(form ?? []);
+
+const ViewFormsPage = () => {
+  const { form } = useContext(ViewFormContext) as ViewFormTypes;
+
+  const [formRespo, setFormResp] = useState(form);
 
   useEffect(() => {
-    setFormResp(form);
+    setFormResp(form!);
   }, [form]);
-
-  console.log(formRespo);
 
   return (
     <Container>
@@ -36,11 +44,11 @@ const ViewForms = () => {
           </Padding>
         </Card>
       </Padding>
-      <Formik initialValues={{}} onSubmit={(values) => {}}>
+      <Formik initialValues={{}} onSubmit={(values) => { }}>
         {({ values, setFieldValue }) => {
           return (
             <Form>
-              {formRespo?.question.map((item, index) => {
+              {formRespo?.question?.map((item, index) => {
                 return (
                   <Padding padding="4px" key={index}>
                     <Card>
