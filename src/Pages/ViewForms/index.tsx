@@ -6,19 +6,19 @@ import RenderCheckBoxCard from "../../Components/ComponentCheckbox/View";
 import RenderRadioButtonCard from "../../Components/ComponentMulti/View";
 import RenderViewTextField from "../../Components/ComponentTextFiled/View";
 import RenderViewTextLong from "../../Components/ComponentTextLong/View";
-import ViewFormProvider, { ViewFormContext } from "../../Context/ViewForm/context";
+import ViewFormProvider, {
+  ViewFormContext,
+} from "../../Context/ViewForm/context";
 import { Column, Container, Padding, Row } from "../../Styles/styles";
 import { ViewFormTypes } from "../../Types/types";
-
 
 const ViewForms = () => {
   return (
     <ViewFormProvider>
       <ViewFormsPage />
     </ViewFormProvider>
-  )
-}
-
+  );
+};
 
 const ViewFormsPage = () => {
   const { form } = useContext(ViewFormContext) as ViewFormTypes;
@@ -28,6 +28,8 @@ const ViewFormsPage = () => {
   useEffect(() => {
     setFormResp(form!);
   }, [form]);
+
+  console.log(formRespo);
 
   return (
     <Container>
@@ -44,7 +46,7 @@ const ViewFormsPage = () => {
           </Padding>
         </Card>
       </Padding>
-      <Formik initialValues={{}} onSubmit={(values) => { }}>
+      <Formik initialValues={{}} onSubmit={(values) => {}}>
         {({ values, setFieldValue }) => {
           return (
             <Form>

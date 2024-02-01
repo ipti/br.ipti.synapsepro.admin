@@ -8,9 +8,9 @@ const CardForm = ({ item }: CardFormTypes) => {
 
     const history = useNavigate()
     return (
-        <Card title={item.title} onClick={() => history(`/edit/${item.id}`)}>
+        <Card title={item.title} style={{minHeight: "210px", cursor: "pointer"}} onClick={() => history(`/edit/${item.id}`)}>
             <p className="m-0">
-                {item.description}
+                {item.description?.substring(0, 128)}{item?.description?.length! > 128 ? "..." : ""}
             </p>
         </Card>
     )

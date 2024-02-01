@@ -21,8 +21,14 @@ const Config = () => {
         <div className="card">
             <Column>
                 <Padding padding="8px" />
+                <label>
+                    Periodização do formulário
+                </label>
+                <Padding  />
                 <Dropdown options={periodic} placeholder="Escolher Periodo" optionLabel="name" />
                 <Padding padding="8px" />
+                <label>Destino do formulário</label>
+                <Padding />
                 <Dropdown options={project} placeholder="Escolher Projeto" optionLabel="name" />
                 <Padding padding="8px" />
             </Column>

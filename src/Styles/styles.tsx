@@ -38,7 +38,7 @@ export const Row = styled.div`
 `;
 
 interface PropsPadding {
-  padding: string;
+  padding?: string;
 }
 
 export const Padding =styled.div<PropsPadding> `
@@ -50,7 +50,7 @@ export const Container = styled.div`
   height: auto;
   overflow-y: auto;
   width: 100%;
-  padding: 4% 16%;
+  padding: 4% 8%;
   font-size: ${styles.typography.font.medium};
   font-family: ${styles.typography.types.inter};
 `;
