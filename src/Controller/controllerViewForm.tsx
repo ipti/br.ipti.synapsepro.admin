@@ -5,14 +5,11 @@ const RespQuestion = (value: any, id: number, formRespo: any, setFormResp: any) 
 
     const newData = { ...formRespo }
 
-
     for (const option of newData.question) {
       if (option.id === id) {
         option.value = value
       }
     }
-
-
     setFormResp(newData);
   }
 

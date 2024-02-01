@@ -3,14 +3,12 @@ import { useContext, useState } from "react";
 
 import { TabMenu } from "primereact/tabmenu";
 import { useNavigate } from "react-router-dom";
-import CreateOrEditFormProvider, {
-  CreateOrEditFormContext,
-} from "../../Context/Form/CreateOrEditForm/context";
-import { Container, Padding, Row } from "../../Styles/styles";
-import { CreateOrEditFormTypes } from "../../Types/types";
 import Form from "./Form";
 import Config from "./Config";
 import Response from "./Response";
+import CreateOrEditFormProvider, { CreateOrEditFormContext } from "../../../Context/Form/CreateOrEditForm/context";
+import { CreateOrEditFormTypes } from "../../../Types/types";
+import { Container, Padding, Row } from "../../../Styles/styles";
 
 const CreateOrEditForm = () => {
   return (

@@ -1,12 +1,12 @@
 import { Paginator } from 'primereact/paginator';
 import { useContext, useState } from "react";
-import { CreateOrEditFormContext } from "../../../../Context/Form/CreateOrEditForm/context";
-import { Column, Padding, Row } from '../../../../Styles/styles';
-import { CreateOrEditFormTypes } from "../../../../Types/types";
-import RenderViewTextField from '../../../../Components/ComponentsForm/ComponentTextFiled/View';
-import RenderViewTextLong from '../../../../Components/ComponentsForm/ComponentTextLong/View';
-import RenderRadioButtonCard from '../../../../Components/ComponentsForm/ComponentMulti/View';
-import RenderCheckBoxCard from '../../../../Components/ComponentsForm/ComponentCheckbox/View';
+import { CreateOrEditFormContext } from '../../../../../Context/Form/CreateOrEditForm/context';
+import { CreateOrEditFormTypes } from '../../../../../Types/types';
+import { Column, Padding, Row } from '../../../../../Styles/styles';
+import RenderViewTextField from '../../../../../Components/ComponentsForm/ComponentTextFiled/View';
+import RenderViewTextLong from '../../../../../Components/ComponentsForm/ComponentTextLong/View';
+import RenderRadioButtonCard from '../../../../../Components/ComponentsForm/ComponentMulti/View';
+import RenderCheckBoxCard from '../../../../../Components/ComponentsForm/ComponentCheckbox/View';
 
 
 const ResponseSingle = () => {

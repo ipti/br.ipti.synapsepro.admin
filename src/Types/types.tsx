@@ -39,22 +39,25 @@ export interface PropsCheckBoxCardView {
     options?: Array<any>,
     item?: any,
     handleChange?: (e: any, id: number, idOptions: number) => void,
-    form: any,
-    setform: any
+    form?: any,
+    setform?: any,
+    disabled?: boolean
 }
 
 export interface PropsRadioButtonCardView {
     options?: Array<any>,
     item?: any,
     handleChange?: (e: any, id: number) => void,
-    form: any,
-    setFormResp: any
+    form?: any,
+    setFormResp?: any,
+    disabled?: boolean
 }
 
 export interface PropsTextFieldCardView {
     item?: any,
-    form: any,
-    setFormResp: any
+    form?: any,
+    setFormResp?: any,
+    disabled?: boolean
 }
 
 export interface PropsDropdown {
@@ -79,9 +82,35 @@ export interface FormsJson {
 
 export interface CreateOrEditFormTypes {
     form: PropsForm | undefined,
-    setform: Dispatch<SetStateAction<PropsForm | undefined>>
+    setform: Dispatch<SetStateAction<PropsForm | undefined>>,
+    responses: Responses
 }
 
+export interface Responses {
+    resposne: Resposne[]
+  }
+  
+  export interface Resposne {
+    id: string
+    title: string
+    description: string
+    question: Question[]
+  }
+  
+  export interface Question {
+    type: string
+    label: string
+    id: string
+    required: boolean
+    value: any
+    options?: Option[]
+  }
+  
+  export interface Option {
+    value: number
+    label: string
+  }
+  
 export interface ViewFormTypes {
     form: PropsForm | undefined,
     setform: Dispatch<SetStateAction<PropsForm | undefined>>

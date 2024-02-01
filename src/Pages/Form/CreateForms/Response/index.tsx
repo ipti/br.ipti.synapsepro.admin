@@ -1,10 +1,10 @@
 import { TabMenu } from "primereact/tabmenu";
-import { Padding } from "../../../Styles/styles";
 import { useContext, useState } from "react";
-import { CreateOrEditFormContext } from "../../../Context/Form/CreateOrEditForm/context";
-import { CreateOrEditFormTypes } from "../../../Types/types";
 import ResponseSingle from "./ResponseSingle";
 import Resume from "./Resume";
+import { CreateOrEditFormContext } from "../../../../Context/Form/CreateOrEditForm/context";
+import { CreateOrEditFormTypes } from "../../../../Types/types";
+import { Padding } from "../../../../Styles/styles";
 
 const Response = () => {
   const [tabMenu, setTabMenu] = useState(0);

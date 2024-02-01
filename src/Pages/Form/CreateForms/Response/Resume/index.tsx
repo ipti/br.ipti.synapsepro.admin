@@ -1,38 +1,37 @@
-import { Paginator } from 'primereact/paginator';
-import { useContext, useState } from "react";
-import { CreateOrEditFormContext } from "../../../../Context/Form/CreateOrEditForm/context";
-import { Column, Padding, Row } from '../../../../Styles/styles';
-import { CreateOrEditFormTypes } from "../../../../Types/types";
-import RenderViewTextField from '../../../../Components/ComponentsForm/ComponentTextFiled/View';
-import RenderViewTextLong from '../../../../Components/ComponentsForm/ComponentTextLong/View';
-import RenderRadioButtonCard from '../../../../Components/ComponentsForm/ComponentMulti/View';
-import RenderCheckBoxCard from '../../../../Components/ComponentsForm/ComponentCheckbox/View';
+import { useContext } from "react";
+import { CreateOrEditFormContext } from "../../../../../Context/Form/CreateOrEditForm/context";
+import { CreateOrEditFormTypes } from "../../../../../Types/types";
+import { Column, Padding, Row } from "../../../../../Styles/styles";
+import RenderViewTextField from "../../../../../Components/ComponentsForm/ComponentTextFiled/View";
+import RenderViewTextLong from "../../../../../Components/ComponentsForm/ComponentTextLong/View";
+import RenderRadioButtonCard from "../../../../../Components/ComponentsForm/ComponentMulti/View";
+import RenderCheckBoxCard from "../../../../../Components/ComponentsForm/ComponentCheckbox/View";
 
 
-const ResponseSingle = () => {
-    const [first, setFirst] = useState(0);
 
-    const onPageChange = (event: any) => {
-        setFirst(event.first);
-    };
+const Resume = () => {
+
 
     const props = useContext(CreateOrEditFormContext) as CreateOrEditFormTypes
+
+
+
+
     return (
         <>
             <div className='card'>
                 <Padding padding="16px">
-                    <h2>{props?.responses?.resposne[first]?.title}</h2>
-                    {props?.responses?.resposne[first]?.description ? (
+                    <h2>{props?.form?.title}</h2>
+                    {props?.form?.description ? (
                         <>
                             <Padding padding="8px" />
-                            <p>{props?.responses?.resposne[first]?.description}</p>
+                            <p>{props?.form?.description}</p>
                         </>
                     ) : null}
                 </Padding>
             </div>
             <div className="card">
-                <Paginator first={first} rows={1} template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" totalRecords={props.responses.resposne.length} onPageChange={onPageChange} />
-                {props.responses.resposne[first].question.map((item, index) => {
+                {props?.form?.question?.map((item, index) => {
                     return (
                         <div>
                             <Padding>
@@ -44,10 +43,16 @@ const ResponseSingle = () => {
                             </Padding>
                             <Padding>
                                 {item?.type === "textfield" ? (
-                                    <RenderViewTextField
-                                        item={item}
-                                        disabled
-                                    />
+                                    <>
+                                        {props.responses.resposne.map((item, index) => {
+                                            return (
+                                                <RenderViewTextField
+                                                    item={item}
+                                                    disabled
+                                                />
+                                            )
+                                        })}
+                                    </>
                                 ) : item?.type === "textlong" ? (
                                     <RenderViewTextLong
                                         item={item}
@@ -79,4 +84,4 @@ const ResponseSingle = () => {
     )
 }
 
-export default ResponseSingle
+export default Resume
