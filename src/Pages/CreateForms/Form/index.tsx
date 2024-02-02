@@ -5,15 +5,15 @@ import TextInput from "../../../Components/TextInput";
 import TextAreaComponent from "../../../Components/TextArea";
 import DropdownComponent from "../../../Components/Dropdown";
 import { InputSwitch } from "primereact/inputswitch";
-import RenderFormCheckbox from "../../../Components/ComponentCheckbox/Create";
-import RenderFormTextField from "../../../Components/ComponentTextFiled/Create";
-import RenderFormTextLong from "../../../Components/ComponentTextLong/Create";
-import RenderForm from "../../../Components/ComponentMulti/Create";
 import { useContext, useState } from "react";
 import { CreateOrEditFormContext } from "../../../Context/Form/CreateOrEditForm/context";
 import { CreateOrEditFormTypes, PropsComponentForm } from "../../../Types/types";
 import { ControllerCreateForm } from "../../../Controller/controllerCreateForm";
 import { gerarIdAleatorio } from "../../../Controller/controllerGlobal";
+import RenderFormTextField from "../../../Components/ComponentsForm/ComponentTextFiled/Create";
+import RenderFormTextLong from "../../../Components/ComponentsForm/ComponentTextLong/Create";
+import RenderForm from "../../../Components/ComponentsForm/ComponentMulti/Create";
+import RenderFormCheckbox from "../../../Components/ComponentsForm/ComponentCheckbox/Create";
 
 const Form = () => {
     const { form, setform } = useContext(

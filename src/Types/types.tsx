@@ -8,7 +8,8 @@ export interface PropsInputText {
     onChange?: ChangeEventHandler<HTMLInputElement> | undefined,
     placeholder?: string | undefined,
     disabled?: boolean | undefined,
-    onBlur?: FocusEventHandler<HTMLInputElement> | undefined
+    onBlur?: FocusEventHandler<HTMLInputElement> | undefined,
+    name?: string
 }
 
 export interface PropsInputArea {
@@ -86,31 +87,37 @@ export interface CreateOrEditFormTypes {
     responses: Responses
 }
 
+
 export interface Responses {
-    resposne: Resposne[]
-  }
-  
-  export interface Resposne {
+    response: Response[]
+}
+
+export interface Response {
     id: string
     title: string
     description: string
+    response: Response2[]
+}
+
+export interface Response2 {
     question: Question[]
-  }
-  
-  export interface Question {
+}
+
+export interface Question {
     type: string
     label: string
     id: string
     required: boolean
     value: any
     options?: Option[]
-  }
-  
-  export interface Option {
+}
+
+export interface Option {
     value: number
     label: string
-  }
-  
+}
+
+
 export interface ViewFormTypes {
     form: PropsForm | undefined,
     setform: Dispatch<SetStateAction<PropsForm | undefined>>

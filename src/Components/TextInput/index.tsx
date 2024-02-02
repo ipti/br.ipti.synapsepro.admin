@@ -8,6 +8,7 @@ const TextInput = ({
   placeholder,
   disabled,
   onBlur,
+  name,
 }: PropsInputText) => {
   return (
     <div>

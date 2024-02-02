@@ -31,7 +31,7 @@ const Response = () => {
   return (
     <>
       <div className="card">
-        <h3>Resposta {props.responses.resposne.length}</h3>
+        <h3>Resposta {props.responses.response.length}</h3>
         <Padding padding="8px" />
         <TabMenu model={items} />
       </div>

@@ -21,50 +21,50 @@ const ResponseSingle = () => {
         <>
             <div className='card'>
                 <Padding padding="16px">
-                    <h2>{props?.responses?.resposne[first]?.title}</h2>
-                    {props?.responses?.resposne[first]?.description ? (
+                    <h2>{props.responses.response[first]?.title}</h2>
+                    {props?.responses?.response[first]?.description ? (
                         <>
                             <Padding padding="8px" />
-                            <p>{props?.responses?.resposne[first]?.description}</p>
+                            <p>{props?.responses?.response[first]?.description}</p>
                         </>
                     ) : null}
                 </Padding>
             </div>
             <div className="card">
-                <Paginator first={first} rows={1} template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" totalRecords={props.responses.resposne.length} onPageChange={onPageChange} />
-                {props.responses.resposne[first].question.map((item, index) => {
+                <Paginator first={first} rows={1} template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" totalRecords={props.responses.response.length} onPageChange={onPageChange} />
+                {props.responses.response[first].response.map((item, index) => {
                     return (
                         <div>
                             <Padding>
                                 <Row id="space-between">
                                     <Column id="center">
-                                        <p>{item.label}</p>
+                                        <p>{item.question[0].label}</p>
                                     </Column>
                                 </Row>
                             </Padding>
                             <Padding>
-                                {item?.type === "textfield" ? (
+                                {item.question[0].type === "textfield" ? (
                                     <RenderViewTextField
                                         item={item}
                                         disabled
                                     />
-                                ) : item?.type === "textlong" ? (
+                                ) : item.question[0].type === "textlong" ? (
                                     <RenderViewTextLong
                                         item={item}
                                         disabled
                                     />
-                                ) : item?.type === "mult" ? (
+                                ) : item.question[0].type === "mult" ? (
                                     <div>
                                         <RenderRadioButtonCard
-                                            options={item.options}
+                                            options={item.question[0].options}
                                             item={item}
                                             disabled
                                         />
                                     </div>
-                                ) : item?.type === "checklist" ? (
+                                ) : item.question[0]?.type === "checklist" ? (
                                     <div>
                                         <RenderCheckBoxCard
-                                            options={item?.options}
+                                            options={item.question[0]?.options}
                                             item={item}
                                             disabled
                                         />

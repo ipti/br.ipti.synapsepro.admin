@@ -43,7 +43,7 @@ const Resume = () => {
                             <Padding>
                                 {item?.type === "textfield" ? (
                                     <>
-                                        {props.responses.resposne.map((item, index) => {
+                                        {props.responses.response.map((item, index) => {
                                             return (
                                                 <RenderViewTextField
                                                     item={item}
