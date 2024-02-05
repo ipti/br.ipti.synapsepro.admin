@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import styles from ".";
 
-export const Column = styled.div`
+interface PropsReverse {
+  reverse?: boolean
+}
+
+export const Column = styled.div<PropsReverse>`
   display: flex;
   flex-direction: column;
 
@@ -17,9 +21,14 @@ export const Column = styled.div`
   #end {
     justify-content: end;
   }
+
+  @media (max-width: 600) {
+    flex-direction: ${props => props.reverse ? "row" : "column"};
+
+  }
 `;
 
-export const Row = styled.div`
+export const Row = styled.div<PropsReverse>`
   display: flex;
   flex-direction: row;
 
@@ -34,6 +43,11 @@ export const Row = styled.div`
   }
   #end {
     justify-content: end;
+  }
+
+  @media (max-width: 600) {
+    flex-direction: ${props => props.reverse ? "column" : "row"};
+
   }
 `;
 

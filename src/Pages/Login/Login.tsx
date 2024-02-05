@@ -1,4 +1,3 @@
-
 import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 
@@ -9,11 +8,9 @@ import TextInput from "../../Components/TextInput";
 import { Column, Padding, Row } from "../../Styles/styles";
 import { ContainerLogin, TopColors } from "./styles";
 
-
 const Login = () => {
-
   return (
-    <ContainerLogin >
+    <ContainerLogin>
       <Row style={{ height: 1 }}>
         <TopColors color="#667DF4" />
         <TopColors color="#F45A5A" />
@@ -21,25 +18,29 @@ const Login = () => {
         <TopColors color="#EADA48" />
       </Row>
       <img id="margin" src={TagImage} alt=""></img>
-      <Column style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100%",
-        width: "100%",
-        position: "relative"
-      }}>
-        <div style={{
+      <Column
+        style={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           height: "100%",
           width: "100%",
-          position: "relative"
-        }}>
-          <div className="col-11 md:col-4" >
+          position: "relative",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            width: "100%",
+            position: "relative",
+          }}
+        >
+          <div className="col-11 md:col-4">
             {/* <div className={classes.marginMobile20} /> */}
             <div>
               <div>
@@ -49,13 +50,15 @@ const Login = () => {
               </div>
             </div>
             {/* <div className={classes.marginMobile} /> */}
+            <div className="p-2" />
+
             <Formik
               initialValues={{}}
-              onSubmit={() => { }}
+              onSubmit={() => {}}
               validationSchema={[]}
               validateOnChange={false}
             >
-              {props => {
+              {(props) => {
                 return (
                   <Form>
                     <div>
@@ -65,22 +68,14 @@ const Login = () => {
                           onChange={props.handleChange}
                           placeholder="Usuário"
                         />
-                        <div>
-                          {/* {props.errors.username} */}
-                        </div>
+                        <div>{/* {props.errors.username} */}</div>
                       </div>
                     </div>
                     <div className="p-2" />
-                    <div
-                    >
-                      <div >
-                        <TextInput
-                          name="password"
-                          placeholder="Senha"
-                        />
-                        <div >
-                          {/* {props.errors.password} */}
-                        </div>
+                    <div>
+                      <div>
+                        <TextInput name="password" placeholder="Senha" />
+                        <div>{/* {props.errors.password} */}</div>
                       </div>
                     </div>
                     <Padding />
@@ -95,8 +90,7 @@ const Login = () => {
                   </div> : null
                 } */}
                     <div className="p-2" />
-                    <div
-                    >
+                    <div>
                       <div>
                         <Button
                           className={"t-button-primary"}
@@ -106,9 +100,12 @@ const Login = () => {
                       </div>
                     </div>
                     <div className="p-2" />
-                    <div className="flex row justify-content-center gap-2">
-                      <div id="resetPassword textCenter">
-                        Faça a sua matricula
+                    <div className="flex row justify-content-center ">
+                      <div
+                        className="flex row gap-2"
+                        id="resetPassword textCenter"
+                      >
+                        <Column id="center">Faça a sua matricula</Column>
                         <Link id="link" to="/register">
                           clique aqui
                         </Link>
@@ -122,9 +119,7 @@ const Login = () => {
         </div>
       </Column>
     </ContainerLogin>
-
   );
 };
-
 
 export default Login;
