@@ -22,5 +22,8 @@ export const Container = styled.div`
     margin: 20px;
     position: relative;
 }
-
+.imageRegistration {
+    height: 20%;
+    width: 20%
+  }
 `;

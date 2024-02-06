@@ -2,6 +2,7 @@ import { TopColors } from "../Login/styles";
 import { Container } from "./style";
 import TagImage from "../../Assets/images/taglogin.svg"
 import BackButton from "../../Assets/images/backIcon.svg"
+import Wizard from "./Wizard";
 
 
 const Register = () => {
@@ -16,14 +17,14 @@ const Register = () => {
       <div style={{ display: "flex", flexDirection: "row" }}>
         <img
           className={"backButton"}
-        //   onClick={backStep}
+          //   onClick={backStep}
           src={BackButton}
           alt=""
         ></img>
         <img className={"imgTag"} src={TagImage} alt=""></img>
       </div>
+      <Wizard />
 
-      
     </Container>
   );
 };

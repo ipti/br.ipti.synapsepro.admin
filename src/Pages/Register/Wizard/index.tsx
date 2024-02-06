@@ -1,9 +1,8 @@
-import React from "react";
 
 // Material UI
 
 // Components
-import { useContext } from "react";
+import Start from "./Steps/Start";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 // import Classroom from "./ClassRoom";
 // import Finish from "./Finish";
@@ -19,19 +18,19 @@ const Wizard = () => {
 
   
 
-  const { isOfLegalAge } = useContext(RegistrationContext);
+  // const { isOfLegalAge } = useContext(RegistrationContext);
   
   const componentMapping = {
     "0": Start,
-    "1": Classroom,
-    "2": StepOne,
-    "3": StepThree,
-    "4": isOfLegalAge === '1' ? StepFour : StepSix,
-    "5": Quiz,
-    "6": Finish
+    // "1": Classroom,
+    // "2": StepOne,
+    // "3": StepThree,
+    // "4": isOfLegalAge === '1' ? StepFour : StepSix,
+    // "5": Quiz,
+    // "6": Finish
   };
 
-  const StepComponent = componentMapping[props.step];
+  const StepComponent = componentMapping[0];
 
 
   return (

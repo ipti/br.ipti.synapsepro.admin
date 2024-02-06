@@ -1,18 +1,15 @@
-import { useContext, useState } from "react";
-import { Row } from "../../../../../Styles/styles";
-import homeImg from "../../assets/images/Capelo.png";
 import { Button } from "primereact/button";
+import { useState } from "react";
+import homeImg from "../../../../../Assets/images/Capelo.png";
+import { Column, Row } from "../../../../../Styles/styles";
+import DropdownComponent from "../../../../../Components/Dropdown";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 
 
 const Start = () => {
-  const [startDate, setStartDate] = useState()
-  const [endDate, setEndDate] = useState()
   const [isValid, setIsValid] = useState()
   // const { setIdEvent, idEvent, setSchool, setYear, schools, school } = useContext(RegistrationContext);
 
-  const datenow = Date.now();
-  const date = new Date(datenow)
 
   // const onButton = () => {
   //   if (startDate <= date.getTime() && date.getTime() <= (endDate + 87000000) && idEvent !== '') {
@@ -24,11 +21,11 @@ const Start = () => {
   // }
   return (
     <>
-      <Row
-        className={"contentStart"}
+      <Column
+        id="center"
       >
         <div className="col-12">
-          <img className={"imageRegistration"} src={homeImg} alt="" />
+          <img className="imageRegistration" src={homeImg} alt="" />
         </div>
         <div className="col-12">
           <h1>Matrícula Online</h1>
@@ -37,6 +34,7 @@ const Start = () => {
             abaixo
           </p>
         </div>
+        <DropdownComponent />
         <div className="col-12">
           {/* <FormControl
             component="fieldset"
@@ -68,18 +66,17 @@ const Start = () => {
             />
           </FormControl> */}
         </div>
-      </Row>
+      </Column>
       <Row
         className={"marginTop marginButtom"}
-        
       >
         <div className="col-6">
           <Button
             type="button"
             // onClick={onButton}
             className="t-button-primary"
-            title="Iniciar"
-            disabled={!isValid}
+            label="Iniciar"
+          // disabled={!isValid}
           />
         </div>
       </Row>
