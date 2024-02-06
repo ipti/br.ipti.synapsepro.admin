@@ -22,6 +22,8 @@ const Register = () => {
         ></img>
         <img className={"imgTag"} src={TagImage} alt=""></img>
       </div>
+
+      
     </Container>
   );
 };
