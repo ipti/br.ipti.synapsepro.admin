@@ -13,7 +13,7 @@ export default function RadioButtonCard({
 
   const props = ControllerCreateForm()
   return (
-    <div className="card ">
+    <div>
       <div className="flex flex-column gap-3">
         {options?.map((item, indexRadioButton) => {
           return (

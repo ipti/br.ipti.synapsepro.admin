@@ -6,16 +6,19 @@ import { Padding } from "../../../../Styles/styles";
 
 const props = ControllerCreateForm()
 
-const Mult = ({form, index, item, setform}: PropsComponets) =>
+const Mult = ({ form, index, item, setform }: PropsComponets) =>
 (
     <div>
-        <RadioButtonCard
-            index={index!}
-            form={form}
-            setform={setform}
-            options={item.options}
-        />
-        <Padding padding="0 32px">
+        <Padding padding="16px">
+
+            <RadioButtonCard
+                index={index!}
+                form={form}
+                setform={setform}
+                options={item.options}
+            />
+        </Padding>
+        <Padding padding="16px">
             <Button
                 icon="pi pi-plus"
                 onClick={() => {

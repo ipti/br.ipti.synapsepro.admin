@@ -5,6 +5,7 @@
 import { useParams } from "react-router-dom";
 import Start from "./Steps/Start";
 import NotPeriod from "./Steps/NotPeriod";
+import Classroom from "./Steps/Classroom";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 // import Classroom from "./ClassRoom";
 // import Finish from "./Finish";
@@ -25,7 +26,8 @@ const Wizard = () => {
   
   const componentMapping: {[key: string]: any} = {
     "0": Start,
-    "1": NotPeriod,
+    "1": Classroom,
+    "2": NotPeriod,
     // "2": StepOne,
     // "3": StepThree,
     // "4": isOfLegalAge === '1' ? StepFour : StepSix,

@@ -3,12 +3,36 @@ import { Link } from "react-router-dom";
 
 import TagImage from "../../Assets/images/taglogin.svg";
 
+import { Password } from 'primereact/password';
+
 import { Button } from "primereact/button";
+import { useContext } from "react";
+import * as Yup from 'yup';
 import TextInput from "../../Components/TextInput";
+import LoginProvider, { LoginContext } from "../../Context/Login/context";
+import { LoginContextText } from "../../Context/Login/types";
 import { Column, Padding, Row } from "../../Styles/styles";
 import { ContainerLogin, TopColors } from "./styles";
+import PasswordInput from "../../Components/TextPassword";
+
 
 const Login = () => {
+  return (
+    <LoginProvider>
+      <LoginPage />
+    </LoginProvider>
+  )
+}
+
+const LoginPage = () => {
+
+  const props = useContext(LoginContext) as LoginContextText
+
+  const LoginSchema = Yup.object().shape({
+    password: Yup.string()
+      .required('Campo Obrigatório'),
+    username: Yup.string().required('Campo Obrigatório'),
+  });
   return (
     <ContainerLogin>
       <Row style={{ height: 1 }}>
@@ -53,42 +77,44 @@ const Login = () => {
             <div className="p-2" />
 
             <Formik
-              initialValues={{}}
-              onSubmit={() => {}}
-              validationSchema={[]}
+              initialValues={props.initialValue}
+              onSubmit={(values) => { props.Login(values); }}
+              validationSchema={LoginSchema}
               validateOnChange={false}
             >
-              {(props) => {
+              {({ values, errors, handleChange }) => {
+                console.log(values)
                 return (
                   <Form>
                     <div>
                       <div>
                         <TextInput
                           name="username"
-                          onChange={props.handleChange}
+                          value={values.username}
+                          onChange={handleChange}
                           placeholder="Usuário"
                         />
-                        <div>{/* {props.errors.username} */}</div>
+                        <div>{errors.username}</div>
                       </div>
                     </div>
                     <div className="p-2" />
                     <div>
                       <div>
-                        <TextInput name="password" placeholder="Senha" />
-                        <div>{/* {props.errors.password} */}</div>
+                        <PasswordInput name="password" placeholder="Senha" onChange={handleChange} value={values.password} />
+                        <div>{errors.password}</div>
                       </div>
                     </div>
                     <Padding />
 
-                    {/* {
-                  !isValid ? <div
+                    {
+                      props.error ? <div
 
-                  >
-                  <div>
-                  {!isValid ? "Usuário ou senha inválido" : ""}
-                  </div>
-                  </div> : null
-                } */}
+                      >
+                        <div>
+                          {!props.error ? "Usuário ou senha inválido" : ""}
+                        </div>
+                      </div> : null
+                    }
                     <div className="p-2" />
                     <div>
                       <div>

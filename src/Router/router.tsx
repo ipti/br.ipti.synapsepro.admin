@@ -1,12 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CreateForms from "../Pages/CreateForms";
 import ViewForms from "../Pages/Form/ViewForms";
 import PrivateRoute from "./privaterouter";
 import ListForm from "../Pages/Form/ListForm";
-import CreateOrEditForm from "../Pages/CreateForms";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import Register from "../Pages/Register";
+import CreateOrEditForm from "../Pages/Form/CreateForms";
+import ListSchedule from "../Pages/Schedule/ListSchedule";
+import FormSchedule from "../Pages/Schedule/FormSchedule";
+import ListClassroom from "../Pages/Classroom/ListClassroom";
+import FormClassroom from "../Pages/Classroom/FormClassroom";
 
 const RoutesApp = () => {
   return (
@@ -22,15 +25,33 @@ const RoutesApp = () => {
         />
         <Route
           element={<PrivateRoute Component={<ListForm />} />}
-          path="/list"
+          path="/"
         />
         <Route
-          element={<PrivateRoute Component={<CreateForms />} />}
+          element={<PrivateRoute Component={<ListSchedule />} />}
+          path="/cronograma"
+        />
+        <Route
+          element={<PrivateRoute Component={<FormSchedule />} />}
+          path="/cronograma/criar"
+        />
+
+        <Route
+          element={<PrivateRoute Component={<ListClassroom />} />}
+          path="/turma"
+        />
+        <Route
+          element={<PrivateRoute Component={<FormClassroom />} />}
+          path="/turma/criar"
+        />
+        <Route
+          element={<PrivateRoute Component={<CreateOrEditForm />} />}
           path="/edit/:id"
         />
-        <Route element={<Login />} path="/" />
+        <Route element={<Login />} path="/login" />
         <Route element={<SignUp />} path="/register" />
         <Route element={<Register />} path="/matricula/:step" />
+
 
 
         {/* <Route path="/*" element={<NotFoundPage />} /> */}

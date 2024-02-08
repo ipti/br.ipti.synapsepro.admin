@@ -17,6 +17,7 @@ const TextInput = ({
         onBlur={onBlur}
         disabled={disabled}
         value={value}
+        name={name}
         onChange={onChange}
         placeholder={placeholder}
       />

@@ -3,10 +3,11 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import Layout from "../Components/Layout/layout";
 import AplicationProvider from "../Context/Aplication/context";
+import { isAuthenticated } from "../Services/localstorage";
 
 const PrivateRoute = ({ Component }: {Component: React.ReactNode}) => {
 
-  return true ?
+  return isAuthenticated() ?
     <AplicationProvider>
       <Layout>
         {Component} 

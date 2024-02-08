@@ -1,15 +1,21 @@
 import React from "react";
-import { Column } from "../../Styles/styles";
+import { Column, Row } from "../../Styles/styles";
 import TopBar from "./TopBar";
 import styles from "../../Styles";
+import Menu from "../Menu";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
 
 
     return (
         <Column style={{ height: "100%" }}>
-            <TopBar />
-            <div style={{ overflowY: "auto", backgroundColor: styles.colors.grayClearOne, height: "100%" }}>{children}</div>
+            <Row style={{ height: "100%" }}>
+                <Menu viewdMenu />
+                <Column style={{ width: "100%" }}>
+                    <TopBar />
+                    <div style={{ overflowY: "auto",  height: "100%" }}>{children}</div>
+                </Column>
+            </Row>
         </Column>
     )
 }

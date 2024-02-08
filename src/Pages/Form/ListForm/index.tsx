@@ -23,9 +23,9 @@ const ListFormPage = () => {
   return (
     <Container>
       <Row id="end">
-        <Button label="Criar formulário" icon={"pi pi-plus"} onClick={() => history("/")} />
+        <Button label="Criar formulário" icon={"pi pi-plus"} onClick={() => history("/create")} />
       </Row>
-      <Padding padding="8px" />
+      <Padding padding="16px" />
       <div className="grid ">
         {props?.forms?.form.map((item, index) => {
           return (

@@ -15,7 +15,7 @@ export default function BoxSelectCard({
 
     const props = ControllerCreateForm()
     return (
-        <div className="card ">
+        <div>
             <div className="flex flex-column gap-3">
                 {options?.map((item, indexRadioButton) => {
                     return (

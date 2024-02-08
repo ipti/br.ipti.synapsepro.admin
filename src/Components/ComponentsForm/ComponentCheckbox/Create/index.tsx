@@ -9,13 +9,16 @@ const props = ControllerCreateForm()
 const Checkbox = ({ form, index, item, setform }: PropsComponets) =>
 (
     <div>
-        <BoxSelectCard
-            index={index!}
-            form={form}
-            setform={setform}
-            options={item?.options}
-        />
-        <Padding padding="8px">
+        <Padding padding="16px">
+
+            <BoxSelectCard
+                index={index!}
+                form={form}
+                setform={setform}
+                options={item?.options}
+            />
+        </Padding>
+        <Padding padding="16px">
             <Button
                 onClick={() => {
                     props.AddBoxSelect(index!, setform, form);

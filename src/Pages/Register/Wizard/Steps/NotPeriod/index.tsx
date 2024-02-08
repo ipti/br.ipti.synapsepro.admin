@@ -1,5 +1,4 @@
 import { Button } from "primereact/button";
-import { useState } from "react";
 import homeImg from "../../../../../Assets/images/Caderno.png";
 import { Column, Row } from "../../../../../Styles/styles";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";

@@ -1,5 +1,5 @@
 @layer primereact {
-  
+
   * {
     margin: 0;
     padding: 0;
@@ -114,12 +114,15 @@
   }
 
   .card {
-    background: var(--surface-card);
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     padding: 2rem;
     border-radius: 10px;
     margin-bottom: 1rem;
   }
+
+
+
   .p-card .p-card-content {
     padding: 0;
-}
+  }
 }

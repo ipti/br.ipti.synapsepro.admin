@@ -80,7 +80,7 @@ const Form = () => {
             <Padding padding="4px" />
             {form?.question?.map((item, index) => {
                 return (
-                    <Padding padding="4px" key={index}>
+                    <>
                         <Card>
                             <Padding padding="16px">
                                 <Row id="space-between">
@@ -119,13 +119,14 @@ const Form = () => {
                             {item?.type === "textfield" ? RenderFormTextField.component({}) : item?.type === "textlong" ? RenderFormTextLong.component({}) : item?.type === "mult" ? RenderForm.component({ form: form, index: index, item: item, setform: setform }) : item?.type === "checklist" ? (
                                 RenderFormCheckbox.component({ form: form, index: index, item: item, setform: setform })
                             ) : null}
-                            <div className="card flex align-items-center justify-content-end gap-2">
+                            <div className="flex align-items-center justify-content-end gap-2">
                                 <i className="pi pi-trash cursor-pointer" onClick={() => props.deleteQuestion(index, form, setform)} />
                                 <span>Obrigatória</span>
                                 <InputSwitch checked={item.required} onChange={(e) => props.editIsRequiredForm(index, e.target.value, form, setform)} />
                             </div>
                         </Card>
-                    </Padding>
+                        <Padding padding="8px" />
+                    </>
                 );
             })}
             <Padding padding="8px" />
