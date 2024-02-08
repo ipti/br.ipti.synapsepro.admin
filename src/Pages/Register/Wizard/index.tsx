@@ -2,7 +2,9 @@
 // Material UI
 
 // Components
+import { useParams } from "react-router-dom";
 import Start from "./Steps/Start";
+import NotPeriod from "./Steps/NotPeriod";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 // import Classroom from "./ClassRoom";
 // import Finish from "./Finish";
@@ -16,13 +18,14 @@ import Start from "./Steps/Start";
 
 const Wizard = () => {
 
+  const {step} = useParams()
   
 
   // const { isOfLegalAge } = useContext(RegistrationContext);
   
-  const componentMapping = {
+  const componentMapping: {[key: string]: any} = {
     "0": Start,
-    // "1": Classroom,
+    "1": NotPeriod,
     // "2": StepOne,
     // "3": StepThree,
     // "4": isOfLegalAge === '1' ? StepFour : StepSix,
@@ -30,7 +33,9 @@ const Wizard = () => {
     // "6": Finish
   };
 
-  const StepComponent = componentMapping[0];
+  const stepverify: number = parseInt(step!)
+
+  const StepComponent = componentMapping[stepverify!];
 
 
   return (

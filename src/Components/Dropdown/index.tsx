@@ -6,7 +6,7 @@ const DropdownComponent = ({value,  onChange, options, placerholder}: PropsDropd
     return (
         <div className="flex justify-content">
             <Dropdown value={value} onChange={onChange} options={options} optionLabel="name"
-                placeholder={placerholder} className="w-full md:w-14rem" />
+                placeholder={placerholder} className="w-full" />
         </div>)
 }
 

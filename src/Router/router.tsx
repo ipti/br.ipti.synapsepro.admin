@@ -30,7 +30,7 @@ const RoutesApp = () => {
         />
         <Route element={<Login />} path="/" />
         <Route element={<SignUp />} path="/register" />
-        <Route element={<Register />} path="/matricula" />
+        <Route element={<Register />} path="/matricula/:step" />
 
 
         {/* <Route path="/*" element={<NotFoundPage />} /> */}

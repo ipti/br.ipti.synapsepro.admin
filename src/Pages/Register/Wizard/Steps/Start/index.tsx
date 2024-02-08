@@ -5,11 +5,9 @@ import { Column, Row } from "../../../../../Styles/styles";
 import DropdownComponent from "../../../../../Components/Dropdown";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 
-
 const Start = () => {
-  const [isValid, setIsValid] = useState()
+  const [isValid, setIsValid] = useState();
   // const { setIdEvent, idEvent, setSchool, setYear, schools, school } = useContext(RegistrationContext);
-
 
   // const onButton = () => {
   //   if (startDate <= date.getTime() && date.getTime() <= (endDate + 87000000) && idEvent !== '') {
@@ -21,20 +19,22 @@ const Start = () => {
   // }
   return (
     <>
-      <Column
-        id="center"
-      >
+      <Column className="contentStart" id="center">
         <div className="col-12">
           <img className="imageRegistration" src={homeImg} alt="" />
         </div>
         <div className="col-12">
           <h1>Matrícula Online</h1>
           <p>
-            Bem-vindo ao Matrícula online, para <br /> iniciar escolha o projeto e clique no botão
-            abaixo
+            Bem-vindo ao Matrícula online, para <br /> iniciar escolha o projeto
+            e clique no botão abaixo
           </p>
         </div>
-        <DropdownComponent />
+        <Row id="center">
+          <div className="col-12 md:col-4">
+            <DropdownComponent placerholder="Escolha o projeto" />
+          </div>
+        </Row>
         <div className="col-12">
           {/* <FormControl
             component="fieldset"
@@ -66,20 +66,18 @@ const Start = () => {
             />
           </FormControl> */}
         </div>
+        <Row id="center" className={"marginTop marginButtom"}>
+          <div className="col-4">
+            <Button
+              type="button"
+              // onClick={onButton}
+              className="t-button-primary"
+              label="Iniciar"
+              // disabled={!isValid}
+            />
+          </div>
+        </Row>
       </Column>
-      <Row
-        className={"marginTop marginButtom"}
-      >
-        <div className="col-6">
-          <Button
-            type="button"
-            // onClick={onButton}
-            className="t-button-primary"
-            label="Iniciar"
-          // disabled={!isValid}
-          />
-        </div>
-      </Row>
     </>
   );
 };
