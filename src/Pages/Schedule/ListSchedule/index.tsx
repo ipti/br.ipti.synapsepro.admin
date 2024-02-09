@@ -1,6 +1,7 @@
 import { Button } from "primereact/button";
 import { Container, Padding, Row } from "../../../Styles/styles";
 import { useNavigate } from "react-router-dom";
+import CardSchedule from "../../../Components/Card/CardSchedule";
 
 const ListSchedule = () => {
 
@@ -21,7 +22,7 @@ const ListSchedule = () => {
                     return (
                         <div className="col-12 md:col-6 lg:col-4">
                             <div className="card">
-                                assnhjnjsan
+                                <CardSchedule title="xnkjxnjnx" subtitle="s k s" />
                             </div>
                         </div>
                     );

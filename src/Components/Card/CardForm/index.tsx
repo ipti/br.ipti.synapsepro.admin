@@ -1,7 +1,7 @@
 
 import { useNavigate } from 'react-router-dom';
-import { CardFormTypes } from '../../Types/types';
-import { Padding } from '../../Styles/styles';
+import { CardFormTypes } from '../../../Types/types';
+import { Padding } from '../../../Styles/styles';
 
 
 const CardForm = ({ item }: CardFormTypes) => {

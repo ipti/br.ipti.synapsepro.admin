@@ -64,7 +64,7 @@ export const Container = styled.div`
   height: auto;
   overflow-y: auto;
   width: 100%;
-  padding: 4% 16%;
+  padding: 4% ;
   font-size: ${styles.typography.font.medium};
   font-family: ${styles.typography.types.inter};
 `;

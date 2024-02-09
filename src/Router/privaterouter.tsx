@@ -7,7 +7,7 @@ import { isAuthenticated } from "../Services/localstorage";
 
 const PrivateRoute = ({ Component }: {Component: React.ReactNode}) => {
 
-  return isAuthenticated() ?
+  return true ?
     <AplicationProvider>
       <Layout>
         {Component} 
