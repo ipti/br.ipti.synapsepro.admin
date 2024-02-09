@@ -21,9 +21,7 @@ const ListSchedule = () => {
                 {schedule.map((item, index) => {
                     return (
                         <div className="col-12 md:col-6 lg:col-4">
-                            <div className="card">
-                                <CardSchedule title="xnkjxnjnx" subtitle="s k s" />
-                            </div>
+                            <CardSchedule title={`Periodo de inscrições - Cloc`} subtitle="08/05/2023 - 30/05/2023" />
                         </div>
                     );
                 })}

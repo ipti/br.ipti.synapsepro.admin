@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
-import { Container, Padding, Row } from "../../../Styles/styles";
 import { useNavigate } from "react-router-dom";
-import CardClassRoom from "./CardClassroom";
+import CardClassroom from "../../../Components/Card/CardClassroom";
+import { Container, Padding, Row } from "../../../Styles/styles";
 
 const ListClassroom = () => {
 
@@ -35,7 +35,7 @@ const ListClassroom = () => {
                 {classroom.map((item, index) => {
                     return (
                         <div className="col-12 md:col-6 lg:col-4">
-                            <CardClassRoom item={item} />
+                            <CardClassroom title={item.name} year={item.year.toString()} />
                         </div>
                     );
                 })}

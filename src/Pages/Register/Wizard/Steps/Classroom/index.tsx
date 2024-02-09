@@ -1,22 +1,11 @@
 import { Button } from "primereact/button";
-import { useState } from "react";
 import homeImg from "../../../../../Assets/images/Capelo.png";
-import { Column, Row } from "../../../../../Styles/styles";
 import DropdownComponent from "../../../../../Components/Dropdown";
+import { Column, Row } from "../../../../../Styles/styles";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 
 const Classroom = () => {
-  const [isValid, setIsValid] = useState();
-  // const { setIdEvent, idEvent, setSchool, setYear, schools, school } = useContext(RegistrationContext);
-
-  // const onButton = () => {
-  //   if (startDate <= date.getTime() && date.getTime() <= (endDate + 87000000) && idEvent !== '') {
-  //     props.setIsActive(true)
-  //     props.next('1', { school_identification: school.inep_id, event_pre_registration: idEvent })
-  //   } else {
-  //     props.setIsActive(false)
-  //   }
-  // }
+  
   return (
     <>
       <Column className="contentStart" id="center">
