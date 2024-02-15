@@ -1,8 +1,8 @@
 const TOKEN_KEY = "token";
-const id_key = "cras-id";
+const id_key = "user-id";
 
-const id_attendance = "cras-id-attendance";
-const menu_key = "cras-menu";
+const id_project = "id-project";
+const menu_key = "menu";
 
 export const isAuthenticated = () => {
   return localStorage.getItem(TOKEN_KEY) !== null;
@@ -21,7 +21,7 @@ export const login = (token: string) => {
 export const logout = () => {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(id_key);
-  localStorage.removeItem(id_attendance);
+  localStorage.removeItem(id_project);
 
   localStorage.clear();
 };
@@ -30,12 +30,12 @@ export const idUser = (id: string) => {
   localStorage.setItem(id_key, id);
 }
 
-export const idAttendance = (id: string) => {
-  localStorage.setItem(id_attendance, id);
+export const idProject = (id: string) => {
+  localStorage.setItem(id_project, id);
 }
 
-export const GetIdAttendance = () => {
-  return localStorage.getItem(id_attendance);
+export const GetIdProject = () => {
+  return localStorage.getItem(id_project);
 }
 
 export const GetIdUser = () => {

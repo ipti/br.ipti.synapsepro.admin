@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { idAttendance, idUser, login, logout, menuItem } from "../localstorage";
+import { idProject, idUser, login, logout, menuItem } from "../localstorage";
 import { LoginRequest } from "./request";
 import { LoginTypes } from "./types";
 
@@ -19,8 +19,8 @@ export const LoginController = ({setError}: {setError: any, }) => {
             console.log(data.data.access_token)
             login(data.data.access_token);
             idUser(data.data.user.id)
+            idProject(data.data.user.schools[0].inep_id)
             console.log(data)
-            idAttendance(data.data.user.attendance_unity_fk)
             history("/");
             menuItem("1")
             window.location.reload()

@@ -4,12 +4,12 @@ import { PropsAplicationContext } from "../../Types/types";
 
 export const AplicationContext = createContext<PropsAplicationContext | null>(null);
 
-const AplicationProvider = ({ children }: {children: React.ReactNode}) => {
+const AplicationProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { form, setform } = AplicationState();
+    const { form, setform, project } = AplicationState();
 
     return (
-        <AplicationContext.Provider value={{ form, setform }}>
+        <AplicationContext.Provider value={{ form, setform, project }}>
             {children}
         </AplicationContext.Provider>
     )
