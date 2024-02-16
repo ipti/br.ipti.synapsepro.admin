@@ -1,0 +1,91 @@
+[
+    {
+      "id": 1,
+      "classroom_fk": 101,
+      "name": "João Silva",
+      "birthday": "1990-05-15",
+      "cpf": "12345678901",
+      "sex": 1,
+      "color_race": 1,
+      "deficiency": false,
+      "deficiency_description": null,
+      "responsable_name": "Maria Silva",
+      "responsable_cpf": "98765432109",
+      "responsable_telephone": "11987654321",
+      "zone": 1,
+      "status": "PENDING",
+      "answers": []
+    },
+    {
+      "id": 2,
+      "classroom_fk": 102,
+      "name": "Ana Souza",
+      "birthday": "1995-10-20",
+      "cpf": "98765432101",
+      "sex": 2,
+      "color_race": 2,
+      "deficiency": true,
+      "deficiency_description": "Deficiência visual",
+      "responsable_name": "Pedro Souza",
+      "responsable_cpf": "12345678909",
+      "responsable_telephone": "11912345678",
+      "zone": 2,
+      "status": "PENDING",
+      "answers": []
+    },
+    [
+        {
+          "id": 3,
+          "classroom_fk": 103,
+          "name": "Maria Oliveira",
+          "birthday": "2000-03-10",
+          "cpf": "55544433322",
+          "sex": 2,
+          "color_race": 3,
+          "deficiency": false,
+          "deficiency_description": null,
+          "responsable_name": "José Oliveira",
+          "responsable_cpf": "44433322211",
+          "responsable_telephone": "11955544433",
+          "zone": 1,
+          "status": "PENDING",
+          "answers": []
+        },
+        {
+          "id": 4,
+          "classroom_fk": 104,
+          "name": "Carlos Santos",
+          "birthday": "2003-12-05",
+          "cpf": "77788899944",
+          "sex": 1,
+          "color_race": 4,
+          "deficiency": true,
+          "deficiency_description": "Deficiência auditiva",
+          "responsable_name": "Ana Santos",
+          "responsable_cpf": "66677788855",
+          "responsable_telephone": "11977788899",
+          "zone": 2,
+          "status": "PENDING",
+          "answers": []
+        },
+        {
+          "id": 5,
+          "classroom_fk": 105,
+          "name": "Luis Fernandes",
+          "birthday": "1998-08-25",
+          "cpf": "22233344455",
+          "sex": 1,
+          "color_race": 5,
+          "deficiency": true,
+          "deficiency_description": "Deficiência física",
+          "responsable_name": "Fernanda Fernandes",
+          "responsable_cpf": "11122233344",
+          "responsable_telephone": "11922233344",
+          "zone": 1,
+          "status": "PENDING",
+          "answers": []
+        }
+      ]
+      
+  ]
+  

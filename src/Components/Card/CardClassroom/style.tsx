@@ -5,6 +5,7 @@ export const Container = styled.div`
   color: ${styles.colors.grayClear};
   font-size: ${styles.typography.font.extraSmall};
   justify-content: space-between;
+  cursor: pointer;
 
   .boxQuantity {
     display: flex;

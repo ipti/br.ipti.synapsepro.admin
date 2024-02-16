@@ -2,18 +2,18 @@ import { createContext } from "react";
 import { ClassroomState } from "./state";
 import { ClassroomTypes } from "./type";
 
-export const ScheduleContext = createContext<ClassroomTypes | null>(null);
+export const ClassroomContext = createContext<ClassroomTypes | null>(null);
 
-const ScheduleProvider = ({ children }: { children: React.ReactNode }) => {
+const ClassroomProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { initialValue, CreateClassroom } = ClassroomState()
+    const { initialValue, CreateClassroom, classrooms } = ClassroomState()
 
 
     return (
-        <ScheduleContext.Provider value={{CreateClassroom, initialValue }}>
+        <ClassroomContext.Provider value={{ CreateClassroom, initialValue, classrooms }}>
             {children}
-        </ScheduleContext.Provider>
+        </ClassroomContext.Provider>
     )
 }
 
-export default ScheduleProvider;
+export default ClassroomProvider;

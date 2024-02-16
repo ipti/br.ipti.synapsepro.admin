@@ -4,7 +4,7 @@ import { getToken } from "./localstorage";
 // require('dotenv').config();
 
 const http = axios.create({
-  baseURL: "https://apitag.azurewebsites.net/",
+  baseURL: "http://localhost:3000/",
 });
 
 http.interceptors.request.use(async config => {

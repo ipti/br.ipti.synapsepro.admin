@@ -1,12 +1,13 @@
-import { Container } from "./style"
-import IconSchedule from "./../../../Assets/images/calendar.png";
+import { useNavigate } from "react-router-dom";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import Icon from "../../Icon";
+import { Container } from "./style";
 
 
 const CardClassroom = ({ title, year }: { title: string, year: string }) => {
+    const history = useNavigate()
     return (
-        <Container className="card">
+        <Container className="card" onClick={() => history("/turma/1")}>
             <Row id="space-between">
                 <h3>{title}</h3>
                 <div className="cursor-pointer">

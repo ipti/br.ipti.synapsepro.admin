@@ -2,6 +2,8 @@ const TOKEN_KEY = "token";
 const id_key = "user-id";
 
 const id_project = "id-project";
+const projects = "projects";
+
 const menu_key = "menu";
 
 export const isAuthenticated = () => {
@@ -34,6 +36,14 @@ export const idProject = (id: string) => {
   localStorage.setItem(id_project, id);
 }
 
+
+export const ProjectLogin = (data: any) => {
+  localStorage.setItem(projects, data);
+}
+
+export const GetProjects = () => {
+  return localStorage.getItem(projects);
+}
 export const GetIdProject = () => {
   return localStorage.getItem(id_project);
 }

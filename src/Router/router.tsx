@@ -10,6 +10,8 @@ import ListSchedule from "../Pages/Schedule/ListSchedule";
 import FormSchedule from "../Pages/Schedule/FormSchedule";
 import ListClassroom from "../Pages/Classroom/ListClassroom";
 import FormClassroom from "../Pages/Classroom/FormClassroom";
+import ClassroomOne from "../Pages/Classroom/ClassroomOne";
+import Student from "../Pages/Classroom/ClassroomOne/Student";
 
 const RoutesApp = () => {
   return (
@@ -43,6 +45,18 @@ const RoutesApp = () => {
         <Route
           element={<PrivateRoute Component={<FormClassroom />} />}
           path="/turma/criar"
+        />
+        <Route
+          element={<PrivateRoute Component={<ClassroomOne />} />}
+          path="/turma/:id"
+        />
+        <Route
+          element={<PrivateRoute Component={<Student />} />}
+          path="/turma/:id/alunos"
+        />
+        <Route
+          element={<PrivateRoute Component={<ClassroomOne />} />}
+          path="/turma/:id/encontros"
         />
         <Route
           element={<PrivateRoute Component={<CreateOrEditForm />} />}

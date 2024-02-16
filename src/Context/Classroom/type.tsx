@@ -2,7 +2,8 @@ import { SchoolIdentification } from "../../Types/types";
 
 export interface ClassroomTypes {
     CreateClassroom: (body: any) => void,
-    initialValue: CreateClassroom
+    initialValue: CreateClassroom,
+    classrooms: undefined;
 }
 
 export interface CreateClassroom {

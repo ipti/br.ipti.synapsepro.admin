@@ -15,7 +15,27 @@ export const requestCreateClassroom = (data: any) => {
       });
   };
 
- export const requestClassroom = (id: number) => {
+
+  export const requestClassroom = (id: number) => {
+    let path = "/classroom";
+    return http
+      .get(path, {
+        params: {
+          where: {
+            school_year: 2024
+          },
+        }
+      })
+      .then(response => response.data)
+      .catch(err => {
+        if (err.response.status === 401) {
+          logout()
+          window.location.reload()
+        }
+        throw err;
+      });
+  };
+ export const requestClassroomOne = (id: number) => {
     let path = "/classroom";
     return http
       .get(path + id, {

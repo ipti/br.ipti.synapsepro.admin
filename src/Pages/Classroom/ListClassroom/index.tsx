@@ -2,8 +2,17 @@ import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
 import CardClassroom from "../../../Components/Card/CardClassroom";
 import { Container, Padding, Row } from "../../../Styles/styles";
+import ClassroomProvider from "../../../Context/Classroom/context";
 
 const ListClassroom = () => {
+    return (
+        <ClassroomProvider>
+            <ListClassroomPage />
+        </ClassroomProvider>
+    )
+}
+
+const ListClassroomPage = () => {
 
     const history = useNavigate();
 
