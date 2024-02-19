@@ -57,8 +57,6 @@ const FormSchedule = () => {
                             )
                         }}
                     </Formik>
-
-
                 </Padding>
             </div>
         </Container>

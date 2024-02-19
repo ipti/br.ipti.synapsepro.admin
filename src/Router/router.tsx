@@ -11,7 +11,10 @@ import FormSchedule from "../Pages/Schedule/FormSchedule";
 import ListClassroom from "../Pages/Classroom/ListClassroom";
 import FormClassroom from "../Pages/Classroom/FormClassroom";
 import ClassroomOne from "../Pages/Classroom/ClassroomOne";
-import Student from "../Pages/Classroom/ClassroomOne/Student";
+import RegistrationList from "../Pages/Classroom/ClassroomOne/RegistrationList";
+import Registration from "../Pages/Classroom/ClassroomOne/RegistrationList/Registration";
+import MeetingList from "../Pages/Classroom/ClassroomOne/MeetingList";
+import CreateMeeting from "../Pages/Classroom/ClassroomOne/MeetingList/CreateMeeting";
 
 const RoutesApp = () => {
   return (
@@ -25,10 +28,7 @@ const RoutesApp = () => {
           element={<PrivateRoute Component={<ViewForms />} />}
           path="/view/:id"
         />
-        <Route
-          element={<PrivateRoute Component={<ListForm />} />}
-          path="/"
-        />
+        <Route element={<PrivateRoute Component={<ListForm />} />} path="/" />
         <Route
           element={<PrivateRoute Component={<ListSchedule />} />}
           path="/cronograma"
@@ -51,12 +51,20 @@ const RoutesApp = () => {
           path="/turma/:id"
         />
         <Route
-          element={<PrivateRoute Component={<Student />} />}
+          element={<PrivateRoute Component={<RegistrationList />} />}
           path="/turma/:id/alunos"
         />
         <Route
-          element={<PrivateRoute Component={<ClassroomOne />} />}
+          element={<PrivateRoute Component={<Registration />} />}
+          path="/turma/:id/aluno/:idRegistration"
+        />
+        <Route
+          element={<PrivateRoute Component={<MeetingList />} />}
           path="/turma/:id/encontros"
+        />
+        <Route
+          element={<PrivateRoute Component={<CreateMeeting />} />}
+          path="/turma/:id/encontros/criar"
         />
         <Route
           element={<PrivateRoute Component={<CreateOrEditForm />} />}
@@ -65,8 +73,6 @@ const RoutesApp = () => {
         <Route element={<Login />} path="/login" />
         <Route element={<SignUp />} path="/register" />
         <Route element={<Register />} path="/matricula/:step" />
-
-
 
         {/* <Route path="/*" element={<NotFoundPage />} /> */}
       </Routes>

@@ -86,7 +86,8 @@ export interface PropsDropdown {
     value?: any,
     onChange?(event: DropdownChangeEvent): void,
     options?: SelectItemOptionsType | undefined,
-    placerholder?: string
+    placerholder?: string,
+    optionsLabel?: string
 }
 
 export interface PropsForm {

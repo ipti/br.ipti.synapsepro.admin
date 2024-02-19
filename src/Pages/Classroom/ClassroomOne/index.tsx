@@ -10,10 +10,10 @@ const ClassroomOne = () => {
         <Container>
             <div className="grid">
                 <div className="col-12 md:col-6" onClick={() => history(`/turma/${id}/alunos`)}>
-                    <CardItensClassrooom title="Alunos" description="Gerencia seus alunos" icon="pi pi-users" />
+                    <CardItensClassrooom title="Alunos" description="Gerencie seus alunos" icon="pi pi-users" />
                 </div>
                 <div className="col-12 md:col-6" onClick={() => history(`/turma/${id}/encontros`)}>
-                    <CardItensClassrooom title="Encontros" description="Gerencia seus encontros" icon="pi pi-home" />
+                    <CardItensClassrooom title="Encontros" description="Gerencie seus encontros" icon="pi pi-home" />
                 </div>
             </div>
         </Container>

@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { ProjectLogin, idProject, idUser, login, logout, menuItem } from "../localstorage";
+import { idUser, login, logout, menuItem } from "../localstorage";
 import { LoginRequest } from "./request";
 import { LoginTypes } from "./types";
 
