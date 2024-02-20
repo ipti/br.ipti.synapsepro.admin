@@ -1,16 +1,19 @@
 import React, { createContext } from "react";
+import { RegisterTypes } from "./type";
+import { RegisterState } from "./state";
 
-export const RegistrationContext = createContext({});
+export const RegisterContext = createContext<RegisterTypes | null>(null);
 
-const RegistrationContextProvider = ({ children }: {children: React.ReactNode}) => {
-
+const RegisterProvider = ({ children }: { children: React.ReactNode }) => {
+    const { padding } = RegisterState()
     return (
-        <RegistrationContext.Provider
+        <RegisterContext.Provider
             value={{
+                padding
             }}>
             {children}
-        </RegistrationContext.Provider>
+        </RegisterContext.Provider>
     )
 }
 
-export default RegistrationContextProvider;
+export default RegisterProvider;

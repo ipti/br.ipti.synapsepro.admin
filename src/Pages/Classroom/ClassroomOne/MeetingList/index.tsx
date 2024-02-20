@@ -1,5 +1,5 @@
 import { Button } from "primereact/button";
-import CardClassroom from "../../../../Components/Card/CardClassroom";
+import CardMeeting from "../../../../Components/Card/CardMeeting";
 import { Container, Padding } from "../../../../Styles/styles";
 
 const MeetingList = () => {
@@ -18,8 +18,8 @@ const MeetingList = () => {
       <div className="grid">
         {meeting.map((item, index) => {
           return (
-            <div className="col-12 md:col-6 lg:col-4">
-              <CardClassroom title={item.name} year={item.data} />
+            <div className="col-12 md:col-6 lg:col-4" key={index}>
+              <CardMeeting title={item.name} data={item.data} />
             </div>
           );
         })}

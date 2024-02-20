@@ -13,7 +13,6 @@ export const Container = styled.div`
   .contentStart {
     color: ${color.grayClear};
     font-family: ${typography.types.inter};
-    text-align: center;
     font-size: ${typography.font.small};
   }
 

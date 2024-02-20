@@ -2,13 +2,13 @@
 // import { useFetchRequestQuiz } from "../../../query/quiz";
 
 
-export const RegistrationState = () => {
-   
-    
+export const RegisterState = () => {
+    const padding = "16px"
+
     // const {schoolsList, requestSaveRegistrationMutation} = Controller()
 
     // const { data: anwsers } = useFetchRequestQuiz({ id: school ? school.inep_id : null })
-  
+
     // useEffect(() => {
     //     if(schoolsList){
     //         setSchools(schoolsList)
@@ -20,5 +20,6 @@ export const RegistrationState = () => {
 
 
     return {
+        padding
     }
 }

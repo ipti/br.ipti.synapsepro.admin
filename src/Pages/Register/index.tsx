@@ -3,9 +3,17 @@ import { Container } from "./style";
 import TagImage from "../../Assets/images/taglogin.svg"
 import BackButton from "../../Assets/images/backIcon.svg"
 import Wizard from "./Wizard";
-
+import RegisterProvider from "../../Context/Register/context";
 
 const Register = () => {
+  return (
+    <RegisterProvider>
+      <RegisterPage />
+    </RegisterProvider>
+  )
+}
+
+const RegisterPage = () => {
   return (
     <Container>
       <div style={{ display: "flex", flexDirection: "row" }}>

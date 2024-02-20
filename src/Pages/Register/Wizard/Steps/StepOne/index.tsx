@@ -3,8 +3,13 @@ import DropdownComponent from "../../../../../Components/Dropdown";
 import TextInput from "../../../../../Components/TextInput";
 import { Column, Padding, Row } from "../../../../../Styles/styles";
 import RadioButtonComponent from "../../../../../Components/RadioButton";
+import { useContext } from "react";
+import { RegisterContext } from "../../../../../Context/Register/context";
+import { RegisterTypes } from "../../../../../Context/Register/type";
 
 const StepOne = () => {
+
+    const props = useContext(RegisterContext) as RegisterTypes
 
     return (
         <>
@@ -12,43 +17,44 @@ const StepOne = () => {
 
                 <Row id="center">
                     <div className="col-12 md:col-4">
-                        <Row id="start">
+                        <Padding />
+                        <div>
+                            <label>CPF *</label>
+                            <Padding />
+                            <TextInput placeholder="CPF *" />
+                        </div>
+                        <Padding padding={props.padding} />
+                        <div>
                             <label>Name *</label>
-                        </Row>
-                        <div className="p-1" />
-                        <TextInput placeholder="Name *" />
-                        <Padding padding="16px" />
-                        <Row id="start">
+                            <Padding />
+                            <TextInput placeholder="Name *" />
+                        </div>
+                        <Padding padding={props.padding} />
+                        <div>
                             <label>Cor/Raça *</label>
-                        </Row>
-                        <div className="p-1" />
-
-                        <DropdownComponent placerholder="Cor/Raça *" />
-                        <Padding padding="16px" />
-                        <Row id="start">
+                            <Padding />
+                            <DropdownComponent placerholder="Cor/Raça *" />
+                        </div>
+                        <Padding padding={props.padding} />
+                        <div>
                             <label>Possui Deficiência? *</label>
-                        </Row>
-                        <div className="p-1" />
-                        <Row className="gap-2">
-                            <RadioButtonComponent label="Sim" />
-                            <RadioButtonComponent label="Não" />
-                        </Row>
-                        <Padding padding="16px" />
-                        <Row id="start">
+                            <Padding />
+                            <Row className="gap-2">
+                                <RadioButtonComponent label="Sim" />
+                                <RadioButtonComponent label="Não" />
+                            </Row>
+                        </div>
+                        <Padding padding={props.padding} />
+                        <div>
                             <label>Você tem 18 anos ou mais? *</label>
-                        </Row>
-                        <div className="p-2" />
-
-                        <RadioButtonComponent label="Sim, tenho 18 anos ou mais" />
-                        <div className="p-2" />
-
-                        <RadioButtonComponent label="Não, ainda não completei 18 anos" />
-                        <div className="p-2" />
+                            <Padding />
+                            <RadioButtonComponent label="Sim, tenho 18 anos ou mais" />
+                            <Padding />
+                            <RadioButtonComponent label="Não, ainda não completei 18 anos" />
+                        </div>
                     </div>
                 </Row>
-                <div className="col-12">
-
-                </div>
+                <Padding padding={props.padding} />
                 <Row id="center" className={"marginTop marginButtom"}>
                     <div className="col-4">
                         <Button

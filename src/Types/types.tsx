@@ -1,4 +1,5 @@
 import { DropdownChangeEvent } from "primereact/dropdown";
+import { InputMaskChangeEvent } from "primereact/inputmask";
 import { InputNumberValueChangeEvent } from "primereact/inputnumber";
 import { RadioButtonChangeEvent } from "primereact/radiobutton";
 import { SelectItemOptionsType } from "primereact/selectitem";
@@ -11,6 +12,16 @@ export interface PropsInputText {
     disabled?: boolean | undefined,
     onBlur?: FocusEventHandler<HTMLInputElement> | undefined,
     name?: string
+}
+
+export interface PropsInputMask {
+    value?: string,
+    onChange?(event: InputMaskChangeEvent): void
+    placeholder?: string | undefined,
+    disabled?: boolean | undefined,
+    onBlur?: FocusEventHandler<HTMLInputElement> | undefined,
+    name?: string,
+    mask?: string
 }
 
 export interface PropsInputNumber {
