@@ -31,7 +31,7 @@ const RegisterPage = () => {
         ></img>
         <img className={"imgTag"} src={TagImage} alt=""></img>
       </div>
-      <Wizard />
+      <Wizard  />
 
     </Container>
   );

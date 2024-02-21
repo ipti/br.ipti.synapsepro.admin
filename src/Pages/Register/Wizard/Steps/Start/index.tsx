@@ -1,8 +1,10 @@
 import { Button } from "primereact/button";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import homeImg from "../../../../../Assets/images/Capelo.png";
 import { Column, Row } from "../../../../../Styles/styles";
 import DropdownComponent from "../../../../../Components/Dropdown";
+import { RegisterContext } from "../../../../../Context/Register/context";
+import { RegisterTypes } from "../../../../../Context/Register/type";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 
 const Start = () => {
@@ -17,6 +19,9 @@ const Start = () => {
   //     props.setIsActive(false)
   //   }
   // }
+
+  const props = useContext(RegisterContext) as RegisterTypes;
+
   return (
     <>
       <Column className="contentStart" id="center">
@@ -70,7 +75,7 @@ const Start = () => {
           <div className="col-4">
             <Button
               type="button"
-              // onClick={onButton}
+              onClick={props.NextStep}
               className="t-button-primary"
               label="Iniciar"
               // disabled={!isValid}

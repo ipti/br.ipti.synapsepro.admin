@@ -2,10 +2,14 @@ import { Button } from "primereact/button";
 import homeImg from "../../../../../Assets/images/Capelo.png";
 import DropdownComponent from "../../../../../Components/Dropdown";
 import { Column, Row } from "../../../../../Styles/styles";
+import { useContext } from "react";
+import { RegisterContext } from "../../../../../Context/Register/context";
+import { RegisterTypes } from "../../../../../Context/Register/type";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 
 const Classroom = () => {
-  
+  const props = useContext(RegisterContext) as RegisterTypes;
+
   return (
     <>
       <Column className="contentStart" id="center">
@@ -21,7 +25,7 @@ const Classroom = () => {
         </div>
         <Row id="center">
           <div className="col-12 md:col-4">
-            <DropdownComponent placerholder="Escolha o projeto" />
+            <DropdownComponent placerholder="Escolha a turma" />
           </div>
         </Row>
         <div className="col-12">
@@ -59,7 +63,7 @@ const Classroom = () => {
           <div className="col-4">
             <Button
               type="button"
-              // onClick={onButton}
+              onClick={props.NextStep}
               className="t-button-primary"
               label="Iniciar"
               // disabled={!isValid}
