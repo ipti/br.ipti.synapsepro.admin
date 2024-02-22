@@ -16,6 +16,9 @@ import Registration from "../Pages/Classroom/ClassroomOne/RegistrationList/Regis
 import MeetingList from "../Pages/Classroom/ClassroomOne/MeetingList";
 import CreateMeeting from "../Pages/Classroom/ClassroomOne/MeetingList/CreateMeeting";
 import Meeting from "../Pages/Classroom/ClassroomOne/MeetingList/Meeting";
+import AttendanceListGenarate from "../Pages/Classroom/ClassroomOne/MeetingList/Meeting/UploadArchivesAttendanceList/AttendanceListGenarete";
+import AttendanceListGenerate from "../Pages/Classroom/ClassroomOne/MeetingList/Meeting/UploadArchivesAttendanceList/AttendanceListGenarete";
+import Report from "../Pages/Classroom/ClassroomOne/Report";
 
 const RoutesApp = () => {
   return (
@@ -52,6 +55,10 @@ const RoutesApp = () => {
           path="/turma/:id"
         />
         <Route
+          element={<PrivateRoute Component={<Report />} />}
+          path="/turma/:id/relatorio"
+        />
+        <Route
           element={<PrivateRoute Component={<RegistrationList />} />}
           path="/turma/:id/alunos"
         />
@@ -71,6 +78,11 @@ const RoutesApp = () => {
           element={<PrivateRoute Component={<Meeting />} />}
           path="/turma/:id/encontros/:idMeeting"
         />
+        <Route
+          element={<PrivateRoute Component={<AttendanceListGenerate />} />}
+          path="/turma/:id/encontros/:idMeeting/generate"
+        />
+
         <Route
           element={<PrivateRoute Component={<CreateOrEditForm />} />}
           path="/edit/:id"

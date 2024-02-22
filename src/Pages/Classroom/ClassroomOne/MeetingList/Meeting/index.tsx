@@ -11,7 +11,6 @@ const Meeting = () => {
             {true ? <UploadArchivesAttendanceList />
                 : <AttendanceList />}
             <Padding padding="16px" />
-
             <Beneficiarios />
         </Container>
     )

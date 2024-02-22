@@ -2,6 +2,7 @@ import { Message } from "primereact/message"
 import { Column, Padding, Row } from "../../../../../../Styles/styles"
 import { useState } from "react"
 import { InputText } from "primereact/inputtext"
+import { Button } from "primereact/button"
 
 const UploadArchivesAttendanceList = () => {
     const [isInput, setIsInput] = useState(false)
@@ -15,8 +16,9 @@ const UploadArchivesAttendanceList = () => {
                 </Column>
             </Row>
             <Padding />
-            {isInput ? <InputText type="file" /> : null
-            }        </>
+            {isInput ? <Row>
+                <InputText type="file" /><Padding /> <Button label="Salvar" icon="pi pi-save" /></Row> : null}
+        </>
     )
 }
 

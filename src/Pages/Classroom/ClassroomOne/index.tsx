@@ -15,6 +15,9 @@ const ClassroomOne = () => {
                 <div className="col-12 md:col-6" onClick={() => history(`/turma/${id}/encontros`)}>
                     <CardItensClassrooom title="Encontros" description="Gerencie seus encontros" icon="pi pi-home" />
                 </div>
+                <div className="col-12 md:col-6" onClick={() => history(`/turma/${id}/encontros`)}>
+                    <CardItensClassrooom title="Tabela" description="Relatório entre Alunos e Encontros" icon="pi pi-table" />
+                </div>
             </div>
         </Container>
     )

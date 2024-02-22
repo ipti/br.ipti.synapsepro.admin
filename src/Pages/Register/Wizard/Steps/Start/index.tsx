@@ -26,14 +26,21 @@ const Start = () => {
     <>
       <Column className="contentStart" id="center">
         <div className="col-12">
-          <img className="imageRegistration" src={homeImg} alt="" />
+          <Row id="center">
+            <img className="imageRegistration" src={homeImg} alt="" />
+          </Row>
         </div>
         <div className="col-12">
-          <h1>Matrícula Online</h1>
-          <p>
-            Bem-vindo ao Matrícula online, para <br /> iniciar escolha o projeto
-            e clique no botão abaixo
-          </p>
+          <Row id="center">
+
+            <h1>Matrícula Online</h1>
+          </Row>
+          <Row id="center">
+            <p>
+              Bem-vindo ao Matrícula online, para <br /> iniciar escolha o projeto
+              e clique no botão abaixo
+            </p>
+          </Row>
         </div>
         <Row id="center">
           <div className="col-12 md:col-4">
@@ -78,7 +85,7 @@ const Start = () => {
               onClick={props.NextStep}
               className="t-button-primary"
               label="Iniciar"
-              // disabled={!isValid}
+            // disabled={!isValid}
             />
           </div>
         </Row>

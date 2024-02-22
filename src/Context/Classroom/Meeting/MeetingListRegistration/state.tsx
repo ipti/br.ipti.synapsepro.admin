@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import json from "../../../Data/students.json";
-export const RegistrationClassroomState = () => {
+import json from "../../../../Data/students.json";
+export const MeetingListRegistrationState = () => {
   
     const [registrations, setregistrations] = useState<Array<any> | undefined>();
 

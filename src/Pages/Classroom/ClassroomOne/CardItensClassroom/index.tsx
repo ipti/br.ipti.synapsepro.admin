@@ -4,9 +4,8 @@ import { Column, Padding, Row } from "../../../../Styles/styles"
 const CardItensClassrooom = ({ icon, title, description }: { icon: string, title: string, description: string }) => {
     return (
         <div className="card cursor-pointer">
-
             <Row>
-                <Column>
+                <Column id="center">
                     <i className={icon} style={{ fontSize: "2rem", color: styles.colors.colorsBaseProductNormal }}></i>
                 </Column>
                 <Padding padding="8px" />
