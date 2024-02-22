@@ -1,8 +1,9 @@
+import { Button } from "primereact/button"
 import TextInput from "../../../../../Components/TextInput"
-import { Container, Padding } from "../../../../../Styles/styles"
+import { Container, Padding, Row } from "../../../../../Styles/styles"
 
 const CreateMeeting = () => {
-    return(
+    return (
         <Container>
             <h2>Criar Encontro</h2>
             <Padding padding="16px" />
@@ -24,7 +25,12 @@ const CreateMeeting = () => {
                     </div>
                 </div>
 
+                <Padding padding="16px" />
+                <Row id="end">
+                    <Button label="Salvar" onClick={() => { }} />
+                </Row>
             </div>
+
         </Container>
     )
 }

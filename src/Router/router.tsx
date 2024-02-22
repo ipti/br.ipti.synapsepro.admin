@@ -15,6 +15,7 @@ import RegistrationList from "../Pages/Classroom/ClassroomOne/RegistrationList";
 import Registration from "../Pages/Classroom/ClassroomOne/RegistrationList/Registration";
 import MeetingList from "../Pages/Classroom/ClassroomOne/MeetingList";
 import CreateMeeting from "../Pages/Classroom/ClassroomOne/MeetingList/CreateMeeting";
+import Meeting from "../Pages/Classroom/ClassroomOne/MeetingList/Meeting";
 
 const RoutesApp = () => {
   return (
@@ -65,6 +66,10 @@ const RoutesApp = () => {
         <Route
           element={<PrivateRoute Component={<CreateMeeting />} />}
           path="/turma/:id/encontros/criar"
+        />
+        <Route
+          element={<PrivateRoute Component={<Meeting />} />}
+          path="/turma/:id/encontros/:idMeeting"
         />
         <Route
           element={<PrivateRoute Component={<CreateOrEditForm />} />}

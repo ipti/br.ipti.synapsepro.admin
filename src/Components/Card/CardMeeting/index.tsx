@@ -8,8 +8,7 @@ const CardMeeting = ({ title, data }: { title: string, data: string }) => {
     const history = useNavigate()
 
     return (
-
-        <Container className="card" onClick={() => history("/turma/1")}>
+        <Container className="card" onClick={() => history("/turma/1/encontros/2")}>
             <Row id="space-between">
                 <h3>{title}</h3>
                 <div className="cursor-pointer">
