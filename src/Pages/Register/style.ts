@@ -10,6 +10,8 @@ export const Container = styled.div`
   background: url(${LoginImg});
   background-repeat: no-repeat;
   background-position: right top;
+  overflow-y: auto;
+  height: 100%;
   .contentStart {
     color: ${color.grayClear};
     font-family: ${typography.types.inter};

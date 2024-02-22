@@ -20,7 +20,7 @@ const SignUp = () => {
 
               <div className="boxRegister">
                 <div>
-                  <Link className="linkRegister" to="/matricula/0">
+                  <Link className="linkRegister" to="/matricula">
                     Iniciar Matrícula
                   </Link>
                 </div>
