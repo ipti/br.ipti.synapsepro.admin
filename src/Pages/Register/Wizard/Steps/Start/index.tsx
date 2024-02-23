@@ -1,14 +1,15 @@
 import { Button } from "primereact/button";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import homeImg from "../../../../../Assets/images/Capelo.png";
-import { Column, Row } from "../../../../../Styles/styles";
 import DropdownComponent from "../../../../../Components/Dropdown";
 import { RegisterContext } from "../../../../../Context/Register/context";
 import { RegisterTypes } from "../../../../../Context/Register/type";
+import { Column, Row } from "../../../../../Styles/styles";
+import ImageTextSteps from "../../ImageTextStpes";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 
 const Start = () => {
-  const [isValid, setIsValid] = useState();
+  // const [isValid, setIsValid] = useState();
   // const { setIdEvent, idEvent, setSchool, setYear, schools, school } = useContext(RegistrationContext);
 
   // const onButton = () => {
@@ -25,23 +26,8 @@ const Start = () => {
   return (
     <>
       <Column className="contentStart" id="center">
-        <div className="col-12">
-          <Row id="center">
-            <img className="imageRegistration" src={homeImg} alt="" />
-          </Row>
-        </div>
-        <div className="col-12">
-          <Row id="center">
-
-            <h1>Matrícula Online</h1>
-          </Row>
-          <Row id="center">
-            <p>
-              Bem-vindo ao Matrícula online, para <br /> iniciar escolha o projeto
-              e clique no botão abaixo
-            </p>
-          </Row>
-        </div>
+        <ImageTextSteps img={homeImg} title="Matrícula Online" subTitle={<p style={{textAlign: "center"}}>Bem-vindo ao Matrícula online, para <br /> iniciar escolha o projeto
+          e clique no botão abaixo</p>} />
         <Row id="center">
           <div className="col-12 md:col-4">
             <DropdownComponent placerholder="Escolha o projeto" />

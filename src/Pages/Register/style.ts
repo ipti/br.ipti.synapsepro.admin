@@ -40,8 +40,8 @@ export const Container = styled.div`
     position: relative;
   }
   .imageRegistration {
-    height: 20%;
-    width: 20%;
+    height: 16%;
+    width: 16%;
   }
 
   @media (max-width: 639px) {

@@ -1,15 +1,14 @@
 // Material UI
 
 // Components
-import { useParams } from "react-router-dom";
-import Start from "./Steps/Start";
-import NotPeriod from "./Steps/NotPeriod";
-import Classroom from "./Steps/Classroom";
-import StepOne from "./Steps/StepOne";
-import StepTwo from "./Steps/StepTwo";
 import { useContext } from "react";
 import { RegisterContext } from "../../../Context/Register/context";
 import { RegisterTypes } from "../../../Context/Register/type";
+import Classroom from "./Steps/Classroom";
+import NotPeriod from "./Steps/NotPeriod";
+import Start from "./Steps/Start";
+import StepOne from "./Steps/StepOne";
+import StepTwo from "./Steps/StepTwo";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 // import Classroom from "./ClassRoom";
 // import Finish from "./Finish";

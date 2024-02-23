@@ -1,24 +1,23 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ViewForms from "../Pages/Form/ViewForms";
-import PrivateRoute from "./privaterouter";
-import ListForm from "../Pages/Form/ListForm";
-import Login from "../Pages/Login/Login";
-import SignUp from "../Pages/SignUp/SignUp";
-import Register from "../Pages/Register";
-import CreateOrEditForm from "../Pages/Form/CreateForms";
-import ListSchedule from "../Pages/Schedule/ListSchedule";
-import FormSchedule from "../Pages/Schedule/FormSchedule";
-import ListClassroom from "../Pages/Classroom/ListClassroom";
-import FormClassroom from "../Pages/Classroom/FormClassroom";
 import ClassroomOne from "../Pages/Classroom/ClassroomOne";
-import RegistrationList from "../Pages/Classroom/ClassroomOne/RegistrationList";
-import Registration from "../Pages/Classroom/ClassroomOne/RegistrationList/Registration";
 import MeetingList from "../Pages/Classroom/ClassroomOne/MeetingList";
 import CreateMeeting from "../Pages/Classroom/ClassroomOne/MeetingList/CreateMeeting";
 import Meeting from "../Pages/Classroom/ClassroomOne/MeetingList/Meeting";
-import AttendanceListGenarate from "../Pages/Classroom/ClassroomOne/MeetingList/Meeting/UploadArchivesAttendanceList/AttendanceListGenarete";
 import AttendanceListGenerate from "../Pages/Classroom/ClassroomOne/MeetingList/Meeting/UploadArchivesAttendanceList/AttendanceListGenarete";
+import RegistrationList from "../Pages/Classroom/ClassroomOne/RegistrationList";
+import Registration from "../Pages/Classroom/ClassroomOne/RegistrationList/Registration";
 import Report from "../Pages/Classroom/ClassroomOne/Report";
+import FormClassroom from "../Pages/Classroom/FormClassroom";
+import ListClassroom from "../Pages/Classroom/ListClassroom";
+import CreateOrEditForm from "../Pages/Form/CreateForms";
+import ListForm from "../Pages/Form/ListForm";
+import ViewForms from "../Pages/Form/ViewForms";
+import Login from "../Pages/Login/Login";
+import Register from "../Pages/Register";
+import FormSchedule from "../Pages/Schedule/FormSchedule";
+import ListSchedule from "../Pages/Schedule/ListSchedule";
+import SignUp from "../Pages/SignUp/SignUp";
+import PrivateRoute from "./privaterouter";
 
 const RoutesApp = () => {
   return (

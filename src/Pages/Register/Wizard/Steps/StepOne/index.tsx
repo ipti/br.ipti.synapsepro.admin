@@ -1,13 +1,12 @@
+import { Formik } from "formik";
 import { Button } from "primereact/button";
-import DropdownComponent from "../../../../../Components/Dropdown";
-import TextInput from "../../../../../Components/TextInput";
-import { Column, Padding, Row } from "../../../../../Styles/styles";
-import RadioButtonComponent from "../../../../../Components/RadioButton";
 import { useContext } from "react";
+import DropdownComponent from "../../../../../Components/Dropdown";
+import RadioButtonComponent from "../../../../../Components/RadioButton";
+import TextInput from "../../../../../Components/TextInput";
 import { RegisterContext } from "../../../../../Context/Register/context";
 import { RegisterTypes } from "../../../../../Context/Register/type";
-import { Formik } from "formik";
-import { Form } from "react-router-dom";
+import { Column, Padding, Row } from "../../../../../Styles/styles";
 
 const StepOne = () => {
   const props = useContext(RegisterContext) as RegisterTypes;

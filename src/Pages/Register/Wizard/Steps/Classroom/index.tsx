@@ -1,10 +1,11 @@
 import { Button } from "primereact/button";
-import homeImg from "../../../../../Assets/images/Capelo.png";
+import homeImg from "../../../../../Assets/images/Pessoas.png";
 import DropdownComponent from "../../../../../Components/Dropdown";
 import { Column, Row } from "../../../../../Styles/styles";
 import { useContext } from "react";
 import { RegisterContext } from "../../../../../Context/Register/context";
 import { RegisterTypes } from "../../../../../Context/Register/type";
+import ImageTextSteps from "../../ImageTextStpes";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 
 const Classroom = () => {
@@ -13,16 +14,11 @@ const Classroom = () => {
   return (
     <>
       <Column className="contentStart" id="center">
-        <div className="col-12">
-          <img className="imageRegistration" src={homeImg} alt="" />
-        </div>
-        <div className="col-12">
-          <h1>Matrícula Online</h1>
-          <p>
-            Bem-vindo ao Matrícula online, para <br /> iniciar escolha o projeto
-            e clique no botão abaixo
-          </p>
-        </div>
+        <ImageTextSteps img={homeImg} title="Matrícula Online" subTitle={<p>
+          Escolha a turma
+          <br />
+          e clique no botão abaixo
+        </p>} />
         <Row id="center">
           <div className="col-12 md:col-4">
             <DropdownComponent placerholder="Escolha a turma" />
@@ -66,7 +62,7 @@ const Classroom = () => {
               onClick={props.NextStep}
               className="t-button-primary"
               label="Iniciar"
-              // disabled={!isValid}
+            // disabled={!isValid}
             />
           </div>
         </Row>
