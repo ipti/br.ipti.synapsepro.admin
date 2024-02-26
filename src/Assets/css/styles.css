@@ -125,4 +125,11 @@
   .p-card .p-card-content {
     padding: 0;
   }
+
+  .p-button.p-button-secondary,
+  .p-buttonset.p-button-secondary>.p-button,
+  .p-splitbutton.p-button-secondary>.p-button,
+  .p-fileupload-choose.p-button-secondary {
+    background-color: #EFF2F5;
+  }
 }
