@@ -42,7 +42,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     setYear("2024")
-    setYearState({ value: parseInt(getYear()!) });
+    setYearState({ value: 2024 });
   }, []);
 
   return (

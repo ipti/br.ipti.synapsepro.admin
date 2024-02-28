@@ -8,7 +8,13 @@ export const Container = styled.div`
    flex-direction: row;
    height: 70px;
    justify-content: space-between;
-   padding: 10px
+   padding: 10px;
+
+   .iconResponsive {
+      @media screen and (min-width: 750px) {
+        display: none ;
+    }
+   }
 `;
 
 export const Back = styled.div`

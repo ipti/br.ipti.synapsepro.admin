@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Column, Row } from "../../Styles/styles";
-import TopBar from "./TopBar";
-import styles from "../../Styles";
 import Menu from "../Menu";
+import TopBar from "./TopBar";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-
+    const [viewdMenu, setViewdMenu] = useState(true)
 
     return (
         <Column style={{ height: "100%" }}>
             <Row style={{ height: "100%" }}>
-                <Menu viewdMenu />
+                <Menu viewdMenu={viewdMenu} />
                 <Column style={{ width: "100%" }}>
-                    <TopBar />
+                    <TopBar setViewdMenu={setViewdMenu} viewdMenu={viewdMenu} />
                     <div style={{ overflowY: "auto",  height: "100%" }}>{children}</div>
                 </Column>
             </Row>
