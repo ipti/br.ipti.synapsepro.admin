@@ -11,7 +11,7 @@ import TextInput from "../../Components/TextInput";
 import PasswordInput from "../../Components/TextPassword";
 import LoginProvider, { LoginContext } from "../../Context/Login/context";
 import { LoginContextText } from "../../Context/Login/types";
-import { getYear, setYear } from "../../Services/localstorage";
+import { setYear } from "../../Services/localstorage";
 import { Column, Padding, Row } from "../../Styles/styles";
 import { ContainerLogin, TopColors } from "./styles";
 

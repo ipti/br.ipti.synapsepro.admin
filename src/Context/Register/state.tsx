@@ -1,14 +1,14 @@
 // import { Controller } from "../../../controller/registration";
 // import { useFetchRequestQuiz } from "../../../query/quiz";
 
-import { useParams } from "react-router-dom";
-import { Registration } from "./type";
 import { useState } from "react";
+import { Registration } from "./type";
 
 export const RegisterState = () => {
   const padding = "16px";
   const [step, setStep] = useState(0);
   const [isOverAge, setIsOverAge] = useState<boolean | undefined>();
+
 
   const NextStep = () => {
     setStep(step + 1);
