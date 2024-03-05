@@ -81,7 +81,6 @@ const RoutesApp = () => {
           element={<PrivateRoute Component={<AttendanceListGenerate />} />}
           path="/turma/:id/encontros/:idMeeting/generate"
         />
-
         <Route
           element={<PrivateRoute Component={<CreateOrEditForm />} />}
           path="/edit/:id"
@@ -89,7 +88,6 @@ const RoutesApp = () => {
         <Route element={<Login />} path="/login" />
         <Route element={<SignUp />} path="/register" />
         <Route element={<Register />} path="/matricula" />
-
         {/* <Route path="/*" element={<NotFoundPage />} /> */}
       </Routes>
     </BrowserRouter>

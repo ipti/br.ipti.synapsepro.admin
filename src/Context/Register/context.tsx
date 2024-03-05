@@ -5,7 +5,7 @@ import { RegisterState } from "./state";
 export const RegisterContext = createContext<RegisterTypes | null>(null);
 
 const RegisterProvider = ({ children }: { children: React.ReactNode }) => {
-  const { padding, NextStep, initialState, isOverAge, setIsOverAge, step } =
+  const { padding, NextStep, initialState, isOverAge, setIsOverAge, step, project } =
     RegisterState();
   return (
     <RegisterContext.Provider
@@ -16,6 +16,7 @@ const RegisterProvider = ({ children }: { children: React.ReactNode }) => {
         setIsOverAge,
         initialState,
         step,
+        project
       }}
     >
       {children}

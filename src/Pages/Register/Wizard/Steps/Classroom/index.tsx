@@ -10,6 +10,7 @@ import ImageTextSteps from "../../ImageTextStpes";
 
 const Classroom = () => {
   const props = useContext(RegisterContext) as RegisterTypes;
+  console.log(props.initialState)
 
   return (
     <>

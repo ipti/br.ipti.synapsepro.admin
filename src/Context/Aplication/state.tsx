@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { PropsForm, SchoolIdentification } from "../../Types/types";
-import { useFetchRequestProjectList } from "../../Services/Project/query";
+import { useFetchRequestProjectList } from "../../Services/PreRegistration/query";
 
 const AplicationState = () => {
     const [form, setform] = useState<PropsForm>({ title: "Formulário Sem título", description: "", question: [] })
