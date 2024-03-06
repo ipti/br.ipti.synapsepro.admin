@@ -7,9 +7,13 @@ import { RegisterTypes } from "../../../../../Context/Register/type";
 import { Column, Row } from "../../../../../Styles/styles";
 import ImageTextSteps from "../../ImageTextStpes";
 import { Formik } from "formik";
+import { DropdownChangeEvent } from "primereact/dropdown";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 
 const Start = () => {
+
+
+
   // const [isValid, setIsValid] = useState();
   // const { setIdEvent, idEvent, setSchool, setYear, schools, school } = useContext(RegistrationContext);
 
@@ -22,13 +26,10 @@ const Start = () => {
   //   }
   // }
 
-
-
   const props = useContext(RegisterContext) as RegisterTypes;
 
-  const initialValue = {
-    classroom_fk: ""
-  }
+  console.log(props.classroom)
+
 
   return (
     <>
@@ -36,17 +37,9 @@ const Start = () => {
         <ImageTextSteps img={homeImg} title="Matrícula Online" subTitle={<p style={{ textAlign: "center" }}>Bem-vindo ao Matrícula online, para <br /> iniciar escolha o projeto
           e clique no botão abaixo</p>} />
         <Row id="center">
-          <Formik initialValues={initialValue} onSubmit={(values) => { props.NextStep(values) }}  >
-            {({ values, handleChange }) => {
-              console.log(values)
-              return (
-                <div className="col-12 md:col-4">
-                  <DropdownComponent name="classroom_fk" placerholder="Escolha o projeto" onChange={handleChange} options={props.project} optionsLabel="name" value={values.classroom_fk} />
-                </div>
-              )
-            }}
-
-          </Formik>
+          <div className="col-12 md:col-4">
+            <DropdownComponent  placerholder="Escolha o projeto" onChange={(e) => props.setClassroom(e.target.value)} options={props.project} optionsLabel="name" value={props.classroom} />
+          </div>
         </Row>
         <div className="col-12">
           {/* <FormControl
@@ -83,7 +76,7 @@ const Start = () => {
           <div className="col-4">
             <Button
               type="button"
-              onClick={props.NextStep}
+              onClick={() => props.NextStep({})}
               className="t-button-primary"
               label="Iniciar"
             // disabled={!isValid}

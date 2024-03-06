@@ -6,11 +6,11 @@ import { useContext } from "react";
 import { RegisterContext } from "../../../../../Context/Register/context";
 import { RegisterTypes } from "../../../../../Context/Register/type";
 import ImageTextSteps from "../../ImageTextStpes";
+import { Form, Formik } from "formik";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 
 const Classroom = () => {
   const props = useContext(RegisterContext) as RegisterTypes;
-  console.log(props.initialState)
 
   return (
     <>
@@ -20,53 +20,36 @@ const Classroom = () => {
           <br />
           e clique no botão abaixo
         </p>} />
-        <Row id="center">
-          <div className="col-12 md:col-4">
-            <DropdownComponent placerholder="Escolha a turma" />
-          </div>
-        </Row>
+        <Formik initialValues={{ classroom_fk: {} }} onSubmit={(values) => {
+          props.NextStep({classoom_fk: values.classroom_fk})
+        }}>
+          {({ values, handleChange, }) => {
+            console.log({...values, classoom_fk: values.classroom_fk})
+            return (
+              <Form>
+                <Row id="center">
+                  <div className="col-12 md:col-4">
+                    <DropdownComponent name="classroom_fk"  placerholder="Escolha a turma" options={props.classroom?.classrooms} value={values.classroom_fk} onChange={handleChange} />
+                  </div>
+                </Row>
+                <Row id="center" className={"marginTop marginButtom"}>
+                  <div className="col-4">
+                    <Button
+                      type="submit"
+                      className="t-button-primary"
+                      label="Continuar"
+                    // disabled={!isValid}
+                    />
+                  </div>
+                </Row>
+              </Form>
+            )
+          }}
+        </Formik>
+
         <div className="col-12">
-          {/* <FormControl
-            component="fieldset"
-            className={classes.formControl}
-          >
-            <FormLabel style={{ display: 'flex', flexDirection: 'row', justifyContent: "start" }} >Projeto *</FormLabel>
-            <Select
-              styles={customStyles}
-              className="basic-single"
-              classNamePrefix="select"
-              placeholder="Digite o nome da projeto"
-              options={schools}
-              isLoading={!schools}
-              onChange={selectedOption => {
-                setSchool(selectedOption)
-                setIsValid(true)
-                const last_event = selectedOption.event_pre_registration.length - 1;
-                if (selectedOption.event_pre_registration[last_event]) {
-                  setIdEvent(selectedOption.event_pre_registration[last_event].id)
-                  setStartDate(new Date(selectedOption.event_pre_registration[last_event].start_date).getTime())
-                  setEndDate(new Date(selectedOption.event_pre_registration[last_event].end_date).getTime())
-                  setYear(new Date(selectedOption.event_pre_registration[last_event].end_date).getFullYear())
-                } else {
-                  props.setIsActive(false)
-                }
-              }}
-              getOptionValue={opt => opt.inep_id}
-              getOptionLabel={opt => opt.name}
-            />
-          </FormControl> */}
         </div>
-        <Row id="center" className={"marginTop marginButtom"}>
-          <div className="col-4">
-            <Button
-              type="button"
-              onClick={props.NextStep}
-              className="t-button-primary"
-              label="Iniciar"
-            // disabled={!isValid}
-            />
-          </div>
-        </Row>
+
       </Column>
     </>
   );

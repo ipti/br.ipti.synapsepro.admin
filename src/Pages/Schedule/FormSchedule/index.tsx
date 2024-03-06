@@ -28,7 +28,6 @@ const FormSchedule = () => {
                         props.CreateSchedule(values)
                     }}>
                         {({ values, handleChange }) => {
-                            console.log(values)
                             return (
                                 <Form>
                                     <div className="grid">

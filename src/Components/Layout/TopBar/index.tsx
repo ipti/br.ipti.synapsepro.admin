@@ -16,11 +16,9 @@ const TopBar = ({setViewdMenu, viewdMenu}: {viewdMenu: boolean, setViewdMenu: Re
 
 
     const verifyValueProject = (id: string) => {
-        console.log(id)
         return props.project?.find((props: SchoolIdentification) => props.inep_id === id)
     }
 
-    console.log(verifyValueProject(GetIdProject()!))
     const history = useNavigate()
 
     return (

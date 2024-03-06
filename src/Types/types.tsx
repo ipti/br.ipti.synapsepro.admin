@@ -99,7 +99,8 @@ export interface PropsDropdown {
     options?: SelectItemOptionsType | undefined,
     placerholder?: string,
     optionsLabel?: string,
-    name?: string
+    name?: string,
+    optionsValue?: string
 }
 
 export interface PropsForm {

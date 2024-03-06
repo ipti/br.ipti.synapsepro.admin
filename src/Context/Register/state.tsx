@@ -2,8 +2,8 @@
 // import { useFetchRequestQuiz } from "../../../query/quiz";
 
 import { useEffect, useState } from "react";
-import { Projects, Registration } from "./type";
 import { useFetchRequestProjectList } from "../../Services/PreRegistration/query";
+import { Project, Projects, Registration } from "./type";
 
 export const RegisterState = () => {
   const padding = "16px";
@@ -11,17 +11,13 @@ export const RegisterState = () => {
   const [isOverAge, setIsOverAge] = useState<boolean | undefined>();
   const [project, setproject] = useState<Projects | undefined>()
   const { data: projectRequet } = useFetchRequestProjectList();
-  const [dataValues, setDataValues] = useState({});
-
-
-
-  console.log(projectRequet)
+  const [classroom, setClassroom] = useState<Project | undefined>();
+  const [dataValues, setDataValues] = useState<Registration | any>({});
 
   const NextStep = (values: any) => {
     setStep(step + 1);
     let data = Object.assign(dataValues, values);
     setDataValues(data);
-
   };
 
   useEffect(() => {
@@ -68,6 +64,8 @@ export const RegisterState = () => {
     isOverAge,
     setIsOverAge,
     step,
-    project
+    project,
+    dataValues,
+    classroom, setClassroom
   };
 };

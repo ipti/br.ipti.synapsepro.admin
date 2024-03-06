@@ -11,7 +11,6 @@ export const LoginController = ({setError}: {setError: any, }) => {
         (data: LoginTypes) => LoginRequest(data),
         {
           onError: (error: any) => {
-            console.log(error.response.data.message);
             setError(error.response.data.message)          
           },
           onSuccess: (data) => {
@@ -20,7 +19,6 @@ export const LoginController = ({setError}: {setError: any, }) => {
             idUser(data.data.user.id);
             // ProjectLogin(data.data.user.schools)
             // idProject(data.data.user.schools[0].inep_id);
-            console.log(data);
             history("/");
             menuItem("1");
             window.location.reload();

@@ -8,7 +8,8 @@ export interface RegisterTypes {
     initialState: Registration
     step: number,
     project: Projects | undefined,
-
+    setClassroom: Dispatch<SetStateAction<Project | undefined>>
+    classroom: Project | undefined
 }
 
 export interface Registration {

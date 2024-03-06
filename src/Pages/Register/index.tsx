@@ -3,7 +3,10 @@ import { Container } from "./style";
 import TagImage from "../../Assets/images/taglogin.svg"
 import BackButton from "../../Assets/images/backIcon.svg"
 import Wizard from "./Wizard";
-import RegisterProvider from "../../Context/Register/context";
+import RegisterProvider, { RegisterContext } from "../../Context/Register/context";
+import { Formik } from "formik";
+import { useContext } from "react";
+import { RegisterTypes } from "../../Context/Register/type";
 
 const Register = () => {
   return (
@@ -14,6 +17,9 @@ const Register = () => {
 }
 
 const RegisterPage = () => {
+
+  const props = useContext(RegisterContext) as RegisterTypes;
+
   return (
     <Container>
       <div style={{ display: "flex", flexDirection: "row" }}>
@@ -31,6 +37,7 @@ const RegisterPage = () => {
         ></img>
         <img className={"imgTag"} src={TagImage} alt=""></img>
       </div>
+    
       <Wizard  />
 
     </Container>
