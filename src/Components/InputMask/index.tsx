@@ -1,4 +1,4 @@
-import { PropsInputMask, PropsInputText } from "../../Types/types";
+import { PropsInputMask } from "../../Types/types";
 
 import { InputMask } from 'primereact/inputmask';
 

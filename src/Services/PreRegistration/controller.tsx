@@ -16,7 +16,7 @@ export const ControllerPreRegistration = () => {
             onSuccess: (data) => {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Cronograma criado com sucesso!',
+                    title: 'Registro feito com sucesso!',
                     confirmButtonColor: styles.colors.colorsBaseProductNormal,
                 }).then((result) => {
                     if (result.isConfirmed) {

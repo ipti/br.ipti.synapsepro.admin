@@ -10,10 +10,21 @@ export interface RegisterTypes {
     project: Projects | undefined,
     setClassroom: Dispatch<SetStateAction<Project | undefined>>
     classroom: Project | undefined
+    color_race: {
+        value: number;
+        label: string;
+    }[]
+    dataValues: Registration
+    backStep: () => void
+    sex: {
+        value: number;
+        label: string;
+    }[]
+    CreateRegister: () => void
 }
 
 export interface Registration {
-    classroom_fk: number | null;
+    classroom: any;
     name: string;
     birthday: string;
     cpf?: string;
@@ -34,10 +45,10 @@ export interface Project {
     id: number
     name: string
     active: boolean
-    classrooms: Classroom[]
+    classrooms: ClassroomTypes[]
 }
 
-export interface Classroom {
+export interface ClassroomTypes {
     id: number
     project_fk: number
     name: string

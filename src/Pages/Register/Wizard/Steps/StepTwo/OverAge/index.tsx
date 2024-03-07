@@ -1,63 +1,62 @@
+import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
-import DropdownComponent from "../../../../../../Components/Dropdown";
-import RadioButtonComponent from "../../../../../../Components/RadioButton";
-import TextInput from "../../../../../../Components/TextInput";
-import { Column, Padding, Row } from "../../../../../../Styles/styles";
+import { useContext } from "react";
+import * as Yup from "yup";
 import { RegisterContext } from "../../../../../../Context/Register/context";
 import { RegisterTypes } from "../../../../../../Context/Register/type";
-import { useContext } from "react";
+import { Column, Padding, Row } from "../../../../../../Styles/styles";
+import InputsEquals from "../InputsEquals";
 
 const OverAge = () => {
   const props = useContext(RegisterContext) as RegisterTypes;
+
+  const initialValue = {
+    responsable_telephone: props.dataValues.responsable_telephone ?? "",
+    birthday: props.dataValues.birthday ?? "",
+    zone: props.dataValues.zone ?? null,
+    sex: props.dataValues.sex ?? null
+  }
+
+  const schema = Yup.object().shape({
+    responsable_telephone: Yup.string().required('Telefone do responsável é obrigatório'),
+    birthday: Yup.string().nullable().required('Data de nascimento é obrigatória'),
+    zone: Yup.string().nullable().required('Zona é obrigatória'),
+    sex: Yup.string().nullable().required('Sexo é obrigatória')
+  });
+
   return (
     <>
       <Column className="contentStart" id="center">
-        <Row id="center">
-          <div className="col-12 md:col-4">
-            <Padding />
-            <div>
-              <label>Data de Nascimento *</label>
-              <Padding />
-              <TextInput placeholder="CPF *" />
-            </div>
+        <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(values) =>
+          {props.NextStep(values); console.log("bashbdsh")}
+        }>
+          {({ values, handleChange, errors, touched }) => {
+            console.log(values)
+            console.log(errors)
+            return (
+              <Form>
+                <Row id="center">
+                  <div className="col-12 md:col-4">
+                    <InputsEquals values={values} errors={errors} handleChange={handleChange} touched={touched} />
+                  </div>
+                </Row>
+                <Padding padding={props.padding} />
+                <Row id="center" className={"marginTop marginButtom"}>
+                  <div className="col-4">
+                    <Button
+                      type="submit"
+                      // onClick={onButton}
+                      className="t-button-primary"
+                      label="Finalizar"
+                    // disabled={!isValid}
+                    />
+                  </div>
+                </Row>
+              </Form>
+            )
+          }}
+        </Formik>
 
-            <Padding padding={props.padding} />
-            <div>
-              <label>Sexo *</label>
-              <Padding />
-              <DropdownComponent placerholder="Sexo *" />
-            </div>
-            <Padding padding={props.padding} />
-            <div>
-              <label>Telefone *</label>
-              <Padding />
-              <TextInput placeholder="Telefone *" />
-            </div>
-            <Padding padding={props.padding} />
-
-            <div>
-              <label>Zona *</label>
-              <Padding />
-              <Row className="gap-2">
-                <RadioButtonComponent label="Rural" />
-                <RadioButtonComponent label="Urbana" />
-              </Row>
-            </div>
-            <Padding padding={props.padding} />
-          </div>
-        </Row>
-        <Padding padding={props.padding} />
-        <Row id="center" className={"marginTop marginButtom"}>
-          <div className="col-4">
-            <Button
-              type="button"
-              // onClick={onButton}
-              className="t-button-primary"
-              label="Continuar"
-              // disabled={!isValid}
-            />
-          </div>
-        </Row>
         <Padding padding={props.padding} />
       </Column>
     </>

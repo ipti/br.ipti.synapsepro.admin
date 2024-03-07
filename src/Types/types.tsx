@@ -53,7 +53,7 @@ export interface PropsInputArea {
 }
 
 export interface PropsRadioButton {
-    value?: string,
+    value?: any,
     onChange?(event: RadioButtonChangeEvent): void,
     checked?: boolean,
     placeholder?: string | undefined,

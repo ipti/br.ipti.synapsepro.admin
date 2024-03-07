@@ -9,6 +9,7 @@ import NotPeriod from "./Steps/NotPeriod";
 import Start from "./Steps/Start";
 import StepOne from "./Steps/StepOne";
 import StepTwo from "./Steps/StepTwo";
+import Finish from "./Steps/Finish";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 // import Classroom from "./ClassRoom";
 // import Finish from "./Finish";
@@ -29,7 +30,8 @@ const Wizard = () => {
     "1": Classroom,
     "2": StepOne,
     "3": StepTwo,
-    "4": NotPeriod,
+    "4": Finish,
+    "5": NotPeriod,
     // "2": StepOne,
     // "3": StepThree,
     // "4": isOfLegalAge === '1' ? StepFour : StepSix,

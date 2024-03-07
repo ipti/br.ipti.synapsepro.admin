@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import { useFetchRequestProjectList } from "../../Services/PreRegistration/query";
 import { Project, Projects, Registration } from "./type";
+import { ControllerPreRegistration } from "../../Services/PreRegistration/controller";
 
 export const RegisterState = () => {
   const padding = "16px";
@@ -13,12 +14,19 @@ export const RegisterState = () => {
   const { data: projectRequet } = useFetchRequestProjectList();
   const [classroom, setClassroom] = useState<Project | undefined>();
   const [dataValues, setDataValues] = useState<Registration | any>({});
+  const props = ControllerPreRegistration()
 
   const NextStep = (values: any) => {
     setStep(step + 1);
     let data = Object.assign(dataValues, values);
     setDataValues(data);
+    console.log(step)
   };
+
+  const backStep = () => {
+    setStep(step - 1);
+
+  }
 
   useEffect(() => {
     if (projectRequet) {
@@ -27,6 +35,25 @@ export const RegisterState = () => {
   }, [projectRequet])
 
 
+  const color_race = [
+    { value: 0, label: 'Não Declarada' },
+    { value: 1, label: 'Branca' },
+    { value: 2, label: 'Preta' },
+    { value: 3, label: 'Parda' },
+    { value: 4, label: 'Amarela' },
+    { value: 5, label: 'Indígena' }
+  ];
+
+  const sex = [
+    { value: 0, label: 'Não Declarada' },
+    { value: 1, label: 'Masculino' },
+    { value: 2, label: 'Feminino' },
+  ];
+
+  const CreateRegister = () => {
+    
+    props.requestPreRegistrationMutation.mutate({...dataValues, cpf: dataValues.cpf.replace(/[^\w\s]/gi, '')})
+  }
 
 
   // const {schoolsList, requestSaveRegistrationMutation} = Controller()
@@ -44,7 +71,7 @@ export const RegisterState = () => {
 
   const initialState: Registration = {
     birthday: "",
-    classroom_fk: null,
+    classroom: null,
     color_race: null,
     deficiency: null,
     name: "",
@@ -66,6 +93,6 @@ export const RegisterState = () => {
     step,
     project,
     dataValues,
-    classroom, setClassroom
+    classroom, setClassroom, color_race, backStep, sex, CreateRegister
   };
 };

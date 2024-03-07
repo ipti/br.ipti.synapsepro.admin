@@ -1,12 +1,11 @@
-import { TopColors } from "../Login/styles";
-import { Container } from "./style";
-import TagImage from "../../Assets/images/taglogin.svg"
-import BackButton from "../../Assets/images/backIcon.svg"
-import Wizard from "./Wizard";
-import RegisterProvider, { RegisterContext } from "../../Context/Register/context";
-import { Formik } from "formik";
 import { useContext } from "react";
+import BackButton from "../../Assets/images/backIcon.svg";
+import TagImage from "../../Assets/images/taglogin.svg";
+import RegisterProvider, { RegisterContext } from "../../Context/Register/context";
 import { RegisterTypes } from "../../Context/Register/type";
+import { TopColors } from "../Login/styles";
+import Wizard from "./Wizard";
+import { Container } from "./style";
 
 const Register = () => {
   return (
@@ -31,7 +30,7 @@ const RegisterPage = () => {
       <div style={{ display: "flex", flexDirection: "row" }}>
         <img
           className={"backButton"}
-          //   onClick={backStep}
+            onClick={props.backStep}
           src={BackButton}
           alt=""
         ></img>
