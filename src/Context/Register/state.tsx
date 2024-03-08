@@ -51,8 +51,10 @@ export const RegisterState = () => {
   ];
 
   const CreateRegister = () => {
-    
-    props.requestPreRegistrationMutation.mutate({...dataValues, cpf: dataValues.cpf.replace(/[^\w\s]/gi, '')})
+    const data = new Date(dataValues.birthday);
+    const dataFormatada = data.toISOString().split('T')[0];
+
+    props.requestPreRegistrationMutation.mutate({ ...dataValues, cpf: dataValues.cpf.replace(/[^a-zA-Z0-9]/g, ''), responsable_telephone: dataValues.responsable_telephone.replace(/[^a-zA-Z0-9]/g, ''), birthday: dataFormatada })
   }
 
 

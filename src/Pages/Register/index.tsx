@@ -6,6 +6,7 @@ import { RegisterTypes } from "../../Context/Register/type";
 import { TopColors } from "../Login/styles";
 import Wizard from "./Wizard";
 import { Container } from "./style";
+import { Column } from "../../Styles/styles";
 
 const Register = () => {
   return (
@@ -36,8 +37,9 @@ const RegisterPage = () => {
         ></img>
         <img className={"imgTag"} src={TagImage} alt=""></img>
       </div>
-    
+      <Column id="center" className="h-full">
       <Wizard  />
+      </Column>
 
     </Container>
   );

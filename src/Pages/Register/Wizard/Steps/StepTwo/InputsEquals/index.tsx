@@ -6,6 +6,7 @@ import TextInput from "../../../../../../Components/TextInput"
 import { Padding, Row } from "../../../../../../Styles/styles"
 import { RegisterContext } from "../../../../../../Context/Register/context"
 import { RegisterTypes } from "../../../../../../Context/Register/type"
+import CalendarComponent from "../../../../../../Components/Calendar"
 
 const InputsEquals = ({ values, handleChange, errors, touched }: { values: any, handleChange: any, errors: any, touched: any }) => {
 
@@ -17,7 +18,7 @@ const InputsEquals = ({ values, handleChange, errors, touched }: { values: any, 
             <div>
                 <label>Data de Nascimento *</label>
                 <Padding />
-                <MaskInput mask="99/99/9999" placeholder="Data de Nascimento *" name="birthday" value={values.birthday} onChange={handleChange} />
+                <CalendarComponent placeholder="Data de Nascimento *" name="birthday" value={values.birthday} onChange={handleChange} />
             </div>
             {errors.birthday && touched.birthday ? (
                 <div style={{ color: "red", marginTop: "8px" }}>{errors.birthday}</div>
@@ -35,7 +36,7 @@ const InputsEquals = ({ values, handleChange, errors, touched }: { values: any, 
             <div>
                 <label>Telefone *</label>
                 <Padding />
-                <TextInput placeholder="Telefone *" name="responsable_telephone" onChange={handleChange} value={values.responsable_telephone} />
+                <MaskInput mask="(99) 9 9999-9999" placeholder="Telefone *" name="responsable_telephone" onChange={handleChange} value={values.responsable_telephone} />
             </div>
             {errors.responsable_telephone && touched.responsable_telephone ? (
                 <div style={{ color: "red", marginTop: "8px" }}>{errors.responsable_telephone}</div>

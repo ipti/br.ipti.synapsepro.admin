@@ -18,7 +18,7 @@ const OverAge = () => {
   }
 
   const schema = Yup.object().shape({
-    responsable_telephone: Yup.string().required('Telefone do responsável é obrigatório'),
+    responsable_telephone: Yup.string().required('Telefone é obrigatório'),
     birthday: Yup.string().nullable().required('Data de nascimento é obrigatória'),
     zone: Yup.string().nullable().required('Zona é obrigatória'),
     sex: Yup.string().nullable().required('Sexo é obrigatória')
