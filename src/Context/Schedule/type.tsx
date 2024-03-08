@@ -10,7 +10,7 @@ export interface ScheduleTypes {
 export interface CreateSchedule {
     start_date: any,
     end_date: any,
-    school_identificationArray?: any,
+    project?: any,
     year?: any,
 }
 

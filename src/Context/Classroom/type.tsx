@@ -1,13 +1,13 @@
 import { SchoolIdentification } from "../../Types/types";
 
 export interface ClassroomTypes {
-    CreateClassroom: (body: any) => void,
-    initialValue: CreateClassroom,
-    classrooms: undefined;
+  CreateClassroom: (body: CreateClassroom) => void,
+  initialValue: any,
+  classrooms: any;
 }
 
 export interface CreateClassroom {
-    name: string
+  name: string
 }
 
 export type Events = Event[]
@@ -23,3 +23,8 @@ export interface Event {
 
 
 
+export interface CreateClassroom {
+  name: string,
+  project: number,
+  year: number
+}

@@ -1,12 +1,11 @@
+import { ProgressBar } from "primereact/progressbar";
+import { Toast } from "primereact/toast";
 import { useContext, useEffect, useRef, useState } from "react";
 import homeImg from "../../../../../Assets/images/Capelo.png";
-import DropdownComponent from "../../../../../Components/Dropdown";
 import { RegisterContext } from "../../../../../Context/Register/context";
 import { RegisterTypes } from "../../../../../Context/Register/type";
 import { Column, Row } from "../../../../../Styles/styles";
 import ImageTextSteps from "../../ImageTextStpes";
-import { Toast } from "primereact/toast";
-import { ProgressBar } from "primereact/progressbar";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 
 const Finish = () => {
@@ -47,9 +46,7 @@ const Finish = () => {
       <Column className="contentStart" id="center">
         <ImageTextSteps img={homeImg} title="Matrícula Online" subTitle={<p style={{ textAlign: "center" }}>Inscrição Finalizada <br /> Aguardes os próximos passos</p>} />
         <Toast ref={toast}></Toast>
-        
         <Row id="center">
-
         <ProgressBar className="w-11 md:w-6" value={value}></ProgressBar>
         </Row>
       </Column>

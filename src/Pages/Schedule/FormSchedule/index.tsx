@@ -13,10 +13,12 @@ const FormSchedule = () => {
     const initialValue: CreateSchedule = {
         start_date: "",
         end_date: "",
-        school_identificationArray: 201902,
+        project: "",
         year: "",
     }
     const props = useContext(ScheduleContext) as ScheduleTypes
+
+
 
     return (
         <Container>
@@ -34,11 +36,11 @@ const FormSchedule = () => {
 
                                         <Column className="col-12 md:col-6">
                                             <label>Data de inicio</label>
-                                            <CalendarComponent onChange={handleChange} dateFormat="dd/mm/yy" value={values.start_date} name="start_date" />
+                                            <CalendarComponent onChange={handleChange} dateFormat="dd/mm/yy" placeholder="Data de inicio" value={values.start_date} name="start_date" />
                                         </Column>
                                         <Column className="col-12 md:col-6">
                                             <label>Data final</label>
-                                            <CalendarComponent onChange={handleChange} dateFormat="dd/mm/yy" value={values.end_date} name="end_date" />
+                                            <CalendarComponent onChange={handleChange} dateFormat="dd/mm/yy" placeholder="Data final" value={values.end_date} name="end_date" />
                                         </Column>
                                     </div>
                                     <Padding />

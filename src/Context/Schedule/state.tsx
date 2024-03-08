@@ -5,15 +5,16 @@ export const ScheduleState = () => {
     const initialValue: CreateSchedule = {
         start_date: "",
         end_date: "",
-        school_identificationArray: 0,
+        project: 0,
         year: 0,
     }
 
     const { requestSaveEventPreMutation, requestDeleteScheduleMutation } = ControllerSchedule()
 
-    const CreateSchedule = (body: any) => {
+    const CreateSchedule = (body: CreateSchedule) => {
         requestSaveEventPreMutation.mutate(body)
     }
+
     const DeleteSchedule = (id: number) => {
         requestDeleteScheduleMutation.mutate(id)
     }

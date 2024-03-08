@@ -28,11 +28,9 @@ const OverAge = () => {
     <>
       <Column className="contentStart" id="center">
         <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(values) =>
-          {props.NextStep(values); console.log("bashbdsh")}
+          {props.NextStep(values)}
         }>
           {({ values, handleChange, errors, touched }) => {
-            console.log(values)
-            console.log(errors)
             return (
               <Form>
                 <Row id="center">

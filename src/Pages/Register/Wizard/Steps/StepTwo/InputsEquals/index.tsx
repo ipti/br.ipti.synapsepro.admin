@@ -1,12 +1,11 @@
 import { useContext } from "react"
+import CalendarComponent from "../../../../../../Components/Calendar"
 import DropdownComponent from "../../../../../../Components/Dropdown"
 import MaskInput from "../../../../../../Components/InputMask"
 import RadioButtonComponent from "../../../../../../Components/RadioButton"
-import TextInput from "../../../../../../Components/TextInput"
-import { Padding, Row } from "../../../../../../Styles/styles"
 import { RegisterContext } from "../../../../../../Context/Register/context"
 import { RegisterTypes } from "../../../../../../Context/Register/type"
-import CalendarComponent from "../../../../../../Components/Calendar"
+import { Padding, Row } from "../../../../../../Styles/styles"
 
 const InputsEquals = ({ values, handleChange, errors, touched }: { values: any, handleChange: any, errors: any, touched: any }) => {
 

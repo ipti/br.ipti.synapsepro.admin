@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react"
 import { ControllerClassroom } from "../../Services/Classroom/controller"
 import { useFetchRequestClassroom } from "../../Services/Classroom/query"
-import { GetIdProject } from "../../Services/localstorage"
 import { CreateClassroom } from "./type"
 
 export const ClassroomState = () => {
-    const initialValue: CreateClassroom = {
+    const initialValue = {
         name: ""
     }
 
-    const [classrooms, setClassrooms] = useState();
+    const [classrooms, setClassrooms] = useState<any>();
 
-    const { data: classroomsFetch } = useFetchRequestClassroom(parseInt(GetIdProject()!))
+    const { data: classroomsFetch } = useFetchRequestClassroom()
 
     useEffect(() => {
         if (classroomsFetch) {
@@ -21,7 +20,7 @@ export const ClassroomState = () => {
 
     const { requestCreateClassroomMutation } = ControllerClassroom()
 
-    const CreateClassroom = (body: any) => {
+    const CreateClassroom = (body: CreateClassroom) => {
         requestCreateClassroomMutation.mutate(body)
     }
 

@@ -2,7 +2,9 @@ import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
 import CardClassroom from "../../../Components/Card/CardClassroom";
 import { Container, Padding, Row } from "../../../Styles/styles";
-import ClassroomProvider from "../../../Context/Classroom/context";
+import ClassroomProvider, { ClassroomContext } from "../../../Context/Classroom/context";
+import { useContext } from "react";
+import { ClassroomTypes } from "../../../Context/Classroom/type";
 
 const ListClassroom = () => {
     return (
@@ -16,23 +18,7 @@ const ListClassroomPage = () => {
 
     const history = useNavigate();
 
-    const classroom = [{
-        name: "TurmaA",
-        subscribe: 20,
-        year: 2024
-    }, {
-        name: "TurmaA",
-        subscribe: 20,
-        year: 2024
-    }, {
-        name: "TurmaA",
-        subscribe: 20,
-        year: 2024
-    }, {
-        name: "TurmaA",
-        subscribe: 20,
-        year: 2024
-    }];
+    const props = useContext(ClassroomContext) as ClassroomTypes
 
     return (
         <Container>
@@ -40,8 +26,8 @@ const ListClassroomPage = () => {
                 <Button label="Criar turma" icon={"pi pi-plus"} onClick={() => history("/turma/criar")} />
             </Row>
             <Padding padding="16px" />
-            <div className="grid ">
-                {classroom.map((item, index) => {
+            <div className="grid">
+                {props.classrooms?.map((item: any, index: number) => {
                     return (
                         <div className="col-12 md:col-6 lg:col-4">
                             <CardClassroom title={item.name} year={item.year.toString()} />

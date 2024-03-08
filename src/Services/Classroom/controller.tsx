@@ -3,12 +3,13 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import styles from "../../Styles";
 import { requestCreateClassroom } from "./request";
+import { CreateClassroom } from "../../Context/Classroom/type";
 
 
 export const ControllerClassroom = () => {
     const history = useNavigate()
     const requestCreateClassroomMutation = useMutation(
-        (data) => requestCreateClassroom(data),
+        (data: CreateClassroom) => requestCreateClassroom(data),
         {
             onError: (error: any) => {
                 alert(error?.response.data.message);

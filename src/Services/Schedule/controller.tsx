@@ -4,13 +4,14 @@ import Swal from "sweetalert2";
 import { requestDeleteSchedule, requestSaveEventPre } from "./request";
 import { useFetchRequestSchecule } from "./query";
 import styles from "../../Styles";
+import { CreateSchedule } from "../../Context/Schedule/type";
 
 
 export const ControllerSchedule = () => {
     const { data: schedules, isLoading: isLoadingSchedules, isError, refetch } = useFetchRequestSchecule();
     const history = useNavigate()
     const requestSaveEventPreMutation = useMutation(
-        (data) => requestSaveEventPre(data),
+        (data: CreateSchedule) => requestSaveEventPre(data),
         {
             onError: (error) => {
             },

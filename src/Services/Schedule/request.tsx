@@ -1,7 +1,8 @@
+import { CreateSchedule } from "../../Context/Schedule/type";
 import http from "../axios";
 import { GetIdProject, logout } from "../localstorage";
 
-export const requestSaveEventPre = (data: any) => {
+export const requestSaveEventPre = (data: CreateSchedule) => {
     return http
       .post("/event-pre-registration", data)
       .then(response => response.data)

@@ -24,8 +24,9 @@ export const RegisterState = () => {
   };
 
   const backStep = () => {
-    setStep(step - 1);
-
+    if (step !== 0) {
+      setStep(step - 1);
+    }
   }
 
   useEffect(() => {

@@ -41,7 +41,7 @@ const TopBar = ({setViewdMenu, viewdMenu}: {viewdMenu: boolean, setViewdMenu: Re
             <Column style={{ width: "auto" }} id="center">
                 <Row>
                     <Column className="w-12rem md:w-16rem">
-                        <DropdownComponent  placerholder="Projetos" options={props.project} value={verifyValueProject(GetIdProject()!)} onChange={(e) => { idProject(e.target.value.inep_id); history("/"); menuItem("1"); window.location.reload(); }} />
+                        <DropdownComponent  placerholder="Projetos" options={props.project} value={verifyValueProject(GetIdProject()!)} onChange={(e) => { idProject(e.target.value.id); history("/"); menuItem("1"); window.location.reload(); }} />
                     </Column>
                     <Padding />
                     <Column id="center">
