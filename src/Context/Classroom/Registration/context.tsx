@@ -10,12 +10,12 @@ const RegistartionDetailsProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { registration, initialValue, typesex, color } =
+  const { registration, initialValue, typesex, color, handleUpdateRegistration } =
     RegistrationClassroomState();
 
   return (
     <RegistrationDetailsContext.Provider
-      value={{ registration, initialValue, typesex, color }}
+      value={{ registration, initialValue, typesex, color, handleUpdateRegistration }}
     >
       {children}
     </RegistrationDetailsContext.Provider>

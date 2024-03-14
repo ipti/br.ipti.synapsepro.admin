@@ -1,14 +1,25 @@
 import { useEffect, useState } from "react";
-import json from "../../../Data/students.json";
-import { RegistrationType } from "./type";
+import { useParams } from "react-router-dom";
+import { useFetchRequestClassroomRegistrationOne } from "../../../Services/Classroom/query";
+import { RegistrationType, UpdateRegister } from "./type";
+import { ControllerUpdateRegistration } from "../../../Services/PreRegistration/controller";
 export const RegistrationClassroomState = () => {
+  const { idRegistration } = useParams();
+  const { data: registrationRequest } = useFetchRequestClassroomRegistrationOne(
+    parseInt(idRegistration!)
+  );
+
+  const {requestPreRegistrationMutation} = ControllerUpdateRegistration()
+
   const [registration, setregistration] = useState<
-    any | undefined
+    RegistrationType | undefined
   >();
 
   useEffect(() => {
-    setregistration(json[0]);
-  }, []);
+    if (registrationRequest) {
+      setregistration(registrationRequest);
+    }
+  }, [registrationRequest]);
   var typesex = [
     { id: 2, type: "Feminino" },
     { id: 1, type: "Masculino" },
@@ -36,11 +47,18 @@ export const RegistrationClassroomState = () => {
     cpf: registration?.cpf,
     color_race: VerifyColor(registration?.color_race!),
     birthday: registration?.birthday,
-    deficiency: registration?.deficiency ? { name: "Sim", id: true } : { name: "Não", id: false },
+    deficiency: registration?.deficiency
+      ? { name: "Sim", id: true }
+      : { name: "Não", id: false },
     responsable_name: registration?.responsable_name,
     responsable_cpf: registration?.responsable_cpf,
-    responsable_telephone: registration?.responsable_telephone
+    responsable_telephone: registration?.responsable_telephone,
+    status: registration?.status
   };
 
-  return { registration, initialValue, typesex, color };
+  const handleUpdateRegistration = (data: UpdateRegister, id: number) => {
+    requestPreRegistrationMutation.mutate({data: data, id: id});
+  }
+
+  return { registration, initialValue, typesex, color, handleUpdateRegistration };
 };

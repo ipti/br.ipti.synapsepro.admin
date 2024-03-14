@@ -1,3 +1,5 @@
+import { Status } from "../../../Controller/controllerGlobal";
+
 export interface RegistrationClassroomTypes {
   registrations?: RegistrationsList;
 }

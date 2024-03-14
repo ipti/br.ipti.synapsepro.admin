@@ -22,3 +22,9 @@ export const gerarIdAleatorio = (tamanho: number) => {
 
     return `${diaFormatado}/${mesFormatado}/${ano}`;
 }
+
+export const Status =  {
+  APPROVED: "APPROVED",
+  PENDING: "PENDING",
+  REPROVED: "REPROVED",
+}

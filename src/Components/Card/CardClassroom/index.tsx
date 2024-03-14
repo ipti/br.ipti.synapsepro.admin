@@ -4,10 +4,10 @@ import Icon from "../../Icon";
 import { Container } from "./style";
 
 
-const CardClassroom = ({ title, year }: { title: string, year: string }) => {
+const CardClassroom = ({ title, year, id }: { title: string, year: string, id: number }) => {
     const history = useNavigate()
     return (
-        <Container className="card" onClick={() => history("/turma/1")}>
+        <Container className="card" onClick={() => history(`/turma/${id}`)}>
             <Row id="space-between">
                 <h3>{title}</h3>
                 <div className="cursor-pointer">

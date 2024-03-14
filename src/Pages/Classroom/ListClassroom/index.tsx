@@ -30,7 +30,7 @@ const ListClassroomPage = () => {
                 {props.classrooms?.map((item: any, index: number) => {
                     return (
                         <div className="col-12 md:col-6 lg:col-4">
-                            <CardClassroom title={item.name} year={item.year.toString()} />
+                            <CardClassroom title={item.name} year={item.year.toString()} id={item.id} />
                         </div>
                     );
                 })}

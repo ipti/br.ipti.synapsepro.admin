@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
-import json from "../../../Data/students.json";
+import { useParams } from "react-router-dom";
+import { useFetchRequestClassroomRegistration } from "../../../Services/Classroom/query";
+import { RegistrationType } from "./type";
 export const RegistrationClassroomState = () => {
-  
-    const [registrations, setregistrations] = useState<Array<any> | undefined>();
-
+    const {id} = useParams()
+    const {data: registrationsRequeset} = useFetchRequestClassroomRegistration(parseInt(id!))
+    const [registrations, setregistrations] = useState<Array<RegistrationType> | undefined>();
 
     useEffect(() => {
-        setregistrations(json)
-    }, [])
+        if(registrationsRequeset){
+            setregistrations(registrationsRequeset)
+        }
+    }, [registrationsRequeset])
 
 
     return {registrations  }

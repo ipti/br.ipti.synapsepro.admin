@@ -1,13 +1,15 @@
+import { Form, Formik } from "formik";
+import { Button } from "primereact/button";
 import { useContext } from "react";
+import DropdownComponent from "../../../../../Components/Dropdown";
+import TextInput from "../../../../../Components/TextInput";
 import RegistartionDetailsProvider, {
   RegistrationDetailsContext,
 } from "../../../../../Context/Classroom/Registration/context";
-import { Container, Padding } from "../../../../../Styles/styles";
 import { RegistrationDetailsTypes } from "../../../../../Context/Classroom/Registration/type";
-import TextInput from "../../../../../Components/TextInput";
-import { Formik } from "formik";
-import { Form } from "react-router-dom";
-import DropdownComponent from "../../../../../Components/Dropdown";
+import { Status } from "../../../../../Controller/controllerGlobal";
+import { Container, Padding } from "../../../../../Styles/styles";
+import { useParams } from "react-router-dom";
 
 const Registration = () => {
   return (
@@ -22,23 +24,31 @@ const RegistrationPage = () => {
     RegistrationDetailsContext
   ) as RegistrationDetailsTypes;
 
-  console.log(props.registration);
+  const {idRegistration} = useParams()
+
   return (
     <Container>
       <h2>Beneficiarios da Turma A</h2>
       <Padding padding="16px" />
       {props.registration ? (
-        <Formik initialValues={props.initialValue} onSubmit={() => {}}>
-          {({ values }) => {
+        <Formik initialValues={props.initialValue} onSubmit={(values) => {props.handleUpdateRegistration({...values}, parseInt(idRegistration!))}}>
+          {({ values, handleChange }) => {
             return (
-              <div>
+              <Form>
+                <Button label="Salvar" />
+                <Padding padding="8px" />
                 <h3>Dados basicos</h3>
                 <Padding />
                 <div className="grid">
                   <div className="col-12 md:col-6">
                     <label>Name</label>
                     <Padding />
-                    <TextInput value={values.name} placeholder="name" />
+                    <TextInput
+                      value={values.name}
+                      placeholder="name"
+                      onChange={handleChange}
+                      name="name"
+                    />
                   </div>
                   <div className="col-12 md:col-6">
                     <label>Sexo</label>
@@ -47,6 +57,8 @@ const RegistrationPage = () => {
                       value={values.sex}
                       optionsLabel="type"
                       options={props.typesex}
+                      name="sex"
+                      onChange={handleChange}
                     />
                   </div>
                 </div>{" "}
@@ -57,6 +69,8 @@ const RegistrationPage = () => {
                     <TextInput
                       value={values.birthday}
                       placeholder="Data de Nascimento"
+                      name="birthday"
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="col-12 md:col-6">
@@ -65,6 +79,8 @@ const RegistrationPage = () => {
                     <DropdownComponent
                       value={values.color_race}
                       options={props.color}
+                      name="color_race"
+                      onChange={handleChange}
                     />{" "}
                   </div>
                 </div>{" "}
@@ -72,7 +88,12 @@ const RegistrationPage = () => {
                   <div className="col-12 md:col-6">
                     <label>CPF</label>
                     <Padding />
-                    <TextInput value={values.cpf} placeholder="CPF" />
+                    <TextInput
+                      value={values.cpf}
+                      placeholder="CPF"
+                      onChange={handleChange}
+                      name="cpf"
+                    />
                   </div>
                   <div className="col-12 md:col-6">
                     <label>Deficiente</label>
@@ -80,6 +101,8 @@ const RegistrationPage = () => {
                     <DropdownComponent
                       value={values.deficiency}
                       placerholder="Deficiente"
+                      name="deficiency"
+                      onChange={handleChange}
                       options={[
                         { id: true, name: "Sim" },
                         { id: false, name: "Não" },
@@ -89,14 +112,20 @@ const RegistrationPage = () => {
                 </div>{" "}
                 <div className="grid">
                   <div className="col-12 md:col-6">
-                    <label>Name</label>
+                    <label>Status</label>
                     <Padding />
-                    <TextInput value={values.name} placeholder="name" />
-                  </div>
-                  <div className="col-12 md:col-6">
-                    <label>CPF</label>
-                    <Padding />
-                    <TextInput value={values.cpf} placeholder="CPF" />
+                    <DropdownComponent
+                      value={values.status}
+                      onChange={handleChange}
+                      name="status"
+                      placerholder="Status"
+                      optionsLabel=""
+                      options={[
+                        Status.APPROVED,
+                        Status.REPROVED,
+                        Status.PENDING,
+                      ]}
+                    />
                   </div>
                 </div>{" "}
                 <Padding padding="8px" />
@@ -108,13 +137,19 @@ const RegistrationPage = () => {
                     <Padding />
                     <TextInput
                       value={values.responsable_name}
+                      name="responsable_name"
+                      onChange={handleChange}
                       placeholder="name"
                     />
                   </div>
                   <div className="col-12 md:col-6">
                     <label>CPF Responsavel</label>
                     <Padding />
-                    <TextInput value={values.responsable_cpf} />
+                    <TextInput
+                      value={values.responsable_cpf}
+                      name="responsable_cpf"
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>{" "}
                 <div className="grid">
@@ -123,12 +158,14 @@ const RegistrationPage = () => {
                     <Padding />
                     <TextInput
                       value={values.responsable_telephone}
+                      name="responsable_telephone"
+                      onChange={handleChange}
                       placeholder="name"
                     />
                   </div>
                 </div>{" "}
                 <Padding padding="8px" />
-                <h3>Endereço</h3>
+                {/* <h3>Endereço</h3>
                 <Padding />
                 <div className="grid">
                   <div className="col-12 md:col-6">
@@ -169,8 +206,8 @@ const RegistrationPage = () => {
                       placeholder="name"
                     />
                   </div>
-                </div>{" "}
-              </div>
+                </div>{" "} */}
+              </Form>
             );
           }}
         </Formik>

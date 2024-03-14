@@ -35,6 +35,8 @@ export const requestClassroom = () => {
       throw err;
     });
 };
+
+
 export const requestClassroomOne = (id: number) => {
   let path = "/classroom";
   return http
@@ -45,6 +47,38 @@ export const requestClassroomOne = (id: number) => {
         },
       }
     })
+    .then(response => response.data)
+    .catch(err => {
+      if (err.response.status === 401) {
+        logout()
+        window.location.reload()
+      }
+      throw err;
+    });
+};
+
+export const requestClassroomRegistration = (id: number) => {
+  let path = "/registration-token-bff";
+  return http
+    .get(path, {
+      params: {
+        idClassroom: id
+      }
+    })
+    .then(response => response.data)
+    .catch(err => {
+      if (err.response.status === 401) {
+        logout()
+        window.location.reload()
+      }
+      throw err;
+    });
+};
+
+export const requestClassroomRegistrationOne = (id: number) => {
+  let path = "/registration/"+id;
+  return http
+    .get(path)
     .then(response => response.data)
     .catch(err => {
       if (err.response.status === 401) {
