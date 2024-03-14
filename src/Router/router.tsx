@@ -40,6 +40,10 @@ const RoutesApp = () => {
           element={<PrivateRoute Component={<FormSchedule />} />}
           path="/cronograma/criar"
         />
+        <Route
+          element={<PrivateRoute Component={<FormSchedule />} />}
+          path="/cronograma/:id"
+        />
 
         <Route
           element={<PrivateRoute Component={<ListClassroom />} />}

@@ -12,6 +12,7 @@ import { Container } from "../../../../Styles/styles";
 import { Button } from "primereact/button";
 import { Status } from "../../../../Controller/controllerGlobal";
 import { useNavigate, useParams } from "react-router-dom";
+import { useFetchRequestClassroomOne } from "../../../../Services/Classroom/query";
 
 const RegistrationList = () => {
   return (
@@ -27,6 +28,8 @@ const RegistrationListPage = () => {
     RegistrationClassroomContext
   ) as RegistrationClassroomTypes;
   const {id} = useParams()
+  const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!))
+
   const actionBodyTemplate = (rowData: RegistrationType) => {
     return (
       <>
@@ -52,7 +55,7 @@ const RegistrationListPage = () => {
 
   return (
     <Container>
-      <h2>Beneficiarios da Turma A</h2>
+      <h2>{classroom?.name}</h2>
       <DataTable
         value={props.registrations}
         scrollable

@@ -4,6 +4,9 @@ export interface ClassroomTypes {
   CreateClassroom: (body: CreateClassroom) => void,
   initialValue: any,
   classrooms: any;
+  UpdateClassroom: (body: {
+    name: string;
+}, id: number) => void
 }
 
 export interface CreateClassroom {

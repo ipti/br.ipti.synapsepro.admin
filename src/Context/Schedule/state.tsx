@@ -1,5 +1,5 @@
-import { ControllerSchedule } from "../../Services/Schedule/controller"
-import { CreateSchedule } from "./type"
+import { ControllerSchedule } from "../../Services/Schedule/controller";
+import { CreateSchedule } from "./type";
 
 export const ScheduleState = () => {
     const initialValue: CreateSchedule = {
@@ -9,14 +9,19 @@ export const ScheduleState = () => {
         year: 0,
     }
 
-    const { requestSaveEventPreMutation, requestDeleteScheduleMutation } = ControllerSchedule()
-
+    const { requestSaveEventPreMutation, requestDeleteScheduleMutation, requestUpdateEventPreMutation } = ControllerSchedule();
+      
     const CreateSchedule = (body: CreateSchedule) => {
         requestSaveEventPreMutation.mutate(body)
     }
 
+    const UpdateSchedule = (body: CreateSchedule, id: number) => {
+        requestUpdateEventPreMutation.mutate({data: body, id: id})
+    }
+
+
     const DeleteSchedule = (id: number) => {
         requestDeleteScheduleMutation.mutate(id)
     }
-    return { initialValue, CreateSchedule, DeleteSchedule }
+    return { initialValue, CreateSchedule, DeleteSchedule, UpdateSchedule }
 }

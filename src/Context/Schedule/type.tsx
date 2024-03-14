@@ -5,6 +5,7 @@ export interface ScheduleTypes {
     CreateSchedule: (body: any) => void;
     scheduleList: Events | undefined;
     DeleteSchedule: (id: number) => void;
+    UpdateSchedule: (body: CreateSchedule, id: number) => void
 }
 
 export interface CreateSchedule {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { ControllerClassroom } from "../../Services/Classroom/controller"
+import { ControllerClassroom, ControllerUpdateClassroom } from "../../Services/Classroom/controller"
 import { useFetchRequestClassroom } from "../../Services/Classroom/query"
 import { CreateClassroom } from "./type"
 
@@ -11,6 +11,13 @@ export const ClassroomState = () => {
     const [classrooms, setClassrooms] = useState<any>();
 
     const { data: classroomsFetch } = useFetchRequestClassroom()
+
+    const {requestUpdateClassroomMutation } = ControllerUpdateClassroom()
+
+    const UpdateClassroom = (body: {name: string}, id: number) => {
+        requestUpdateClassroomMutation.mutate({data: body, id: id})
+    }
+
 
     useEffect(() => {
         if (classroomsFetch) {
@@ -24,5 +31,5 @@ export const ClassroomState = () => {
         requestCreateClassroomMutation.mutate(body)
     }
 
-    return { initialValue, CreateClassroom,classrooms }
+    return { initialValue, CreateClassroom,classrooms, UpdateClassroom }
 }

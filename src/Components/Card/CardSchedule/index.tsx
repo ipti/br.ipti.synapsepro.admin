@@ -6,14 +6,15 @@ import { useContext, useState } from "react";
 import { ScheduleContext } from "../../../Context/Schedule/context";
 import { ScheduleTypes } from "../../../Context/Schedule/type";
 import { ConfirmDialog } from 'primereact/confirmdialog';
+import { useNavigate } from "react-router-dom";
 
 const CardSchedule = ({ title, subtitle, id }: { title: string, subtitle: string, id: number }) => {
   const props = useContext(ScheduleContext) as ScheduleTypes
   const [visible, setVisible] = useState(false)
-
+  const history = useNavigate()
 
   return (
-    <Container className="card">
+    <Container className="card cursor:pointer" onClick={() => {history(`/cronograma/${id}`)}}>
       <Row id="space-between">
         <h3>Cronograma</h3>
         <div className="cursor-pointer" onClick={() => setVisible(true)}>

@@ -5,17 +5,33 @@ import { Form, Formik } from "formik";
 import { Calendar } from 'primereact/calendar';
 import { useContext } from "react";
 import CalendarComponent from "../../../Components/Calendar";
-import { ScheduleContext } from "../../../Context/Schedule/context";
+import ScheduleProvider, { ScheduleContext } from "../../../Context/Schedule/context";
 import { CreateSchedule, ScheduleTypes } from "../../../Context/Schedule/type";
-
+import { GetIdProject } from "../../../Services/localstorage";
+import { useParams } from "react-router-dom";
+import { useFetchRequestScheculeOne } from "../../../Services/Schedule/query";
 
 const FormSchedule = () => {
+    return (
+        <ScheduleProvider>
+            <FormSchedulePage />
+        </ScheduleProvider>
+    )
+}
+
+const FormSchedulePage = () => {
+    const { id } = useParams()
+
+    const { data: schedule } = useFetchRequestScheculeOne(parseInt(id!))
+
     const initialValue: CreateSchedule = {
-        start_date: "",
-        end_date: "",
-        project: "",
-        year: "",
+        start_date: schedule?.start_date ?? "",
+        end_date: schedule?.end_date ?? "",
+        project: [parseInt(GetIdProject()!)],
+        year: schedule?.year ?? "",
     }
+
+
     const props = useContext(ScheduleContext) as ScheduleTypes
 
 
@@ -30,6 +46,7 @@ const FormSchedule = () => {
                         props.CreateSchedule(values)
                     }}>
                         {({ values, handleChange }) => {
+                            console.log(values)
                             return (
                                 <Form>
                                     <div className="grid">

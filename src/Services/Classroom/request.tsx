@@ -38,15 +38,24 @@ export const requestClassroom = () => {
 
 
 export const requestClassroomOne = (id: number) => {
-  let path = "/classroom";
+  let path = "/classroom/";
   return http
-    .get(path + id, {
-      params: {
-        include: {
-          student_pre_identification: true
-        },
+    .get(path + id)
+    .then(response => response.data)
+    .catch(err => {
+      if (err.response.status === 401) {
+        logout()
+        window.location.reload()
       }
-    })
+      throw err;
+    });
+};
+
+export const requestUpdateClassroom = (id: number, data: {name: string}) => {
+  console.log(id, data)
+  let path = "/classroom/";
+  return http
+    .put(path + id, data)
     .then(response => response.data)
     .catch(err => {
       if (err.response.status === 401) {
