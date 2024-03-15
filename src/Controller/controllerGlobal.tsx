@@ -28,3 +28,10 @@ export const Status =  {
   PENDING: "PENDING",
   REPROVED: "REPROVED",
 }
+
+export const ROLE =  {
+  ADMIN: "ADMIN",
+  USER: "USER", 
+  REAPPLICATORS: "REAPPLICATORS",
+  COORDINATORS: 'COORDINATORS'
+}

@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import { requestProjectList } from "./request";
 
-export const useFetchRequestProjectList = () => {
+export const useFetchRequestProjectLists = () => {
     return useQuery(["useRequestProjectList"], () => requestProjectList());
 };

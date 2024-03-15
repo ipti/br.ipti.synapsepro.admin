@@ -4,10 +4,10 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import TagLogin from "../../Assets/images/taglogin.svg";
 import {
-    getMenuItem,
-    getYear,
-    menuItem,
-    setYear,
+  getMenuItem,
+  getYear,
+  menuItem,
+  setYear,
 } from "../../Services/localstorage";
 import styles from "../../Styles";
 import { Column, Padding, Row } from "../../Styles/styles";
@@ -68,7 +68,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             path={"/turma"}
             icon={"pi pi-sitemap"}
           />
-          <Padding />
+          {/* <Padding />
           <Item
             text={"Formulários"}
             funcActiv={() => {
@@ -78,8 +78,20 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             active={active === 3 ? true : false}
             path={"/"}
             icon={"pi pi-list"}
+          /> */}
+          <Padding />
+          <Item
+            text={"Usuarios"}
+            funcActiv={() => {
+              setActive(4);
+              menuItem("4");
+            }}
+            active={active === 4 ? true : false}
+            path={"/users"}
+            icon={"pi pi-users"}
           />
         </Padding>
+
       ) : null}
       <ModalYear
         visible={visibleModal}
@@ -108,7 +120,7 @@ const ModalYear = ({
   useEffect(() => {
     setYearState(parseInt(getYear()!))
   }, [])
-  
+
   return (
     <Dialog
       visible={visible}

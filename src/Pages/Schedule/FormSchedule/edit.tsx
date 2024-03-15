@@ -2,32 +2,42 @@ import { Button } from "primereact/button";
 import { Column, Container, Padding, Row } from "../../../Styles/styles";
 
 import { Form, Formik } from "formik";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import CalendarComponent from "../../../Components/Calendar";
 import ScheduleProvider, {
-  ScheduleContext,
+    ScheduleContext,
 } from "../../../Context/Schedule/context";
 import { CreateSchedule, ScheduleTypes } from "../../../Context/Schedule/type";
-import { GetIdProject } from "../../../Services/localstorage";
+import { useFetchRequestScheculeOne } from "../../../Services/Schedule/query";
+import queryClient from "../../../Services/reactquery";
 
-const FormSchedule = () => {
+const FormEditSchedule = () => {
   return (
     <ScheduleProvider>
-      <FormSchedulePage />
+      <FormEditSchedulePage />
     </ScheduleProvider>
   );
 };
 
-const FormSchedulePage = () => {
+const FormEditSchedulePage = () => {
+  const { id } = useParams();
 
+
+  useEffect(() => {
+    queryClient.removeQueries("useRequestsScheculeOne")
+
+  }, [])
+
+
+  const { data: schedule } = useFetchRequestScheculeOne(parseInt(id!));
 
  
-  
-  const initialValueCreate: CreateSchedule = {
-    start_date:  "",
-    end_date:"",
-    project: [parseInt(GetIdProject()!)],
+  const initialValueUpdate: CreateSchedule = {
+    start_date: new Date(schedule?.start_date),
+    end_date: new Date(schedule?.end_date),
   };
+
 
   const props = useContext(ScheduleContext) as ScheduleTypes;
 
@@ -35,16 +45,17 @@ const FormSchedulePage = () => {
     <Container>
       <div className="card">
         <Padding>
-          <h3>{"Criar"} cronograma</h3>
+          <h3>{schedule ? "Editar" : "Criar"} cronograma</h3>
           <Padding padding="16px" />
-         
+          {schedule ? (
             <Formik
-              initialValues={initialValueCreate}
+              initialValues={initialValueUpdate}
               onSubmit={(values) => {
-                props.CreateSchedule(values);
+                props.UpdateSchedule(values, parseInt(id!));
               }}
             >
               {({ values, handleChange }) => {
+                console.log(values)
                 return (
                   <Form>
                     <div className="grid">
@@ -83,17 +94,18 @@ const FormSchedulePage = () => {
                   </div> */}
                     <Padding padding="16px" />
                     <Row id="end">
-                      <Button label="Criar" />
+                      <Button label={schedule ? "Editar" : "Criar"} />
                     </Row>
                   </Form>
                 );
               }}
             </Formik>
-          
+          ) :
+            null}
         </Padding>
       </div>
     </Container>
   );
 };
 
-export default FormSchedule;
+export default FormEditSchedule;

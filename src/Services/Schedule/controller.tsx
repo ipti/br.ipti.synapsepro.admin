@@ -1,14 +1,13 @@
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import { requestDeleteSchedule, requestSaveEventPre, requestUpdateSchedule } from "./request";
-import { useFetchRequestSchecule } from "./query";
-import styles from "../../Styles";
 import { CreateSchedule } from "../../Context/Schedule/type";
+import styles from "../../Styles";
+import queryClient from "../reactquery";
+import { requestDeleteSchedule, requestSaveEventPre, requestUpdateSchedule } from "./request";
 
 
 export const ControllerSchedule = () => {
-    const { data: schedules, isLoading: isLoadingSchedules, isError, refetch } = useFetchRequestSchecule();
     const history = useNavigate()
     const requestSaveEventPreMutation = useMutation(
         (data: CreateSchedule) => requestSaveEventPre(data),
@@ -58,9 +57,9 @@ export const ControllerSchedule = () => {
             onError: (error) => {
             },
             onSuccess: (data) => {
-                refetch()
+                queryClient.refetchQueries("useRequestsSchecule")
             },
         }
     );
-    return { requestSaveEventPreMutation, requestDeleteScheduleMutation, schedules, isLoadingSchedules, isError, requestUpdateEventPreMutation }
+    return { requestSaveEventPreMutation, requestDeleteScheduleMutation, requestUpdateEventPreMutation }
 } 

@@ -17,6 +17,9 @@ import FormSchedule from "../Pages/Schedule/FormSchedule";
 import ListSchedule from "../Pages/Schedule/ListSchedule";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "./privaterouter";
+import FormEditSchedule from "../Pages/Schedule/FormSchedule/edit";
+import ListUsers from "../Pages/Users/ListUsers";
+import CreateUser from "../Pages/Users/CreateUser";
 
 const RoutesApp = () => {
   return (
@@ -40,7 +43,7 @@ const RoutesApp = () => {
           path="/cronograma/criar"
         />
         <Route
-          element={<PrivateRoute Component={<FormSchedule />} />}
+          element={<PrivateRoute Component={<FormEditSchedule />} />}
           path="/cronograma/:id"
         />
 
@@ -88,6 +91,16 @@ const RoutesApp = () => {
           element={<PrivateRoute Component={<CreateOrEditForm />} />}
           path="/edit/:id"
         />
+
+        <Route
+          element={<PrivateRoute Component={<ListUsers />} />}
+          path="/users"
+        />
+        <Route
+          element={<PrivateRoute Component={<CreateUser />} />}
+          path="/users/criar"
+        />
+
         <Route element={<Login />} path="/login" />
         <Route element={<SignUp />} path="/register" />
         <Route element={<Register />} path="/matricula" />

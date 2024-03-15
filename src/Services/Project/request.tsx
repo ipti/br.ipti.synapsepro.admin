@@ -2,12 +2,7 @@ import http from "../axios";
 
 export const requestProjectList = async () => {
     return await http
-      .get("/student-pre-identify/school", {
-        params: {
-          include: {
-          }
-        }
-      })
+      .get("/project")
       .then(response => response.data)
       .catch(err => {
         // if(err.response.status === 401){

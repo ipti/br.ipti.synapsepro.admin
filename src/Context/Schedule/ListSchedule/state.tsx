@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react"
-import { ControllerSchedule } from "../../../Services/Schedule/controller"
+import { useFetchRequestSchecule } from "../../../Services/Schedule/query"
 import { Events } from "../type"
 
 
 export const ScheduleListState = () => {
-   
-    const [scheduleList, setschedule] = useState<Events | undefined >()
 
-    const { schedules } = ControllerSchedule()
+    const [scheduleList, setschedule] = useState<Events | undefined>()
+
+    const { data: schedules } = useFetchRequestSchecule();
 
     useEffect(() => {
-        if(schedules){
+        if (schedules) {
             setschedule(schedules)
         }
     }, [schedules])
-   
+
     return { scheduleList }
 }
