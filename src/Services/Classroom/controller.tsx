@@ -2,7 +2,7 @@ import { useMutation } from "react-query";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import styles from "../../Styles";
-import { requestCreateClassroom, requestUpdateClassroom } from "./request";
+import { requestCreateClassroom, requestDeleteClassroom, requestUpdateClassroom } from "./request";
 import { CreateClassroom } from "../../Context/Classroom/type";
 import queryClient from "../reactquery";
 
@@ -22,29 +22,13 @@ export const ControllerClassroom = () => {
                     confirmButtonColor: styles.colors.colorsBaseProductNormal,
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        history('/turmas')
+                        history('/turma')
                     }
                 })
             },
         }
     );
 
-    // const requestDeleteScheduleMutation = useMutation(
-    //     (data: any) => requestDeleteSchedule(data),
-    //     {
-    //         onError: (error) => {
-    //         },
-    //         onSuccess: (data) => {
-    //             refetch()
-    //         },
-    //     }
-    // );
-    return { requestCreateClassroomMutation }
-}
-
-
-
-export const ControllerUpdateClassroom = () => {
     const requestUpdateClassroomMutation = useMutation(
         ({ data, id }: { data: { name: string }, id: number }) => requestUpdateClassroom(id, data),
         {
@@ -66,15 +50,16 @@ export const ControllerUpdateClassroom = () => {
         }
     );
 
-    // const requestDeleteScheduleMutation = useMutation(
-    //     (data: any) => requestDeleteSchedule(data),
-    //     {
-    //         onError: (error) => {
-    //         },
-    //         onSuccess: (data) => {
-    //             refetch()
-    //         },
-    //     }
-    // );
-    return { requestUpdateClassroomMutation }
-} 
+    const requestDeleteClassroomMutation = useMutation(
+        (id: number) => requestDeleteClassroom(id),
+        {
+            onError: (error) => {
+            },
+            onSuccess: (data) => {
+                queryClient.refetchQueries("useRequestsClassroom")
+            },
+        }
+    );
+    return { requestCreateClassroomMutation, requestUpdateClassroomMutation, requestDeleteClassroomMutation }
+}
+

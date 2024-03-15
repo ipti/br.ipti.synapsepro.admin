@@ -53,7 +53,7 @@ export const ControllerSchedule = () => {
     
 
     const requestDeleteScheduleMutation = useMutation(
-        (data: any) => requestDeleteSchedule(data),
+        (id: number) => requestDeleteSchedule(id),
         {
             onError: (error) => {
             },

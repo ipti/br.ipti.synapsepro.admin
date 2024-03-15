@@ -97,3 +97,18 @@ export const requestClassroomRegistrationOne = (id: number) => {
       throw err;
     });
 };
+
+export const requestDeleteClassroom = (id: number) => {
+  let path = "/classroom/" + id;
+  return http
+    .delete(path)
+    .then(response => response.data)
+    .catch(err => {
+      if (err.response.status === 401) {
+        logout()
+        window.location.reload()
+      }
+      alert(err.response.message)
+      throw err;
+    });
+};

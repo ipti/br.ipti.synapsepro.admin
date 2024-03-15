@@ -34,7 +34,7 @@ const ListSchedulePage = () => {
                 {props.scheduleList?.map((item, index) => {
                     return (
                         <div className="col-12 md:col-6 lg:col-4">
-                            <CardSchedule id={item.id} title={`Periodo de inscrições`} subtitle={`${formatarData(new Date(item.start_date))} - ${formatarData(new Date(item.end_date))}`} />
+                            <CardSchedule id={item.id} title={`Periodo de inscrições`}  subtitle={`${formatarData(new Date(item.start_date))} - ${formatarData(new Date(item.end_date))}`} />
                         </div>
                     );
                 })}

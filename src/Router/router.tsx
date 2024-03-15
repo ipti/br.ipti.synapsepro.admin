@@ -10,7 +10,6 @@ import Report from "../Pages/Classroom/ClassroomOne/Report";
 import FormClassroom from "../Pages/Classroom/FormClassroom";
 import ListClassroom from "../Pages/Classroom/ListClassroom";
 import CreateOrEditForm from "../Pages/Form/CreateForms";
-import ListForm from "../Pages/Form/ListForm";
 import ViewForms from "../Pages/Form/ViewForms";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register";
@@ -31,7 +30,7 @@ const RoutesApp = () => {
           element={<PrivateRoute Component={<ViewForms />} />}
           path="/view/:id"
         />
-        <Route element={<PrivateRoute Component={<ListForm />} />} path="/" />
+        <Route element={<PrivateRoute Component={<ListSchedule />} />} path="/" />
         <Route
           element={<PrivateRoute Component={<ListSchedule />} />}
           path="/cronograma"

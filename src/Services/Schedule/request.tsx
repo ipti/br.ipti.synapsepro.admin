@@ -4,7 +4,7 @@ import { GetIdProject, getYear, logout } from "../localstorage";
 
 export const requestSaveEventPre = (data: CreateSchedule) => {
   return http
-    .post("/event_registration", { ...data, year: data.year.getFullYear() })
+    .post("/event_registration", { ...data, year: parseInt(getYear()!) })
     .then(response => response.data)
     .catch(err => {
       if (err.response.status === 401) {

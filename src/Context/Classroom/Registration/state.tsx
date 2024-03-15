@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useFetchRequestClassroomRegistrationOne } from "../../../Services/Classroom/query";
 import { RegistrationType, UpdateRegister } from "./type";
 import { ControllerUpdateRegistration } from "../../../Services/PreRegistration/controller";
+import { useFetchRequestClassroomRegistrationOne } from "../../../Services/PreRegistration/query";
 export const RegistrationClassroomState = () => {
   const { idRegistration } = useParams();
   const { data: registrationRequest } = useFetchRequestClassroomRegistrationOne(
@@ -20,6 +20,7 @@ export const RegistrationClassroomState = () => {
       setregistration(registrationRequest);
     }
   }, [registrationRequest]);
+
   var typesex = [
     { id: 2, type: "Feminino" },
     { id: 1, type: "Masculino" },

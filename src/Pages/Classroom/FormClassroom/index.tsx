@@ -6,7 +6,6 @@ import ClassroomProvider, { ClassroomContext } from "../../../Context/Classroom/
 import { ClassroomTypes } from "../../../Context/Classroom/type";
 import { GetIdProject, getYear } from "../../../Services/localstorage";
 import { Container, Padding, Row } from "../../../Styles/styles";
-import { Dropdown } from "primereact/dropdown";
 
 const FormClassroom = () => {
     return (
