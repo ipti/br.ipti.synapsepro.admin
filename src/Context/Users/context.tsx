@@ -5,9 +5,9 @@ import { UsersState } from "./state";
 export const UsersContext = createContext<UsersTypes | null>(null);
 
 const UsersProvider = ({ children }: { children: React.ReactNode }) => {
-    const { users } = UsersState()
+    const { users, CreateUser } = UsersState()
     return (
-        <UsersContext.Provider value={{ users }}>
+        <UsersContext.Provider value={{ users, CreateUser }}>
             {children}
         </UsersContext.Provider>
     )
