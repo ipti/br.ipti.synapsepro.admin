@@ -36,12 +36,12 @@ const UnderAge = () => {
       <Column className="contentStart" id="center">
         <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(values) => { props.NextStep(values) }}>
           {({ values, handleChange, errors, touched }) => {
+            console.log(errors)
             return (
               <>
                 <Row id="center">
                   <div className="col-12 md:col-4">
                     <Padding />
-
                     <div>
                       <label>Nome do responsável *</label>
                       <Padding />

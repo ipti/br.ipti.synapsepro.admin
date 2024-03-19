@@ -56,6 +56,7 @@ export const Container = styled.div`
     width: 98%;
   }
   .buttonLogin {
+    margin-top: 30px;
     border-style: solid;
     border-width: 1px;
     border-radius: 25px;
@@ -86,7 +87,7 @@ export const Container = styled.div`
     border: none;
     border-radius: 5px;
     color: ${color.colorsBaseProductNormal};
-    font-size: ${typography.font.extraSmall};
+    font-size: 12;
     font-family: ${typography.types.bold};
     padding: 10px 20px;
     text-decoration: none;

@@ -5,17 +5,26 @@ import UsersProvider, { UsersContext } from "../../../Context/Users/context";
 import { UsersTypes } from "../../../Context/Users/type";
 import { Container, Padding } from "../../../Styles/styles";
 import InputsUser from "../Inputs";
+import { useFetchRequestUsersOne } from "../../../Services/Users/query";
+import { useParams } from "react-router-dom";
+import { useFetchRequestProjectLists } from "../../../Services/Project/query";
 
-const CreateUser = () => {
+const EditUser = () => {
   return (
     <UsersProvider>
-      <CreateUserPage />
+      <EditUserPage />
     </UsersProvider>
   );
 };
 
-const CreateUserPage = () => {
+const EditUserPage = () => {
   const props = useContext(UsersContext) as UsersTypes;
+
+  const {id} = useParams()
+
+    const {data: project} = useFetchRequestUsersOne(parseInt(id!))
+    const { data: projects } = useFetchRequestProjectLists();
+
 
   const CreateUserSchema = Yup.object().shape({
     name: Yup.string().required("Campo Obrigatório"),
@@ -32,31 +41,30 @@ const CreateUserPage = () => {
   return (
     <Container>
       <Padding padding="8px" />
-      <h3>Criar usuários</h3>
+      <h3>Editar usuário</h3>
       <Padding />
-      <Formik
+      {project ? <Formik
         initialValues={{
-          name: "",
-          username: "",
-          role: "",
+          name: project?.name ?? "",
+          username: project?.username ?? "",
+          role: project?.role ?? "",
           password: "",
-          project: [],
+          project: projects,
           confirmPassword: "",
         }}
         onSubmit={(values) => {
-          props.CreateUser(values);
+          props.UpdateUser(values, parseInt(id!));
         }}
         validationSchema={CreateUserSchema}
       >
         {({ values, handleChange, errors, touched }) => {
-            console.log(errors)
           return (
             <InputsUser errors={errors} handleChange={handleChange} touched={touched} values={values} />
           );
         }}
-      </Formik>
+      </Formik> : null}
     </Container>
   );
 };
 
-export default CreateUser;
+export default EditUser;

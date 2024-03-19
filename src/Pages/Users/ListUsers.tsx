@@ -18,18 +18,20 @@ const ListUsers = () => {
 
 const ListUsersPage = () => {
 
-    
+
     const props = useContext(UsersContext) as UsersTypes
     const history = useNavigate()
     const actionBodyTemplate = (rowData: any) => {
 
         return (
-                <Row id='end'>
-                    <Button icon="pi pi-pencil" rounded className="mr-2" onClick={() => {}} />
-                    <Button icon="pi pi-trash" rounded type="button" severity="danger" onClick={() => { }} />
-                </Row>
+            <Row id='end'>
+                <Button icon="pi pi-pencil" rounded className="mr-2" onClick={() => { history("/users/" + rowData.id) }} />
+                <Button icon="pi pi-trash" rounded type="button" severity="danger" onClick={() => { props.DeleteUser(rowData.id) }} />
+            </Row>
         );
     };
+
+
     return (
         <Container>
             <h3>
@@ -42,7 +44,7 @@ const ListUsersPage = () => {
                 <Column field="id" header="Code"></Column>
                 <Column field="name" header="Nome"></Column>
                 <Column field="role" header="Tipo"></Column>
-                <Column field="quantity" align="right" body={actionBodyTemplate}  header="Ações"></Column>
+                <Column field="quantity" align="right" body={actionBodyTemplate} header="Ações"></Column>
             </DataTable>
         </Container>
     )

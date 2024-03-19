@@ -10,6 +10,7 @@ import Start from "./Steps/Start";
 import StepOne from "./Steps/StepOne";
 import StepTwo from "./Steps/StepTwo";
 import Finish from "./Steps/Finish";
+import ChoiceYear from "./Steps/ChoiceYear";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 // import Classroom from "./ClassRoom";
 // import Finish from "./Finish";
@@ -26,12 +27,13 @@ const Wizard = () => {
   // const { isOfLegalAge } = useContext(RegistrationContext);
 
   const componentMapping: { [key: string]: any } = {
-    "0": Start,
-    "1": Classroom,
-    "2": StepOne,
-    "3": StepTwo,
-    "4": Finish,
-    "5": NotPeriod,
+    "0": ChoiceYear,
+    "1": Start,
+    "2": Classroom,
+    "3": StepOne,
+    "4": StepTwo,
+    "5": Finish,
+    "6": NotPeriod,
     // "2": StepOne,
     // "3": StepThree,
     // "4": isOfLegalAge === '1' ? StepFour : StepSix,

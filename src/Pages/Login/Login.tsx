@@ -27,10 +27,10 @@ const LoginPage = () => {
   const props = useContext(LoginContext) as LoginContextText;
 
   const years = [
-    { value: 2024 },
-    { value: 2023 },
-    { value: 2022 },
-    { value: 2021 },
+    2024,
+    2023,
+    2022,
+    2021,
   ];
 
   const [year, setYearState] = useState<any>();
@@ -42,7 +42,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     setYear("2024")
-    setYearState({ value: 2024 });
+    setYearState(2024);
   }, []);
 
   return (
@@ -136,9 +136,9 @@ const LoginPage = () => {
                           placerholder="Ano"
                           onChange={(e) => {
                             setYearState(e.target.value);
-                            setYear(year.value.toString());
+                            setYear(e.target.value.toString());
                           }}
-                          optionsLabel="value"
+                          optionsLabel=""
                           value={year}
                         />
                         <div>{errors.password}</div>

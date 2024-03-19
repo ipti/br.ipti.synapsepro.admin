@@ -20,6 +20,7 @@ import PrivateRoute from "./privaterouter";
 import FormEditSchedule from "../Pages/Schedule/FormSchedule/edit";
 import ListUsers from "../Pages/Users/ListUsers";
 import CreateUser from "../Pages/Users/CreateUser";
+import EditUser from "../Pages/Users/EditUser";
 
 const RoutesApp = () => {
   return (
@@ -99,6 +100,10 @@ const RoutesApp = () => {
         <Route
           element={<PrivateRoute Component={<CreateUser />} />}
           path="/users/criar"
+        />
+        <Route
+          element={<PrivateRoute Component={<EditUser />} />}
+          path="/users/:id"
         />
 
         <Route element={<Login />} path="/login" />

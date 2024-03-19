@@ -30,11 +30,24 @@ export const UsersState = () => {
     props.requestUserMutation.mutate(body);
   };
 
+  const UpdateUser = (data: CreateUser, id: number) => {
+    const body = {
+        name: data.name,
+        username: data.username,
+        role: data.role,
+        project: GetId(data.project)
+    }
+    props.requestUpdateUserMutation.mutate({data: body, id: id});
+  };
+
+  const DeleteUser = (id: number) => {
+    props.requestDeleteUserMutation.mutate(id)
+  }
   useEffect(() => {
     if (userRequest) {
       setusers(userRequest);
     }
   }, [userRequest]);
 
-  return { users, CreateUser };
+  return { users, CreateUser, DeleteUser, UpdateUser };
 };

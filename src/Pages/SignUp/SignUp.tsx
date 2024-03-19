@@ -8,7 +8,7 @@ const SignUp = () => {
   return (
     <div className="row align-items--center">
       <Container>
-        <Row reverse={true} className="box">
+        <Row reverse={true} className="box" style={{width: "100%"}}>
           <div className="divBlue" />
           <div className="divImage">
             <img className="imgTagna" src={Tagna} alt="" />
