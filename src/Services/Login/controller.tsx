@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { idUser, login, logout, menuItem } from "../localstorage";
+import { idProject, idUser, login, logout, menuItem } from "../localstorage";
 import { LoginRequest } from "./request";
 import { LoginTypes } from "./types";
 
@@ -16,9 +16,9 @@ export const LoginController = ({setError}: {setError: any, }) => {
           onSuccess: (data) => {
             logout()
             login(data.data.access_token);
-            idUser(data.data.user.id);
+            idUser(data.data.userRegistered.id);
             // ProjectLogin(data.data.user.schools)
-            // idProject(data.data.user.schools[0].inep_id);
+            idProject(data.data.userRegistered.user_projects[0]?.project_fk);
             history("/");
             menuItem("1");
             window.location.reload();

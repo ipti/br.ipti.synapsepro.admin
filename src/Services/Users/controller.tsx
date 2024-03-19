@@ -18,7 +18,7 @@ export const ControllerUser = () => {
             confirmButtonColor: styles.colors.colorsBaseProductNormal,
           }).then((result) => {
             if (result.isConfirmed) {
-              history("/");
+              history("/users");
             }
           });
         },

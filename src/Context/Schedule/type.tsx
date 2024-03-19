@@ -1,4 +1,3 @@
-import { SchoolIdentification } from "../../Types/types";
 
 export interface ScheduleTypes {
     initialValue: CreateSchedule;
@@ -22,8 +21,6 @@ export interface Event {
   start_date: string
   end_date: string
   year: number
-  school_inep_id_fk: string
-  school_identification: SchoolIdentification
 }
 
 

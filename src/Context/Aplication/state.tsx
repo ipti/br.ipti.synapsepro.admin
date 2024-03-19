@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { PropsForm, SchoolIdentification } from "../../Types/types";
-import { useFetchRequestProjectList } from "../../Services/PreRegistration/query";
+import { useFetchRequestProjectLists } from "../../Services/Project/query";
+import { Projects, PropsForm } from "../../Types/types";
 
 const AplicationState = () => {
     const [form, setform] = useState<PropsForm>({ title: "Formulário Sem título", description: "", question: [] })
-    const { data: projects } = useFetchRequestProjectList()
+    const { data: projects } = useFetchRequestProjectLists()
 
-    const [project, setproject] = useState<Array<SchoolIdentification> | undefined>()
+    const [project, setproject] = useState<Array<Projects> | undefined>()
 
     useEffect(() => {
         if (projects) {

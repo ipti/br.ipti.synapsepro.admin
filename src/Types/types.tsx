@@ -182,66 +182,9 @@ export interface CardFormTypes {
     item: PropsForm
 }
 
-export interface SchoolIdentification {
-    register_type: string
-    inep_id: string
-    manager_cpf: string
-    manager_name: string
-    manager_role: any
-    manager_email: string
-    manager_access_criterion: string
-    manager_contract_type: number
-    situation: number
-    initial_date: string
-    final_date: string
-    number_ato: string
-    name: string
-    latitude: string
-    longitude: string
-    cep: string
-    address: string
-    address_number: string
-    address_complement: string
-    address_neighborhood: string
-    edcenso_uf_fk: number
-    edcenso_city_fk: number
-    edcenso_district_fk: number
-    ddd: string
-    phone_number: string
-    public_phone_number: any
-    other_phone_number: string
-    fax_number: any
-    email: string
-    edcenso_regional_education_organ_fk: string
-    administrative_dependence: number
-    location: number
-    id_difflocation: any
-    linked_mec: any
-    linked_army: any
-    linked_helth: any
-    linked_other: any
-    private_school_category: any
-    public_contract: any
-    private_school_business_or_individual: any
-    private_school_syndicate_or_association: any
-    private_school_ong_or_oscip: any
-    private_school_non_profit_institutions: any
-    private_school_s_system: any
-    private_school_organization_civil_society: any
-    private_school_maintainer_cnpj: any
-    private_school_cnpj: any
-    regulation: any
-    regulation_organ: any
-    regulation_organ_federal: boolean
-    regulation_organ_state: boolean
-    regulation_organ_municipal: boolean
-    offer_or_linked_unity: number
-    inep_head_school: string
-    ies_code: string
-    logo_file_name: string
-    logo_file_type: string
-    logo_file_content: LogoFileContent
-    act_of_acknowledgement: string
+export interface Projects {
+    id: number,
+    name: string,
   }
 
   export interface LogoFileContent {
