@@ -3,7 +3,7 @@ import http from "../axios";
 import { logout } from "../localstorage";
 
 export const requestUsers = () => {
-  let path = "/users";
+  let path = "/user-bff";
 
   return http
     .get(path)
