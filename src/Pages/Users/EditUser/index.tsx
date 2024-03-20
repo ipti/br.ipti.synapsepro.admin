@@ -29,13 +29,8 @@ const EditUserPage = () => {
   const CreateUserSchema = Yup.object().shape({
     name: Yup.string().required("Campo Obrigatório"),
     username: Yup.string().required("Campo Obrigatório"),
-    password: Yup.string().required("Campo Obrigatório"),
     role: Yup.string().required("Campo Obrigatório"),
     project: Yup.array().required("Campo Obrigatório"),
-    confirmPassword: Yup.string()
-      .label("Confirmar senha")
-      .required("Campo Obrigatório")
-      .oneOf([Yup.ref("password")], "Senhas difirentes"),
   });
 
   return (

@@ -38,7 +38,7 @@ const CreateUserPage = () => {
         initialValues={{
           name: "",
           username: "",
-          role: "",
+          role: undefined,
           password: "",
           project: [],
           confirmPassword: "",

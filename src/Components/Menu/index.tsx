@@ -47,7 +47,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
       </Padding>
       {true ? (
         <Padding padding="8px">
-          <Item
+          {/* <Item
             text={"Cronograma"}
             funcActiv={() => {
               setActive(1);
@@ -56,15 +56,15 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             active={active === 1 ? true : false}
             path={"/cronograma"}
             icon={"pi pi-calendar"}
-          />
+          /> */}
           <Padding />
           <Item
             text={"Turmas"}
             funcActiv={() => {
-              setActive(2);
-              menuItem("2");
+              setActive(1);
+              menuItem("1");
             }}
-            active={active === 2 ? true : false}
+            active={active === 1 ? true : false}
             path={"/turma"}
             icon={"pi pi-sitemap"}
           />
@@ -83,10 +83,10 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           <Item
             text={"Usuarios"}
             funcActiv={() => {
-              setActive(4);
-              menuItem("4");
+              setActive(2);
+              menuItem("2");
             }}
-            active={active === 4 ? true : false}
+            active={active === 2 ? true : false}
             path={"/users"}
             icon={"pi pi-users"}
           />

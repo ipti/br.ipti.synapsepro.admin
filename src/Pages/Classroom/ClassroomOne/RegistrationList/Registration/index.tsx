@@ -11,6 +11,7 @@ import { Status } from "../../../../../Controller/controllerGlobal";
 import { Container, Padding } from "../../../../../Styles/styles";
 import { useParams } from "react-router-dom";
 import { useFetchRequestClassroomOne } from "../../../../../Services/Classroom/query";
+import MaskInput from "../../../../../Components/InputMask";
 
 const Registration = () => {
   return (
@@ -69,7 +70,8 @@ const RegistrationPage = () => {
                     <label>Data de Nascimento</label>
                     <Padding />
                     <TextInput
-                      value={values.birthday}
+                      value={values.birthday?.toString()}
+                      disabled
                       placeholder="Data de Nascimento"
                       name="birthday"
                       onChange={handleChange}
@@ -90,8 +92,9 @@ const RegistrationPage = () => {
                   <div className="col-12 md:col-6">
                     <label>CPF</label>
                     <Padding />
-                    <TextInput
+                    <MaskInput
                       value={values.cpf}
+                      mask="999.999.999-99"
                       placeholder="CPF"
                       onChange={handleChange}
                       name="cpf"
@@ -121,11 +124,11 @@ const RegistrationPage = () => {
                       onChange={handleChange}
                       name="status"
                       placerholder="Status"
-                      optionsLabel=""
+                      optionsLabel="name"
                       options={[
-                        Status.APPROVED,
-                        Status.REPROVED,
-                        Status.PENDING,
+                        {id: Status.APPROVED, name: "Aprovado"},
+                        {id: Status.REPROVED, name: "Reprovado"},
+                        {id: Status.PENDING, name: "Pedente"},
                       ]}
                     />
                   </div>
@@ -141,15 +144,17 @@ const RegistrationPage = () => {
                       value={values.responsable_name}
                       name="responsable_name"
                       onChange={handleChange}
-                      placeholder="name"
+                      placeholder="Nome do Resposável"
                     />
                   </div>
                   <div className="col-12 md:col-6">
                     <label>CPF Responsavel</label>
                     <Padding />
-                    <TextInput
+                    <MaskInput
                       value={values.responsable_cpf}
+                      mask="999.999.999-99"
                       name="responsable_cpf"
+                      placeholder="CPF do Responsável"
                       onChange={handleChange}
                     />
                   </div>
@@ -158,8 +163,9 @@ const RegistrationPage = () => {
                   <div className="col-12 md:col-6">
                     <label>Telefone </label>
                     <Padding />
-                    <TextInput
+                    <MaskInput
                       value={values.responsable_telephone}
+                      mask="(99) 9 9999-9999"
                       name="responsable_telephone"
                       onChange={handleChange}
                       placeholder="name"

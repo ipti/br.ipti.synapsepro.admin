@@ -19,9 +19,8 @@ export const requestPreRegistration = (data: CreatePreRegistration) => {
 
 
 export const requestUpdateRegistration = (data: UpdateRegister, id: number) => {
-  console.log(data)
   return http
-    .put("/registration/" + id, { ...data, color_race: data.color_race?.id, sex: data.sex?.id, deficiency: data.deficiency.id })
+    .put("/registration/" + id, { ...data, color_race: data.color_race?.id, sex: data.sex?.id, deficiency: data.deficiency.id, status: data.status?.id })
     .then(response => response.data)
     .catch(err => {
       if (err.response.status === 401) {

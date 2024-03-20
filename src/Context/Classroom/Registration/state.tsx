@@ -3,13 +3,14 @@ import { useParams } from "react-router-dom";
 import { RegistrationType, UpdateRegister } from "./type";
 import { ControllerUpdateRegistration } from "../../../Services/PreRegistration/controller";
 import { useFetchRequestClassroomRegistrationOne } from "../../../Services/PreRegistration/query";
+import { formatarData, Status } from "../../../Controller/controllerGlobal";
 export const RegistrationClassroomState = () => {
   const { idRegistration } = useParams();
   const { data: registrationRequest } = useFetchRequestClassroomRegistrationOne(
     parseInt(idRegistration!)
   );
 
-  const {requestPreRegistrationMutation} = ControllerUpdateRegistration()
+  const { requestPreRegistrationMutation } = ControllerUpdateRegistration();
 
   const [registration, setregistration] = useState<
     RegistrationType | undefined
@@ -42,24 +43,42 @@ export const RegistrationClassroomState = () => {
   const VerifyColor = (color_race: number) => {
     return color.find((props) => props.id === color_race);
   };
+
+  const date = new Date(registration?.birthday!);
+
+  const status = [
+    {id: Status.APPROVED, name: "Aprovado"},
+    {id: Status.REPROVED, name: "Reprovado"},
+    {id: Status.PENDING, name: "Pedente"},
+  ]
+
+  const getStatus = (id: string) => {
+    return status.find(props => props.id === id)
+  }
   const initialValue = {
     name: registration?.name,
     sex: VerifySex(registration?.sex!),
     cpf: registration?.cpf,
     color_race: VerifyColor(registration?.color_race!),
-    birthday: registration?.birthday,
+    birthday: !isNaN(date.getTime()) ? formatarData(date) : registration?.birthday,
     deficiency: registration?.deficiency
       ? { name: "Sim", id: true }
       : { name: "Não", id: false },
     responsable_name: registration?.responsable_name,
     responsable_cpf: registration?.responsable_cpf,
     responsable_telephone: registration?.responsable_telephone,
-    status: registration?.status
+    status: getStatus(registration?.status!),
   };
 
   const handleUpdateRegistration = (data: UpdateRegister, id: number) => {
-    requestPreRegistrationMutation.mutate({data: data, id: id});
-  }
+    requestPreRegistrationMutation.mutate({ data: {...data, birthday: registration?.birthday}, id: id });
+  };
 
-  return { registration, initialValue, typesex, color, handleUpdateRegistration };
+  return {
+    registration,
+    initialValue,
+    typesex,
+    color,
+    handleUpdateRegistration,
+  };
 };

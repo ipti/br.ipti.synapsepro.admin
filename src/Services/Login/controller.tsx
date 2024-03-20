@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { idProject, idUser, login, logout, menuItem } from "../localstorage";
 import { LoginRequest } from "./request";
 import { LoginTypes } from "./types";
+import Swal from "sweetalert2";
+import styles from "../../Styles";
 
 export const LoginController = ({setError}: {setError: any, }) => {
     const history = useNavigate();
@@ -11,6 +13,11 @@ export const LoginController = ({setError}: {setError: any, }) => {
         (data: LoginTypes) => LoginRequest(data),
         {
           onError: (error: any) => {
+            Swal.fire({
+              icon: 'error',
+              title: error.response.data.message,
+              confirmButtonColor: styles.colors.colorsBaseProductNormal,
+          })
             setError(error.response.data.message)          
           },
           onSuccess: (data) => {

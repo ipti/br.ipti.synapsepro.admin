@@ -87,7 +87,7 @@ export const Container = styled.div`
     border: none;
     border-radius: 5px;
     color: ${color.colorsBaseProductNormal};
-    font-size: 12;
+    font-size: 32px;
     font-family: ${typography.types.bold};
     padding: 10px 20px;
     text-decoration: none;
@@ -103,9 +103,12 @@ export const Container = styled.div`
       align-items: end;
       width: 98%;
     }
+    .linkRegister {
+      font-size: 24px;
+    }
   }
 
-  @media (max-width: 740px) {
+  @media (max-width: 800px) {
     .divImage {
       width: 100%;
       position: relative;
@@ -114,6 +117,9 @@ export const Container = styled.div`
       font-family: ${typography.types.regular};
       color: ${color.white};
       font-size: 25px;
+    }
+    .linkRegister {
+      font-size: 16px;
     }
   }
 
@@ -152,8 +158,8 @@ export const Container = styled.div`
       justify-content: start;
       margin-top: 25vh;
     }
-    .box{
-        flex-direction: column;
+    .box {
+      flex-direction: column;
     }
     @media (max-height: 700px) {
       .formSignUp {

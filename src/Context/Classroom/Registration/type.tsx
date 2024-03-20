@@ -25,7 +25,7 @@ export interface UpdateRegister
         id: number;
         name: string;
     } | undefined;
-    birthday: string | undefined;
+    birthday: string | undefined | Date;
     deficiency: {
       name: string;
       id: boolean;
@@ -33,7 +33,7 @@ export interface UpdateRegister
     responsable_name: string | undefined;
     responsable_cpf: string | undefined;
     responsable_telephone: string | undefined;
-    status: string | undefined;
+    status: {id: string, name: string} | undefined;
 }
 
 export interface RegistrationType {

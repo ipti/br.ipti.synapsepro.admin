@@ -22,7 +22,7 @@ export const requestCreateUsers = (data: CreateUser) => {
   let path = "/user-bff";
 
   return http
-    .post(path, data)
+    .post(path, {...data, role: data.role?.id})
     .then(response => response.data)
     .catch(err => {
       if (err.response.status === 401) {

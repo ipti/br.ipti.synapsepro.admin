@@ -38,6 +38,7 @@ export const ControllerUser = () => {
         }).then((result) => {
           if (result.isConfirmed) {
             history("/users");
+            queryClient.refetchQueries("useRequestsUsers")
           }
         });
       },

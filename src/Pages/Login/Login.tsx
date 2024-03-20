@@ -26,12 +26,7 @@ const Login = () => {
 const LoginPage = () => {
   const props = useContext(LoginContext) as LoginContextText;
 
-  const years = [
-    2024,
-    2023,
-    2022,
-    2021,
-  ];
+  const years = [2024, 2023, 2022, 2021];
 
   const [year, setYearState] = useState<any>();
 
@@ -41,7 +36,7 @@ const LoginPage = () => {
   });
 
   useEffect(() => {
-    setYear("2024")
+    setYear("2024");
     setYearState(2024);
   }, []);
 
@@ -96,7 +91,7 @@ const LoginPage = () => {
               validationSchema={LoginSchema}
               validateOnChange={false}
             >
-              {({ values, errors, handleChange }) => {
+              {({ values, errors, handleChange, touched }) => {
                 return (
                   <Form>
                     <div>
@@ -109,7 +104,12 @@ const LoginPage = () => {
                           onChange={handleChange}
                           placeholder="Usuário"
                         />
-                        <div>{errors.username}</div>
+                        <Padding />
+                        {errors.username && touched.username ? (
+                          <div style={{ color: "red", marginTop: "8px" }}>
+                            {errors.username}
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                     <div className="p-2" />
@@ -123,7 +123,12 @@ const LoginPage = () => {
                           onChange={handleChange}
                           value={values.password}
                         />
-                        <div>{errors.password}</div>
+                        <Padding />
+                        {errors.password && touched.password ? (
+                          <div style={{ color: "red", marginTop: "8px" }}>
+                            {errors.password}
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                     <Padding />
@@ -141,7 +146,6 @@ const LoginPage = () => {
                           optionsLabel=""
                           value={year}
                         />
-                        <div>{errors.password}</div>
                       </div>
                     </div>
                     <Padding />

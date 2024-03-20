@@ -34,7 +34,7 @@ const RoutesApp = () => {
           element={<PrivateRoute Component={<ViewForms />} />}
           path="/view/:id"
         />
-        <Route element={<PrivateRoute Component={<ListSchedule />} />} path="/" />
+        <Route element={<PrivateRoute Component={<ListClassroom />} />} path="/" />
         <Route
           element={<PrivateRoute Component={<ListSchedule />} />}
           path="/cronograma"
