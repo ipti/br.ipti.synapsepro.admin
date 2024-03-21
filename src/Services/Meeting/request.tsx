@@ -15,3 +15,34 @@ export const requestCreateMeeting = (data: CreateMeeting) => {
             throw err;
         });
 }
+
+
+export const requestMeetingList = async (id: string) => {
+    if (id) {
+      return await http
+        .get("/meeting-bff", { params: { idClassroom : id } })
+        .then((response) => response.data)
+        .catch((err) => {
+          // if(err.response.status === 401){
+          //   logout()
+          //   window.location.reload()
+          // }
+          throw err;
+        });
+    }
+  };
+
+  export const requestMeetingOne = async (id: string) => {
+    if (id) {
+      return await http
+        .get("/meeting-bff/one", { params: { idMeeting  : id } })
+        .then((response) => response.data)
+        .catch((err) => {
+          // if(err.response.status === 401){
+          //   logout()
+          //   window.location.reload()
+          // }
+          throw err;
+        });
+    }
+  };

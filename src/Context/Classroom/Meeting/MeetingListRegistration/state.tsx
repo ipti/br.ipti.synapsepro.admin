@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
-import json from "../../../../Data/students.json";
+import { useParams } from "react-router-dom";
+import { useFetchRequestMeetingOne } from "../../../../Services/Meeting/query";
+import { Meeting } from "./type";
 export const MeetingListRegistrationState = () => {
-  
-    const [registrations, setregistrations] = useState<Array<any> | undefined>();
+  const { idMeeting } = useParams();
 
+  const { data: meetingRequest } = useFetchRequestMeetingOne(idMeeting!);
+  const [meeting, setmeeting] = useState<Meeting | undefined>();
 
-    useEffect(() => {
-        setregistrations(json)
-    }, [])
+  useEffect(() => {
+    if (meetingRequest) {
+      setmeeting(meetingRequest);
+    }
+  }, [meetingRequest]);
 
-
-    return {registrations  }
-}
+  return { meeting };
+};
