@@ -7,6 +7,7 @@ import MeetingListProvider, {
 } from "../../../../Context/Classroom/Meeting/MeetingList/context";
 import { useContext } from "react";
 import { MeetingListTypes } from "../../../../Context/Classroom/Meeting/MeetingList/type";
+import { useFetchRequestClassroomOne } from "../../../../Services/Classroom/query";
 
 const MeetingList = () => {
   return (
@@ -21,10 +22,13 @@ const MeetingListPage = () => {
 
   const { id } = useParams();
 
+  const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!));
+
+
   const history = useNavigate();
   return (
     <Container>
-      <h2>Encontros</h2>
+      <h2>Encontros {classroom?.name}</h2>
       <Padding padding="16px" />
       <Button
         label="Criar encontro"

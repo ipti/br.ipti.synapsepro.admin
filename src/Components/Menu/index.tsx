@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
@@ -15,10 +15,14 @@ import DropdownComponent from "../Dropdown";
 import Icon from "../Icon";
 import Item from "./Item";
 import { Container, TopBar } from "./style";
+import { AplicationContext } from "../../Context/Aplication/context";
+import { PropsAplicationContext } from "../../Types/types";
+import { ROLE } from "../../Controller/controllerGlobal";
 
 const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
   const [active, setActive] = useState(parseInt(getMenuItem()!));
   const [visibleModal, setVisibleModal] = useState(false);
+  const props = useContext(AplicationContext) as PropsAplicationContext
   return (
     <Container active={viewdMenu}>
       <Row>
@@ -80,7 +84,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             icon={"pi pi-list"}
           /> */}
           <Padding />
-          <Item
+          {(props.user?.role === ROLE.ADMIN || props.user?.role === ROLE.COORDINATORS) ? <Item
             text={"Usuarios"}
             funcActiv={() => {
               setActive(2);
@@ -89,7 +93,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             active={active === 2 ? true : false}
             path={"/users"}
             icon={"pi pi-users"}
-          />
+          /> : null}
         </Padding>
 
       ) : null}

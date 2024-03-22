@@ -12,3 +12,11 @@ export interface CreateUser {
     project: number[];
     role?: {name: string, id: string}
   }
+
+  export interface User {
+    id: number
+    name: string
+    username: string
+    active: boolean
+    role: string
+  }

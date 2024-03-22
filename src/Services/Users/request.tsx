@@ -65,7 +65,7 @@ export const requestUpdateUsers = (id: number, data: any) => {
 export const requestUsersOne = (id: number) => {
   let path = "/users/" + id;
   return http
-    .put(path)
+    .get(path)
     .then(response => response.data)
     .catch(err => {
       if (err.response.status === 401) {

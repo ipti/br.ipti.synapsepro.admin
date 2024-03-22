@@ -8,6 +8,7 @@ export interface CreateMeeting {
   export interface EditMeeting {
     name?: string;
     description?: string
+    status?: {id: string, name: string}
   }
 
   export interface CreateFouls {

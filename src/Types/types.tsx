@@ -4,6 +4,7 @@ import { InputNumberValueChangeEvent } from "primereact/inputnumber";
 import { RadioButtonChangeEvent } from "primereact/radiobutton";
 import { SelectItemOptionsType } from "primereact/selectitem";
 import { ChangeEventHandler, Dispatch, FocusEventHandler, SetStateAction } from "react";
+import { User } from "../Context/Users/type";
 
 export interface PropsInputText {
     value?: string,
@@ -95,6 +96,7 @@ export interface PropsTextFieldCardView {
 }
 
 export interface PropsDropdown {
+    disabled?: boolean | undefined
     value?: any,
     onChange?(event: DropdownChangeEvent): void,
     options?: SelectItemOptionsType | undefined,
@@ -112,6 +114,7 @@ export interface PropsAplicationContext {
     form: PropsForm,
     setform: any,
     project: any;
+    user: User | undefined
 }
 
 export interface FormsJson {

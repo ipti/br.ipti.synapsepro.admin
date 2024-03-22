@@ -18,7 +18,7 @@ export const requestCreateMeeting = (data: CreateMeeting) => {
 
 export const requestUpdateMeeting = (data: EditMeeting, id: number) => {
   return http
-      .put("/meeting/"+id, { ...data })
+      .put("/meeting/"+id, { ...data, status: data.status?.id })
       .then((response) => response.data)
       .catch((err) => {
           if (err.response.status === 401) {

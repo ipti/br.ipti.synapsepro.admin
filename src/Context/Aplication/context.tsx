@@ -6,10 +6,10 @@ export const AplicationContext = createContext<PropsAplicationContext | null>(nu
 
 const AplicationProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { form, setform, project } = AplicationState();
+    const { form, setform, project, user } = AplicationState();
 
     return (
-        <AplicationContext.Provider value={{ form, setform, project }}>
+        <AplicationContext.Provider value={{ form, setform, project, user }}>
             {children}
         </AplicationContext.Provider>
     )
