@@ -1,7 +1,9 @@
-import { RegistrationsList } from "../../RegistrationsList/type";
+import { CreateFouls, EditMeeting } from "../Create/type";
 
 export interface MeetingListRegisterTypes {
   meeting: Meeting | undefined;
+  UpdateMeeting: (data: EditMeeting, id: number) => void
+  CreateFouls: (data: CreateFouls) => void
 }
 
 export interface Meeting {
@@ -13,6 +15,7 @@ export interface Meeting {
   classroom_fk: number;
   fouls: any[];
   classroom: Classroom;
+  description: string
 }
 
 export interface Classroom {

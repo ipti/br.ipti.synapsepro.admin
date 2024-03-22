@@ -50,6 +50,7 @@ export interface PropsInputArea {
     placeholder?: string | undefined,
     disabled?: boolean | undefined,
     onBlur?: FocusEventHandler<HTMLTextAreaElement> | undefined
+    name?: string
 }
 
 export interface PropsRadioButton {

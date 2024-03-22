@@ -5,6 +5,16 @@ export interface CreateMeeting {
     classroom?: number
   }
 
+  export interface EditMeeting {
+    name?: string;
+    description?: string
+  }
+
+  export interface CreateFouls {
+    meeting: number;
+    registration?: Array<number>
+  }
+
   export interface CreateMeetingType {
     CreateMeeting: (data: CreateMeeting) => void
   }
