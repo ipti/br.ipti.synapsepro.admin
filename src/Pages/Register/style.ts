@@ -35,7 +35,7 @@ export const Container = styled.div`
   }
 
   .imgTag {
-    width: 5%;
+    width: 8%;
     margin: 20px;
     position: relative;
   }

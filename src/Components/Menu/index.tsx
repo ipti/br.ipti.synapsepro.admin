@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import TagLogin from "../../Assets/images/taglogin.svg";
+import TagLogin from "../../Assets/images/logo.svg";
 import {
   getMenuItem,
   getYear,
@@ -33,7 +33,8 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
       </Row>
       <Padding padding="16px">
         <Row id="center">
-          <img src={TagLogin} alt=""></img>
+          <img src={TagLogin} style={{ width: "128px" }} alt=""></img>
+          <Padding />
           <Column id="center">
             <div
               style={{

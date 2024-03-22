@@ -1,7 +1,7 @@
 import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 
-import TagImage from "../../Assets/images/taglogin.svg";
+import TagImage from "../../Assets/images/logo.svg";
 
 import { Button } from "primereact/button";
 import { useContext, useEffect, useState } from "react";
@@ -48,7 +48,6 @@ const LoginPage = () => {
         <TopColors color="#66D654" />
         <TopColors color="#EADA48" />
       </Row>
-      <img id="margin" src={TagImage} alt=""></img>
       <Column
         style={{
           display: "flex",
@@ -74,14 +73,12 @@ const LoginPage = () => {
           <div className="col-11 md:col-4">
             {/* <div className={classes.marginMobile20} /> */}
             <div>
-              <div>
-                <p id="titleLogin">Matricula Online </p>
-                <div className="p-2" />
-                <p id="subTitleLogin">Entre com as suas credenciais </p>
-              </div>
+                <Row id="center">
+                  <img src={TagImage} alt=""></img>
+                </Row>
             </div>
             {/* <div className={classes.marginMobile} /> */}
-            <div className="p-2" />
+            <div className="p-4" />
 
             <Formik
               initialValues={props.initialValue}

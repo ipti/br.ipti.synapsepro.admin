@@ -10,11 +10,12 @@ export const Container = styled.div`
   color: ${color.white};
   background: url(${Background});
   background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   position: fixed;
   .divBlue {
-    background: linear-gradient(0deg, #3f45ea, #3f45ea);
-    opacity: 0.94;
+    background: linear-gradient(0deg, #336AE9, #336AE9);
+    opacity: 0.80;
     position: absolute;
     height: 100%;
     width: 100%;
@@ -25,6 +26,7 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
     height: 100%;
     position: relative;
     z-index: 100;
@@ -36,8 +38,8 @@ export const Container = styled.div`
     position: relative;
     z-index: 100;
   }
-  .imgTagna {
-    width: 90%;
+  .imgLogo {
+    width: 40%;
   }
 
   .resetPassword {
@@ -52,7 +54,7 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: start;
     position: absolute;
-    align-items: end;
+    align-items: center;
     width: 98%;
   }
   .buttonLogin {
@@ -66,8 +68,10 @@ export const Container = styled.div`
 
   .textTitle {
     font-family: ${typography.types.regular};
+    font-weight: 500;
     color: ${color.white};
-    font-size: ${typography.font.large};
+    text-align: center;
+    font-size: ${typography.font.extraLarge};
   }
 
   .boxRegister {
@@ -87,7 +91,7 @@ export const Container = styled.div`
     border: none;
     border-radius: 5px;
     color: ${color.colorsBaseProductNormal};
-    font-size: 32px;
+    font-size: 18px;
     font-family: ${typography.types.bold};
     padding: 10px 20px;
     text-decoration: none;
@@ -100,7 +104,7 @@ export const Container = styled.div`
       justify-content: start;
       font-size: 14px;
       position: absolute;
-      align-items: end;
+      align-items: center;
       width: 98%;
     }
     .linkRegister {
@@ -113,6 +117,9 @@ export const Container = styled.div`
       width: 100%;
       position: relative;
     }
+    .imgLogo {
+    width: 80%;
+  }
     .textTitle {
       font-family: ${typography.types.regular};
       color: ${color.white};
@@ -128,7 +135,7 @@ export const Container = styled.div`
       display: flex;
       flex-direction: row;
       justify-content: center;
-      align-items: end;
+      align-items: center;
       background: linear-gradient(
         180deg,
         rgba(71, 77, 232, 0) 0%,
@@ -143,9 +150,6 @@ export const Container = styled.div`
       height: 100%;
       margin-top: auto;
       position: absolute;
-    }
-    .imgTagna {
-      width: 460px;
     }
     .textTitle {
       font-family: ${typography.types.normal};

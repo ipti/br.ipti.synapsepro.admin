@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import BackButton from "../../Assets/images/backIcon.svg";
-import TagImage from "../../Assets/images/taglogin.svg";
+import TagImage from "../../Assets/images/logo.svg";
 import RegisterProvider, { RegisterContext } from "../../Context/Register/context";
 import { RegisterTypes } from "../../Context/Register/type";
 import { TopColors } from "../Login/styles";
