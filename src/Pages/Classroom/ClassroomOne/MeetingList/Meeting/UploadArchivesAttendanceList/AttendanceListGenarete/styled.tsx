@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import styles from '../../../../../../../Styles';
 
 // Definindo estilos para a tabela
 export const Table = styled.table`

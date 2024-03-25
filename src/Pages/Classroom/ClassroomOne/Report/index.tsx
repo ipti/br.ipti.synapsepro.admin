@@ -27,12 +27,12 @@ const ReportPage = () => {
         { field: 'quantity', header: 'Quantity' }
     ];
 
-    const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
+    // const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
 
 
-    const exportCSV = (selectionOnly: any) => {
-        dt.current.exportCSV({ selectionOnly });
-    };
+    // const exportCSV = (selectionOnly: any) => {
+    //     dt.current.exportCSV({ selectionOnly });
+    // };
 
     const exportPdf = () => {
         import('jspdf').then((jsPDF) => {

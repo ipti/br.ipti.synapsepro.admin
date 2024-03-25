@@ -1,10 +1,10 @@
 import axios from "axios";
 import { getToken } from "./localstorage";
 
-// require('dotenv').config();
+
 
 const http = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: process.env.REACT_APP_API_PATH,
 });
 
 http.interceptors.request.use(async config => {
