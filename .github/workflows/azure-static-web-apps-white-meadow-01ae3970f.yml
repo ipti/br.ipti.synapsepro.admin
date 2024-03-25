@@ -10,7 +10,7 @@ on:
       - main
 
 env:
-  REACT_APP_API_PATH: ${{ env.REACT_APP_API_PATH }}
+  REACT_APP_API_PATH: ${{ secrets.REACT_APP_API_PATH }}
 
 jobs:
   build_and_deploy_job:
