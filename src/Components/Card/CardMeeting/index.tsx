@@ -8,7 +8,7 @@ import { Message } from "primereact/message";
 const CardMeeting = ({ title, data, status, idMeeting }: { title: string; data: string, status: string, idMeeting: number }) => {
   const history = useNavigate();
 
-  const {id} = useParams()
+  const { id } = useParams()
 
   return (
     <Container className="card" onClick={() => history(`/turma/${id}/encontros/${idMeeting}`)}>
@@ -21,18 +21,16 @@ const CardMeeting = ({ title, data, status, idMeeting }: { title: string; data: 
       <Padding padding="8px" />
       <Row id="space-between">
         <Column>
-          <div className={"boxDescriptionScheduleSubtitle"}>Encontro</div>
-          <Padding />
           <div className={"boxYear"}>
             <Column id="center" style={{ height: "100%" }}>
-              {formatarData(new Date(data))}
+              <Row>
+               <p>Data: </p><Padding /> {formatarData(new Date(data))}
+              </Row>
             </Column>
           </div>
         </Column>
         <Column>
-          <div className={"boxDescriptionScheduleSubtitle"}>Status</div>
-          <Padding />
-          {status === Status.PENDING ? <Message severity="warn" text="Pendente" /> : status === Status.APPROVED ? <Message severity="success" text="Aprovado" /> : status === Status.REPROVED ? <Message severity="error" text="Recusado" /> :null}
+          {status === Status.PENDING ? <Message severity="warn" text="Pendente" /> : status === Status.APPROVED ? <Message severity="success" text="Aprovado" /> : status === Status.REPROVED ? <Message severity="error" text="Recusado" /> : null}
         </Column>
       </Row>
     </Container>

@@ -3,6 +3,9 @@ import { Button } from "primereact/button";
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TextInput from "../../../Components/TextInput";
+import pessoas from "../../../Assets/images/pessoasgray.svg"
+import meeting from "../../../Assets/images/school_teacher.svg"
+
 import ClassroomProvider, {
   ClassroomContext,
 } from "../../../Context/Classroom/context";
@@ -89,8 +92,8 @@ const ClassroomOnePage = () => {
         >
           <CardItensClassrooom
             title="Alunos"
-            description="Gerencie seus alunos"
-            icon="pi pi-users"
+            description="Acesse para gerenciar seus alunos"
+            icon={pessoas}
             count={classroom?.registrations?.length}
           />
         </div>
@@ -100,8 +103,8 @@ const ClassroomOnePage = () => {
         >
           <CardItensClassrooom
             title="Encontros"
-            description="Gerencie seus encontros"
-            icon="pi pi-home"
+            description="Acesse para Gerenciar seus encontros"
+            icon={meeting}
             count={classroom?.meeting?.length}
           />
         </div>

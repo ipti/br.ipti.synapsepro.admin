@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import TagLogin from "../../Assets/images/logo.svg";
+import { AplicationContext } from "../../Context/Aplication/context";
+import { ROLE } from "../../Controller/controllerGlobal";
 import {
   getMenuItem,
   getYear,
@@ -11,13 +13,14 @@ import {
 } from "../../Services/localstorage";
 import styles from "../../Styles";
 import { Column, Padding, Row } from "../../Styles/styles";
+import { PropsAplicationContext } from "../../Types/types";
 import DropdownComponent from "../Dropdown";
 import Icon from "../Icon";
 import Item from "./Item";
-import { Container, TopBar } from "./style";
-import { AplicationContext } from "../../Context/Aplication/context";
-import { PropsAplicationContext } from "../../Types/types";
-import { ROLE } from "../../Controller/controllerGlobal";
+import { Container } from "./style";
+import turmas from "../../Assets/images/turmasPessoas.svg"
+
+import user from "../../Assets/images/personUser.svg"
 
 const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
   const [active, setActive] = useState(parseInt(getMenuItem()!));
@@ -25,12 +28,6 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
   const props = useContext(AplicationContext) as PropsAplicationContext
   return (
     <Container active={viewdMenu}>
-      <Row>
-        <TopBar style={{ backgroundColor: "#667DF4" }} />
-        <TopBar style={{ backgroundColor: "#F45A5A" }} />
-        <TopBar style={{ backgroundColor: "#66D654" }} />
-        <TopBar style={{ backgroundColor: "#EADA48" }} />
-      </Row>
       <Padding padding="16px">
         <Row id="center">
           <img src={TagLogin} style={{ width: "128px" }} alt=""></img>
@@ -71,7 +68,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 1 ? true : false}
             path={"/turma"}
-            icon={"pi pi-sitemap"}
+            icon={turmas}
           />
           {/* <Padding />
           <Item
@@ -93,10 +90,9 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 2 ? true : false}
             path={"/users"}
-            icon={"pi pi-users"}
+            icon={user}
           /> : null}
         </Padding>
-
       ) : null}
       <ModalYear
         visible={visibleModal}

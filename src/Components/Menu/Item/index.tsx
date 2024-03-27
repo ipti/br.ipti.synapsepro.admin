@@ -1,7 +1,6 @@
-import { useNavigate, } from "react-router-dom"
-import { Container, Text } from "./style";
+import { useNavigate, } from "react-router-dom";
 import { Column, Padding, Row } from "../../../Styles/styles";
-import Icon from "../../Icon";
+import { Container, Text } from "./style";
 
 interface Propsitem {
     icon: string,
@@ -26,7 +25,9 @@ const Item = ({ icon, path, text, active, funcActiv }: Propsitem) => {
                 <Padding />
                 <Text active={active}>
                     <Column id="center">
-                        <Icon size="1.2rem" icon={icon} />
+                        <div className={`boxQuantity`}>
+                            <img src={icon} alt="" style={{ height: 30 }} />
+                        </div>
                     </Column>
                     <Padding />
                     <Column id="center">

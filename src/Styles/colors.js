@@ -9,7 +9,7 @@ const color = {
     pink: "#F270FC",
     blue: "#7070FC",
     red: "#ED5A68",
-    green: "#05ec02",
+    green: "#28A138",
     blueClear: "#dcefed",
     colorsBaseProductNormal: "#3f45ea",
     colorsBaseProductNormalHover: "#2e33b7",

@@ -10,6 +10,7 @@ import { ClassroomTypes } from "../../../Context/Classroom/type";
 import { AplicationContext } from "../../../Context/Aplication/context";
 import { PropsAplicationContext } from "../../../Types/types";
 import { ROLE } from "../../../Controller/controllerGlobal";
+import Empty from "../../../Components/Empty";
 
 const ListClassroom = () => {
   return (
@@ -31,7 +32,7 @@ const ListClassroomPage = () => {
     <Container>
       {(propsAplication.user?.role === ROLE.ADMIN ||
         propsAplication.user?.role === ROLE.COORDINATORS) && (
-        <Row id="end">
+        <Row id="end" style={{width: "100%"}}>
           <Button
             label="Criar turma"
             icon={"pi pi-plus"}
@@ -40,7 +41,7 @@ const ListClassroomPage = () => {
         </Row>
       )}
       <Padding padding="16px" />
-      <div className="grid">
+      {props?.classrooms?.length > 0 ? <div className="grid">
         {props.classrooms?.map((item: any, index: number) => {
           return (
             <div className="col-12 md:col-6 lg:col-4">
@@ -52,7 +53,7 @@ const ListClassroomPage = () => {
             </div>
           );
         })}
-      </div>
+      </div> : <Empty title="Turmas" />}
     </Container>
   );
 };

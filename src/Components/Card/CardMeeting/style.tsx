@@ -14,13 +14,11 @@ export const Container = styled.div`
   }
   .boxYear {
     border-radius: 25px;
-    background-color: ${styles.colors.colorsBaseProductNormal};
-    width: 102px;
-    height: 32px;
+    height: 100%;
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: white;
-    padding: 9px, 16px, 9px, 16px;
+    font-weight: 600;
+    color: ${styles.colors.colorsBaseInkLighterActive};
   }
 `;

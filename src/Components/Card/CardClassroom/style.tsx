@@ -14,8 +14,9 @@ export const Container = styled.div`
   }
   .boxYear {
     border-radius: 25px;
-    background-color: ${styles.colors.colorsBaseProductLightActive};
+    background-color: ${styles.colors.green};
     width: 64px;
+    height: 24px;
     text-align: center;
     color: white;
     padding: 9px, 16px, 9px, 16px;

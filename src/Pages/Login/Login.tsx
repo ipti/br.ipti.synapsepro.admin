@@ -42,12 +42,6 @@ const LoginPage = () => {
 
   return (
     <ContainerLogin>
-      <Row style={{ height: 1 }}>
-        <TopColors color="#667DF4" />
-        <TopColors color="#F45A5A" />
-        <TopColors color="#66D654" />
-        <TopColors color="#EADA48" />
-      </Row>
       <Column
         style={{
           display: "flex",

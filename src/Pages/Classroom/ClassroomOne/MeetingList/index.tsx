@@ -8,6 +8,7 @@ import MeetingListProvider, {
 import { useContext } from "react";
 import { MeetingListTypes } from "../../../../Context/Classroom/Meeting/MeetingList/type";
 import { useFetchRequestClassroomOne } from "../../../../Services/Classroom/query";
+import Empty from "../../../../Components/Empty";
 
 const MeetingList = () => {
   return (
@@ -35,7 +36,7 @@ const MeetingListPage = () => {
         onClick={() => history(`/turma/${id}/encontros/criar`)}
       />
       <Padding padding="16px" />
-      <div className="grid">
+      {props.meetings?.length ? <div className="grid">
         {props.meetings?.map((item, index) => {
           return (
             <div className="col-12 md:col-6 lg:col-4" key={index}>
@@ -48,7 +49,7 @@ const MeetingListPage = () => {
             </div>
           );
         })}
-      </div>
+      </div> : <Empty title="Encontros" />}
     </Container>
   );
 };

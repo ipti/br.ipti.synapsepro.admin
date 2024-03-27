@@ -6,6 +6,8 @@ import { ConfirmDialog } from "primereact/confirmdialog";
 import { useContext, useState } from "react";
 import { ClassroomContext } from "../../../Context/Classroom/context";
 import { ClassroomTypes } from "../../../Context/Classroom/type";
+import IconClassroom from "./../../../Assets/images/turma.svg";
+
 
 const CardClassroom = ({
   title,
@@ -25,7 +27,9 @@ const CardClassroom = ({
     <>
       <Container className="card" onClick={() => history(`/turma/${id}`)}>
         <Row id="space-between">
-          <h3>{title}</h3>
+          <Column>
+            <div className={"boxYear"}><Column style={{height: "100%"}} id="center">{year}</Column></div>
+          </Column>
           <div
             className="cursor-pointer"
             onClick={(e) => {
@@ -37,11 +41,15 @@ const CardClassroom = ({
           </div>
         </Row>
         <Padding padding="8px" />
-        <Column>
-          <div className={"boxDescriptionScheduleSubtitle"}>Turma</div>
-          <Padding />
-          <div className={"boxYear"}>{year}</div>
-        </Column>
+        <Row>
+          <div className={`boxQuantity`}>
+            <img src={IconClassroom} alt="" style={{ height: 40 }} />
+          </div>
+          <Padding padding="8px" />
+          <Column id="center">
+            <h3>{title}</h3>
+          </Column>
+        </Row>
       </Container>
       <ConfirmDialog
         visible={visible}
