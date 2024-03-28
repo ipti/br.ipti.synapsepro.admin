@@ -13,7 +13,7 @@ const PrivateRoute = ({ Component }: { Component: React.ReactNode }) => {
         {Component}
       </Layout>
     </AplicationProvider>
-    : <Navigate to="/login" />
+    : <Navigate to="/register" />
 }
 
 

@@ -97,6 +97,29 @@ export const Container = styled.div`
     text-decoration: none;
   }
 
+  .marquee {
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  height: 206px;
+  overflow-x: hidden;
+}
+
+.track {
+  position: absolute;
+  white-space: nowrap;
+}
+
+.track > h1 {
+  margin: 20px 0;
+  font-size: 8rem;
+  font-family: Antonio;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #f4955c;
+  text-transform: uppercase;
+}
+
   @media (max-width: 1300px) {
     .resetPassword {
       display: flex;

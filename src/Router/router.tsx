@@ -106,8 +106,8 @@ const RoutesApp = () => {
           path="/users/:id"
         />
 
-        <Route element={<Login />} path="/login" />
         <Route element={<SignUp />} path="/register" />
+        <Route element={<Login />} path="/login" />
         <Route element={<Register />} path="/matricula" />
         {/* <Route path="/*" element={<NotFoundPage />} /> */}
       </Routes>

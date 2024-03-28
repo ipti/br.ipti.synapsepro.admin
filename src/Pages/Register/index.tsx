@@ -3,10 +3,9 @@ import BackButton from "../../Assets/images/backIcon.svg";
 import TagImage from "../../Assets/images/logo.svg";
 import RegisterProvider, { RegisterContext } from "../../Context/Register/context";
 import { RegisterTypes } from "../../Context/Register/type";
-import { TopColors } from "../Login/styles";
+import { Column } from "../../Styles/styles";
 import Wizard from "./Wizard";
 import { Container } from "./style";
-import { Column } from "../../Styles/styles";
 
 const Register = () => {
   return (
@@ -22,12 +21,12 @@ const RegisterPage = () => {
 
   return (
     <Container>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      {/* <div style={{ display: "flex", flexDirection: "row" }}>
         <TopColors color="#667DF4" />
         <TopColors color="#F45A5A" />
         <TopColors color="#66D654" />
         <TopColors color="#EADA48" />
-      </div>
+      </div> */}
       <div style={{ display: "flex", flexDirection: "row" }}>
         <img
           className={"backButton"}

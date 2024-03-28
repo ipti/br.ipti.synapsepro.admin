@@ -1,10 +1,29 @@
 import { Link } from "react-router-dom";
 import Tagna from "../../Assets/images/signup.svg";
+import animation from "../../Assets/images/animation.svg";
+
 import { Container } from "./styles";
 import { Padding, Row } from "../../Styles/styles";
+import { motion } from "framer-motion";
 
 
 const SignUp = () => {
+
+  const marqueeVariants = {
+    animate: {
+      x: [-600, -800],
+      transition: {
+        x: {
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: 20,
+          ease: "linear",
+        },
+      },
+    },
+  };
+
+
   return (
     <div className="row align-items--center">
       <Container>
@@ -15,7 +34,7 @@ const SignUp = () => {
           </div> */}
           <div className="formSignUp">
             <img className="imgLogo" src={Tagna} alt="" />
-            <Padding padding="16px"/>
+            <Padding padding="16px" />
             <div className="textTitle">
               <div>Bem-Vindo</div>
               <div>ao Matrícula Online</div>
@@ -26,6 +45,14 @@ const SignUp = () => {
                   </Link>
                 </div>
               </div>
+              <Padding padding="16px" />
+              <motion.div
+                className="track"
+                variants={marqueeVariants}
+                animate="animate"
+              >
+                <img alt="" src={animation} />
+              </motion.div>
             </div>
           </div>
           <div className="resetPassword textCenter">

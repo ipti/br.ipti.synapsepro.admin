@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 import { useFetchRequestProjectList } from "../../Services/PreRegistration/query";
 import { Project, Projects, Registration } from "./type";
 import { ControllerPreRegistration } from "../../Services/PreRegistration/controller";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterState = () => {
   const padding = "16px";
+  const history = useNavigate()
   const [step, setStep] = useState(0);
   const [isOverAge, setIsOverAge] = useState<boolean | undefined>();
   const [project, setproject] = useState<Projects | undefined>()
@@ -26,6 +28,9 @@ export const RegisterState = () => {
   const backStep = () => {
     if (step !== 0) {
       setStep(step - 1);
+    }
+    if (step === 0) {
+      history("/register")
     }
   }
 
