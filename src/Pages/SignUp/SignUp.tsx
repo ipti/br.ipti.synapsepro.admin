@@ -11,7 +11,7 @@ const SignUp = () => {
 
   const marqueeVariants = {
     animate: {
-      x: [-600, -800],
+      x: [-800, -800],
       transition: {
         x: {
           repeat: Infinity,
