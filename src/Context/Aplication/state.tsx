@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Projects, PropsForm } from "../../Types/types";
 import { useFetchRequestProjectLists } from "../../Services/Project/query";
 import { useFetchRequestUsersOne } from "../../Services/Users/query";
-import { GetIdUser } from "../../Services/localstorage";
+import { GetIdProject, GetIdUser, idProject } from "../../Services/localstorage";
 import { User } from "../Users/type";
 
 const AplicationState = () => {
@@ -13,13 +13,19 @@ const AplicationState = () => {
     const [user, setuser] = useState<User | undefined>()
 
 
-    const {data: userRequest} = useFetchRequestUsersOne(parseInt(GetIdUser()!))
+    const { data: userRequest } = useFetchRequestUsersOne(parseInt(GetIdUser()!))
+
+
 
     useEffect(() => {
         if (projects) {
             setproject(projects)
+
+            if (!GetIdProject()){
+                idProject(projects[0].id.toString())
+            }
         }
-        if(userRequest){
+        if (userRequest) {
             setuser(userRequest)
         }
     }, [projects, userRequest])
