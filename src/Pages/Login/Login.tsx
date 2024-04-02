@@ -77,6 +77,7 @@ const LoginPage = () => {
               height: "100%",
               width: "100%",
               position: "relative",
+              overflowY: "auto"
             }}
           >
             <div className="col-11 md:col-9">

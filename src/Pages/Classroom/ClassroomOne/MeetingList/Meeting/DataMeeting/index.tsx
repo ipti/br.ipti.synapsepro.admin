@@ -102,8 +102,6 @@ const DataMeeting = () => {
                       options={status}
                     />
                   </div>
-                </div>
-                <div className="grid">
                   <div className="col-12 md:col-6">
                     <label>Justificativa</label>
                     <Padding />

@@ -26,19 +26,46 @@ const RegistrationPage = () => {
     RegistrationDetailsContext
   ) as RegistrationDetailsTypes;
 
-  const { idRegistration, id } = useParams()
-  const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!))
+  const { idRegistration, id } = useParams();
+  const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!));
 
   return (
     <Container>
       <h2>{classroom?.name}</h2>
       <Padding padding="16px" />
       {props.registration ? (
-        <Formik initialValues={props.initialValue} onSubmit={(values) => { props.handleUpdateRegistration({ ...values }, parseInt(idRegistration!)) }}>
+        <Formik
+          initialValues={props.initialValue}
+          onSubmit={(values) => {
+            props.handleUpdateRegistration(
+              { ...values },
+              parseInt(idRegistration!)
+            );
+          }}
+        >
           {({ values, handleChange }) => {
             return (
               <Form>
                 <Button label="Salvar" />
+                <Padding padding="8px" />
+                <div className="grid">
+                  <div className="col-12 md:col-6">
+                    <label>Status</label>
+                    <Padding />
+                    <DropdownComponent
+                      value={values.status}
+                      onChange={handleChange}
+                      name="status"
+                      placerholder="Status"
+                      optionsLabel="name"
+                      options={[
+                        { id: Status.APPROVED, name: "Aprovado" },
+                        { id: Status.REPROVED, name: "Reprovado" },
+                        { id: Status.PENDING, name: "Pedente" },
+                      ]}
+                    />
+                  </div>
+                </div>{" "}
                 <Padding padding="8px" />
                 <h3>Dados basicos</h3>
                 <Padding />
@@ -111,24 +138,6 @@ const RegistrationPage = () => {
                       options={[
                         { id: true, name: "Sim" },
                         { id: false, name: "Não" },
-                      ]}
-                    />
-                  </div>
-                </div>{" "}
-                <div className="grid">
-                  <div className="col-12 md:col-6">
-                    <label>Status</label>
-                    <Padding />
-                    <DropdownComponent
-                      value={values.status}
-                      onChange={handleChange}
-                      name="status"
-                      placerholder="Status"
-                      optionsLabel="name"
-                      options={[
-                        {id: Status.APPROVED, name: "Aprovado"},
-                        {id: Status.REPROVED, name: "Reprovado"},
-                        {id: Status.PENDING, name: "Pedente"},
                       ]}
                     />
                   </div>
