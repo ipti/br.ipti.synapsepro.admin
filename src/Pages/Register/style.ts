@@ -54,7 +54,7 @@ export const Container = styled.div`
       width: 10%;
     }
     .imgTag {
-      width: 15%;
+      width: 25%;
     }
   }
 `;

@@ -1,7 +1,9 @@
 import { useContext } from "react";
 import BackButton from "../../Assets/images/backIcon.svg";
 import TagImage from "../../Assets/images/logo.svg";
-import RegisterProvider, { RegisterContext } from "../../Context/Register/context";
+import RegisterProvider, {
+  RegisterContext,
+} from "../../Context/Register/context";
 import { RegisterTypes } from "../../Context/Register/type";
 import { Column } from "../../Styles/styles";
 import Wizard from "./Wizard";
@@ -12,11 +14,10 @@ const Register = () => {
     <RegisterProvider>
       <RegisterPage />
     </RegisterProvider>
-  )
-}
+  );
+};
 
 const RegisterPage = () => {
-
   const props = useContext(RegisterContext) as RegisterTypes;
 
   return (
@@ -30,18 +31,20 @@ const RegisterPage = () => {
       <div style={{ display: "flex", flexDirection: "row" }}>
         <img
           className={"backButton"}
-            onClick={props.backStep}
+          onClick={props.backStep}
           src={BackButton}
           alt=""
         ></img>
         <img className={"imgTag"} src={TagImage} alt=""></img>
       </div>
-      <Column id="center" className="h-full">
-      <Wizard  />
-      </Column>
 
+      <Column id="center" className="h-full">
+        <Column id="center" style={{ height: "100%" }}>
+          <Wizard />
+        </Column>
+      </Column>
     </Container>
   );
 };
 
-export default Register
+export default Register;

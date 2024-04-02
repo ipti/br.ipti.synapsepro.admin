@@ -6,6 +6,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import { MeetingListRegistrationContext } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/context";
 import { MeetingListRegisterTypes } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/type";
 import { Padding, Row } from "../../../../../../Styles/styles";
+import styled from "styled-components";
+import styles from "../../../../../../Styles";
+
+const StyleComponent = styled.div`
+  .p-datatable .p-datatable-tbody > tr.p-highlight {
+    background: #fea0a1;
+    color: ${styles.colors.colorsBaseInkNormalActive};
+    font-weight: 500;
+  }
+  .p-checkbox .p-checkbox-box.p-highlight {
+    border-color: ${styles.colors.red};
+    background: ${styles.colors.red};
+  }
+`;
 
 const Beneficiarios = () => {
   const props = useContext(
@@ -59,23 +73,24 @@ const Beneficiarios = () => {
       <Padding padding="16px" />
       <span style={{ color: "GrayText" }}>Marque quem faltou</span>
       <Padding padding="8px" />
-      {props.meeting?.classroom.registrations ? (
-        <DataTable
-          value={props.meeting?.classroom.registrations}
-          selectionMode={rowClick ? null : "checkbox"}
-          selection={selectedProducts}
-          onSelectionChange={(e: any) => setSelectedProducts(e.value)}
-          dataKey="id"
-          tableStyle={{ minWidth: "50rem" }}
-        >
-          <Column
-            selectionMode="multiple"
-            headerStyle={{ width: "3rem" }}
-          ></Column>
-          <Column field="id" align="center" header="Matricula"></Column>
-          <Column field="name" align="center" header="Nome"></Column>
-        </DataTable>
-      ) : null}
+      <StyleComponent>
+        {props.meeting?.classroom.registrations ? (
+          <DataTable
+            value={props.meeting?.classroom.registrations}
+            selectionMode={rowClick ? null : "checkbox"}
+            selection={selectedProducts}
+            onSelectionChange={(e: any) => setSelectedProducts(e.value)}
+            dataKey="id"
+            tableStyle={{ minWidth: "50rem" }}
+          >
+            <Column
+              selectionMode="multiple"
+              headerStyle={{ width: "3rem" }}
+            ></Column>
+            <Column field="name" align="center" header="Nome"></Column>
+          </DataTable>
+        ) : null}
+      </StyleComponent>
     </div>
   );
 };

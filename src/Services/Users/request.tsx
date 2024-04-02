@@ -7,42 +7,40 @@ export const requestUsers = () => {
 
   return http
     .get(path)
-    .then(response => response.data)
-    .catch(err => {
+    .then((response) => response.data)
+    .catch((err) => {
       if (err.response.status === 401) {
-        logout()
-        window.location.reload()
+        logout();
+        window.location.reload();
       }
       throw err;
     });
 };
-
 
 export const requestCreateUsers = (data: CreateUser) => {
   let path = "/user-bff";
 
   return http
-    .post(path, {...data, role: data.role?.id})
-    .then(response => response.data)
-    .catch(err => {
+    .post(path, { ...data, role: data.role?.id })
+    .then((response) => response.data)
+    .catch((err) => {
       if (err.response.status === 401) {
-        logout()
-        window.location.reload()
+        logout();
+        window.location.reload();
       }
       throw err;
     });
 };
 
-
 export const requestDeleteUsers = (id: number) => {
   let path = "/users/" + id;
   return http
     .delete(path)
-    .then(response => response.data)
-    .catch(err => {
+    .then((response) => response.data)
+    .catch((err) => {
       if (err.response.status === 401) {
-        logout()
-        window.location.reload()
+        logout();
+        window.location.reload();
       }
       throw err;
     });
@@ -52,26 +50,28 @@ export const requestUpdateUsers = (id: number, data: any) => {
   let path = "/users/" + id;
   return http
     .put(path, data)
-    .then(response => response.data)
-    .catch(err => {
+    .then((response) => response.data)
+    .catch((err) => {
       if (err.response.status === 401) {
-        logout()
-        window.location.reload()
+        logout();
+        window.location.reload();
       }
       throw err;
     });
 };
 
 export const requestUsersOne = (id: number) => {
-  let path = "/users/" + id;
-  return http
-    .get(path)
-    .then(response => response.data)
-    .catch(err => {
-      if (err.response.status === 401) {
-        logout()
-        window.location.reload()
-      }
-      throw err;
-    });
+  if (id) {
+    let path = "/users/" + id;
+    return http
+      .get(path)
+      .then((response) => response.data)
+      .catch((err) => {
+        if (err.response.status === 401) {
+          logout();
+          window.location.reload();
+        }
+        throw err;
+      });
+  }
 };

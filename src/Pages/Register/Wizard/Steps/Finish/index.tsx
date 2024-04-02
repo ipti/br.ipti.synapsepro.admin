@@ -30,7 +30,7 @@ const Finish = () => {
           }
 
           setValue(_val);
-      }, 180);
+      }, 60);
 
       return () => {
           if (interval.current) {

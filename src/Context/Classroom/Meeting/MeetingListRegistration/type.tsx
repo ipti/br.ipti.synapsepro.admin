@@ -15,7 +15,8 @@ export interface Meeting {
   classroom_fk: number;
   fouls: any[];
   classroom: Classroom;
-  description: string
+  description: string,
+  justification: string
 }
 
 export interface Classroom {

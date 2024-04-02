@@ -36,6 +36,7 @@ const DataMeeting = () => {
       initialValues={{
         name: props.meeting?.name,
         description: props.meeting?.description,
+        justification: props.meeting?.justification,
         status: getStatus(props.meeting?.status!),
       }}
       onSubmit={(values) => {
@@ -84,6 +85,39 @@ const DataMeeting = () => {
               ) : null}
             </Row>
             <Padding padding="16px" />
+            {(propsAplication.user?.role === ROLE.ADMIN ||
+              propsAplication.user?.role === ROLE.COORDINATORS) && (
+              <>
+                <div className="grid">
+                  <div className="col-12 md:col-6">
+                    <label>Status</label>
+                    <Padding />
+                    <DropdownComponent
+                      disabled={!edit}
+                      value={values.status}
+                      onChange={handleChange}
+                      name="status"
+                      placerholder="Status"
+                      optionsLabel="name"
+                      options={status}
+                    />
+                  </div>
+                </div>
+                <div className="grid">
+                  <div className="col-12 md:col-6">
+                    <label>Justificativa</label>
+                    <Padding />
+                    <TextAreaComponent
+                      disabled={!edit}
+                      onChange={handleChange}
+                      value={values.justification}
+                      name="justification"
+                      placeholder="Justicativa sobre a escolha do status"
+                    />
+                  </div>
+                </div>
+              </>
+            )}{" "}
             <div className="grid">
               <div className="col-12 md:col-6">
                 <label>Observações</label>
@@ -93,27 +127,10 @@ const DataMeeting = () => {
                   onChange={handleChange}
                   value={values.description}
                   name="description"
-                  placeholder="Observações"
+                  placeholder="Observações sobre o encontro"
                 />
               </div>
             </div>
-            {(propsAplication.user?.role === ROLE.ADMIN || propsAplication.user?.role === ROLE.COORDINATORS) && (
-              <div className="grid">
-                <div className="col-12 md:col-6">
-                  <label>Status</label>
-                  <Padding />
-                  <DropdownComponent
-                    disabled={!edit}
-                    value={values.status}
-                    onChange={handleChange}
-                    name="status"
-                    placerholder="Status"
-                    optionsLabel="name"
-                    options={status}
-                  />
-                </div>
-              </div>
-            )}{" "}
           </Form>
         );
       }}
