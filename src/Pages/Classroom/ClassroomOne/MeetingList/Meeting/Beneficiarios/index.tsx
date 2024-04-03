@@ -3,12 +3,14 @@ import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import styled from "styled-components";
+import Present from "../../../../../../Assets/images/status-approved.svg";
+import NotPresent from "../../../../../../Assets/images/status-desapproved.svg";
 import { MeetingListRegistrationContext } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/context";
 import { MeetingListRegisterTypes } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/type";
-import { Padding, Row } from "../../../../../../Styles/styles";
-import styled from "styled-components";
 import styles from "../../../../../../Styles";
-import { InputSwitch } from "primereact/inputswitch";
+import { Padding, Row } from "../../../../../../Styles/styles";
+
 
 const StyleComponent = styled.div`
   .p-datatable .p-datatable-tbody > tr > td {
@@ -43,26 +45,22 @@ const Beneficiarios = () => {
   };
 
   const bodyRegisterFouls = (dataRow: any) => {
-    console.log(dataRow);
     return (
       <Row id="center">
-        <InputSwitch
-          checked={
-            !selectedProducts.find((props: any) => props.id === dataRow.id)
-          }
-          onChange={(e) => {
-            if (!e.target.value) {
-              setSelectedProducts((prevArray: any) =>
-                prevArray.concat(dataRow)
-              );
-            } else {
-              const novoArray = selectedProducts.filter(
-                (obj: any) => obj.id !== dataRow.id
-              );
-              setSelectedProducts(novoArray);
-            }
-          }}
-        />
+        {!selectedProducts.find((props: any) => props.id === dataRow.id) ? <img alt="" style={{ cursor: "pointer" }} src={Present} onClick={() => {
+          setSelectedProducts((prevArray: any) =>
+            prevArray.concat(dataRow)
+          );
+        }} /> : <img alt="" style={{ cursor: "pointer" }} src={NotPresent} onClick={() => {
+          const novoArray = selectedProducts.filter(
+            (obj: any) => obj.id !== dataRow.id
+          );
+          setSelectedProducts(novoArray);
+        }} />}
+
+
+
+
       </Row>
     );
   };
@@ -92,8 +90,6 @@ const Beneficiarios = () => {
         />
       </Row>
       <Padding padding="16px" />
-      <span style={{ color: "GrayText" }}>Marque quem faltou</span>
-      <Padding padding="8px" />
       <StyleComponent>
         {props.meeting?.classroom.registrations ? (
           <DataTable
