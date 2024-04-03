@@ -69,6 +69,13 @@
     src: local("Inter Regular"), url("../font/Inter-Regular.ttf") format("truetype");
   }
 
+  :root {
+
+    --primary-color: #636644;
+
+
+  }
+
   .t-button-primary {
     width: 100%;
     border: none;

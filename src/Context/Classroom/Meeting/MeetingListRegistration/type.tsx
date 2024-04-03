@@ -17,6 +17,7 @@ export interface Meeting {
   classroom: Classroom;
   description: string,
   justification: string
+  theme: string
 }
 
 export interface Classroom {

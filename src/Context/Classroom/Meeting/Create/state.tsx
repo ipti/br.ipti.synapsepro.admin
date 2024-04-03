@@ -5,8 +5,18 @@ export const CreateMeetingState = () => {
 
     const { requestCreateMeetingMutation } = MeetingController()
 
+    const getId = (array: any) => {
+        var arrayReturn = [];
+
+        for(var user of array){
+            arrayReturn.push(user.id)
+        }
+
+        return arrayReturn
+    }
+
     const CreateMeeting = (data: CreateMeeting) => {
-        requestCreateMeetingMutation.mutate(data)
+        requestCreateMeetingMutation.mutate({...data, users: getId(data.users)})
     }
 
     return {

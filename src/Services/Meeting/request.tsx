@@ -4,7 +4,7 @@ import { logout } from "../localstorage";
 
 export const requestCreateMeeting = (data: CreateMeeting) => {
     return http
-        .post("/meeting", { ...data, users: data.users?.id })
+        .post("/meeting", { ...data })
         .then((response) => response.data)
         .catch((err) => {
             if (err.response.status === 401) {

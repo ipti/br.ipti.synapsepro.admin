@@ -24,8 +24,8 @@ const DataMeeting = () => {
 
   const status = [
     { id: Status.APPROVED, name: "Aprovado" },
-    { id: Status.REPROVED, name: "Reprovado" },
-    { id: Status.PENDING, name: "Pedente" },
+    { id: Status.REPROVED, name: "Pendente de Revisão" },
+    { id: Status.PENDING, name: "Pedente de Análise" },
   ];
   const getStatus = (id: string) => {
     return status.find((props) => props.id === id);
@@ -37,6 +37,7 @@ const DataMeeting = () => {
         name: props.meeting?.name,
         description: props.meeting?.description,
         justification: props.meeting?.justification,
+        theme: props.meeting?.theme,
         status: getStatus(props.meeting?.status!),
       }}
       onSubmit={(values) => {
@@ -66,6 +67,7 @@ const DataMeeting = () => {
                 {!edit ? (
                   <Button
                     text
+                    label="Editar"
                     icon="pi pi-pencil"
                     onClick={() => setEdit(true)}
                   />
@@ -85,6 +87,18 @@ const DataMeeting = () => {
               ) : null}
             </Row>
             <Padding padding="16px" />
+            <div className="grid">
+              <div className="col-12 md:col-6">
+                <label>Tema do encontro</label>
+                <TextInput
+                  name="theme"
+                  value={values.theme}
+                  disabled={!edit}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <Padding padding="16px" />
             {(propsAplication.user?.role === ROLE.ADMIN ||
               propsAplication.user?.role === ROLE.COORDINATORS) && (
               <>
@@ -102,7 +116,7 @@ const DataMeeting = () => {
                       options={status}
                     />
                   </div>
-                  <div className="col-12 md:col-6">
+                  {values.status?.id === Status.REPROVED && <div className="col-12 md:col-6">
                     <label>Justificativa</label>
                     <Padding />
                     <TextAreaComponent
@@ -112,7 +126,7 @@ const DataMeeting = () => {
                       name="justification"
                       placeholder="Justicativa sobre a escolha do status"
                     />
-                  </div>
+                  </div>}
                 </div>
               </>
             )}{" "}

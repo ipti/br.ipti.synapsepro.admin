@@ -49,7 +49,6 @@ const CreateUserPage = () => {
         validationSchema={CreateUserSchema}
       >
         {({ values, handleChange, errors, touched }) => {
-            console.log(errors)
           return (
             <InputsUser errors={errors} handleChange={handleChange} touched={touched} values={values} />
           );

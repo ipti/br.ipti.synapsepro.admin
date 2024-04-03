@@ -8,16 +8,12 @@ import { MeetingListRegisterTypes } from "../../../../../../Context/Classroom/Me
 import { Padding, Row } from "../../../../../../Styles/styles";
 import styled from "styled-components";
 import styles from "../../../../../../Styles";
+import { InputSwitch } from "primereact/inputswitch";
 
 const StyleComponent = styled.div`
-  .p-datatable .p-datatable-tbody > tr.p-highlight {
-    background: #fea0a1;
-    color: ${styles.colors.colorsBaseInkNormalActive};
+  .p-datatable .p-datatable-tbody > tr > td {
     font-weight: 500;
-  }
-  .p-checkbox .p-checkbox-box.p-highlight {
-    border-color: ${styles.colors.red};
-    background: ${styles.colors.red};
+    color: ${styles.colors.colorsBaseInkNormalActive};
   }
 `;
 
@@ -44,6 +40,31 @@ const Beneficiarios = () => {
       array.push(foul.id);
     }
     return array;
+  };
+
+  const bodyRegisterFouls = (dataRow: any) => {
+    console.log(dataRow);
+    return (
+      <Row id="center">
+        <InputSwitch
+          checked={
+            !selectedProducts.find((props: any) => props.id === dataRow.id)
+          }
+          onChange={(e) => {
+            if (!e.target.value) {
+              setSelectedProducts((prevArray: any) =>
+                prevArray.concat(dataRow)
+              );
+            } else {
+              const novoArray = selectedProducts.filter(
+                (obj: any) => obj.id !== dataRow.id
+              );
+              setSelectedProducts(novoArray);
+            }
+          }}
+        />
+      </Row>
+    );
   };
 
   const { id, idMeeting } = useParams();
@@ -83,11 +104,16 @@ const Beneficiarios = () => {
             dataKey="id"
             tableStyle={{ minWidth: "50rem" }}
           >
-            <Column
+            {/* <Column
               selectionMode="multiple"
               headerStyle={{ width: "3rem" }}
-            ></Column>
+            ></Column> */}
             <Column field="name" align="center" header="Nome"></Column>
+            <Column
+              body={bodyRegisterFouls}
+              align="center"
+              header="Presença"
+            ></Column>
           </DataTable>
         ) : null}
       </StyleComponent>
