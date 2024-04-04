@@ -82,7 +82,7 @@ const Beneficiarios = () => {
           }}
         />
         <Button
-          label="Gerar Lista de presença"
+          label={window.innerWidth > 600 ? "Gerar Lista de presença" : ""}
           icon="pi pi-download"
           onClick={() => {
             history(`/turma/${id}/encontros/${idMeeting}/generate`);
@@ -99,6 +99,7 @@ const Beneficiarios = () => {
             onSelectionChange={(e: any) => setSelectedProducts(e.value)}
             dataKey="id"
             tableStyle={{ minWidth: "50rem" }}
+            emptyMessage="Não há alunos registrados"
           >
             {/* <Column
               selectionMode="multiple"

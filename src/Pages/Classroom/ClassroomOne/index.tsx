@@ -80,7 +80,7 @@ const ClassroomOnePage = () => {
           </Column>
           <Padding />
           {propsAplication.user?.role === (ROLE.ADMIN || ROLE.COORDINATORS) && (
-            <Button text icon="pi pi-pencil" onClick={() => setEdit(true)} />
+            <Button text label="Editar" icon="pi pi-pencil" onClick={() => setEdit(true)} />
           )}
         </Row>
       )}

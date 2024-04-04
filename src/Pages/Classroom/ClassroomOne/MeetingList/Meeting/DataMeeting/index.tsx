@@ -1,14 +1,14 @@
 import { Form, Formik } from "formik";
-import { Column, Padding, Row } from "../../../../../../Styles/styles";
-import TextInput from "../../../../../../Components/TextInput";
 import { Button } from "primereact/button";
-import TextAreaComponent from "../../../../../../Components/TextArea";
-import DropdownComponent from "../../../../../../Components/Dropdown";
-import { ROLE, Status } from "../../../../../../Controller/controllerGlobal";
 import { useContext, useState } from "react";
+import DropdownComponent from "../../../../../../Components/Dropdown";
+import TextAreaComponent from "../../../../../../Components/TextArea";
+import TextInput from "../../../../../../Components/TextInput";
+import { AplicationContext } from "../../../../../../Context/Aplication/context";
 import { MeetingListRegistrationContext } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/context";
 import { MeetingListRegisterTypes } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/type";
-import { AplicationContext } from "../../../../../../Context/Aplication/context";
+import { ROLE, Status } from "../../../../../../Controller/controllerGlobal";
+import { Column, Padding, Row } from "../../../../../../Styles/styles";
 import { PropsAplicationContext } from "../../../../../../Types/types";
 
 const DataMeeting = () => {
@@ -101,35 +101,35 @@ const DataMeeting = () => {
             <Padding padding="16px" />
             {(propsAplication.user?.role === ROLE.ADMIN ||
               propsAplication.user?.role === ROLE.COORDINATORS) && (
-              <>
-                <div className="grid">
-                  <div className="col-12 md:col-6">
-                    <label>Status</label>
-                    <Padding />
-                    <DropdownComponent
-                      disabled={!edit}
-                      value={values.status}
-                      onChange={handleChange}
-                      name="status"
-                      placerholder="Status"
-                      optionsLabel="name"
-                      options={status}
-                    />
+                <>
+                  <div className="grid">
+                    <div className="col-12 md:col-6">
+                      <label>Status</label>
+                      <Padding />
+                      <DropdownComponent
+                        disabled={!edit}
+                        value={values.status}
+                        onChange={handleChange}
+                        name="status"
+                        placerholder="Status"
+                        optionsLabel="name"
+                        options={status}
+                      />
+                    </div>
+                    {values.status?.id === Status.REPROVED && <div className="col-12 md:col-6">
+                      <label>Justificativa</label>
+                      <Padding />
+                      <TextAreaComponent
+                        disabled={!edit}
+                        onChange={handleChange}
+                        value={values.justification}
+                        name="justification"
+                        placeholder="Justicativa sobre a escolha do status"
+                      />
+                    </div>}
                   </div>
-                  {values.status?.id === Status.REPROVED && <div className="col-12 md:col-6">
-                    <label>Justificativa</label>
-                    <Padding />
-                    <TextAreaComponent
-                      disabled={!edit}
-                      onChange={handleChange}
-                      value={values.justification}
-                      name="justification"
-                      placeholder="Justicativa sobre a escolha do status"
-                    />
-                  </div>}
-                </div>
-              </>
-            )}{" "}
+                </>
+              )}{" "}
             <div className="grid">
               <div className="col-12 md:col-6">
                 <label>Observações</label>

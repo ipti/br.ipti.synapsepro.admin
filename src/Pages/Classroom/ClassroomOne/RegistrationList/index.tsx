@@ -9,6 +9,7 @@ import {
 } from "../../../../Context/Classroom/RegistrationsList/type";
 import { useFetchRequestClassroomOne } from "../../../../Services/Classroom/query";
 import { Container, Padding } from "../../../../Styles/styles";
+import Empty from "../../../../Components/Empty";
 
 const RegistrationList = () => {
   return (
@@ -30,7 +31,7 @@ const RegistrationListPage = () => {
     <Container>
       <h2>{classroom?.name}</h2>
       <Padding padding="16px" />
-      <div className="grid">
+      {classroom.length > 0 ? <div className="grid">
         {props.registrations?.map((item, index) => {
           return (
             <div className="col-12 md:col-6 lg:col-4" key={index}>
@@ -38,7 +39,7 @@ const RegistrationListPage = () => {
             </div>
           );
         })}
-      </div>
+      </div> : <Empty title="Matriculas" />}
     </Container>
   );
 };
