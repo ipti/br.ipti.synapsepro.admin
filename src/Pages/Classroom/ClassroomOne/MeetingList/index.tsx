@@ -36,7 +36,7 @@ const MeetingListPage = () => {
         onClick={() => history(`/turma/${id}/encontros/criar`)}
       />
       <Padding padding="16px" />
-      {props.meetings?.length ? <div className="grid">
+      {props?.meetings?.length! > 0 ? <div className="grid">
         {props.meetings?.map((item, index) => {
           return (
             <div className="col-12 md:col-6 lg:col-4" key={index}>

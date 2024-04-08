@@ -22,7 +22,7 @@ const AplicationState = () => {
             setproject(projects)
 
             if (!GetIdProject()){
-                idProject(projects[0].id.toString())
+                idProject(projects[0]?.id.toString())
             }
         }
         if (userRequest) {

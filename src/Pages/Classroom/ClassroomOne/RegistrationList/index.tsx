@@ -31,7 +31,7 @@ const RegistrationListPage = () => {
     <Container>
       <h2>{classroom?.name}</h2>
       <Padding padding="16px" />
-      {classroom.length > 0 ? <div className="grid">
+      {props?.registrations?.length! > 0 ? <div className="grid">
         {props.registrations?.map((item, index) => {
           return (
             <div className="col-12 md:col-6 lg:col-4" key={index}>
