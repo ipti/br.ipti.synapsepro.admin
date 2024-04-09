@@ -8,7 +8,7 @@ interface PropsActive {
 
 export const Container = styled.div<PropsActive>`
     background-color: ${styles.colors.colorsBaseProductLighter};
-    min-width: 230px;
+    min-width: 256px;
     @media screen and (max-width: 750px) {
         display: ${props => props.active ? "" : "none" };
     }

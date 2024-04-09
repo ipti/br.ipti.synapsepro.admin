@@ -30,14 +30,18 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
     <Container active={viewdMenu}>
       <Padding padding="16px">
         <Row id="center">
+          <Column id="center">
           <img src={TagLogin} style={{ width: "128px" }} alt=""></img>
+          </Column>
           <Padding />
           <Column id="center">
             <div
               style={{
-                backgroundColor: styles.colors.colorsBaseCloudNormal,
-                padding: "4px",
+                border: `2px solid ${styles.colors.colorsBaseCloudNormal}`,
+                padding: "8px 16px",
+                borderRadius: "20px",
                 cursor: "pointer",
+
               }}
               onClick={() => setVisibleModal(!visibleModal)}
             >

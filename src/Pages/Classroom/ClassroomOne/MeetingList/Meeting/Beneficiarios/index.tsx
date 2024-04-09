@@ -74,6 +74,7 @@ const Beneficiarios = () => {
         <Button
           label="Salvar"
           icon="pi pi-save"
+          disabled={props.meeting?.meetingArchives.length! === 0}
           onClick={() => {
             props.CreateFouls({
               meeting: props.meeting?.id!,

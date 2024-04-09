@@ -11,6 +11,7 @@ import { Container, Padding } from "../../../../../Styles/styles";
 import { PropsAplicationContext } from "../../../../../Types/types";
 import Beneficiarios from "./Beneficiarios";
 import DataMeeting from "./DataMeeting";
+import ListArchivesAttendanceList from "./UploadArchivesAttendanceList";
 
 const Meeting = () => {
   return (
@@ -38,19 +39,19 @@ const MeetingPage = () => {
               props.meeting?.status === Status.PENDING
                 ? "warn"
                 : props.meeting?.status === Status.APPROVED
-                  ? "success"
-                  : props.meeting?.status === Status.REPROVED
-                    ? "error"
-                    : "info"
+                ? "success"
+                : props.meeting?.status === Status.REPROVED
+                ? "error"
+                : "info"
             }
             text={
               props.meeting?.status === Status.PENDING
                 ? "Pendente"
                 : props.meeting?.status === Status.APPROVED
-                  ? "Aprovado"
-                  : props.meeting?.status === Status.REPROVED
-                    ? "Reprovado"
-                    : "info"
+                ? "Aprovado"
+                : props.meeting?.status === Status.REPROVED
+                ? "Reprovado"
+                : "info"
             }
           />
           <Padding />
@@ -61,11 +62,23 @@ const MeetingPage = () => {
           <Padding padding="16px" />
           <DataMeeting />
           <Padding padding="16px" />
+          <div className="grid">
+            <div className="col-12 md:col-6">
+              <label>Salve os arquivos do encontro</label>
+              <Padding />
+              <Upload />
+            </div>
+          </div>
+          <Padding />
+          {props.meeting?.meetingArchives.length > 0 && <label>Arquivos</label>}
+          <Padding />
 
-          <div className="col-12 md:col-6">
-            <label>Arquivos</label>
-            <Padding />
-            <Upload />
+          <div className="grid">
+            <div className="col-12 md:col-6">
+              {props.meeting?.meetingArchives?.map((item) => {
+                return <ListArchivesAttendanceList item={item} />;
+              })}
+            </div>
           </div>
           {/* {true ? <UploadArchivesAttendanceList /> : <AttendanceList />} */}
           <Padding padding="16px" />

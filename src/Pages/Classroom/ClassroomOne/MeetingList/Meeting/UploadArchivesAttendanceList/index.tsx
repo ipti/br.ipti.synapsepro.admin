@@ -1,25 +1,39 @@
-import { Message } from "primereact/message"
-import { Column, Padding, Row } from "../../../../../../Styles/styles"
-import { useState } from "react"
-import { InputText } from "primereact/inputtext"
-import { Button } from "primereact/button"
+import { MeetingArc } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/type";
+import { Column, Padding, Row } from "../../../../../../Styles/styles";
 
-const UploadArchivesAttendanceList = () => {
-    const [isInput, setIsInput] = useState(false)
-    return (
-        <>
-            <Row>
-                <Message severity="warn" text="Anexe lista de presença" />
-                <Padding padding="8px" />
-                <Column id="center">
-                    <i className="pi pi-upload cursor-pointer" onClick={() => setIsInput(true)} />
-                </Column>
-            </Row>
-            <Padding />
-            {isInput ? <Row>
-                <InputText type="file" /><Padding /> <Button label="Salvar" icon="pi pi-save" /></Row> : null}
-        </>
-    )
-}
+const ListArchivesAttendanceList = ({ item }: { item: MeetingArc }) => {
+  return (
+    <div
+      style={{
+        padding: "22px 16px",
+        background: "#ECF2FF",
+        cursor: "pointer",
+        borderRadius: "4px",
+        marginBottom: "8px",
+      }}
+      onClick={() => {
+        window.open(
+          process.env.REACT_APP_API_PATH +
+            `archive-meeting-bff/${item.id}/` +
+            item.original_name
+        );
+      }}
+    >
+      <Row>
+        <img
+          style={{ width: "30px", height: "30px" }}
+          alt=""
+          src={
+            process.env.REACT_APP_API_PATH +
+            `archive-meeting-bff/${item.id}/` +
+            item.original_name
+          }
+        />
+        <Padding />
+        <Column id="center">{item.original_name}</Column>
+      </Row>
+    </div>
+  );
+};
 
-export default UploadArchivesAttendanceList;
+export default ListArchivesAttendanceList;

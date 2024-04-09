@@ -1,18 +1,25 @@
 import { Button } from 'primereact/button';
 import { FileUpload, FileUploadHeaderTemplateOptions, ItemTemplateOptions } from 'primereact/fileupload';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { MeetingListRegistrationContext } from '../../Context/Classroom/Meeting/MeetingListRegistration/context';
+import { MeetingListRegisterTypes } from '../../Context/Classroom/Meeting/MeetingListRegistration/type';
 
 export default function Upload() {
 
     const [file, setFile] = useState<Array<any>>([])
 
+    const {idMeeting} = useParams()
+
+    const meetingList = useContext(MeetingListRegistrationContext) as MeetingListRegisterTypes;
+
     const headerTemplate = (options: FileUploadHeaderTemplateOptions) => {
-        const { className, chooseButton, cancelButton } = options;
+        const { className, chooseButton, cancelButton, props} = options;
 
         return (
             <div className={className} style={{ backgroundColor: 'transparent', display: 'flex', alignItems: 'center' }}>
                 {chooseButton}
-                <Button rounded outlined icon="pi pi-save" disabled={file.length === 0} onClick={() => console.log(file)} />
+                <Button rounded outlined icon="pi pi-save" disabled={file.length === 0} onClick={() => {meetingList.ArchivesMeeting(file[0], parseInt(idMeeting!)); props.onClear!()}} />
                 {cancelButton}
 
             </div>
@@ -21,7 +28,6 @@ export default function Upload() {
 
     const onTemplateSelect = (e: any) => {
         let files = e.files;
-        console.log(files)
         setFile(files)
     };
 
@@ -30,7 +36,6 @@ export default function Upload() {
     const cancelOptions = { icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined' };
 
     const onTemplateRemove = (files: File, callback: Function) => {
-        console.log(files)
         setFile(file.filter(props => props.name !== files.name))
         callback();
     };
@@ -57,6 +62,6 @@ export default function Upload() {
     };
 
     return (
-        <FileUpload chooseOptions={chooseOptions} onClear={onTemplateClear} itemTemplate={itemTemplate} uploadOptions={uploadOptions} cancelOptions={cancelOptions} name="demo[]" headerTemplate={headerTemplate} multiple accept="/*" onSelect={onTemplateSelect} emptyTemplate={<p className="m-0">Arraste e solte os arquivos aqui.</p>} />
+        <FileUpload chooseOptions={chooseOptions} accept="image/*" onClear={onTemplateClear} itemTemplate={itemTemplate} uploadOptions={uploadOptions} cancelOptions={cancelOptions} name="demo[]" headerTemplate={headerTemplate} onSelect={onTemplateSelect} emptyTemplate={<p className="m-0">Arraste e solte os arquivos aqui.</p>} />
     )
 }

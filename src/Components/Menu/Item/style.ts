@@ -16,7 +16,6 @@ export const Text = styled.h3<PropsActive>`
 export const Container = styled.div<PropsActive>`
 cursor: pointer;
 border-radius: ${props => props.active ? "8px" : "0"};
-background-color: ${props => props.active ? styles.colors.colorsBaseProductLightActive : "transparent"};
 width: 100%;
     &:hover{
         border-radius: 8px;

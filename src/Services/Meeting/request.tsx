@@ -45,6 +45,25 @@ export const requestUpdateFouls = (data: CreateFouls,) => {
 }
 
 
+export const requestArchivesMeeting = (data: FormData, id: number) => {
+
+  console.log(data)
+  return http
+      .post("/archive-meeting-bff?meetingId="+id, data)
+      .then((response) => response.data)
+      .catch((err) => {
+          if (err.response.status === 401) {
+              logout();
+              window.location.reload();
+          }
+          alert(err.response.message);
+          throw err;
+      });
+}
+
+
+
+
 export const requestMeetingList = async (id: string) => {
     if (id) {
       return await http

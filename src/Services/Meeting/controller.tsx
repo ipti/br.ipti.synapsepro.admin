@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
 import { CreateFouls, CreateMeeting, EditMeeting } from "../../Context/Classroom/Meeting/Create/type";
-import { requestCreateMeeting, requestUpdateFouls, requestUpdateMeeting } from "./request";
+import { requestArchivesMeeting, requestCreateMeeting, requestUpdateFouls, requestUpdateMeeting } from "./request";
 import Swal from "sweetalert2";
 import styles from "../../Styles";
 import { useNavigate, useParams } from "react-router-dom";
@@ -26,6 +26,27 @@ export const MeetingController = () => {
                         history(`/turma/${id}/encontros`)
                     }
                 })
+            },
+        }
+    )
+
+    const  requestArchvesMeetingMutation= useMutation(
+        ({data, id}:{data: FormData, id: number}) => requestArchivesMeeting(data, id),
+        {
+            onError: (error: any) => {
+                alert(error?.response.data.message);
+            },
+            onSuccess: (data) => {
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Encontro Alterado com sucesso!',
+                //     confirmButtonColor: styles.colors.colorsBaseProductNormal,
+                // }).then((result) => {
+                //     if (result.isConfirmed) {
+                //         queryClient.refetchQueries("useRequestsMeetingOne")
+                //     }
+                // })
+                window.location.reload()
             },
         }
     )
@@ -71,7 +92,7 @@ export const MeetingController = () => {
     )
 
     return {
-        requestCreateMeetingMutation, requestUpdateMeetingMutation, requestCreateFoulsMutation
+        requestCreateMeetingMutation, requestUpdateMeetingMutation, requestCreateFoulsMutation, requestArchvesMeetingMutation
     }
 }
 

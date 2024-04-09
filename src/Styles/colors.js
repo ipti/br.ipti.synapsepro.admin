@@ -15,7 +15,7 @@ const color = {
     colorsBaseProductNormalHover: "#2e33b7",
     colorsBaseInkNormal: "#252A31",
     colorsBaseInkLight: "#5F738C",
-    colorsBaseProductNormalActive: "#272B96",
+    colorsBaseProductNormalActive: "#336AE9",
     colorsBaseProductLightActive: "#ccd0ee",
     colorsBaseCloudNormal: "#EFF2F5",
     colorsBaseProductDarkHover: "#1C1F7F",

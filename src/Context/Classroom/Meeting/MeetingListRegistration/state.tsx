@@ -6,18 +6,21 @@ import { CreateFouls, EditMeeting } from "../Create/type";
 import { MeetingController } from "../../../../Services/Meeting/controller";
 export const MeetingListRegistrationState = () => {
 
-
-
   const { idMeeting } = useParams();
 
   const { data: meetingRequest } = useFetchRequestMeetingOne(idMeeting!);
   const [meeting, setmeeting] = useState<Meeting | undefined>();
 
-
-  const { requestUpdateMeetingMutation, requestCreateFoulsMutation } = MeetingController()
+  const { requestUpdateMeetingMutation, requestCreateFoulsMutation, requestArchvesMeetingMutation } = MeetingController()
 
   const UpdateMeeting = (data: EditMeeting, id: number) => {
     requestUpdateMeetingMutation.mutate({data: data, id: id})
+  }
+
+  const ArchivesMeeting = (data: any, id: number) => {
+    const formData = new FormData();
+    formData.append('file', data);
+    requestArchvesMeetingMutation.mutate({data: formData, id: id})
   }
 
   const CreateFouls = (data: CreateFouls) => {
@@ -30,5 +33,5 @@ export const MeetingListRegistrationState = () => {
     }
   }, [meetingRequest]);
 
-  return { meeting, UpdateMeeting, CreateFouls };
+  return { meeting, UpdateMeeting, CreateFouls, ArchivesMeeting };
 };
