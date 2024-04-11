@@ -46,6 +46,7 @@ export interface Users {
 }
 
 export interface MeetingArc {
+  archive_url: string,
   id: number
   meeting_fk: number
   size: number
