@@ -7,6 +7,7 @@ import UsersProvider, { UsersContext } from "../../Context/Users/context";
 import { UsersTypes } from "../../Context/Users/type";
 import { Container, Padding } from "../../Styles/styles";
 import { ROLE } from "../../Controller/controllerGlobal";
+import Loading from "../../Components/Loading";
 
 const ListUsers = () => {
   return (
@@ -50,6 +51,9 @@ const ListUsersPage = () => {
       </p>
     );
   };
+
+  if (props.isLoading) return <Loading />;
+
 
   return (
     <Container>

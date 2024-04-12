@@ -16,6 +16,7 @@ import CardItensClassrooom from "./CardItensClassroom";
 import { AplicationContext } from "../../../Context/Aplication/context";
 import { PropsAplicationContext } from "../../../Types/types";
 import { ROLE } from "../../../Controller/controllerGlobal";
+import Loading from "../../../Components/Loading";
 
 const ClassroomOne = () => {
   return (
@@ -35,6 +36,9 @@ const ClassroomOnePage = () => {
   const propsAplication = useContext(
     AplicationContext
   ) as PropsAplicationContext;
+
+  if (props.isLoading) return <Loading />;
+
 
   return (
     <Container>

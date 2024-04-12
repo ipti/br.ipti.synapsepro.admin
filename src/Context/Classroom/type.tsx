@@ -10,6 +10,7 @@ export interface ClassroomTypes {
     id: number
   ) => void;
   DeleteClassroom: (id: number) => void;
+  isLoading: boolean
 }
 
 export interface CreateClassroom {

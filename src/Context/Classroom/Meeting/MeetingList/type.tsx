@@ -1,5 +1,6 @@
 export interface MeetingListTypes {
   meetings: Meeting[] | undefined;
+  isLoading: boolean
 }
 
 export interface Meeting {

@@ -8,7 +8,7 @@ export const MeetingListRegistrationState = () => {
 
   const { idMeeting } = useParams();
 
-  const { data: meetingRequest } = useFetchRequestMeetingOne(idMeeting!);
+  const { data: meetingRequest, isLoading } = useFetchRequestMeetingOne(idMeeting!);
   const [meeting, setmeeting] = useState<Meeting | undefined>();
 
   const { requestUpdateMeetingMutation, requestCreateFoulsMutation, requestArchvesMeetingMutation } = MeetingController()
@@ -33,5 +33,5 @@ export const MeetingListRegistrationState = () => {
     }
   }, [meetingRequest]);
 
-  return { meeting, UpdateMeeting, CreateFouls, ArchivesMeeting };
+  return { meeting, UpdateMeeting, CreateFouls, ArchivesMeeting, isLoading };
 };

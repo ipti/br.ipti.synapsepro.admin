@@ -6,7 +6,7 @@ import { useFetchRequestClassroomRegistrationOne } from "../../../Services/PreRe
 import { formatarData, Status } from "../../../Controller/controllerGlobal";
 export const RegistrationClassroomState = () => {
   const { idRegistration } = useParams();
-  const { data: registrationRequest } = useFetchRequestClassroomRegistrationOne(
+  const { data: registrationRequest, isLoading } = useFetchRequestClassroomRegistrationOne(
     parseInt(idRegistration!)
   );
 
@@ -80,5 +80,6 @@ export const RegistrationClassroomState = () => {
     typesex,
     color,
     handleUpdateRegistration,
+    isLoading
   };
 };

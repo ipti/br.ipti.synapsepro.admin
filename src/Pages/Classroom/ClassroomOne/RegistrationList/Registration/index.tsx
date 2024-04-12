@@ -12,6 +12,7 @@ import { Container, Padding } from "../../../../../Styles/styles";
 import { useParams } from "react-router-dom";
 import { useFetchRequestClassroomOne } from "../../../../../Services/Classroom/query";
 import MaskInput from "../../../../../Components/InputMask";
+import Loading from "../../../../../Components/Loading";
 
 const Registration = () => {
   return (
@@ -28,6 +29,8 @@ const RegistrationPage = () => {
 
   const { idRegistration, id } = useParams();
   const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!));
+
+  if (props.isLoading) return <Loading />;
 
   return (
     <Container>

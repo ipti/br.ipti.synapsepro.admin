@@ -6,7 +6,7 @@ import { CreateUser } from "./type";
 export const UsersState = () => {
   const [users, setusers] = useState<any>();
 
-  const { data: userRequest } = useFetchRequestUsers();
+  const { data: userRequest, isLoading } = useFetchRequestUsers();
 
   const props = ControllerUser();
 
@@ -49,5 +49,5 @@ export const UsersState = () => {
     }
   }, [userRequest]);
 
-  return { users, CreateUser, DeleteUser, UpdateUser };
+  return { users, CreateUser, DeleteUser, UpdateUser, isLoading };
 };

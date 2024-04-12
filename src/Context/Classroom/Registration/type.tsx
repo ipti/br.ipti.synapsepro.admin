@@ -10,6 +10,7 @@ export interface RegistrationDetailsTypes {
   }[];
   initialValue: UpdateRegister
   handleUpdateRegistration: (data: UpdateRegister, id: number) => void
+  isLoading: boolean
 }
 
 

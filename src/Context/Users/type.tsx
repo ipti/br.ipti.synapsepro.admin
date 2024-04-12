@@ -3,6 +3,7 @@ export interface UsersTypes {
     CreateUser: (data: CreateUser) => void
     DeleteUser: (id: number) => void
     UpdateUser: (data: CreateUser, id: number) => void
+    isLoading: boolean
 }
 
 export interface CreateUser {

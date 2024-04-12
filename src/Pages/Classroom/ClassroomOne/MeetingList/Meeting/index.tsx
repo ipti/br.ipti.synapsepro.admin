@@ -12,6 +12,7 @@ import { PropsAplicationContext } from "../../../../../Types/types";
 import Beneficiarios from "./Beneficiarios";
 import DataMeeting from "./DataMeeting";
 import ListArchivesAttendanceList from "./UploadArchivesAttendanceList";
+import Loading from "../../../../../Components/Loading";
 
 const Meeting = () => {
   return (
@@ -29,6 +30,9 @@ const MeetingPage = () => {
   const propsAplication = useContext(
     AplicationContext
   ) as PropsAplicationContext;
+
+  if (props.isLoading) return <Loading />;
+
 
   return (
     <Container>

@@ -5,7 +5,7 @@ import { useFetchRequestClassroomRegistration } from "../../../Services/PreRegis
 import { ControllerUpdateRegistration } from "../../../Services/PreRegistration/controller";
 export const RegistrationClassroomState = () => {
     const {id} = useParams()
-    const {data: registrationsRequeset} = useFetchRequestClassroomRegistration(parseInt(id!))
+    const {data: registrationsRequeset, isLoading} = useFetchRequestClassroomRegistration(parseInt(id!))
     const {requestDeleteRegistrationMutation} = ControllerUpdateRegistration()
 
     const DeleteRegistration = (id: number) => {
@@ -21,5 +21,5 @@ export const RegistrationClassroomState = () => {
     }, [registrationsRequeset])
 
 
-    return {registrations, DeleteRegistration }
+    return {registrations, DeleteRegistration, isLoading }
 }

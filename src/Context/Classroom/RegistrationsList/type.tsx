@@ -3,6 +3,7 @@ import { Status } from "../../../Controller/controllerGlobal";
 export interface RegistrationClassroomTypes {
   registrations?: RegistrationsList;
   DeleteRegistration: (id: number) => void
+  isLoading: boolean
 }
 
 export type RegistrationsList = RegistrationType[];

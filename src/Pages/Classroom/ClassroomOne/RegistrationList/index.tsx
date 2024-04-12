@@ -10,6 +10,7 @@ import {
 import { useFetchRequestClassroomOne } from "../../../../Services/Classroom/query";
 import { Container, Padding } from "../../../../Styles/styles";
 import Empty from "../../../../Components/Empty";
+import Loading from "../../../../Components/Loading";
 
 const RegistrationList = () => {
   return (
@@ -26,6 +27,7 @@ const RegistrationListPage = () => {
   const {id} = useParams()
   const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!))
 
+  if (props.isLoading) return <Loading />;
 
   return (
     <Container>

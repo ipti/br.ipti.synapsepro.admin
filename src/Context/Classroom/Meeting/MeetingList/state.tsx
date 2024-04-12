@@ -5,7 +5,7 @@ import { Meeting } from "./type";
 export const MeetingListState = () => {
   const { id } = useParams();
 
-  const { data: meetingRequest } = useFetchRequestMeetingList(id!);
+  const { data: meetingRequest, isLoading } = useFetchRequestMeetingList(id!);
 
   const [meetings, setMeeting] = useState<Array<Meeting> | undefined>();
 
@@ -15,5 +15,5 @@ export const MeetingListState = () => {
     }
   }, [meetingRequest]);
 
-  return { meetings };
+  return { meetings, isLoading };
 };

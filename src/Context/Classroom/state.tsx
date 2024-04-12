@@ -10,7 +10,7 @@ export const ClassroomState = () => {
 
     const [classrooms, setClassrooms] = useState<any>();
 
-    const { data: classroomsFetch } = useFetchRequestClassroom()
+    const { data: classroomsFetch, isLoading } = useFetchRequestClassroom()
 
     const { requestCreateClassroomMutation, requestDeleteClassroomMutation, requestUpdateClassroomMutation } = ControllerClassroom()
 
@@ -34,5 +34,5 @@ export const ClassroomState = () => {
         requestDeleteClassroomMutation.mutate(id)
     }
 
-    return { initialValue, CreateClassroom,classrooms, UpdateClassroom, DeleteClassroom }
+    return { initialValue, CreateClassroom,classrooms, UpdateClassroom, DeleteClassroom, isLoading }
 }

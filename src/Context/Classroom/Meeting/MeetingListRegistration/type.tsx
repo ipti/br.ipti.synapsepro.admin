@@ -5,6 +5,7 @@ export interface MeetingListRegisterTypes {
   UpdateMeeting: (data: EditMeeting, id: number) => void
   CreateFouls: (data: CreateFouls) => void
   ArchivesMeeting: (data: any, id: number) => void
+  isLoading: boolean
 }
 
 export interface Meeting {

@@ -57,25 +57,11 @@ export const RegisterState = () => {
   ];
 
   const CreateRegister = () => {
-    const data = new Date(dataValues.birthday);
-    const dataFormatada = data.toISOString().split('T')[0];
+    const data = new Date(dataValues?.birthday);
+    const dataFormatada = data?.toISOString()?.split('T')[0];
 
     props.requestPreRegistrationMutation.mutate({ ...dataValues, cpf: dataValues.cpf.replace(/[^a-zA-Z0-9]/g, ''), responsable_telephone: dataValues.responsable_telephone.replace(/[^a-zA-Z0-9]/g, ''), birthday: dataFormatada, responsable_cpf: dataValues?.responsable_cpf?.replace(/[^a-zA-Z0-9]/g, '') })
   }
-
-
-  // const {schoolsList, requestSaveRegistrationMutation} = Controller()
-
-  // const { data: anwsers } = useFetchRequestQuiz({ id: school ? school.inep_id : null })
-
-  // useEffect(() => {
-  //     if(schoolsList){
-  //         setSchools(schoolsList)
-  //     }
-  //     if(anwsers){
-  //         setQuiz(anwsers)
-  //     }
-  //   }, [schoolsList, anwsers])
 
   const initialState: Registration = {
     birthday: "",

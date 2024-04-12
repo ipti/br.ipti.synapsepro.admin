@@ -11,6 +11,7 @@ import { AplicationContext } from "../../../Context/Aplication/context";
 import { PropsAplicationContext } from "../../../Types/types";
 import { ROLE } from "../../../Controller/controllerGlobal";
 import Empty from "../../../Components/Empty";
+import Loading from "../../../Components/Loading";
 
 const ListClassroom = () => {
   return (
@@ -28,11 +29,13 @@ const ListClassroomPage = () => {
 
   const props = useContext(ClassroomContext) as ClassroomTypes;
 
+  if (props.isLoading) return <Loading />;
+
   return (
     <Container>
       {(propsAplication.user?.role === ROLE.ADMIN ||
         propsAplication.user?.role === ROLE.COORDINATORS) && (
-        <Row id="end" style={{width: "100%"}}>
+        <Row id="end" style={{ width: "100%" }}>
           <Button
             label="Criar turma"
             icon={"pi pi-plus"}
@@ -41,19 +44,23 @@ const ListClassroomPage = () => {
         </Row>
       )}
       <Padding padding="16px" />
-      {props?.classrooms?.length > 0 ? <div className="grid">
-        {props.classrooms?.map((item: any, index: number) => {
-          return (
-            <div className="col-12 md:col-6 lg:col-4">
-              <CardClassroom
-                title={item.name}
-                year={item.year.toString()}
-                id={item.id}
-              />
-            </div>
-          );
-        })}
-      </div> : <Empty title="Turmas" />}
+      {props?.classrooms?.length > 0 ? (
+        <div className="grid">
+          {props.classrooms?.map((item: any, index: number) => {
+            return (
+              <div className="col-12 md:col-6 lg:col-4">
+                <CardClassroom
+                  title={item.name}
+                  year={item.year.toString()}
+                  id={item.id}
+                />
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <Empty title="Turmas" />
+      )}
     </Container>
   );
 };
