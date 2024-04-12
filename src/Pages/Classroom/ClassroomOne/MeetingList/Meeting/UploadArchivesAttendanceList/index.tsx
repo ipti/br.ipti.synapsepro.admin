@@ -14,8 +14,8 @@ const ListArchivesAttendanceList = ({ item }: { item: MeetingArc }) => {
       onClick={() => {
         window.open(item.archive_url ??
           process.env.REACT_APP_API_PATH +
-            `archive-meeting-bff/${item.id}/` +
-            item.original_name
+          `archive-meeting-bff/${item.id}/` +
+          item.original_name
         );
       }}
     >
@@ -24,6 +24,7 @@ const ListArchivesAttendanceList = ({ item }: { item: MeetingArc }) => {
           style={{ width: "30px", height: "30px" }}
           alt=""
           src={
+            item.archive_url ??
             process.env.REACT_APP_API_PATH +
             `archive-meeting-bff/${item.id}/` +
             item.original_name
