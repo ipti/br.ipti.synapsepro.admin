@@ -7,12 +7,13 @@ import MeetingListRegistrationProvider, {
 } from "../../../../../Context/Classroom/Meeting/MeetingListRegistration/context";
 import { MeetingListRegisterTypes } from "../../../../../Context/Classroom/Meeting/MeetingListRegistration/type";
 import { ROLE, Status } from "../../../../../Controller/controllerGlobal";
-import { Container, Padding } from "../../../../../Styles/styles";
+import { Column, Container, Padding } from "../../../../../Styles/styles";
 import { PropsAplicationContext } from "../../../../../Types/types";
 import Beneficiarios from "./Beneficiarios";
 import DataMeeting from "./DataMeeting";
 import ListArchivesAttendanceList from "./UploadArchivesAttendanceList";
 import Loading from "../../../../../Components/Loading";
+import TextAreaComponent from "../../../../../Components/TextArea";
 
 const Meeting = () => {
   return (
@@ -33,37 +34,51 @@ const MeetingPage = () => {
 
   if (props.isLoading) return <Loading />;
 
-
   return (
     <Container>
       {props.meeting ? (
         <>
-          <Message
-            severity={
-              props.meeting?.status === Status.PENDING
-                ? "warn"
-                : props.meeting?.status === Status.APPROVED
-                ? "success"
-                : props.meeting?.status === Status.REPROVED
-                ? "error"
-                : "info"
-            }
-            text={
-              props.meeting?.status === Status.PENDING
-                ? "Pendente"
-                : props.meeting?.status === Status.APPROVED
-                ? "Aprovado"
-                : props.meeting?.status === Status.REPROVED
-                ? "Reprovado"
-                : "info"
-            }
-          />
-          <Padding />
-          {props.meeting.justification &&
-            propsAplication.user?.role === ROLE.REAPPLICATORS && (
-              <h4>Justificativa: {props.meeting.justification}</h4>
-            )}
-          <Padding padding="16px" />
+          <div className="grid">
+            <Column id="center" className="col-12 md:col-6">
+              <div>
+                <Message
+                  severity={
+                    props.meeting?.status === Status.PENDING
+                      ? "warn"
+                      : props.meeting?.status === Status.APPROVED
+                      ? "success"
+                      : props.meeting?.status === Status.REPROVED
+                      ? "error"
+                      : "info"
+                  }
+                  text={
+                    props.meeting?.status === Status.PENDING
+                      ? "Pendente"
+                      : props.meeting?.status === Status.APPROVED
+                      ? "Aprovado"
+                      : props.meeting?.status === Status.REPROVED
+                      ? "Pendente de Revisão"
+                      : "info"
+                  }
+                />
+              </div>
+            </Column>
+
+            {props.meeting.justification &&
+              propsAplication.user?.role === ROLE.REAPPLICATORS && (
+                <div className="col-12 md:col-6">
+                  <label>Justificativa</label>
+                  <Padding />
+                  <TextAreaComponent
+                    disabled={true}
+                    value={props.meeting?.justification}
+                    name="justification"
+                    placeholder="Justicativa sobre a escolha do status"
+                  />
+                </div>
+              )}
+          </div>
+          <Padding padding="8px" />
           <DataMeeting />
           <Padding padding="16px" />
           <div className="grid">
@@ -74,7 +89,9 @@ const MeetingPage = () => {
             </div>
           </div>
           <Padding />
-          {props.meeting?.meeting_archives?.length > 0 && <label>Arquivos</label>}
+          {props.meeting?.meeting_archives?.length > 0 && (
+            <label>Arquivos</label>
+          )}
           <Padding />
 
           <div className="grid">

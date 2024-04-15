@@ -30,7 +30,7 @@ const CardMeeting = ({ title, data, status, idMeeting }: { title: string; data: 
           </div>
         </Column>
         <Column>
-          {status === Status.PENDING ? <Message severity="warn" text="Pendente" /> : status === Status.APPROVED ? <Message severity="success" text="Aprovado" /> : status === Status.REPROVED ? <Message severity="error" text="Recusado" /> : null}
+          {status === Status.PENDING ? <Message severity="warn" text="" /> : status === Status.APPROVED ? <Message severity="success" text="" /> : status === Status.REPROVED ? <Message severity="error" text="" /> : null}
         </Column>
       </Row>
     </Container>

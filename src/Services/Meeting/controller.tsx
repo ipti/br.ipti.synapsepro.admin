@@ -46,7 +46,7 @@ export const MeetingController = () => {
                 //         queryClient.refetchQueries("useRequestsMeetingOne")
                 //     }
                 // })
-                window.location.reload()
+                queryClient.refetchQueries("useRequestsMeetingOne")
             },
         }
     )
