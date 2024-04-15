@@ -55,7 +55,6 @@ const FormEditSchedulePage = () => {
               }}
             >
               {({ values, handleChange }) => {
-                console.log(values)
                 return (
                   <Form>
                     <div className="grid">

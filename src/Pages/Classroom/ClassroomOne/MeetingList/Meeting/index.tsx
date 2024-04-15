@@ -74,12 +74,12 @@ const MeetingPage = () => {
             </div>
           </div>
           <Padding />
-          {props.meeting?.meetingArchives.length > 0 && <label>Arquivos</label>}
+          {props.meeting?.meeting_archives?.length > 0 && <label>Arquivos</label>}
           <Padding />
 
           <div className="grid">
             <div className="col-12 md:col-6">
-              {props.meeting?.meetingArchives?.map((item) => {
+              {props.meeting?.meeting_archives?.map((item) => {
                 return <ListArchivesAttendanceList item={item} />;
               })}
             </div>

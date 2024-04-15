@@ -19,8 +19,8 @@ export interface Meeting {
   classroom_fk: number
   fouls: any[]
   classroom: Classroom
-  meetingUser: MeetingUser[]
-  meetingArchives: MeetingArc[]
+  meeting_user: MeetingUser[]
+  meeting_archives: MeetingArc[]
 }
 
 export interface Classroom {

@@ -22,7 +22,6 @@ export const RegisterState = () => {
     setStep(step + 1);
     let data = Object.assign(dataValues, values);
     setDataValues(data);
-    console.log(step)
   };
 
   const backStep = () => {

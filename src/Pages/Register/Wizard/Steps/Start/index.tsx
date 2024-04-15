@@ -12,7 +12,6 @@ const Start = () => {
 
   const props = useContext(RegisterContext) as RegisterTypes;
 
-  console.log(props.classroom)
 
 
 

@@ -17,7 +17,7 @@ const InputsEquals = ({ values, handleChange, errors, touched }: { values: any, 
             <div>
                 <label>Data de Nascimento *</label>
                 <Padding />
-                <CalendarComponent placeholder="Data de Nascimento *" name="birthday" value={values.birthday} onChange={handleChange} />
+                <CalendarComponent placeholder="Data de Nascimento *" name="birthday" dateFormat="dd/mm/yy" value={values.birthday} onChange={handleChange} />
             </div>
             {errors.birthday && touched.birthday ? (
                 <div style={{ color: "red", marginTop: "8px" }}>{errors.birthday}</div>

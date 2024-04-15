@@ -50,7 +50,6 @@ export const requestClassroomOne = (id: number) => {
 };
 
 export const requestUpdateClassroom = (id: number, data: { name: string }) => {
-  console.log(id, data);
   let path = "/classroom/";
   return http
     .put(path + id, data)

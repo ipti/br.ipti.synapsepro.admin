@@ -39,7 +39,6 @@ const CreateMeetingPage = () => {
         }}
       >
         {({ values, handleChange }) => {
-          console.log(values);
           return (
             <Form>
               <div className="card">

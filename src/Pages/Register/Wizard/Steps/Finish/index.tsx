@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import homeImg from "../../../../../Assets/images/Caderno.png";
 import loading from "../../../../../Assets/images/Gif de Carregamento.gif";
 import { RegisterContext } from "../../../../../Context/Register/context";
@@ -9,13 +9,33 @@ import ImageTextSteps from "../../ImageTextStpes";
 
 const Finish = () => {
   const props = useContext(RegisterContext) as RegisterTypes;
+  const [value, setValue] = useState<number>(0);
+
+  const interval = useRef<any | null>(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      props.CreateRegister();
-    }, 1200);
+      let _val = value;
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      interval.current = setInterval(() => {
+          _val += Math.floor(Math.random() * 10) + 1;
+
+          if (_val >= 100) {
+              _val = 100;
+              props.CreateRegister()
+
+              clearInterval(interval.current!);
+          }
+
+          setValue(_val);
+      }, 120);
+
+      return () => {
+          if (interval.current) {
+              clearInterval(interval.current);
+              interval.current = null;
+          }
+      };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

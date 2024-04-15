@@ -1,12 +1,12 @@
 import { Form } from "formik";
-import { Padding } from "../../../Styles/styles";
-import TextInput from "../../../Components/TextInput";
-import DropdownComponent from "../../../Components/Dropdown";
-import { ROLE } from "../../../Controller/controllerGlobal";
-import { MultiSelect } from "primereact/multiselect";
-import PasswordInput from "../../../Components/TextPassword";
 import { Button } from "primereact/button";
-import { useFetchRequestProjectLists } from "../../../Services/Project/query";
+import { MultiSelect } from "primereact/multiselect";
+import DropdownComponent from "../../../Components/Dropdown";
+import TextInput from "../../../Components/TextInput";
+import PasswordInput from "../../../Components/TextPassword";
+import { ROLE } from "../../../Controller/controllerGlobal";
+import { useFetchRequestSocialTechnologyLists } from "../../../Services/SocialTechnology/query";
+import { Padding } from "../../../Styles/styles";
 
 const InputsUser = ({
   values,
@@ -19,7 +19,7 @@ const InputsUser = ({
   errors: any;
   touched: any;
 }) => {
-  const { data: projects } = useFetchRequestProjectLists();
+  const { data: projects } = useFetchRequestSocialTechnologyLists();
 
   return (
     <Form>
