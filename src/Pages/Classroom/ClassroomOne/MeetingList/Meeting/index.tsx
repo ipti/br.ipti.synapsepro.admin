@@ -81,13 +81,13 @@ const MeetingPage = () => {
           <Padding padding="8px" />
           <DataMeeting />
           <Padding padding="16px" />
-          <div className="grid">
+          {!(props.meeting.status === Status.APPROVED && propsAplication.user?.role === ROLE.REAPPLICATORS) && <div className="grid">
             <div className="col-12 md:col-6">
               <label>Salve os arquivos do encontro</label>
               <Padding />
               <Upload />
             </div>
-          </div>
+          </div>}
           <Padding />
           {props.meeting?.meeting_archives?.length > 0 && (
             <label>Arquivos</label>
