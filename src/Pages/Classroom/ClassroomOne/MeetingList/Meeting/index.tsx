@@ -46,24 +46,23 @@ const MeetingPage = () => {
                     props.meeting?.status === Status.PENDING
                       ? "warn"
                       : props.meeting?.status === Status.APPROVED
-                      ? "success"
-                      : props.meeting?.status === Status.REPROVED
-                      ? "error"
-                      : "info"
+                        ? "success"
+                        : props.meeting?.status === Status.REPROVED
+                          ? "error"
+                          : "info"
                   }
                   text={
                     props.meeting?.status === Status.PENDING
                       ? "Pendente"
                       : props.meeting?.status === Status.APPROVED
-                      ? "Aprovado"
-                      : props.meeting?.status === Status.REPROVED
-                      ? "Pendente de Revisão"
-                      : "info"
+                        ? "Aprovado"
+                        : props.meeting?.status === Status.REPROVED
+                          ? "Pendente de Revisão"
+                          : "info"
                   }
                 />
               </div>
             </Column>
-
             {props.meeting.justification &&
               propsAplication.user?.role === ROLE.REAPPLICATORS && (
                 <div className="col-12 md:col-6">
@@ -93,7 +92,6 @@ const MeetingPage = () => {
             <label>Arquivos</label>
           )}
           <Padding />
-
           <div className="grid">
             <div className="col-12 md:col-6">
               {props.meeting?.meeting_archives?.map((item) => {

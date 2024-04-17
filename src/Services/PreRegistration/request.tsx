@@ -19,6 +19,7 @@ export const requestPreRegistration = (data: CreatePreRegistration) => {
 
 
 export const requestUpdateRegistration = (data: UpdateRegister, id: number) => {
+  console.log(data)
   return http
     .put("/registration/" + id, { ...data, color_race: data.color_race?.id, sex: data.sex?.id, deficiency: data.deficiency.id, status: data.status?.id })
     .then(response => response.data)
@@ -79,6 +80,22 @@ export const requestClassroomRegistrationOne = (id: number) => {
       }
       throw err;
     });
+};
+
+export const requestRegistrationOneCpf = (cpf?: string) => {
+  if (cpf) {
+    let path = "/registration-bff?cpf=" + cpf.replace(/[^\d]/g, '');
+    return http
+      .get(path)
+      .then(response => response.data)
+      .catch(err => {
+        if (err.response.status === 401) {
+          logout()
+          window.location.reload()
+        }
+        throw err;
+      });
+  }
 };
 
 export const requestDeleteRegistration = (id: number) => {

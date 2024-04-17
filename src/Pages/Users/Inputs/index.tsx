@@ -7,6 +7,9 @@ import PasswordInput from "../../../Components/TextPassword";
 import { ROLE } from "../../../Controller/controllerGlobal";
 import { useFetchRequestSocialTechnologyLists } from "../../../Services/SocialTechnology/query";
 import { Padding } from "../../../Styles/styles";
+import { useContext } from "react";
+import { AplicationContext } from "../../../Context/Aplication/context";
+import { PropsAplicationContext } from "../../../Types/types";
 
 const InputsUser = ({
   values,
@@ -20,6 +23,8 @@ const InputsUser = ({
   touched: any;
 }) => {
   const { data: projects } = useFetchRequestSocialTechnologyLists();
+
+  const props = useContext(AplicationContext) as PropsAplicationContext
 
   return (
     <Form>
@@ -70,8 +75,11 @@ const InputsUser = ({
             optionsLabel="name"
             value={values.role}
             onChange={handleChange}
-            options={[
+            options={props.user?.role === ROLE.ADMIN ? [
               { id: ROLE.ADMIN, name: "Admin" },
+              { id: ROLE.COORDINATORS, name: "Coordenador" },
+              { id: ROLE.REAPPLICATORS, name: "Reaplicador" },
+            ] : [
               { id: ROLE.COORDINATORS, name: "Coordenador" },
               { id: ROLE.REAPPLICATORS, name: "Reaplicador" },
             ]}

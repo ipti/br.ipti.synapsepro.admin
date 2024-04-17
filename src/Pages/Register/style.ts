@@ -8,7 +8,7 @@ export const Container = styled.div`
   font-family: ${typography.types.light};
   background-repeat: no-repeat;
   background-position: right top;
-  overflow-y: auto;
+  position: fixed;
   height: 100%;
   .contentStart {
     color: ${color.grayClear};

@@ -47,9 +47,9 @@ export const RegistrationClassroomState = () => {
   const date = new Date(registration?.birthday!);
 
   const status = [
-    {id: Status.APPROVED, name: "Aprovado"},
-    {id: Status.REPROVED, name: "Reprovado"},
-    {id: Status.PENDING, name: "Pedente"},
+    { id: Status.APPROVED, name: "Aprovado" },
+    { id: Status.REPROVED, name: "Reprovado" },
+    { id: Status.PENDING, name: "Pedente" },
   ]
 
   const getStatus = (id: string) => {
@@ -60,7 +60,7 @@ export const RegistrationClassroomState = () => {
     sex: VerifySex(registration?.sex!),
     cpf: registration?.cpf,
     color_race: VerifyColor(registration?.color_race!),
-    birthday: !isNaN(date.getTime()) ? formatarData(date) : registration?.birthday,
+    birthday: !isNaN(date.getTime()) ? formatarData(registration?.birthday!) : registration?.birthday,
     deficiency: registration?.deficiency
       ? { name: "Sim", id: true }
       : { name: "Não", id: false },
@@ -71,7 +71,7 @@ export const RegistrationClassroomState = () => {
   };
 
   const handleUpdateRegistration = (data: UpdateRegister, id: number) => {
-    requestPreRegistrationMutation.mutate({ data: {...data, birthday: registration?.birthday}, id: id });
+    requestPreRegistrationMutation.mutate({ data: { ...data, birthday: registration?.birthday, responsable_telephone: data?.responsable_telephone?.replace(/[^a-zA-Z0-9]/g, ''), responsable_cpf: data?.responsable_cpf?.replace(/[^a-zA-Z0-9]/g, '') }, id: id });
   };
 
   return {

@@ -1,37 +1,31 @@
 export const gerarIdAleatorio = (tamanho: number) => {
-    const caracteres =
-      "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    let id = "";
+  const caracteres =
+    "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  let id = "";
 
-    for (let i = 0; i < tamanho; i++) {
-      const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
-      id += caracteres.charAt(indiceAleatorio);
-    }
+  for (let i = 0; i < tamanho; i++) {
+    const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+    id += caracteres.charAt(indiceAleatorio);
+  }
 
-    return id;
-  };
+  return id;
+};
 
- export function formatarData(data: Date): string {
-    const dia: number = data.getDate();
-    const mes: number = data.getMonth() + 1; // Os meses começam do zero, então adicionamos 1
-    const ano: number = data.getFullYear();
-    
-    // Adicionando zeros à esquerda para garantir que cada parte da data tenha dois dígitos
-    const diaFormatado: string = dia < 10 ? `0${dia}` : `${dia}`;
-    const mesFormatado: string = mes < 10 ? `0${mes}` : `${mes}`;
-
-    return `${diaFormatado}/${mesFormatado}/${ano}`;
+export function formatarData(data: string): string {
+  var date = data.toString().split("T")[0]
+  var dataEdit = date.split("-").reverse().join("/");
+  return dataEdit;
 }
 
-export const Status =  {
+export const Status = {
   APPROVED: "APPROVED",
   PENDING: "PENDING",
   REPROVED: "REPROVED",
 }
 
-export const ROLE =  {
+export const ROLE = {
   ADMIN: "ADMIN",
-  USER: "USER", 
+  USER: "USER",
   REAPPLICATORS: "REAPPLICATORS",
   COORDINATORS: 'COORDINATORS'
 }

@@ -24,7 +24,7 @@ const CardMeeting = ({ title, data, status, idMeeting }: { title: string; data: 
           <div className={"boxYear"}>
             <Column id="center" style={{ height: "100%" }}>
               <Row>
-               <p>Data: </p><Padding /> {formatarData(new Date(data))}
+               <p>Data: </p><Padding /> {formatarData(data)}
               </Row>
             </Column>
           </div>

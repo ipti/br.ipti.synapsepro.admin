@@ -27,6 +27,7 @@ const DataMeeting = () => {
     { id: Status.REPROVED, name: "Pendente de Revisão" },
     { id: Status.PENDING, name: "Pedente de Análise" },
   ];
+  
   const getStatus = (id: string) => {
     return status.find((props) => props.id === id);
   };
