@@ -6,15 +6,16 @@ import { RegisterContext } from "../../../../../Context/Register/context";
 import { RegisterTypes } from "../../../../../Context/Register/type";
 import { Column, Padding, Row } from "../../../../../Styles/styles";
 import ImageTextSteps from "../../ImageTextStpes";
-import { getYear } from "../../../../../Services/localstorage";
+import { getYear, setYear } from "../../../../../Services/localstorage";
+import queryClient from "../../../../../Services/reactquery";
 // import { RegistrationContext } from "../../containers/Registration/Context/context";
 
 const ChoiceYear = () => {
 
-    const [year, setYear] = useState<number | undefined>()
+    const [year, setYearPage] = useState<number | undefined>()
 
     useEffect(() => {
-        setYear(parseInt(getYear()!))
+        setYearPage(parseInt(getYear()!))
     }, [])
 
     const props = useContext(RegisterContext) as RegisterTypes;
@@ -26,7 +27,7 @@ const ChoiceYear = () => {
                     e clique no botão abaixo</p>} />
                 <Row id="center">
                     <div className="col-12 md:col-4">
-                        <DropdownComponent placerholder="Escolha o Ano" onChange={(e) => { setYear(e.target.value); setYear(e.target.value) }} options={[2024, 2023, 2022, 2021, 2020]} optionsLabel="" value={year} />
+                        <DropdownComponent placerholder="Escolha o Ano" onChange={(e) => { setYearPage(e.target.value); setYear(e.target.value); queryClient.refetchQueries("useRequestProjectsAndClassroom") }} options={[2024, 2023, 2022, 2021, 2020]} optionsLabel="" value={year} />
                     </div>
                 </Row>
                 <Padding padding={props.padding} />

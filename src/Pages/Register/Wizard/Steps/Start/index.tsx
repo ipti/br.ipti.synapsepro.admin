@@ -22,7 +22,7 @@ const Start = () => {
           e clique no botão abaixo</p>} />
         <Row id="center">
           <div className="col-12 md:col-4">
-            <DropdownComponent placerholder="Escolha o projeto" onChange={(e) => props.setClassroom(e.target.value)} options={props.project} optionsLabel="name" value={props.classroom} />
+            <DropdownComponent placerholder="Escolha o projeto" onChange={(e) => {props.setClassroom(e.target.value)}} options={props.project} optionsLabel="name" value={props.classroom} />
             {!props.classroom && true ? (
               <div style={{ color: "red", marginTop: "8px" }}>Projeto é obrigatório</div>
             ) : null}
