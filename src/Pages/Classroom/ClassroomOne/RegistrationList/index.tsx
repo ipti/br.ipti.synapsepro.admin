@@ -37,7 +37,7 @@ const RegistrationListPage = () => {
         {props.registrations?.map((item, index) => {
           return (
             <div className="col-12 md:col-6 lg:col-4" key={index}>
-              <CardRegistration title={item.id.toString()} subtitle={item.name} idRegistration={item.id} status={item.status} />
+              <CardRegistration title={item.registration.id.toString()} subtitle={item.registration.name} idRegistration={item.registration.id} status={item.registration.status} />
             </div>
           );
         })}

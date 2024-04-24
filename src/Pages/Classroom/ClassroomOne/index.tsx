@@ -98,7 +98,7 @@ const ClassroomOnePage = () => {
             title="Alunos"
             description="Acesse para gerenciar seus alunos"
             icon={pessoas}
-            count={classroom?.registrations?.length}
+            count={classroom?.register_classroom?.length}
           />
         </div>
         <div
