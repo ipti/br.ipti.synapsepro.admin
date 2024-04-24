@@ -24,7 +24,6 @@ export const Column = styled.div<PropsReverse>`
 
   @media (max-width: 600) {
     flex-direction: ${props => props.reverse ? "row" : "column"};
-
   }
 `;
 

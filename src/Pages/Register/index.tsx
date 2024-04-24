@@ -5,7 +5,7 @@ import RegisterProvider, {
   RegisterContext,
 } from "../../Context/Register/context";
 import { RegisterTypes } from "../../Context/Register/type";
-import { Column, Row } from "../../Styles/styles";
+import { Column, Padding, Row } from "../../Styles/styles";
 import Wizard from "./Wizard";
 import { Container } from "./style";
 
@@ -31,13 +31,12 @@ const RegisterPage = () => {
         ></img>
       </div>
 
-      <Column id="center" className="h-full">
-        <Column id="center" style={{ height: "100%" }}>
-          <Row id="center">
-            <img className={"imgLogo"} src={TagImage} alt=""></img>
-          </Row>
-          <Wizard />
-        </Column>
+      <Column id="center" className="h-full" style={{ height: "100vh", overflowY: "auto", marginBottom: "32px" }}>
+        <Row id="center">
+          <img className={"imgLogo"} src={TagImage} alt=""></img>
+        </Row>
+        <Wizard />
+        <Padding padding="32px" />
       </Column>
     </Container>
   );

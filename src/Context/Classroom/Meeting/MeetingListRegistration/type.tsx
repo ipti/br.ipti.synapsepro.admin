@@ -25,13 +25,23 @@ export interface Meeting {
 
 export interface Classroom {
   name: string
-  registrations: Registration[]
+  register_classroom: RegisterClassroom[]
+}
+
+export interface RegisterClassroom {
+  id: number
+  registration_fk: number
+  classroom_fk: number
+  createdAt: string
+  updatedAt: string
+  registration: Registration
 }
 
 export interface Registration {
   id: number
   name: string
 }
+
 
 export interface MeetingUser {
   users: Users

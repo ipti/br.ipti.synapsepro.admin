@@ -82,11 +82,11 @@ const List = () => {
           </tr>
         </thead>
         <tbody>
-          {props.meeting?.classroom.registrations?.map((item, index) => {
+          {props.meeting?.classroom.register_classroom?.map((item, index) => {
             return (
               <tr>
                 <Td style={{ textAlign: "center" }}>{index + 1}</Td>
-                <Td>{item.name}</Td>
+                <Td>{item.registration.name}</Td>
                 <Td></Td>
               </tr>
             );

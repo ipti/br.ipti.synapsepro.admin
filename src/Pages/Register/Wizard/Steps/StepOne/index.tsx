@@ -29,11 +29,16 @@ const StepOne = () => {
     deficiency: Yup.boolean().required('Deficiência é obrigatória')
   });
 
+  const schemaNotCpf = Yup.object().shape({
+    name: Yup.string().required('Nome é obrigatório'),
+    color_race: Yup.string().required('Raça/cor é obrigatório'),
+    deficiency: Yup.boolean().required('Deficiência é obrigatória')
+  });
 
 
   return (
     <>
-      <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(values) => props.NextStep(values)}>
+      <Formik initialValues={initialValue} validationSchema={(props.isOverAge) ? schema : schemaNotCpf} onSubmit={(values) => props.NextStep(values)}>
         {({ values, handleChange, errors, touched }) => {
           return (
             <Form>
@@ -42,11 +47,11 @@ const StepOne = () => {
                   <div className="col-12 md:col-4">
                     <Padding />
                     <div>
-                      <label>CPF *</label>
+                      <label>{props.isOverAge ? "CPF *" : "CPF"}</label>
                       <Padding />
                       <MaskInput
                         mask="999.999.999-99"
-                        placeholder="CPF *"
+                        placeholder={props.isOverAge ? "CPF *" : "CPF"}
                         name="cpf"
                         value={values.cpf}
                         onChange={handleChange}
@@ -85,14 +90,7 @@ const StepOne = () => {
                     {errors.deficiency && touched.deficiency ? (
                       <div style={{ color: "red", marginTop: "8px" }}>{errors.deficiency}</div>
                     ) : null}
-                    <Padding padding={props.padding} />
-                    <div>
-                      <label>Você tem 18 anos ou mais? *</label>
-                      <Padding />
-                      <RadioButtonComponent label="Sim, tenho 18 anos ou mais" checked={props.isOverAge === true} value={true} onChange={() => props.setIsOverAge(true)} />
-                      <Padding />
-                      <RadioButtonComponent label="Não, ainda não completei 18 anos" checked={props.isOverAge === false} value={false} onChange={() => props.setIsOverAge(false)} />
-                    </div>
+                    
                   </div>
                 </Row>
                 <Padding padding={props.padding} />

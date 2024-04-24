@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Present from "../../../../../../Assets/images/status-approved.svg";
 import NotPresent from "../../../../../../Assets/images/status-desapproved.svg";
 import { MeetingListRegistrationContext } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/context";
-import { MeetingListRegisterTypes } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/type";
+import { MeetingListRegisterTypes, RegisterClassroom } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/type";
 import styles from "../../../../../../Styles";
 import { Padding, Row } from "../../../../../../Styles/styles";
 
@@ -44,16 +44,16 @@ const Beneficiarios = () => {
     return array;
   };
 
-  const bodyRegisterFouls = (dataRow: any) => {
+  const bodyRegisterFouls = (dataRow: RegisterClassroom) => {
     return (
       <Row id="center">
-        {!selectedProducts.find((props: any) => props.id === dataRow.id) ? <img alt="" style={{ cursor: "pointer" }} src={Present} onClick={() => {
+        {!selectedProducts.find((props: any) => props.id === dataRow.registration.id) ? <img alt="" style={{ cursor: "pointer" }} src={Present} onClick={() => {
           setSelectedProducts((prevArray: any) =>
-            prevArray.concat(dataRow)
+            prevArray.concat(dataRow.registration)
           );
         }} /> : <img alt="" style={{ cursor: "pointer" }} src={NotPresent} onClick={() => {
           const novoArray = selectedProducts.filter(
-            (obj: any) => obj.id !== dataRow.id
+            (obj: any) => obj.id !== dataRow.registration.id
           );
           setSelectedProducts(novoArray);
         }} />}
@@ -92,9 +92,9 @@ const Beneficiarios = () => {
       </Row>
       <Padding padding="16px" />
       <StyleComponent>
-        {props.meeting?.classroom.registrations ? (
+        {props.meeting?.classroom.register_classroom ? (
           <DataTable
-            value={props.meeting?.classroom.registrations}
+            value={props.meeting?.classroom.register_classroom}
             selectionMode={rowClick ? null : "checkbox"}
             selection={selectedProducts}
             onSelectionChange={(e: any) => setSelectedProducts(e.value)}
@@ -106,7 +106,7 @@ const Beneficiarios = () => {
               selectionMode="multiple"
               headerStyle={{ width: "3rem" }}
             ></Column> */}
-            <Column field="name" align="center" header="Nome"></Column>
+            <Column field="registration.name" align="center" header="Nome"></Column>
             <Column
               body={bodyRegisterFouls}
               align="center"
