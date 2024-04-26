@@ -27,7 +27,7 @@ const RegistrationPage = () => {
     RegistrationDetailsContext
   ) as RegistrationDetailsTypes;
 
-  const { idRegistration, id } = useParams();
+  const { id } = useParams();
   const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!));
 
   if (props.isLoading) return <Loading />;
@@ -42,7 +42,7 @@ const RegistrationPage = () => {
           onSubmit={(values) => {
             props.handleUpdateRegistration(
               { ...values },
-              parseInt(idRegistration!)
+              props.registration?.registration_fk!
             );
           }}
         >

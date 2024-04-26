@@ -6,9 +6,8 @@ import { useFetchRequestClassroomRegistrationOne } from "../../../Services/PreRe
 import { formatarData, Status } from "../../../Controller/controllerGlobal";
 export const RegistrationClassroomState = () => {
   const { idRegistration } = useParams();
-  const { data: registrationRequest, isLoading } = useFetchRequestClassroomRegistrationOne(
-    parseInt(idRegistration!)
-  );
+  const { data: registrationRequest, isLoading } =
+    useFetchRequestClassroomRegistrationOne(parseInt(idRegistration!));
 
   const { requestPreRegistrationMutation } = ControllerUpdateRegistration();
 
@@ -44,34 +43,48 @@ export const RegistrationClassroomState = () => {
     return color.find((props) => props.id === color_race);
   };
 
-  const date = new Date(registration?.birthday!);
+  const date = new Date(registration?.registration.birthday!);
 
   const status = [
     { id: Status.APPROVED, name: "Aprovado" },
     { id: Status.REPROVED, name: "Reprovado" },
     { id: Status.PENDING, name: "Pedente" },
-  ]
+  ];
 
   const getStatus = (id: string) => {
-    return status.find(props => props.id === id)
-  }
+    return status.find((props) => props.id === id);
+  };
   const initialValue = {
-    name: registration?.name,
-    sex: VerifySex(registration?.sex!),
-    cpf: registration?.cpf,
-    color_race: VerifyColor(registration?.color_race!),
-    birthday: !isNaN(date.getTime()) ? formatarData(registration?.birthday!) : registration?.birthday,
-    deficiency: registration?.deficiency
+    name: registration?.registration.name,
+    sex: VerifySex(registration?.registration.sex!),
+    cpf: registration?.registration.cpf,
+    color_race: VerifyColor(registration?.registration.color_race!),
+    birthday: !isNaN(date.getTime())
+      ? formatarData(registration?.registration.birthday!)
+      : registration?.registration.birthday,
+    deficiency: registration?.registration.deficiency
       ? { name: "Sim", id: true }
       : { name: "Não", id: false },
-    responsable_name: registration?.responsable_name,
-    responsable_cpf: registration?.responsable_cpf,
-    responsable_telephone: registration?.responsable_telephone,
+    responsable_name: registration?.registration.responsable_name,
+    responsable_cpf: registration?.registration.responsable_cpf,
+    responsable_telephone: registration?.registration.responsable_telephone,
     status: getStatus(registration?.status!),
   };
 
   const handleUpdateRegistration = (data: UpdateRegister, id: number) => {
-    requestPreRegistrationMutation.mutate({ data: { ...data, birthday: registration?.birthday, responsable_telephone: data?.responsable_telephone?.replace(/[^a-zA-Z0-9]/g, ''), responsable_cpf: data?.responsable_cpf?.replace(/[^a-zA-Z0-9]/g, '') }, id: id });
+    requestPreRegistrationMutation.mutate({
+      data: {
+        ...data,
+        registration_classroom_id: registration?.id,
+        birthday: registration?.registration.birthday,
+        responsable_telephone: data?.responsable_telephone?.replace(
+          /[^a-zA-Z0-9]/g,
+          ""
+        ),
+        responsable_cpf: data?.responsable_cpf?.replace(/[^a-zA-Z0-9]/g, ""),
+      },
+      id: id,
+    });
   };
 
   return {
@@ -80,6 +93,6 @@ export const RegistrationClassroomState = () => {
     typesex,
     color,
     handleUpdateRegistration,
-    isLoading
+    isLoading,
   };
 };
