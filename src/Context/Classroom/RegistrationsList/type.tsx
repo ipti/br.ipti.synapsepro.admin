@@ -16,7 +16,8 @@ export interface RegistrationType {
   classroom_fk: number
   createdAt: string
   updatedAt: string
-  registration: Registration
+  registration: Registration,
+  status: string
 }
 
 export interface Registration {

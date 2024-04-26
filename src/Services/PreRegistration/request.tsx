@@ -69,7 +69,7 @@ export const requestClassroomRegistration = (id: number) => {
 };
 
 export const requestClassroomRegistrationOne = (id: number) => {
-  let path = "/registration/" + id;
+  let path = "/registration-token-bff/one?idRegistrationClassroom=" + id;
   return http
     .get(path)
     .then(response => response.data)

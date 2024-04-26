@@ -35,21 +35,32 @@ export interface UpdateRegister
     responsable_cpf: string | undefined;
     responsable_telephone: string | undefined;
     status: {id: string, name: string} | undefined;
+    registration_classroom_id?: number
+}
+export interface RegistrationType {
+  id: number
+  registration_fk: number
+  classroom_fk: number
+  status: string
+  createdAt: string
+  updatedAt: string
+  registration: Registration
 }
 
-export interface RegistrationType {
-  id: number;
-  classroom_fk?: number;
-  name?: string;
-  birthday?: string;
-  cpf?: string;
-  sex?: number;
-  color_race?: number;
-  deficiency?: boolean;
-  deficiency_description?: string | null;
-  responsable_name?: string;
-  responsable_cpf?: string;
-  responsable_telephone?: string;
-  zone?: number;
-  status?: string;
+export interface Registration {
+  id: number
+  name: string
+  birthday: string
+  cpf: string
+  sex: number
+  color_race: number
+  deficiency: boolean
+  deficiency_description: any
+  responsable_name: string
+  responsable_cpf: string
+  responsable_telephone: string
+  zone: number
+  status: string
+  createdAt: string
+  updatedAt: string
 }
