@@ -33,6 +33,7 @@ const CardRegistration = ({
     RegistrationClassroomContext
   ) as RegistrationClassroomTypes;
 
+  console.log(idRegistration)
   return (
     <>
       <Container
@@ -86,7 +87,7 @@ const CardRegistration = ({
       <ConfirmDialog
         visible={visible}
         onHide={() => setVisible(false)}
-        message="Tem certeza de que deseja prosseguir??"
+        message="Tem certeza de que deseja prosseguir?"
         header="Confirmation"
         icon="pi pi-exclamation-triangle"
         accept={() => props.DeleteRegistration(idRegistration)}

@@ -21,6 +21,7 @@ import FormEditSchedule from "../Pages/Schedule/FormSchedule/edit";
 import ListUsers from "../Pages/Users/ListUsers";
 import CreateUser from "../Pages/Users/CreateUser";
 import EditUser from "../Pages/Users/EditUser";
+import ProjectsList from "../Pages/Projects/ProjectsList";
 
 const RoutesApp = () => {
   return (
@@ -96,6 +97,10 @@ const RoutesApp = () => {
         <Route
           element={<PrivateRoute Component={<ListUsers />} />}
           path="/users"
+        />
+        <Route
+          element={<PrivateRoute Component={<ProjectsList />} />}
+          path="/projetos"
         />
         <Route
           element={<PrivateRoute Component={<CreateUser />} />}

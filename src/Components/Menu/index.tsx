@@ -63,6 +63,16 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             path={"/cronograma"}
             icon={"pi pi-calendar"}
           /> */}
+          <Item
+            text={"Projetos"}
+            funcActiv={() => {
+              setActive(1);
+              menuItem("1");
+            }}
+            active={active === 1 ? true : false}
+            path={"/projetos"}
+            icon={turmas}
+          />
           <Padding />
           <Item
             text={"Turmas"}
