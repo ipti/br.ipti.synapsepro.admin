@@ -86,7 +86,7 @@ const CardRegistration = ({
       <ConfirmDialog
         visible={visible}
         onHide={() => setVisible(false)}
-        message="Are you sure you want to proceed?"
+        message="Tem certeza de que deseja prosseguir??"
         header="Confirmation"
         icon="pi pi-exclamation-triangle"
         accept={() => props.DeleteRegistration(idRegistration)}

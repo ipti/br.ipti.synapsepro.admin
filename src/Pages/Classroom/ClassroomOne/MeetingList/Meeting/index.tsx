@@ -14,6 +14,7 @@ import DataMeeting from "./DataMeeting";
 import ListArchivesAttendanceList from "./UploadArchivesAttendanceList";
 import Loading from "../../../../../Components/Loading";
 import TextAreaComponent from "../../../../../Components/TextArea";
+import { Chip } from "primereact/chip";
 
 const Meeting = () => {
   return (
@@ -46,19 +47,19 @@ const MeetingPage = () => {
                     props.meeting?.status === Status.PENDING
                       ? "warn"
                       : props.meeting?.status === Status.APPROVED
-                        ? "success"
-                        : props.meeting?.status === Status.REPROVED
-                          ? "error"
-                          : "info"
+                      ? "success"
+                      : props.meeting?.status === Status.REPROVED
+                      ? "error"
+                      : "info"
                   }
                   text={
                     props.meeting?.status === Status.PENDING
                       ? "Pendente"
                       : props.meeting?.status === Status.APPROVED
-                        ? "Aprovado"
-                        : props.meeting?.status === Status.REPROVED
-                          ? "Pendente de Revisão"
-                          : "info"
+                      ? "Aprovado"
+                      : props.meeting?.status === Status.REPROVED
+                      ? "Pendente de Revisão"
+                      : "info"
                   }
                 />
               </div>
@@ -77,16 +78,31 @@ const MeetingPage = () => {
                 </div>
               )}
           </div>
+
           <Padding padding="8px" />
           <DataMeeting />
-          <Padding padding="16px" />
-          {!(props.meeting.status === Status.APPROVED && propsAplication.user?.role === ROLE.REAPPLICATORS) && <div className="grid">
-            <div className="col-12 md:col-6">
-              <label>Salve os arquivos do encontro</label>
-              <Padding />
-              <Upload />
+          <div className="col-12 md:col-6">
+            <label>Responsáveis pelo encontro</label>
+            <Padding />
+            <div className="flex flex-wrap gap-2">
+              {props.meeting.meeting_user.map((item) => {
+                return <Chip label={item.users.name} />;
+              })}
             </div>
-          </div>}
+          </div>
+          <Padding padding="16px" />
+          {!(
+            props.meeting.status === Status.APPROVED &&
+            propsAplication.user?.role === ROLE.REAPPLICATORS
+          ) && (
+            <div className="grid">
+              <div className="col-12 md:col-6">
+                <label>Salve os arquivos do encontro</label>
+                <Padding />
+                <Upload />
+              </div>
+            </div>
+          )}
           <Padding />
           {props.meeting?.meeting_archives?.length > 0 && (
             <label>Arquivos</label>
