@@ -71,6 +71,7 @@ const CreateMeetingPage = () => {
                     <CalendarComponent
                       placeholder="Data do encontro *"
                       name="meeting_date"
+                      dateFormat="dd/mm/yy"
                       value={values.meeting_date}
                       onChange={handleChange}
                     />

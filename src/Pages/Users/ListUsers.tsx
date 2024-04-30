@@ -62,8 +62,8 @@ const ListUsersPage = () => {
       <Button label="Criar usuário" onClick={() => history("/users/criar")} />
       <Padding padding="16px" />
       <DataTable value={props.users} tableStyle={{ minWidth: "50rem" }}>
-        <Column field="id" header="Code"></Column>
         <Column field="name" header="Nome"></Column>
+        <Column field="username" header="Usuário"></Column>
         <Column field="role" body={typeUserBody} header="Tipo"></Column>
         <Column field="active" body={ActiveUserBody} header="Ativo"></Column>
       </DataTable>
