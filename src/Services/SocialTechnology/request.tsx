@@ -16,3 +16,20 @@ export const requestSocialTechnologytList = async () => {
       });
   }
 };
+
+
+export const requestSocialTechnologyOne = async () => {
+  if (GetIdUser()) {
+    return await http
+      .get("/social-technology-bff/one", { params: { stId: GetIdUser() } })
+      .then((response) => response.data)
+      .catch((err) => {
+        // if(err.response.status === 401){
+        //   logout()
+        //   window.location.reload()
+        // }
+
+        throw err;
+      });
+  }
+};

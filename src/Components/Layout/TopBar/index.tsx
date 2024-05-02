@@ -4,6 +4,7 @@ import { AplicationContext } from "../../../Context/Aplication/context";
 import {
     GetIdProject,
     idProject,
+    idTs,
     menuItem,
 } from "../../../Services/localstorage";
 import { Column, Padding, Row } from "../../../Styles/styles";
@@ -65,7 +66,7 @@ const TopBar = ({
                 options={props.project}
                 value={verifyValueProject(parseInt(GetIdProject()!))}
                 onChange={(e) => {
-                  idProject(e.target.value.id);
+                  idTs(e.target.value.id);
                   history("/");
                   menuItem("1");
                   window.location.reload();

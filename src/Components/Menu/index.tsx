@@ -41,7 +41,6 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
                 padding: "8px 16px",
                 borderRadius: "20px",
                 cursor: "pointer",
-
               }}
               onClick={() => setVisibleModal(!visibleModal)}
             >
@@ -77,32 +76,21 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           <Item
             text={"Turmas"}
             funcActiv={() => {
-              setActive(1);
-              menuItem("1");
+              setActive(2);
+              menuItem("2");
             }}
-            active={active === 1 ? true : false}
+            active={active === 2 ? true : false}
             path={"/turma"}
             icon={turmas}
           />
-          {/* <Padding />
-          <Item
-            text={"Formulários"}
+          <Padding />
+          {(props.user?.role === ROLE.ADMIN || props.user?.role === ROLE.COORDINATORS) ? <Item
+            text={"Usuarios"}
             funcActiv={() => {
               setActive(3);
               menuItem("3");
             }}
             active={active === 3 ? true : false}
-            path={"/"}
-            icon={"pi pi-list"}
-          /> */}
-          <Padding />
-          {(props.user?.role === ROLE.ADMIN || props.user?.role === ROLE.COORDINATORS) ? <Item
-            text={"Usuarios"}
-            funcActiv={() => {
-              setActive(2);
-              menuItem("2");
-            }}
-            active={active === 2 ? true : false}
             path={"/users"}
             icon={user}
           /> : null}

@@ -1,5 +1,5 @@
 import http from "../axios";
-import { GetIdProject, GetIdUser } from "../localstorage";
+import { GetIdTs, GetIdUser } from "../localstorage";
 
 export const requestProjectList = async () => {
   if (GetIdUser()) {
@@ -19,9 +19,9 @@ export const requestProjectList = async () => {
 };
 
 export const requestTsList = async () => {
-  if (GetIdUser()) {
+  if (GetIdTs()) {
     return await http
-      .get("/social-technology-bff/one", { params: { stId: GetIdProject() } })
+      .get("/social-technology-bff/one", { params: { stId: GetIdTs() } })
       .then((response) => response.data)
       .catch((err) => {
 
