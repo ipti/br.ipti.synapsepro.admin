@@ -1,6 +1,6 @@
 import { CreateClassroom } from "../../Context/Classroom/type";
 import http from "../axios";
-import { GetIdProject, getYear, logout } from "../localstorage";
+import { getYear, logout } from "../localstorage";
 
 export const requestCreateClassroom = (data: CreateClassroom) => {
   return http
@@ -16,12 +16,12 @@ export const requestCreateClassroom = (data: CreateClassroom) => {
     });
 };
 
-export const requestClassroom = () => {
+export const requestClassroom = (idProject: number) => {
   let path = "/classroom-bff";
   return http
     .get(path, {
       params: {
-        idProject: GetIdProject(),
+        idProject: idProject,
         year: getYear(),
       },
     })

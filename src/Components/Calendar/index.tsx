@@ -61,6 +61,7 @@ const CalendarComponent = ({
       value={value}
       onChange={onChange}
       dateFormat={dateFormat}
+      
       style={{ width: "100%" }}
       locale="pt-br"
       name={name}

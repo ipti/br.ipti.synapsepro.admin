@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+import { Tsone } from "../Project/ProjectList/type";
 
 export interface ClassroomTypes {
   CreateClassroom: (body: CreateClassroom) => void;
@@ -10,7 +12,10 @@ export interface ClassroomTypes {
     id: number
   ) => void;
   DeleteClassroom: (id: number) => void;
-  isLoading: boolean
+  isLoading: boolean,
+  tsOne: Tsone | undefined
+  project: number | undefined
+  setProject: Dispatch<SetStateAction<number | undefined>>
 }
 
 export interface CreateClassroom {

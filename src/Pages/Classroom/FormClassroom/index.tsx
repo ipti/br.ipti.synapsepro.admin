@@ -1,12 +1,13 @@
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
 import { useContext } from "react";
+import { useParams } from "react-router-dom";
+import Loading from "../../../Components/Loading";
 import TextInput from "../../../Components/TextInput";
 import ClassroomProvider, { ClassroomContext } from "../../../Context/Classroom/context";
 import { ClassroomTypes } from "../../../Context/Classroom/type";
-import { GetIdProject, getYear } from "../../../Services/localstorage";
+import { getYear } from "../../../Services/localstorage";
 import { Container, Padding, Row } from "../../../Styles/styles";
-import Loading from "../../../Components/Loading";
 
 const FormClassroom = () => {
     return (
@@ -17,6 +18,8 @@ const FormClassroom = () => {
 }
 
 const FormClassroomPage = () => {
+
+    const { id } = useParams()
 
     const initialValues = {
         name: ""
@@ -33,11 +36,12 @@ const FormClassroomPage = () => {
                 <Padding>
                     <h3>Criar turma</h3>
                     <Padding padding="16px" />
-                    <Formik initialValues={initialValues} onSubmit={(values) => { props.CreateClassroom({ ...values, project: parseInt(GetIdProject()!), year: parseInt(getYear()!) }) }}>
+                    <Formik initialValues={initialValues} onSubmit={(values) => { props.CreateClassroom({ ...values, project: parseInt(id!), year: parseInt(getYear()!) }) }}>
                         {({ values, errors, handleChange, touched }) => {
                             return (
                                 <Form>
                                     <label>Nome*</label>
+                                    <Padding />
                                     <TextInput name="name" onChange={handleChange} placeholder="Name*" value={values.name} />
                                     <Padding />
                                     {errors.name && touched.name ? (

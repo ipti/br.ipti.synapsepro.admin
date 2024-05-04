@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFetchRequestSocialTechnologyLists } from "../../Services/SocialTechnology/query";
 import { useFetchRequestUsersOne } from "../../Services/Users/query";
-import { GetIdProject, GetIdTs, GetIdUser, idProject, idTs } from "../../Services/localstorage";
+import { GetIdTs, GetIdUser, idTs } from "../../Services/localstorage";
 import { Projects, PropsForm } from "../../Types/types";
 import { User } from "../Users/type";
 

@@ -7,6 +7,6 @@ export const useFetchRequestClassroomOne = (id: number) => {
 
 
 
-export const useFetchRequestClassroom = () => {
-  return useQuery(["useRequestsClassroom"],requestClassroom);
+export const useFetchRequestClassroom = (idProject: number) => {
+  return useQuery(["useRequestsClassroom", idProject],() => requestClassroom(idProject));
 };

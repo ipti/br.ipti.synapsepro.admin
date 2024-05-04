@@ -2,15 +2,14 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AplicationContext } from "../../../Context/Aplication/context";
 import {
-    GetIdProject,
-    idProject,
-    idTs,
-    menuItem,
+  GetIdTs,
+  idTs,
+  menuItem
 } from "../../../Services/localstorage";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import {
-    Projects,
-    PropsAplicationContext
+  Projects,
+  PropsAplicationContext
 } from "../../../Types/types";
 import DropdownComponent from "../../Dropdown";
 import LogoutTopBar from "./Logout";
@@ -64,7 +63,7 @@ const TopBar = ({
               <DropdownComponent
                 placerholder="Projetos"
                 options={props.project}
-                value={verifyValueProject(parseInt(GetIdProject()!))}
+                value={verifyValueProject(parseInt(GetIdTs()!))}
                 onChange={(e) => {
                   idTs(e.target.value.id);
                   history("/");

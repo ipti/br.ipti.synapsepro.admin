@@ -22,6 +22,7 @@ import ListUsers from "../Pages/Users/ListUsers";
 import CreateUser from "../Pages/Users/CreateUser";
 import EditUser from "../Pages/Users/EditUser";
 import ProjectsList from "../Pages/Projects/ProjectsList";
+import CreateProjectsList from "../Pages/Projects/CreateProjectsList";
 
 const RoutesApp = () => {
   return (
@@ -35,7 +36,7 @@ const RoutesApp = () => {
           element={<PrivateRoute Component={<ViewForms />} />}
           path="/view/:id"
         />
-        <Route element={<PrivateRoute Component={<ListClassroom />} />} path="/" />
+        <Route element={<PrivateRoute Component={<ProjectsList />} />} path="/" />
         <Route
           element={<PrivateRoute Component={<ListSchedule />} />}
           path="/cronograma"
@@ -55,7 +56,7 @@ const RoutesApp = () => {
         />
         <Route
           element={<PrivateRoute Component={<FormClassroom />} />}
-          path="/turma/criar"
+          path="/turma/criar/:id"
         />
         <Route
           element={<PrivateRoute Component={<ClassroomOne />} />}
@@ -101,6 +102,10 @@ const RoutesApp = () => {
         <Route
           element={<PrivateRoute Component={<ProjectsList />} />}
           path="/projetos"
+        />
+        <Route
+          element={<PrivateRoute Component={<CreateProjectsList />} />}
+          path="/projetos/criar"
         />
         <Route
           element={<PrivateRoute Component={<CreateUser />} />}

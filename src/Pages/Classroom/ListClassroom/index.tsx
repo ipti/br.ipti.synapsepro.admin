@@ -12,6 +12,8 @@ import { PropsAplicationContext } from "../../../Types/types";
 import { ROLE } from "../../../Controller/controllerGlobal";
 import Empty from "../../../Components/Empty";
 import Loading from "../../../Components/Loading";
+import DropdownComponent from "../../../Components/Dropdown";
+import { idProject } from "../../../Services/localstorage";
 
 const ListClassroom = () => {
   return (
@@ -39,10 +41,17 @@ const ListClassroomPage = () => {
           <Button
             label="Criar turma"
             icon={"pi pi-plus"}
-            onClick={() => history("/turma/criar")}
+            onClick={() => history("/turma/criar/"+props.project)}
           />
         </Row>
       )}
+
+      <Padding />
+      <div className="grid">
+        <div className="col-12 md:col-6">
+          <DropdownComponent placerholder="Escolha o projeto" options={props.tsOne?.project} optionsLabel="name" optionsValue="id" value={props.project} onChange={(e) => {console.log(e.value);props.setProject(e.value); idProject(e.value)}}/>
+        </div>
+      </div>
       <Padding padding="16px" />
       {props?.classrooms?.length > 0 ? (
         <div className="grid">

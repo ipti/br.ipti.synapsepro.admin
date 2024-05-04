@@ -18,20 +18,22 @@ import DropdownComponent from "../Dropdown";
 import Icon from "../Icon";
 import Item from "./Item";
 import { Container } from "./style";
-import turmas from "../../Assets/images/turmasPessoas.svg"
+import turmas from "../../Assets/images/turmasPessoas.svg";
 
-import user from "../../Assets/images/personUser.svg"
+import user from "../../Assets/images/personUser.svg";
 
 const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
   const [active, setActive] = useState(parseInt(getMenuItem()!));
   const [visibleModal, setVisibleModal] = useState(false);
-  const props = useContext(AplicationContext) as PropsAplicationContext
+  const props = useContext(AplicationContext) as PropsAplicationContext;
   return (
     <Container active={viewdMenu}>
+      <Padding padding="4px" />
+
       <Padding padding="16px">
         <Row id="center">
           <Column id="center">
-          <img src={TagLogin} style={{ width: "128px" }} alt=""></img>
+            <img src={TagLogin} style={{ width: "128px" }} alt=""></img>
           </Column>
           <Padding />
           <Column id="center">
@@ -50,6 +52,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           </Column>
         </Row>
       </Padding>
+      <Padding padding="8px" />
       {true ? (
         <Padding padding="8px">
           {/* <Item
@@ -63,7 +66,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             icon={"pi pi-calendar"}
           /> */}
           <Item
-            text={"Projetos"}
+            text={"Tecnologias"}
             funcActiv={() => {
               setActive(1);
               menuItem("1");
@@ -74,26 +77,52 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           />
           <Padding />
           <Item
-            text={"Turmas"}
+            text={"Projetos"}
             funcActiv={() => {
               setActive(2);
               menuItem("2");
             }}
             active={active === 2 ? true : false}
-            path={"/turma"}
+            path={"/projetos"}
             icon={turmas}
           />
           <Padding />
-          {(props.user?.role === ROLE.ADMIN || props.user?.role === ROLE.COORDINATORS) ? <Item
-            text={"Usuarios"}
+          <Item
+            text={"Turmas"}
             funcActiv={() => {
               setActive(3);
               menuItem("3");
             }}
             active={active === 3 ? true : false}
-            path={"/users"}
-            icon={user}
-          /> : null}
+            path={"/turma"}
+            icon={turmas}
+          />
+          <Padding />
+          {props.user?.role === ROLE.ADMIN ||
+          props.user?.role === ROLE.COORDINATORS ? (
+            <Item
+              text={"Usuarios"}
+              funcActiv={() => {
+                setActive(4);
+                menuItem("4");
+              }}
+              active={active === 4 ? true : false}
+              path={"/users"}
+              icon={user}
+            />
+          ) : null}
+          <Padding />
+
+          <Item
+            text={"Ajuda"}
+            funcActiv={() => {
+              setActive(5);
+              menuItem("5");
+            }}
+            active={active === 5 ? true : false}
+            path={"/turma"}
+            icon={turmas}
+          />
         </Padding>
       ) : null}
       <ModalYear
@@ -121,8 +150,8 @@ const ModalYear = ({
   const [year, setYearState] = useState<any>();
 
   useEffect(() => {
-    setYearState(parseInt(getYear()!))
-  }, [])
+    setYearState(parseInt(getYear()!));
+  }, []);
 
   return (
     <Dialog
