@@ -5,6 +5,6 @@ export const useFetchRequestProjectLists = () => {
     return useQuery(["useRequestProjectList"], () => requestProjectList());
 };
 
-export const useFetchRequestTsLists = () => {
-    return useQuery(["requestTsList"], () => requestTsList());
+export const useFetchRequestTsLists = (id: number | undefined) => {
+    return useQuery(["requestTsList", id], () => requestTsList(id));
 };

@@ -17,7 +17,7 @@ export const ClassroomState = () => {
     const { data: classroomsFetch, isLoading } = useFetchRequestClassroom(project!)
 
     const [tsOne, setTsOne] = useState<Tsone | undefined>();
-    const { data: tsOneRequest } = useFetchRequestTsLists()
+    const { data: tsOneRequest } = useFetchRequestTsLists(undefined)
 
     useEffect(() => {
         if (tsOneRequest) {

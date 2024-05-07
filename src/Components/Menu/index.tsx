@@ -66,23 +66,34 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             icon={"pi pi-calendar"}
           /> */}
           <Item
-            text={"Tecnologias"}
+            text={"Pagina Inicial"}
             funcActiv={() => {
               setActive(1);
               menuItem("1");
             }}
             active={active === 1 ? true : false}
-            path={"/projetos"}
+            path={"/"}
+            icon={turmas}
+          />
+          <Padding />
+          <Item
+            text={"Tecnologias"}
+            funcActiv={() => {
+              setActive(2);
+              menuItem("2");
+            }}
+            active={active === 2 ? true : false}
+            path={"/tecnologias"}
             icon={turmas}
           />
           <Padding />
           <Item
             text={"Projetos"}
             funcActiv={() => {
-              setActive(2);
-              menuItem("2");
+              setActive(3);
+              menuItem("3");
             }}
-            active={active === 2 ? true : false}
+            active={active === 3 ? true : false}
             path={"/projetos"}
             icon={turmas}
           />
@@ -90,10 +101,10 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           <Item
             text={"Turmas"}
             funcActiv={() => {
-              setActive(3);
-              menuItem("3");
+              setActive(4);
+              menuItem("4");
             }}
-            active={active === 3 ? true : false}
+            active={active === 4 ? true : false}
             path={"/turma"}
             icon={turmas}
           />
@@ -103,10 +114,10 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             <Item
               text={"Usuarios"}
               funcActiv={() => {
-                setActive(4);
-                menuItem("4");
+                setActive(5);
+                menuItem("5");
               }}
-              active={active === 4 ? true : false}
+              active={active === 5 ? true : false}
               path={"/users"}
               icon={user}
             />
@@ -116,11 +127,11 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           <Item
             text={"Ajuda"}
             funcActiv={() => {
-              setActive(5);
-              menuItem("5");
+              setActive(6);
+              menuItem("6");
             }}
-            active={active === 5 ? true : false}
-            path={"/turma"}
+            active={active === 6 ? true : false}
+            path={"/ajuda"}
             icon={turmas}
           />
         </Padding>

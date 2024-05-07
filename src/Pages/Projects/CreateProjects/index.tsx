@@ -7,15 +7,15 @@ import { CreateProjectTypes } from "../../../Context/Project/CreateList/type";
 import { GetIdTs } from "../../../Services/localstorage";
 import { Container, Padding, Row } from "../../../Styles/styles";
 
-const CreateProjectsList = () => {
+const CreateProjects = () => {
   return (
     <CreateProjectProvider>
-      <CreateProjectsListPage />
+      <CreateProjectsPage />
     </CreateProjectProvider>
   );
 };
 
-const CreateProjectsListPage = () => {
+const CreateProjectsPage = () => {
 
     const props = useContext(CreateProjectContext) as CreateProjectTypes
 
@@ -63,4 +63,4 @@ const CreateProjectsListPage = () => {
   );
 };
 
-export default CreateProjectsList;
+export default CreateProjects;

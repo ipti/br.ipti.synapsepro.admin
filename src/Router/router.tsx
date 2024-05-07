@@ -22,7 +22,10 @@ import ListUsers from "../Pages/Users/ListUsers";
 import CreateUser from "../Pages/Users/CreateUser";
 import EditUser from "../Pages/Users/EditUser";
 import ProjectsList from "../Pages/Projects/ProjectsList";
-import CreateProjectsList from "../Pages/Projects/CreateProjectsList";
+import CreateProjectsList from "../Pages/Projects/CreateProjects";
+import TecnologySocial from "../Pages/TecnologySocial/TecnologySocialList";
+import InitialPage from "../Pages/InitialPage";
+import Help from "../Pages/Help";
 
 const RoutesApp = () => {
   return (
@@ -36,7 +39,7 @@ const RoutesApp = () => {
           element={<PrivateRoute Component={<ViewForms />} />}
           path="/view/:id"
         />
-        <Route element={<PrivateRoute Component={<ProjectsList />} />} path="/" />
+        <Route element={<PrivateRoute Component={<InitialPage />} />} path="/" />
         <Route
           element={<PrivateRoute Component={<ListSchedule />} />}
           path="/cronograma"
@@ -104,8 +107,16 @@ const RoutesApp = () => {
           path="/projetos"
         />
         <Route
+          element={<PrivateRoute Component={<Help />} />}
+          path="/ajuda"
+        />
+        <Route
           element={<PrivateRoute Component={<CreateProjectsList />} />}
           path="/projetos/criar"
+        />
+        <Route
+          element={<PrivateRoute Component={<TecnologySocial />} />}
+          path="/tecnologias"
         />
         <Route
           element={<PrivateRoute Component={<CreateUser />} />}
@@ -115,7 +126,6 @@ const RoutesApp = () => {
           element={<PrivateRoute Component={<EditUser />} />}
           path="/users/:id"
         />
-
         <Route element={<SignUp />} path="/register" />
         <Route element={<Login />} path="/login" />
         <Route element={<Register />} path="/matricula" />

@@ -34,10 +34,10 @@ export const requestProjectList = async () => {
   }
 };
 
-export const requestTsList = async () => {
+export const requestTsList = async (id: number | undefined) => {
   if (GetIdTs()) {
     return await http
-      .get("/social-technology-bff/one", { params: { stId: GetIdTs() } })
+      .get("/social-technology-bff/one", { params: { stId: id ?? GetIdTs() } })
       .then((response) => response.data)
       .catch((err) => {
 

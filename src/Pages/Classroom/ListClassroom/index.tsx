@@ -49,6 +49,8 @@ const ListClassroomPage = () => {
       <Padding />
       <div className="grid">
         <div className="col-12 md:col-6">
+          <label>Projeto</label>
+          <Padding />
           <DropdownComponent placerholder="Escolha o projeto" options={props.tsOne?.project} optionsLabel="name" optionsValue="id" value={props.project} onChange={(e) => {console.log(e.value);props.setProject(e.value); idProject(e.value)}}/>
         </div>
       </div>
