@@ -19,7 +19,7 @@ const TecnologySocial = () => {
           <Button
             label="Criar Tecnologia Social"
             icon={"pi pi-plus"}
-            onClick={() => history("/projetos/criar")}
+            onClick={() => history("/tecnologias/criar")}
           />
         </Row>
       )}

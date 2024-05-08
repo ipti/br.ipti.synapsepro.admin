@@ -2,15 +2,15 @@ import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import styles from "../../Styles";
-import { CreateProject } from "../../Context/Project/CreateList/type";
-import { requestCreateProject } from "./request";
+import { requestCreateSocialTechnology } from "./request";
+import queryClient from "../reactquery";
 
-export const ProjectController = () => {
+export const TechnologySocialController = () => {
 
     const history = useNavigate()
 
     const requestCreateprojectMutation = useMutation(
-        (data: CreateProject) => requestCreateProject(data),
+        (data: {name: string}) => requestCreateSocialTechnology(data),
         {
             onError: (error: any) => {
                 alert(error?.response.data.message);
@@ -18,11 +18,12 @@ export const ProjectController = () => {
             onSuccess: (data) => {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Projeto criado com sucesso!',
+                    title: 'Tecnologia criada com sucesso!',
                     confirmButtonColor: styles.colors.colorsBaseProductNormal,
                 }).then((result) => {
+                    queryClient.refetchQueries("useRequestSocialTechnologyList")
                     if (result.isConfirmed) {
-                        history('/projetos')
+                        history('/tecnologias')
                     }
                 })
             },

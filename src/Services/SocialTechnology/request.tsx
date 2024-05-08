@@ -33,3 +33,18 @@ export const requestSocialTechnologyOne = async () => {
       });
   }
 };
+
+
+export const requestCreateSocialTechnology = async (body: {name: string}) => {
+    return await http
+      .post("/social-technology-bff", body)
+      .then((response) => response.data)
+      .catch((err) => {
+        // if(err.response.status === 401){
+        //   logout()
+        //   window.location.reload()
+        // }
+
+        throw err;
+      });
+};

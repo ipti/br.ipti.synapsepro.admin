@@ -19,6 +19,11 @@ import Icon from "../Icon";
 import Item from "./Item";
 import { Container } from "./style";
 import turmas from "../../Assets/images/turmasPessoas.svg";
+import home from "../../Assets/images/home.svg"
+import tecnologia from "../../Assets/images/digital_wellbeing.svg"
+import projeto from "../../Assets/images/note_add.svg"
+import ajuda from "../../Assets/images/question_mark.svg"
+
 
 import user from "../../Assets/images/personUser.svg";
 
@@ -73,7 +78,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 1 ? true : false}
             path={"/"}
-            icon={turmas}
+            icon={home}
           />
           <Padding />
           <Item
@@ -84,7 +89,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 2 ? true : false}
             path={"/tecnologias"}
-            icon={turmas}
+            icon={tecnologia}
           />
           <Padding />
           <Item
@@ -95,7 +100,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 3 ? true : false}
             path={"/projetos"}
-            icon={turmas}
+            icon={projeto}
           />
           <Padding />
           <Item
@@ -132,7 +137,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 6 ? true : false}
             path={"/ajuda"}
-            icon={turmas}
+            icon={ajuda}
           />
         </Padding>
       ) : null}

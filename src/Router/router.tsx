@@ -26,6 +26,7 @@ import CreateProjectsList from "../Pages/Projects/CreateProjects";
 import TecnologySocial from "../Pages/TecnologySocial/TecnologySocialList";
 import InitialPage from "../Pages/InitialPage";
 import Help from "../Pages/Help";
+import CreateTechnologySocial from "../Pages/TecnologySocial/CreateTechnologySocial";
 
 const RoutesApp = () => {
   return (
@@ -117,6 +118,10 @@ const RoutesApp = () => {
         <Route
           element={<PrivateRoute Component={<TecnologySocial />} />}
           path="/tecnologias"
+        />
+        <Route
+          element={<PrivateRoute Component={<CreateTechnologySocial />} />}
+          path="/tecnologias/criar"
         />
         <Route
           element={<PrivateRoute Component={<CreateUser />} />}
