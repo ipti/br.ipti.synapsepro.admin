@@ -99,7 +99,7 @@ export const requestRegistrationOneCpf = (cpf?: string) => {
 };
 
 export const requestDeleteRegistration = (id: number) => {
-  let path = "/registration/" + id;
+  let path = "/registration-token-bff/" + id;
   return http
     .delete(path)
     .then(response => response.data)

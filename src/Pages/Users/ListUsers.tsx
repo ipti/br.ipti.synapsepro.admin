@@ -1,13 +1,14 @@
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UsersProvider, { UsersContext } from "../../Context/Users/context";
-import { UsersTypes } from "../../Context/Users/type";
+import { User, UsersTypes } from "../../Context/Users/type";
 import { Container, Padding } from "../../Styles/styles";
 import { ROLE } from "../../Controller/controllerGlobal";
 import Loading from "../../Components/Loading";
+import { ConfirmDialog } from "primereact/confirmdialog";
 
 const ListUsers = () => {
   return (
@@ -20,6 +21,8 @@ const ListUsers = () => {
 const ListUsersPage = () => {
   const props = useContext(UsersContext) as UsersTypes;
   const history = useNavigate();
+
+  const [visible, setVisible] = useState<any>(false)
   // const actionBodyTemplate = (rowData: any) => {
 
   //     return (
@@ -52,6 +55,12 @@ const ListUsersPage = () => {
     );
   };
 
+  const ActionsUserBody = (rowData: any) => {
+    return (
+      <Button severity="danger" icon={"pi pi-trash"} onClick={() => {setVisible(rowData)}} />
+    );
+  };
+
   if (props.isLoading) return <Loading />;
 
 
@@ -66,7 +75,18 @@ const ListUsersPage = () => {
         <Column field="username" header="Usuário"></Column>
         <Column field="role" body={typeUserBody} header="Tipo"></Column>
         <Column field="active" body={ActiveUserBody} header="Ativo"></Column>
+        {/* <Column field="actions" body={ActionsUserBody} header="Ações"></Column> */}
+
       </DataTable>
+      <ConfirmDialog
+        visible={visible}
+        onHide={() => setVisible(false)}
+        message="Tem certeza de que deseja prosseguir?"
+        header="Confirmation"
+        icon="pi pi-exclamation-triangle"
+        accept={() => props.DeleteUser(visible?.id)}
+        reject={() => setVisible(false)}
+      />
     </Container>
   );
 };
