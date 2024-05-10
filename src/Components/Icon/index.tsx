@@ -1,8 +1,8 @@
 
 
-const Icon = ({icon, size}: { icon: string, size?: string}) => {
+const Icon = ({icon, size, color, fontWeight}: { icon: string, size?: string, color?: string, fontWeight?: string}) => {
     return(
-        <i className={icon} style={{ fontSize: size || '1.5rem' }}  />
+        <i className={icon} style={{ fontSize: size || '1.5rem', color: color, fontWeight: fontWeight }}  />
     )
 }
 

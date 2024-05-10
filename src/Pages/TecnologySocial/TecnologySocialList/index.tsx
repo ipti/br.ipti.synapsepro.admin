@@ -30,7 +30,6 @@ const TecnologySocial = () => {
             <div className="col-12 md:col-6 lg:col-4">
               <CardClassroom
                 title={item.name}
-                year={item.id.toString()}
                 id={item.id}
               />
             </div>

@@ -1,21 +1,27 @@
-import { useNavigate } from "react-router-dom";
-import { Column, Padding, Row } from "../../../Styles/styles";
-import Icon from "../../Icon";
-import { Container } from "./style";
 import { ConfirmDialog } from "primereact/confirmdialog";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ClassroomContext } from "../../../Context/Classroom/context";
 import { ClassroomTypes } from "../../../Context/Classroom/type";
-import IconClassroom from "./../../../Assets/images/turma.svg";
+import { Column, Padding, Row } from "../../../Styles/styles";
+import IconClassroom from "./../../../Assets/images/cardturmas.svg";
+import { Container } from "./style";
+import Icon from "../../Icon";
+
+import pessoas from "../../../Assets/images/pessoasgray.svg"
+import meeting from "../../../Assets/images/school_teacher.svg"
+import styles from "../../../Styles";
 
 
 const CardClassroom = ({
   title,
-  year,
+  meetingCount,
+  registrationCount,
   id,
 }: {
   title: string;
-  year: string;
+  meetingCount?: number;
+  registrationCount?: number,
   id: number;
 }) => {
   const history = useNavigate();
@@ -27,9 +33,15 @@ const CardClassroom = ({
     <>
       <Container className="card" onClick={() => history(`/turma/${id}`)}>
         <Row id="space-between">
-          <Column>
-            <div className={"boxYear"}><Column style={{height: "100%"}} id="center">{year}</Column></div>
-          </Column>
+          <Row >
+            <div className={`boxQuantity`}>
+              <img src={IconClassroom} alt="" style={{ height: 32 }} />
+            </div>
+            <Padding padding="4px" />
+            <Column id="center">
+              <h3>{title}</h3>
+            </Column>
+          </Row>
           <div
             className="cursor-pointer"
             onClick={(e) => {
@@ -37,18 +49,23 @@ const CardClassroom = ({
               setVisible(true);
             }}
           >
-            <Icon icon="pi pi-trash" size="1rem" />
+            <Icon icon="pi pi-trash" color={styles.colors.colorGrayElephant} size="1rem" fontWeight="900" />
           </div>
         </Row>
-        <Padding padding="8px" />
-        <Row>
-          <div className={`boxQuantity`}>
-            <img src={IconClassroom} alt="" style={{ height: 40 }} />
-          </div>
-          <Padding padding="8px" />
-          <Column id="center">
-            <h3>{title}</h3>
-          </Column>
+        < Padding padding="8px" />
+        <Row style={{ gap: 16 }}>
+          <Row style={{ gap: 8, alignItems: "center" }}>
+            <img src={pessoas} alt="" style={{ width: 24 }} />
+            <p>
+              Alunos: {registrationCount}
+            </p>
+          </Row>
+          <Row style={{ gap: 8, alignItems: "center" }}>
+            <img src={meeting} alt="" style={{ width: 19 }} />
+            <p>
+              Encontros: {meetingCount}
+            </p>
+          </Row>
         </Row>
       </Container>
       <ConfirmDialog

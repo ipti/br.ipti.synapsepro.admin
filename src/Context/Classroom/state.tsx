@@ -22,8 +22,8 @@ export const ClassroomState = () => {
     useEffect(() => {
         if (tsOneRequest) {
             setTsOne(tsOneRequest)
-            setProject(tsOneRequest?.project[0].id)
-            idProject(tsOneRequest?.project[0].id)
+            setProject(tsOneRequest?.project[0]?.id)
+            idProject(tsOneRequest?.project[0]?.id)
         }
     }, [tsOneRequest])
 

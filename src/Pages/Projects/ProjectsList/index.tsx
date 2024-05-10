@@ -44,7 +44,6 @@ const ProjectsListPage = () => {
             <div className="col-12 md:col-6 lg:col-4">
               <CardClassroom
                 title={item.name}
-                year={item.social_technology_id.toString()}
                 id={item.id}
               />
             </div>
