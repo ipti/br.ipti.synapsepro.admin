@@ -114,15 +114,26 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             icon={turmas}
           />
           <Padding />
+          <Item
+            text={"Beneficiarios"}
+            funcActiv={() => {
+              setActive(5);
+              menuItem("5");
+            }}
+            active={active === 5 ? true : false}
+            path={"/beneficiarios"}
+            icon={turmas}
+          />
+          <Padding />
           {props.user?.role === ROLE.ADMIN ||
           props.user?.role === ROLE.COORDINATORS ? (
             <Item
               text={"Usuarios"}
               funcActiv={() => {
-                setActive(5);
-                menuItem("5");
+                setActive(6);
+                menuItem("6");
               }}
-              active={active === 5 ? true : false}
+              active={active === 6 ? true : false}
               path={"/users"}
               icon={user}
             />
@@ -132,10 +143,10 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           <Item
             text={"Ajuda"}
             funcActiv={() => {
-              setActive(6);
-              menuItem("6");
+              setActive(7);
+              menuItem("7");
             }}
-            active={active === 6 ? true : false}
+            active={active === 7 ? true : false}
             path={"/ajuda"}
             icon={ajuda}
           />
