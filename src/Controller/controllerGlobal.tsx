@@ -17,6 +17,13 @@ export function formatarData(data: string): string {
   return dataEdit;
 }
 
+export function somarNumeros(num1: number, num2: number): number {
+  console.log(num1+num2)
+  console.log(num1, num2)
+
+  return parseInt(`${num1 + num2}`);
+}
+
 export const Status = {
   APPROVED: "APPROVED",
   PENDING: "PENDING",
