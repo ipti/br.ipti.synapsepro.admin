@@ -31,8 +31,7 @@ const CreateUserPage = () => {
 
   return (
     <Container>
-      <Padding padding="8px" />
-      <h3>Criar usuários</h3>
+      <h1>Criar usuários</h1>
       <Padding />
       <Formik
         initialValues={{

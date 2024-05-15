@@ -14,6 +14,9 @@ const TecnologySocial = () => {
   ) as PropsAplicationContext;
   return (
     <Container>
+      <h1>Tecnologias</h1>
+      <Padding padding="16px" />
+
       {propsAplication.user?.role === ROLE.ADMIN && (
         <Row id="end" style={{ width: "100%" }}>
           <Button
@@ -28,10 +31,7 @@ const TecnologySocial = () => {
         {propsAplication.project?.map((item, index) => {
           return (
             <div className="col-12 md:col-6 lg:col-4">
-              <CardClassroom
-                title={item.name}
-                id={item.id}
-              />
+              <CardClassroom title={item.name} id={item.id} />
             </div>
           );
         })}

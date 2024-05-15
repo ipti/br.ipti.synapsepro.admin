@@ -11,6 +11,7 @@ import { somarNumeros } from "../../../Controller/controllerGlobal";
 import { Container, Padding } from "../../../Styles/styles";
 import ModalFilter from "./ModalFilter";
 import color from "../../../Styles/colors";
+import { useNavigate } from "react-router-dom";
 
 const BeneficiariesList = () => {
   return (
@@ -22,12 +23,14 @@ const BeneficiariesList = () => {
 
 const BeneficiariesListPage = () => {
   const props = useContext(BeneficiariesListContext) as BeneficiariesListType;
+  const history = useNavigate()
 
   const [visible, setVisible] = useState<any>();
 
   const renderHeader = () => {
     return (
-      <div className="flex justify-content-end" style={{background: color.colorCard}}>
+      <div className="flex justify-content-between" style={{background: color.colorCard}}>
+        <Button label="Adicionar beneficiario" icon="pi pi-plus" onClick={() => history("criar")} />
         <Button
           label="Configurar filtro"
           icon="pi pi-filter"
@@ -41,7 +44,7 @@ const BeneficiariesListPage = () => {
   return (
     <>
       <Container>
-        <h3>Beneficiarios</h3>
+        <h1>Beneficiarios</h1>
         <Padding padding="16px" />
         <DataTable
           value={props.registrations?.content}

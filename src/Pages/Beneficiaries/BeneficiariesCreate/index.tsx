@@ -1,71 +1,71 @@
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
 import { useContext } from "react";
-import DropdownComponent from "../../../../../Components/Dropdown";
-import TextInput from "../../../../../Components/TextInput";
-import RegistartionDetailsProvider, {
-  RegistrationDetailsContext,
-} from "../../../../../Context/Classroom/Registration/context";
-import { RegistrationDetailsTypes } from "../../../../../Context/Classroom/Registration/type";
-import { color_race, Status, typesex } from "../../../../../Controller/controllerGlobal";
-import { Container, Padding } from "../../../../../Styles/styles";
-import { useParams } from "react-router-dom";
-import { useFetchRequestClassroomOne } from "../../../../../Services/Classroom/query";
-import MaskInput from "../../../../../Components/InputMask";
-import Loading from "../../../../../Components/Loading";
+import DropdownComponent from "../../../Components/Dropdown";
+import MaskInput from "../../../Components/InputMask";
+import Loading from "../../../Components/Loading";
+import TextInput from "../../../Components/TextInput";
+import BeneficiariesCreateProvider, {
+  BeneficiariesCreateContext,
+} from "../../../Context/Beneficiaries/BeneficiaresCreate/context";
+import { BeneficiariesCreateType } from "../../../Context/Beneficiaries/BeneficiaresCreate/type";
+import {
+  color_race,
+  Status,
+  typesex,
+} from "../../../Controller/controllerGlobal";
+import { Column, Container, Padding, Row } from "../../../Styles/styles";
 
-const Registration = () => {
+const BeneficiariesCreate = () => {
   return (
-    <RegistartionDetailsProvider>
+    <BeneficiariesCreateProvider>
       <RegistrationPage />
-    </RegistartionDetailsProvider>
+    </BeneficiariesCreateProvider>
   );
 };
 
 const RegistrationPage = () => {
   const props = useContext(
-    RegistrationDetailsContext
-  ) as RegistrationDetailsTypes;
+    BeneficiariesCreateContext
+  ) as BeneficiariesCreateType;
 
-  const { id } = useParams();
-  const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!));
-
-  if (props.isLoading) return <Loading />;
+  if (false) return <Loading />;
 
   return (
     <Container>
-      <h2>{classroom?.name}</h2>
+      <h1>Criar Beneficiario</h1>
       <Padding padding="16px" />
-      {props.registration ? (
+      {true ? (
         <Formik
           initialValues={props.initialValue}
           onSubmit={(values) => {
-            props.handleUpdateRegistration(
-              { ...values },
-              props.registration?.registration_fk!
-            );
+            // props.handleUpdateRegistration(
+            //   { ...values },
+            //   props.registration?.registration_fk!
+            // );
           }}
         >
           {({ values, handleChange }) => {
             return (
               <Form>
-                <Button label="Salvar" />
+                <Column>
+                  <Row id="end">
+                    <Button label="Criar" />
+                  </Row>
+                </Column>
+                <Padding padding="8px" />
+                <h3>Verificar Cadastro</h3>
                 <Padding padding="8px" />
                 <div className="grid">
                   <div className="col-12 md:col-6">
-                    <label>Status</label>
+                    <label>CPF</label>
                     <Padding />
-                    <DropdownComponent
-                      value={values.status}
+                    <MaskInput
+                      value={values.cpf}
+                      mask="999.999.999-99"
+                      placeholder="CPF"
                       onChange={handleChange}
-                      name="status"
-                      placerholder="Status"
-                      optionsLabel="name"
-                      options={[
-                        { id: Status.APPROVED, name: "Aprovado" },
-                        { id: Status.REPROVED, name: "Reprovado" },
-                        { id: Status.PENDING, name: "Pedente" },
-                      ]}
+                      name="cpf"
                     />
                   </div>
                 </div>{" "}
@@ -119,17 +119,6 @@ const RegistrationPage = () => {
                   </div>
                 </div>{" "}
                 <div className="grid">
-                  <div className="col-12 md:col-6">
-                    <label>CPF</label>
-                    <Padding />
-                    <MaskInput
-                      value={values.cpf}
-                      mask="999.999.999-99"
-                      placeholder="CPF"
-                      onChange={handleChange}
-                      name="cpf"
-                    />
-                  </div>
                   <div className="col-12 md:col-6">
                     <label>Deficiente</label>
                     <Padding />
@@ -185,6 +174,38 @@ const RegistrationPage = () => {
                   </div>
                 </div>{" "}
                 <Padding padding="8px" />
+                <h3>Projeto</h3>
+                <Padding padding="8px" />
+                <div className="grid">
+                  <div className="col-12 md:col-6">
+                    <label>Projetos</label>
+                    <Padding />
+                    <DropdownComponent
+                      value={values.deficiency}
+                      placerholder="Deficiente"
+                      name="deficiency"
+                      onChange={handleChange}
+                      options={[
+                        { id: true, name: "Sim" },
+                        { id: false, name: "Não" },
+                      ]}
+                    />
+                  </div>
+                  <div className="col-12 md:col-6">
+                    <label>Turma</label>
+                    <Padding />
+                    <DropdownComponent
+                      value={values.deficiency}
+                      placerholder="Deficiente"
+                      name="deficiency"
+                      onChange={handleChange}
+                      options={[
+                        { id: true, name: "Sim" },
+                        { id: false, name: "Não" },
+                      ]}
+                    />
+                  </div>
+                </div>{" "}
                 {/* <h3>Endereço</h3>
                 <Padding />
                 <div className="grid">
@@ -235,4 +256,4 @@ const RegistrationPage = () => {
     </Container>
   );
 };
-export default Registration;
+export default BeneficiariesCreate;

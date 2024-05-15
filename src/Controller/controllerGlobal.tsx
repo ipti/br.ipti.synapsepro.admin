@@ -24,6 +24,20 @@ export function somarNumeros(num1: number, num2: number): number {
   return parseInt(`${num1 + num2}`);
 }
 
+export var typesex = [
+  { id: 2, type: "Feminino" },
+  { id: 1, type: "Masculino" },
+];
+
+export const color_race = [
+  { id: 0, name: "Não Declarada" },
+  { id: 1, name: "Branca" },
+  { id: 2, name: "Preta" },
+  { id: 3, name: "Parda" },
+  { id: 4, name: "Amarela" },
+  { id: 5, name: "Indígena" },
+];
+
 export const Status = {
   APPROVED: "APPROVED",
   PENDING: "PENDING",

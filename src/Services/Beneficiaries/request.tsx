@@ -1,5 +1,5 @@
 import http from "../axios";
-import { logout } from "../localstorage";
+import { GetIdTs, logout } from "../localstorage";
 
 export const requestAllRegistration = ({
   page,
@@ -12,7 +12,7 @@ export const requestAllRegistration = ({
     "/registration-token-bff/registration-all?page=" +
     page +
     "&limit=" +
-    limite;
+    limite + "&idTs="+ GetIdTs();
   return http
     .get(path)
     .then((response) => response.data)

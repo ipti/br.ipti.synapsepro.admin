@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { RegistrationType, UpdateRegister } from "./type";
 import { ControllerUpdateRegistration } from "../../../Services/PreRegistration/controller";
 import { useFetchRequestClassroomRegistrationOne } from "../../../Services/PreRegistration/query";
-import { formatarData, Status } from "../../../Controller/controllerGlobal";
+import { color_race, formatarData, Status, typesex } from "../../../Controller/controllerGlobal";
 export const RegistrationClassroomState = () => {
   const { idRegistration } = useParams();
   const { data: registrationRequest, isLoading } =
@@ -21,26 +21,14 @@ export const RegistrationClassroomState = () => {
     }
   }, [registrationRequest]);
 
-  var typesex = [
-    { id: 2, type: "Feminino" },
-    { id: 1, type: "Masculino" },
-  ];
-
-  const color = [
-    { id: 0, name: "Não Declarada" },
-    { id: 1, name: "Branca" },
-    { id: 2, name: "Preta" },
-    { id: 3, name: "Parda" },
-    { id: 4, name: "Amarela" },
-    { id: 5, name: "Indígena" },
-  ];
+ 
 
   const VerifySex = (sex: number) => {
     return typesex.find((props) => props.id === sex);
   };
 
-  const VerifyColor = (color_race: number) => {
-    return color.find((props) => props.id === color_race);
+  const VerifyColor = (color_race_number: number) => {
+    return color_race.find((props) => props.id === color_race_number);
   };
 
   const date = new Date(registration?.registration.birthday!);
@@ -90,8 +78,6 @@ export const RegistrationClassroomState = () => {
   return {
     registration,
     initialValue,
-    typesex,
-    color,
     handleUpdateRegistration,
     isLoading,
   };

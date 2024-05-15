@@ -1,6 +1,6 @@
 import { Button } from "primereact/button";
 import { ROLE } from "../../../Controller/controllerGlobal";
-import { Container, Row } from "../../../Styles/styles";
+import { Container, Padding, Row } from "../../../Styles/styles";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AplicationContext } from "../../../Context/Aplication/context";
@@ -28,6 +28,10 @@ const ProjectsListPage = () => {
   const props = useContext(ProjectListContext) as ProjectListTypes;
   return (
     <Container>
+      <h1>Projetos</h1>
+
+      <Padding padding="16px" />
+
       {(propsAplication.user?.role === ROLE.ADMIN ||
         propsAplication.user?.role === ROLE.COORDINATORS) && (
         <Row id="end" style={{ width: "100%" }}>
@@ -42,10 +46,7 @@ const ProjectsListPage = () => {
         {props.tsOne?.project?.map((item, index) => {
           return (
             <div className="col-12 md:col-6 lg:col-4">
-              <CardClassroom
-                title={item.name}
-                id={item.id}
-              />
+              <CardClassroom title={item.name} id={item.id} />
             </div>
           );
         })}
