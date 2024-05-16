@@ -29,6 +29,7 @@ import Help from "../Pages/Help";
 import CreateTechnologySocial from "../Pages/TecnologySocial/CreateTechnologySocial";
 import BeneficiariesList from "../Pages/Beneficiaries/BeneficiariesList";
 import BeneficiariesCreate from "../Pages/Beneficiaries/BeneficiariesCreate";
+import BeneficiariesEdit from "../Pages/Beneficiaries/BeneficiariesEdit";
 
 const RoutesApp = () => {
   return (
@@ -110,6 +111,10 @@ const RoutesApp = () => {
         <Route
           element={<PrivateRoute Component={<BeneficiariesCreate />} />}
           path="/beneficiarios/criar"
+        />
+        <Route
+          element={<PrivateRoute Component={<BeneficiariesEdit />} />}
+          path="/beneficiarios/:id"
         />
         <Route
           element={<PrivateRoute Component={<ListUsers />} />}

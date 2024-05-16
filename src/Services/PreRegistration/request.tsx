@@ -69,7 +69,7 @@ export const requestClassroomRegistration = (id: number) => {
 };
 
 export const requestClassroomRegistrationOne = (id: number) => {
-  let path = "/registration-token-bff/one?idRegistrationClassroom=" + id;
+  let path = "/registration-token-bff/register-classroom-one?idRegistrationClassroom=" + id;
   return http
     .get(path)
     .then(response => response.data)
@@ -80,6 +80,22 @@ export const requestClassroomRegistrationOne = (id: number) => {
       }
       throw err;
     });
+};
+
+export const requestRegistrationOne = (id?: string) => {
+  if (id) {
+    let path = "/registration-token-bff/one?idRegistration=" + id;
+    return http
+      .get(path)
+      .then(response => response.data)
+      .catch(err => {
+        if (err.response.status === 401) {
+          logout()
+          window.location.reload()
+        }
+        throw err;
+      });
+  }
 };
 
 export const requestRegistrationOneCpf = (cpf?: string) => {

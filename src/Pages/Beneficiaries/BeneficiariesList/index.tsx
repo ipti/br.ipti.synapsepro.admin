@@ -8,7 +8,7 @@ import BeneficiariesListProvider, {
 } from "../../../Context/Beneficiaries/BeneficiariesList/context";
 import { BeneficiariesListType } from "../../../Context/Beneficiaries/BeneficiariesList/type";
 import { somarNumeros } from "../../../Controller/controllerGlobal";
-import { Container, Padding } from "../../../Styles/styles";
+import { Container, Padding, Row } from "../../../Styles/styles";
 import ModalFilter from "./ModalFilter";
 import color from "../../../Styles/colors";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ const BeneficiariesListPage = () => {
 
   const renderHeader = () => {
     return (
-      <div className="flex justify-content-between" style={{background: color.colorCard}}>
+      <div className="flex justify-content-between" style={{ background: color.colorCard }}>
         <Button label="Adicionar beneficiario" icon="pi pi-plus" onClick={() => history("criar")} />
         <Button
           label="Configurar filtro"
@@ -39,6 +39,15 @@ const BeneficiariesListPage = () => {
           }}
         />
       </div>
+    );
+  };
+
+  const ActionBeneficiariesBody = (rowData: any) => {
+    return (
+      <Row style={{ gap: "8px" }}>
+        <Button rounded icon={"pi pi-pencil"} onClick={() => { history(`${rowData.id}`) }} />
+        <Button severity="danger" rounded icon={"pi pi-trash"} onClick={() => { setVisible(rowData) }} />
+      </Row>
     );
   };
   return (
@@ -58,6 +67,7 @@ const BeneficiariesListPage = () => {
             header="Nome do responsável"
           ></Column>
           <Column field="cpf" header="CPF"></Column>
+          <Column header="Ações" body={ActionBeneficiariesBody}></Column>
         </DataTable>
         <Paginator
           first={props.page}
