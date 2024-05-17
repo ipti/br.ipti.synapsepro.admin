@@ -73,7 +73,7 @@ const RegistrationPage = () => {
             props.CreateRegister({ ...values });
           }}
         >
-          {({ values, handleChange, errors, touched }) => {
+          {({ values, handleChange, errors, touched, setFieldValue }) => {
             console.log(errors);
             return (
               <Form>
@@ -291,8 +291,8 @@ const RegistrationPage = () => {
                     <DropdownComponent
                       value={props.project}
                       placerholder="Selecione o projeto"
-                      name="deficiency"
-                      onChange={(e) => props.setProject(e.target.value)}
+                      name="project"
+                      onChange={(e) => {props.setProject(e.target.value); setFieldValue("project", e.target.value)}}
                       options={props.tsOne?.project}
                       optionsLabel="name"
                       optionsValue="id"

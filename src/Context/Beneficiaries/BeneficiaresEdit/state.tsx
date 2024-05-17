@@ -25,7 +25,7 @@ export const BeneficiariesEditState = () => {
   const { id } = useParams();
   const {
     requestRegistrationClassroomMutation,
-    requestDeleteRegistrationMutation,
+    requestDeleteRegistrationClassroomMutation,
     requestPreRegistrationMutation,
   } = ControllerUpdateRegistration();
   const { data: registrationsRequests, isLoading } =
@@ -70,15 +70,14 @@ export const BeneficiariesEditState = () => {
   };
 
   const DeleteRegistration = (id: number) => {
-    requestDeleteRegistrationMutation.mutate(id);
+    requestDeleteRegistrationClassroomMutation.mutate(id);
   };
 
   const handleUpdateRegistration = (data: UpdateRegister, id: number) => {
     requestPreRegistrationMutation.mutate({
       data: {
         ...data,
-        registration_classroom_id: registrations?.id,
-        birthday: registrations?.birthday,
+        birthday: data?.birthday,
         responsable_telephone: data?.responsable_telephone?.replace(
           /[^a-zA-Z0-9]/g,
           ""

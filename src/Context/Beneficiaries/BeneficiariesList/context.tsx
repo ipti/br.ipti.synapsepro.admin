@@ -10,7 +10,7 @@ const BeneficiariesListProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { registrations, limite, page, setLimite, setPage, filter, setFilter } =
+  const { registrations, limite, page, setLimite, setPage, filter, setFilter, DeleteRegistration } =
     BeneficiariesListState();
 
   return (
@@ -23,6 +23,7 @@ const BeneficiariesListProvider = ({
         setPage,
         filter,
         setFilter,
+        DeleteRegistration
       }}
     >
       {children}

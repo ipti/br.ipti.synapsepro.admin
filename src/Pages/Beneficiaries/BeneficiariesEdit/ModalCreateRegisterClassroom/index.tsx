@@ -20,7 +20,7 @@ const ModalCreateRegisterClassroom = ({
   const { id } = useParams();
 
   return (
-    <Dialog onHide={onHide} visible={visible} style={{ width: "50vw" }}>
+    <Dialog onHide={onHide} visible={visible} style={{ width: "30vw" }}>
       <Formik
         initialValues={{ classroom: "", registration: id, project: "" }}
         onSubmit={(values) => {
@@ -35,7 +35,7 @@ const ModalCreateRegisterClassroom = ({
           return (
             <Form>
               <div className="grid">
-                <div className="col-12 md:col-6">
+                <div className="col-12">
                   <label>Matricula</label>
                   <Padding />
                   <DropdownComponent
@@ -53,26 +53,27 @@ const ModalCreateRegisterClassroom = ({
                     </div>
                   ) : null}
                 </div>
-                {props.classrooms ? (
-                  <div className="col-12 md:col-6">
-                    <label>Turma</label>
-                    <Padding />
-                    <DropdownComponent
-                      value={values.classroom}
-                      placerholder="Selecione a turma"
-                      name="classroom"
-                      optionsValue="id"
-                      onChange={handleChange}
-                      options={props.classrooms}
-                    />
-                    {errors.classroom && touched.classroom ? (
-                      <div style={{ color: "red", marginTop: "8px" }}>
-                        {errors.classroom}
-                      </div>
-                    ) : null}
-                  </div>
-                ) : null}
+
               </div>{" "}
+              {props.classrooms ? (
+                <div className="col-12">
+                  <label>Turma</label>
+                  <Padding />
+                  <DropdownComponent
+                    value={values.classroom}
+                    placerholder="Selecione a turma"
+                    name="classroom"
+                    optionsValue="id"
+                    onChange={handleChange}
+                    options={props.classrooms}
+                  />
+                  {errors.classroom && touched.classroom ? (
+                    <div style={{ color: "red", marginTop: "8px" }}>
+                      {errors.classroom}
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
               <Padding padding="16px" />
               <Column style={{ width: "100%" }}>
                 <Row id="end">

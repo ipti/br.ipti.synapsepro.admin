@@ -4,6 +4,7 @@ export interface BeneficiariesListType {
   registrations: any;
   setLimite: Dispatch<SetStateAction<number>>;
   setPage: Dispatch<SetStateAction<number>>;
+  DeleteRegistration: (id: number) => void
   page: number;
   limite: number;
   filter:

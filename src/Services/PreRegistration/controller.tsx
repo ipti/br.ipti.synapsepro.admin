@@ -6,6 +6,7 @@ import styles from "../../Styles";
 import queryClient from "../reactquery";
 import {
   requestDeleteRegistration,
+  requestDeleteRegistrationClassroom,
   requestPreRegistration,
   requestRegistrationClassroom,
   requestUpdateRegistration,
@@ -20,7 +21,7 @@ export const ControllerPreRegistration = () => {
   const requestPreRegistrationMutation = useMutation(
     (data: CreatePreRegistration) => requestPreRegistration(data),
     {
-      onError: (error) => {},
+      onError: (error) => { },
       onSuccess: (data) => {
         Swal.fire({
           icon: "success",
@@ -35,7 +36,30 @@ export const ControllerPreRegistration = () => {
     }
   );
 
-  return { requestPreRegistrationMutation };
+  const requestRegistrationMutation = useMutation(
+    (data: CreatePreRegistration) => requestPreRegistration(data),
+    {
+      onError: (error) => { },
+      onSuccess: (data) => {
+        console.log(data);
+        Swal.fire({
+          icon: "success",
+          title: "Registro feito com sucesso!",
+          confirmButtonColor: styles.colors.colorsBaseProductNormal,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            if(data?.user?.id){
+              history("/beneficiarios/" + data?.user?.id);
+            } else {
+              history("/beneficiarios");
+            }
+          }
+        });
+      },
+    }
+  );
+
+  return { requestPreRegistrationMutation, requestRegistrationMutation };
 };
 
 export const ControllerUpdateRegistration = () => {
@@ -43,7 +67,7 @@ export const ControllerUpdateRegistration = () => {
     ({ data, id }: { data: UpdateRegister; id: number }) =>
       requestUpdateRegistration(data, id),
     {
-      onError: (error) => {},
+      onError: (error) => { },
       onSuccess: (data) => {
         Swal.fire({
           icon: "success",
@@ -58,7 +82,7 @@ export const ControllerUpdateRegistration = () => {
     (data: CreateRegistrationClassroomType) =>
       requestRegistrationClassroom(data),
     {
-      onError: (error) => {},
+      onError: (error) => { },
       onSuccess: (data) => {
         Swal.fire({
           icon: "success",
@@ -74,10 +98,10 @@ export const ControllerUpdateRegistration = () => {
     }
   );
 
-  const requestDeleteRegistrationMutation = useMutation(
-    (id: number) => requestDeleteRegistration(id),
+  const requestDeleteRegistrationClassroomMutation = useMutation(
+    (id: number) => requestDeleteRegistrationClassroom(id),
     {
-      onError: (error) => {},
+      onError: (error) => { },
       onSuccess: (data) => {
         Swal.fire({
           icon: "success",
@@ -86,9 +110,28 @@ export const ControllerUpdateRegistration = () => {
         }).then((result) => {
           if (result.isConfirmed) {
             // history("/");
-
             queryClient.refetchQueries("useRequestsClassroomRegistration");
-            queryClient.refetchQueries("useRequestsClassroomRegistrationOne");          }
+            queryClient.refetchQueries("useRequestsRegistrationOne");
+          }
+        });
+      },
+    }
+  );
+
+  const requestDeleteRegistrationMutation = useMutation(
+    (id: number) => requestDeleteRegistration(id),
+    {
+      onError: (error) => { },
+      onSuccess: (data) => {
+        Swal.fire({
+          icon: "success",
+          title: " Beneficiario excluido com sucesso!",
+          confirmButtonColor: styles.colors.colorsBaseProductNormal,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // history("/");
+            queryClient.refetchQueries("useRequestAllRegistration");
+          }
         });
       },
     }
@@ -96,7 +139,8 @@ export const ControllerUpdateRegistration = () => {
 
   return {
     requestPreRegistrationMutation,
-    requestDeleteRegistrationMutation,
+    requestDeleteRegistrationClassroomMutation,
     requestRegistrationClassroomMutation,
+    requestDeleteRegistrationMutation
   };
 };

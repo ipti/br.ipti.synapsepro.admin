@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { RegistrationType, UpdateRegister } from "./type";
+import { VerifyColor, VerifySex, formatarData, getStatus } from "../../../Controller/controllerGlobal";
 import { ControllerUpdateRegistration } from "../../../Services/PreRegistration/controller";
 import { useFetchRequestClassroomRegistrationOne } from "../../../Services/PreRegistration/query";
-import { color_race, formatarData, getStatus, Status, typesex, VerifyColor, VerifySex } from "../../../Controller/controllerGlobal";
+import { RegistrationType, UpdateRegister } from "./type";
 export const RegistrationClassroomState = () => {
   const { idRegistration } = useParams();
   const { data: registrationRequest, isLoading } =
     useFetchRequestClassroomRegistrationOne(parseInt(idRegistration!));
-
   const { requestPreRegistrationMutation } = ControllerUpdateRegistration();
-
   const [registration, setregistration] = useState<
     RegistrationType | undefined
   >();
@@ -21,11 +19,8 @@ export const RegistrationClassroomState = () => {
     }
   }, [registrationRequest]);
 
- 
-
   const date = new Date(registration?.registration.birthday!);
 
-  
   const initialValue = {
     name: registration?.registration.name,
     sex: VerifySex(registration?.registration.sex!),

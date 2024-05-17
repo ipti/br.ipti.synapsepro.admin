@@ -1,12 +1,9 @@
+import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import { Column, Padding, Row } from "../../../../Styles/styles";
-import TextInput from "../../../../Components/TextInput";
 import DropdownComponent from "../../../../Components/Dropdown";
 import MaskInput from "../../../../Components/InputMask";
-import { Button } from "primereact/button";
-import { useContext } from "react";
-import { BeneficiariesListContext } from "../../../../Context/Beneficiaries/BeneficiariesList/context";
-import { BeneficiariesListType } from "../../../../Context/Beneficiaries/BeneficiariesList/type";
+import TextInput from "../../../../Components/TextInput";
+import { Column, Padding, Row } from "../../../../Styles/styles";
 
 const ModalFilter = ({
   onHide,
@@ -15,8 +12,6 @@ const ModalFilter = ({
   onHide(): void;
   visible?: boolean | undefined;
 }) => {
-  const props = useContext(BeneficiariesListContext) as BeneficiariesListType;
-
   
 
   return (

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useFetchRequestAllRegistration } from "../../../Services/Beneficiaries/query";
+import { ControllerUpdateRegistration } from "../../../Services/PreRegistration/controller";
 
 export const BeneficiariesListState = () => {
   const [registrations, setRegistrations] = useState<any | undefined>();
@@ -13,11 +14,19 @@ export const BeneficiariesListState = () => {
     page: Math.floor(page / 10 + 1),
   });
 
+  const {
+    requestDeleteRegistrationMutation } = ControllerUpdateRegistration();
+
   useEffect(() => {
     if (registrationsRequests) {
       setRegistrations(registrationsRequests);
     }
   }, [registrationsRequests]);
+
+  const DeleteRegistration = (id: number) => {
+    requestDeleteRegistrationMutation.mutate(id);
+  };
+
 
   return {
     registrations,
@@ -27,5 +36,6 @@ export const BeneficiariesListState = () => {
     setLimite,
     filter,
     setFilter,
+    DeleteRegistration
   };
 };

@@ -1,17 +1,17 @@
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
+import { ConfirmDialog } from "primereact/confirmdialog";
 import { DataTable } from "primereact/datatable";
 import { Paginator } from "primereact/paginator";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BeneficiariesListProvider, {
   BeneficiariesListContext,
 } from "../../../Context/Beneficiaries/BeneficiariesList/context";
 import { BeneficiariesListType } from "../../../Context/Beneficiaries/BeneficiariesList/type";
 import { somarNumeros } from "../../../Controller/controllerGlobal";
-import { Container, Padding, Row } from "../../../Styles/styles";
-import ModalFilter from "./ModalFilter";
 import color from "../../../Styles/colors";
-import { useNavigate } from "react-router-dom";
+import { Container, Padding, Row } from "../../../Styles/styles";
 
 const BeneficiariesList = () => {
   return (
@@ -31,25 +31,26 @@ const BeneficiariesListPage = () => {
     return (
       <div className="flex justify-content-between" style={{ background: color.colorCard }}>
         <Button label="Adicionar beneficiario" icon="pi pi-plus" onClick={() => history("criar")} />
-        <Button
+        {/* <Button
           label="Configurar filtro"
           icon="pi pi-filter"
           onClick={() => {
             setVisible(true);
           }}
-        />
+        /> */}
       </div>
     );
   };
 
   const ActionBeneficiariesBody = (rowData: any) => {
     return (
-      <Row style={{ gap: "8px" }}>
+      <Row id="center" style={{ gap: "8px" }}>
         <Button rounded icon={"pi pi-pencil"} onClick={() => { history(`${rowData.id}`) }} />
         <Button severity="danger" rounded icon={"pi pi-trash"} onClick={() => { setVisible(rowData) }} />
       </Row>
     );
   };
+
   return (
     <>
       <Container>
@@ -74,12 +75,20 @@ const BeneficiariesListPage = () => {
           totalRecords={props.registrations?.total}
           onPageChange={(e) => {
             props.setPage(somarNumeros(e.first, 1));
-            console.log(e);
           }}
           rows={props.limite}
         />
       </Container>
-      <ModalFilter visible={visible} onHide={() => setVisible(false)} />
+      <ConfirmDialog
+        visible={visible}
+        onHide={() => setVisible(false)}
+        message="Tem certeza de que deseja prosseguir?"
+        header="Confirmação"
+        icon="pi pi-exclamation-triangle"
+        accept={() => props.DeleteRegistration(visible.id)}
+        reject={() => setVisible(false)}
+      />
+      {/* <ModalFilter visible={visible} onHide={() => setVisible(false)} /> */}
     </>
   );
 };

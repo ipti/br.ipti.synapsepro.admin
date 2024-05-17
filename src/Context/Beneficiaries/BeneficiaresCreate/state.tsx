@@ -15,9 +15,9 @@ export const BeneficiariesCreateState = () => {
 
   useEffect(() => {
     if (classroomsFetch) {
-        setClassrooms(classroomsFetch)
+      setClassrooms(classroomsFetch)
     }
-}, [classroomsFetch, project])
+  }, [classroomsFetch, project])
 
   useEffect(() => {
     if (tsOneRequest) {
@@ -29,8 +29,7 @@ export const BeneficiariesCreateState = () => {
   const CreateRegister = (values: any) => {
     const data = new Date(values?.birthday);
     const dataFormatada = data?.toISOString()?.split('T')[0];
-
-    props.requestPreRegistrationMutation.mutate({ ...values, cpf: values.cpf.replace(/[^a-zA-Z0-9]/g, ''), responsable_telephone: values.responsable_telephone.replace(/[^a-zA-Z0-9]/g, ''), birthday: dataFormatada, responsable_cpf: values?.responsable_cpf?.replace(/[^a-zA-Z0-9]/g, '') })
+    props.requestRegistrationMutation.mutate({ ...values, cpf: values.cpf.replace(/[^a-zA-Z0-9]/g, ''), responsable_telephone: values.responsable_telephone.replace(/[^a-zA-Z0-9]/g, ''), birthday: dataFormatada, responsable_cpf: values?.responsable_cpf?.replace(/[^a-zA-Z0-9]/g, '') })
   }
 
 

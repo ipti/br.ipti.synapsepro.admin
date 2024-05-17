@@ -1,5 +1,7 @@
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
+import { Column } from "primereact/column";
+import { ConfirmDialog } from "primereact/confirmdialog";
 import { DataTable } from "primereact/datatable";
 import { useContext, useState } from "react";
 import DropdownComponent from "../../../Components/Dropdown";
@@ -11,12 +13,9 @@ import BeneficiariesEditProvider, {
 } from "../../../Context/Beneficiaries/BeneficiaresEdit/context";
 import { BeneficiariesEditType } from "../../../Context/Beneficiaries/BeneficiaresEdit/type";
 import { color_race, typesex } from "../../../Controller/controllerGlobal";
-import { Container, Padding, Row } from "../../../Styles/styles";
-import { Column } from "primereact/column";
 import color from "../../../Styles/colors";
-import { useNavigate } from "react-router-dom";
+import { Container, Padding, Row } from "../../../Styles/styles";
 import ModalCreateRegisterClassroom from "./ModalCreateRegisterClassroom";
-import { ConfirmDialog } from "primereact/confirmdialog";
 
 const BeneficiariesEdit = () => {
   return (
@@ -31,8 +30,6 @@ const BeneficiariesEditPage = () => {
   const [visible, setVisible] = useState<any>();
 
   const [visibleDelete, setVisibleDelete] = useState<any>();
-
-  const history = useNavigate();
 
   if (props.isLoading) return <Loading />;
 
@@ -119,9 +116,9 @@ const BeneficiariesEditPage = () => {
                   <div className="col-12 md:col-6">
                     <label>Data de Nascimento</label>
                     <Padding />
-                    <TextInput
+                    <MaskInput
                       value={values.birthday?.toString()}
-                      disabled
+                      mask="99/99/9999"
                       placeholder="Data de Nascimento"
                       name="birthday"
                       onChange={handleChange}
@@ -207,22 +204,7 @@ const BeneficiariesEditPage = () => {
                 <Padding padding="8px" />
                 <h3>Matriculas</h3>
                 <Padding padding="8px" />
-                <DataTable
-                  value={props.registrations?.register_classroom}
-                  tableStyle={{ minWidth: "50rem" }}
-                  header={renderHeader}
-                >
-                  <Column
-                    field="classroom.project.name"
-                    header="Projeto"
-                  ></Column>
-                  <Column field="classroom.name" header="Turma"></Column>
-                  <Column field="status" header="Status"></Column>
-                  <Column
-                    header="Ações"
-                    body={ActionBeneficiariesBody}
-                  ></Column>
-                </DataTable>
+
                 {/* <h3>Endereço</h3>
                 <Padding />
                 <div className="grid">
@@ -270,6 +252,22 @@ const BeneficiariesEditPage = () => {
           }}
         </Formik>
       ) : null}
+      <DataTable
+        value={props.registrations?.register_classroom}
+        tableStyle={{ minWidth: "50rem" }}
+        header={renderHeader}
+      >
+        <Column
+          field="classroom.project.name"
+          header="Projeto"
+        ></Column>
+        <Column field="classroom.name" header="Turma"></Column>
+        <Column field="status" header="Status"></Column>
+        <Column
+          header="Ações"
+          body={ActionBeneficiariesBody}
+        ></Column>
+      </DataTable>
       <ModalCreateRegisterClassroom
         onHide={() => setVisible(false)}
         visible={visible}

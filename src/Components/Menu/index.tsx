@@ -18,14 +18,23 @@ import DropdownComponent from "../Dropdown";
 import Icon from "../Icon";
 import Item from "./Item";
 import { Container } from "./style";
-import turmas from "../../Assets/images/turmasPessoas.svg";
+import turmasHover from "../../Assets/images/turmasPessoas.svg";
+
+import turmas from "../../Assets/images/peoples.svg";
 import home from "../../Assets/images/home.svg"
+import homeHover from "../../Assets/images/home_hover.svg"
+
 import tecnologia from "../../Assets/images/digital_wellbeing.svg"
+
+import tecnologia_hover from "../../Assets/images/digital_wellbeing_hover.svg"
 import projeto from "../../Assets/images/note_add.svg"
+import projeto_hover from "../../Assets/images/note_add_hover.svg"
+
 import ajuda from "../../Assets/images/question_mark.svg"
 
 
 import user from "../../Assets/images/personUser.svg";
+import user_hover from "../../Assets/images/person_hover.svg";
 
 const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
   const [active, setActive] = useState(parseInt(getMenuItem()!));
@@ -78,7 +87,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 1 ? true : false}
             path={"/"}
-            icon={home}
+            icon={active === 1 ? homeHover : home}
           />
           <Padding />
           <Item
@@ -89,7 +98,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 2 ? true : false}
             path={"/tecnologias"}
-            icon={tecnologia}
+            icon={active === 2 ? tecnologia_hover : tecnologia}
           />
           <Padding />
           <Item
@@ -100,7 +109,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 3 ? true : false}
             path={"/projetos"}
-            icon={projeto}
+            icon={active === 3 ? projeto_hover : projeto}
           />
           <Padding />
           <Item
@@ -111,7 +120,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 4 ? true : false}
             path={"/turma"}
-            icon={turmas}
+            icon={active === 4 ? turmasHover : turmas}
           />
           <Padding />
           <Item
@@ -122,11 +131,11 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 5 ? true : false}
             path={"/beneficiarios"}
-            icon={turmas}
+            icon={active === 5 ? turmasHover : turmas}
           />
           <Padding />
           {props.user?.role === ROLE.ADMIN ||
-          props.user?.role === ROLE.COORDINATORS ? (
+            props.user?.role === ROLE.COORDINATORS ? (
             <Item
               text={"Usuarios"}
               funcActiv={() => {
@@ -135,10 +144,10 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
               }}
               active={active === 6 ? true : false}
               path={"/users"}
-              icon={user}
+              icon={active === 6 ? user_hover : user}
             />
           ) : null}
-          <Padding />
+          {/* <Padding />
 
           <Item
             text={"Ajuda"}
@@ -149,7 +158,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             active={active === 7 ? true : false}
             path={"/ajuda"}
             icon={ajuda}
-          />
+          /> */}
         </Padding>
       ) : null}
       <ModalYear
