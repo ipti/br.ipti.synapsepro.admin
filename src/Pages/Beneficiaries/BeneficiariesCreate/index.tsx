@@ -9,12 +9,12 @@ import BeneficiariesCreateProvider, {
   BeneficiariesCreateContext,
 } from "../../../Context/Beneficiaries/BeneficiaresCreate/context";
 import { BeneficiariesCreateType } from "../../../Context/Beneficiaries/BeneficiaresCreate/type";
-import {
-  color_race,
-  Status,
-  typesex,
-} from "../../../Controller/controllerGlobal";
+import { color_race, typesex } from "../../../Controller/controllerGlobal";
 import { Column, Container, Padding, Row } from "../../../Styles/styles";
+import CalendarComponent from "../../../Components/Calendar";
+import * as Yup from "yup";
+import { validaCPF } from "../../../Controller/controllerValidCPF";
+import RadioButtonComponent from "../../../Components/RadioButton";
 
 const BeneficiariesCreate = () => {
   return (
@@ -29,6 +29,35 @@ const RegistrationPage = () => {
     BeneficiariesCreateContext
   ) as BeneficiariesCreateType;
 
+  const schema = Yup.object().shape({
+    name: Yup.string().required("Nome é obrigatório"),
+    color_race: Yup.string().required("Raça/cor é obrigatório"),
+    deficiency: Yup.boolean().required("Deficiência é obrigatória"),
+    cpf: Yup.string().test("cpf-valid", "CPF inválido", (value) => {
+      if (value && value.trim() !== "") {
+        return validaCPF(value);
+      }
+      return true;
+    }),
+    responsable_cpf: Yup.string().test("cpf-valid", "CPF inválido", (value) => {
+      if (value && value.trim() !== "") {
+        return validaCPF(value);
+      }
+      return true;
+    }),
+    responsable_telephone: Yup.string().required(
+      "Telefone é obrigatório"
+    ),
+    birthday: Yup.string()
+      .nullable()
+      .required("Data de nascimento é obrigatória"),
+    zone: Yup.string().nullable().required("Zona é obrigatório"),
+    project: Yup.string().nullable().required("Projeto é obrigatório"),
+    classroom: Yup.string().nullable().required("Classroom é obrigatório"),
+
+    sex: Yup.string().nullable().required("Sexo é obrigatória"),
+  });
+
   if (false) return <Loading />;
 
   return (
@@ -38,19 +67,19 @@ const RegistrationPage = () => {
       {true ? (
         <Formik
           initialValues={props.initialValue}
+          validationSchema={schema}
           onSubmit={(values) => {
-            // props.handleUpdateRegistration(
-            //   { ...values },
-            //   props.registration?.registration_fk!
-            // );
+            delete values.project;
+            props.CreateRegister({ ...values });
           }}
         >
-          {({ values, handleChange }) => {
+          {({ values, handleChange, errors, touched }) => {
+            console.log(errors);
             return (
               <Form>
                 <Column>
                   <Row id="end">
-                    <Button label="Criar" />
+                    <Button label="Criar" type="submit" />
                   </Row>
                 </Column>
                 <Padding padding="8px" />
@@ -67,6 +96,11 @@ const RegistrationPage = () => {
                       onChange={handleChange}
                       name="cpf"
                     />
+                    {errors.cpf && touched.cpf ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.cpf}
+                      </div>
+                    ) : null}
                   </div>
                 </div>{" "}
                 <Padding padding="8px" />
@@ -74,7 +108,7 @@ const RegistrationPage = () => {
                 <Padding />
                 <div className="grid">
                   <div className="col-12 md:col-6">
-                    <label>Name</label>
+                    <label>Name *</label>
                     <Padding />
                     <TextInput
                       value={values.name}
@@ -82,56 +116,114 @@ const RegistrationPage = () => {
                       onChange={handleChange}
                       name="name"
                     />
+                    {errors.name && touched.name ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.name}
+                      </div>
+                    ) : null}
                   </div>
                   <div className="col-12 md:col-6">
-                    <label>Sexo</label>
+                    <label>Sexo *</label>
                     <Padding />
                     <DropdownComponent
                       value={values.sex}
                       optionsLabel="type"
                       options={typesex}
+                      optionsValue="id"
+                      placerholder="Selecione seu sexo"
                       name="sex"
                       onChange={handleChange}
                     />
+                    {errors.sex && touched.sex ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.sex}
+                      </div>
+                    ) : null}
                   </div>
                 </div>{" "}
                 <div className="grid">
                   <div className="col-12 md:col-6">
-                    <label>Data de Nascimento</label>
+                    <label>Data de Nascimento *</label>
                     <Padding />
-                    <TextInput
-                      value={values.birthday?.toString()}
-                      disabled
+                    <CalendarComponent
+                      value={values.birthday}
                       placeholder="Data de Nascimento"
                       name="birthday"
                       onChange={handleChange}
                     />
+                    {errors.birthday && touched.birthday ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.birthday}
+                      </div>
+                    ) : null}
                   </div>
                   <div className="col-12 md:col-6">
-                    <label>Cor de raça</label>
+                    <label>Cor de raça *</label>
                     <Padding />
                     <DropdownComponent
                       value={values.color_race}
                       options={color_race}
+                      placerholder="Selecione sua cor de raça"
                       name="color_race"
+                      optionsValue="id"
                       onChange={handleChange}
                     />{" "}
+                    {errors.color_race && touched.color_race ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.color_race}
+                      </div>
+                    ) : null}
                   </div>
                 </div>{" "}
                 <div className="grid">
                   <div className="col-12 md:col-6">
-                    <label>Deficiente</label>
+                    <label>Deficiente *</label>
                     <Padding />
                     <DropdownComponent
                       value={values.deficiency}
-                      placerholder="Deficiente"
+                      placerholder="Possui deficiência?"
                       name="deficiency"
                       onChange={handleChange}
+                      optionsValue="id"
                       options={[
                         { id: true, name: "Sim" },
                         { id: false, name: "Não" },
                       ]}
                     />
+                    {errors.deficiency && touched.deficiency ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.deficiency}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <div className="col-12 md:col-6">
+                      <label>Zona *</label>
+                      <Padding />
+                      <Column id="end">
+                        <Row className="gap-2">
+                          <RadioButtonComponent
+                            value={1}
+                            checked={values.zone === 1}
+                            onChange={handleChange}
+                            name="zone"
+                            label="Rural"
+                          />
+                          <RadioButtonComponent
+                            value={2}
+                            checked={values.zone === 2}
+                            onChange={handleChange}
+                            name="zone"
+                            label="Urbana"
+                          />
+                        </Row>
+                      </Column>
+                      {errors.zone && touched.zone ? (
+                        <div style={{ color: "red", marginTop: "8px" }}>
+                          {errors.zone}
+                        </div>
+                      ) : null}
+                    </div>
                   </div>
                 </div>{" "}
                 <Padding padding="8px" />
@@ -147,6 +239,11 @@ const RegistrationPage = () => {
                       onChange={handleChange}
                       placeholder="Nome do Resposável"
                     />
+                    {errors.responsable_name && touched.responsable_name ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.responsable_name}
+                      </div>
+                    ) : null}
                   </div>
                   <div className="col-12 md:col-6">
                     <label>CPF Responsavel</label>
@@ -158,11 +255,16 @@ const RegistrationPage = () => {
                       placeholder="CPF do Responsável"
                       onChange={handleChange}
                     />
+                    {errors.responsable_cpf && touched.responsable_cpf ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.responsable_cpf}
+                      </div>
+                    ) : null}
                   </div>
                 </div>{" "}
                 <div className="grid">
                   <div className="col-12 md:col-6">
-                    <label>Telefone </label>
+                    <label>Telefone *</label>
                     <Padding />
                     <MaskInput
                       value={values.responsable_telephone}
@@ -171,40 +273,55 @@ const RegistrationPage = () => {
                       onChange={handleChange}
                       placeholder="name"
                     />
+                    {errors.responsable_telephone &&
+                    touched.responsable_telephone ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.responsable_telephone}
+                      </div>
+                    ) : null}
                   </div>
                 </div>{" "}
                 <Padding padding="8px" />
-                <h3>Projeto</h3>
+                <h3>Projeto *</h3>
                 <Padding padding="8px" />
                 <div className="grid">
                   <div className="col-12 md:col-6">
-                    <label>Projetos</label>
+                    <label>Matricula</label>
                     <Padding />
                     <DropdownComponent
-                      value={values.deficiency}
-                      placerholder="Deficiente"
+                      value={props.project}
+                      placerholder="Selecione o projeto"
                       name="deficiency"
-                      onChange={handleChange}
-                      options={[
-                        { id: true, name: "Sim" },
-                        { id: false, name: "Não" },
-                      ]}
+                      onChange={(e) => props.setProject(e.target.value)}
+                      options={props.tsOne?.project}
+                      optionsLabel="name"
+                      optionsValue="id"
                     />
+                    {errors.project && touched.project ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.project}
+                      </div>
+                    ) : null}
                   </div>
-                  <div className="col-12 md:col-6">
-                    <label>Turma</label>
-                    <Padding />
-                    <DropdownComponent
-                      value={values.deficiency}
-                      placerholder="Deficiente"
-                      name="deficiency"
-                      onChange={handleChange}
-                      options={[
-                        { id: true, name: "Sim" },
-                        { id: false, name: "Não" },
-                      ]}
-                    />
-                  </div>
+                  {props.classrooms ? (
+                    <div className="col-12 md:col-6">
+                      <label>Turma</label>
+                      <Padding />
+                      <DropdownComponent
+                        value={values.classroom}
+                        placerholder="Selecione a turma"
+                        name="classroom"
+                        optionsValue="id"
+                        onChange={handleChange}
+                        options={props.classrooms}
+                      />
+                      {errors.classroom && touched.classroom ? (
+                        <div style={{ color: "red", marginTop: "8px" }}>
+                          {errors.classroom}
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : null}
                 </div>{" "}
                 {/* <h3>Endereço</h3>
                 <Padding />

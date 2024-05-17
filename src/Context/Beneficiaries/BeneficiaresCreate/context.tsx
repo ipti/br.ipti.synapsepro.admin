@@ -10,13 +10,13 @@ const BeneficiariesCreateProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { initialValue } =
+  const { initialValue, project, setProject, tsOne, classrooms, CreateRegister } =
     BeneficiariesCreateState();
 
   return (
     <BeneficiariesCreateContext.Provider
       value={{
-        initialValue
+        initialValue, project, setProject, tsOne, classrooms, CreateRegister
       }}
     >
       {children}

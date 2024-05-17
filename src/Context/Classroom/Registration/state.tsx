@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { RegistrationType, UpdateRegister } from "./type";
 import { ControllerUpdateRegistration } from "../../../Services/PreRegistration/controller";
 import { useFetchRequestClassroomRegistrationOne } from "../../../Services/PreRegistration/query";
-import { color_race, formatarData, Status, typesex } from "../../../Controller/controllerGlobal";
+import { color_race, formatarData, getStatus, Status, typesex, VerifyColor, VerifySex } from "../../../Controller/controllerGlobal";
 export const RegistrationClassroomState = () => {
   const { idRegistration } = useParams();
   const { data: registrationRequest, isLoading } =
@@ -23,25 +23,9 @@ export const RegistrationClassroomState = () => {
 
  
 
-  const VerifySex = (sex: number) => {
-    return typesex.find((props) => props.id === sex);
-  };
-
-  const VerifyColor = (color_race_number: number) => {
-    return color_race.find((props) => props.id === color_race_number);
-  };
-
   const date = new Date(registration?.registration.birthday!);
 
-  const status = [
-    { id: Status.APPROVED, name: "Aprovado" },
-    { id: Status.REPROVED, name: "Reprovado" },
-    { id: Status.PENDING, name: "Pedente" },
-  ];
-
-  const getStatus = (id: string) => {
-    return status.find((props) => props.id === id);
-  };
+  
   const initialValue = {
     name: registration?.registration.name,
     sex: VerifySex(registration?.registration.sex!),

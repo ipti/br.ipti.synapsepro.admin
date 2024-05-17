@@ -3,13 +3,17 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { UpdateRegister } from "../../Context/Classroom/Registration/type";
 import styles from "../../Styles";
+import queryClient from "../reactquery";
 import {
   requestDeleteRegistration,
   requestPreRegistration,
+  requestRegistrationClassroom,
   requestUpdateRegistration,
 } from "./request";
-import { CreatePreRegistration } from "./types";
-import queryClient from "../reactquery";
+import {
+  CreatePreRegistration,
+  CreateRegistrationClassroomType,
+} from "./types";
 
 export const ControllerPreRegistration = () => {
   const history = useNavigate();
@@ -50,15 +54,49 @@ export const ControllerUpdateRegistration = () => {
     }
   );
 
+  const requestRegistrationClassroomMutation = useMutation(
+    (data: CreateRegistrationClassroomType) =>
+      requestRegistrationClassroom(data),
+    {
+      onError: (error) => {},
+      onSuccess: (data) => {
+        Swal.fire({
+          icon: "success",
+          title: "Registro feito com sucesso!",
+          confirmButtonColor: styles.colors.colorsBaseProductNormal,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // history("/");
+            queryClient.refetchQueries("useRequestsRegistrationOne");
+          }
+        });
+      },
+    }
+  );
+
   const requestDeleteRegistrationMutation = useMutation(
     (id: number) => requestDeleteRegistration(id),
     {
       onError: (error) => {},
       onSuccess: (data) => {
-        queryClient.refetchQueries("useRequestsClassroomRegistration");
+        Swal.fire({
+          icon: "success",
+          title: " Matricula excluida com sucesso!",
+          confirmButtonColor: styles.colors.colorsBaseProductNormal,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // history("/");
+
+            queryClient.refetchQueries("useRequestsClassroomRegistration");
+            queryClient.refetchQueries("useRequestsClassroomRegistrationOne");          }
+        });
       },
     }
   );
 
-  return { requestPreRegistrationMutation, requestDeleteRegistrationMutation };
+  return {
+    requestPreRegistrationMutation,
+    requestDeleteRegistrationMutation,
+    requestRegistrationClassroomMutation,
+  };
 };

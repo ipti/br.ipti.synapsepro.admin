@@ -18,21 +18,23 @@ export const requestCreateClassroom = (data: CreateClassroom) => {
 
 export const requestClassroom = (idProject: number) => {
   let path = "/classroom-bff";
-  return http
-    .get(path, {
-      params: {
-        idProject: idProject,
-        year: getYear(),
-      },
-    })
-    .then((response) => response.data)
-    .catch((err) => {
-      if (err.response.status === 401) {
-        logout();
-        window.location.reload();
-      }
-      throw err;
-    });
+  if (idProject) {
+    return http
+      .get(path, {
+        params: {
+          idProject: idProject,
+          year: getYear(),
+        },
+      })
+      .then((response) => response.data)
+      .catch((err) => {
+        if (err.response.status === 401) {
+          logout();
+          window.location.reload();
+        }
+        throw err;
+      });
+  }
 };
 
 export const requestClassroomOne = (id: number) => {
@@ -64,7 +66,7 @@ export const requestUpdateClassroom = (id: number, data: { name: string }) => {
 };
 
 export const requestClassroomRegistration = (id: number) => {
-  let path = "/registration-token-bff";
+  let path = "/registration-classroom-bff";
   return http
     .get(path, {
       params: {

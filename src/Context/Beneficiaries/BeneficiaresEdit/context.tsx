@@ -10,14 +10,32 @@ const BeneficiariesEditProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { registrations, initialValue } =
-    BeneficiariesEditState();
+  const {
+    registrations,
+    initialValue,
+    isLoading,
+    CreateRegisterClassroom,
+    DeleteRegistration,
+    handleUpdateRegistration,
+    classrooms,
+    project,
+    projectRequet,
+    setProject,
+  } = BeneficiariesEditState();
 
   return (
     <BeneficiariesEditContext.Provider
       value={{
         registrations,
-        initialValue
+        initialValue,
+        isLoading,
+        CreateRegisterClassroom,
+        DeleteRegistration,
+        handleUpdateRegistration,
+        classrooms,
+        project,
+        projectRequet,
+        setProject,
       }}
     >
       {children}

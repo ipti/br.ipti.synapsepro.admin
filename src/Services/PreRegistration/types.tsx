@@ -14,4 +14,9 @@ export interface CreatePreRegistration {
     zone: number;
     classroom: number;
   }
+
+  export interface CreateRegistrationClassroomType {
+    registration: number;
+    classroom: number;
+  }
   
