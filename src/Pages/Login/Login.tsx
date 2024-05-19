@@ -26,7 +26,13 @@ const Login = () => {
 const LoginPage = () => {
   const props = useContext(LoginContext) as LoginContextText;
 
-  const years = [2024, 2023, 2022, 2021];
+  const years = [
+    { value: 2024 },
+    { value: 2023 },
+    { value: 2022 },
+    { value: 2021 },
+  ];
+
 
   const [year, setYearState] = useState<any>();
 
@@ -147,7 +153,8 @@ const LoginPage = () => {
                               setYearState(e.target.value);
                               setYear(e.target.value.toString());
                             }}
-                            optionsLabel=""
+                            optionsLabel="value"
+                            optionsValue="value"
                             value={year}
                           />
                         </div>

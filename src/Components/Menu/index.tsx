@@ -162,7 +162,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
       ) : null}
       <ModalYear
         visible={visibleModal}
-        onHide={() => setVisibleModal(!visibleModal)}
+        onHide={() => setVisibleModal(false)}
       />
     </Container>
   );

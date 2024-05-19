@@ -1,15 +1,15 @@
 import { Button } from "primereact/button";
-import { ROLE } from "../../../Controller/controllerGlobal";
-import { Container, Padding, Row } from "../../../Styles/styles";
-import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import CardProject from "../../../Components/Card/CardProject";
 import { AplicationContext } from "../../../Context/Aplication/context";
-import { PropsAplicationContext } from "../../../Types/types";
 import ProjectListProvider, {
   ProjectListContext,
 } from "../../../Context/Project/ProjectList/context";
 import { ProjectListTypes } from "../../../Context/Project/ProjectList/type";
-import CardClassroom from "../../../Components/Card/CardClassroom";
+import { ROLE } from "../../../Controller/controllerGlobal";
+import { Container, Padding, Row } from "../../../Styles/styles";
+import { PropsAplicationContext } from "../../../Types/types";
 
 const ProjectsList = () => {
   return (
@@ -42,11 +42,12 @@ const ProjectsListPage = () => {
           />
         </Row>
       )}
+      <Padding padding="16px" />
       <div className="grid">
         {props.tsOne?.project?.map((item, index) => {
           return (
             <div className="col-12 md:col-6 lg:col-4">
-              <CardClassroom title={item.name} id={item.id} />
+              <CardProject title={item.name} id={item.id} />
             </div>
           );
         })}

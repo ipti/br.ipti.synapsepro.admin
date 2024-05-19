@@ -1,11 +1,11 @@
+import { Button } from "primereact/button";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import CardTs from "../../../Components/Card/CardTs";
 import { AplicationContext } from "../../../Context/Aplication/context";
-import { PropsAplicationContext } from "../../../Types/types";
 import { ROLE } from "../../../Controller/controllerGlobal";
 import { Container, Padding, Row } from "../../../Styles/styles";
-import { Button } from "primereact/button";
-import CardClassroom from "../../../Components/Card/CardClassroom";
+import { PropsAplicationContext } from "../../../Types/types";
 
 const TecnologySocial = () => {
   const history = useNavigate();
@@ -31,7 +31,7 @@ const TecnologySocial = () => {
         {propsAplication.project?.map((item, index) => {
           return (
             <div className="col-12 md:col-6 lg:col-4">
-              <CardClassroom title={item.name} id={item.id} />
+              <CardTs title={item.name} id={item.id} />
             </div>
           );
         })}
