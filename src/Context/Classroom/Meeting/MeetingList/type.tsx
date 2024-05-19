@@ -1,6 +1,7 @@
 export interface MeetingListTypes {
   meetings: Meeting[] | undefined;
   isLoading: boolean
+  DeleteMeeting: (id: number) => void
 }
 
 export interface Meeting {

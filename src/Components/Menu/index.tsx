@@ -21,20 +21,19 @@ import { Container } from "./style";
 import turmasHover from "../../Assets/images/turmasPessoas.svg";
 
 import turmas from "../../Assets/images/peoples.svg";
-import home from "../../Assets/images/home.svg"
-import homeHover from "../../Assets/images/home_hover.svg"
+import home from "../../Assets/images/iconsMenu/home.svg";
+import homeHover from "../../Assets/images/iconsMenu/home_active.svg";
 
-import tecnologia from "../../Assets/images/digital_wellbeing.svg"
+import tecnologia from "../../Assets/images/iconsMenu/digital_wellbeing.svg";
 
-import tecnologia_hover from "../../Assets/images/digital_wellbeing_hover.svg"
-import projeto from "../../Assets/images/note_add.svg"
-import projeto_hover from "../../Assets/images/note_add_hover.svg"
+import tecnologia_hover from "../../Assets/images/iconsMenu/digital_wellbeing_active.svg";
+import projeto from "../../Assets/images/iconsMenu/note_add.svg";
+import projeto_hover from "../../Assets/images/iconsMenu/note_add_active.svg";
 
-import ajuda from "../../Assets/images/question_mark.svg"
+// import ajuda from "../../Assets/images/question_mark.svg";
 
-
-import user from "../../Assets/images/personUser.svg";
-import user_hover from "../../Assets/images/person_hover.svg";
+import user from "../../Assets/images/iconsMenu/person.svg";
+import user_hover from "../../Assets/images/iconsMenu/person_active.svg";
 
 const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
   const [active, setActive] = useState(parseInt(getMenuItem()!));
@@ -135,7 +134,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           />
           <Padding />
           {props.user?.role === ROLE.ADMIN ||
-            props.user?.role === ROLE.COORDINATORS ? (
+          props.user?.role === ROLE.COORDINATORS ? (
             <Item
               text={"Usuarios"}
               funcActiv={() => {

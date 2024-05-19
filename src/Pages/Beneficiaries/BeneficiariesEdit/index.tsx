@@ -12,7 +12,11 @@ import BeneficiariesEditProvider, {
   BeneficiariesEditContext,
 } from "../../../Context/Beneficiaries/BeneficiaresEdit/context";
 import { BeneficiariesEditType } from "../../../Context/Beneficiaries/BeneficiaresEdit/type";
-import { color_race, typesex } from "../../../Controller/controllerGlobal";
+import {
+  color_race,
+  getStatus,
+  typesex
+} from "../../../Controller/controllerGlobal";
 import color from "../../../Styles/colors";
 import { Container, Padding, Row } from "../../../Styles/styles";
 import ModalCreateRegisterClassroom from "./ModalCreateRegisterClassroom";
@@ -46,6 +50,10 @@ const BeneficiariesEditPage = () => {
         />
       </div>
     );
+  };
+
+  const StatusBody = (rowData: any) => {
+    return <div>{getStatus(rowData?.status)?.name}</div>;
   };
 
   const ActionBeneficiariesBody = (rowData: any) => {
@@ -204,7 +212,6 @@ const BeneficiariesEditPage = () => {
                 <Padding padding="8px" />
                 <h3>Matriculas</h3>
                 <Padding padding="8px" />
-
                 {/* <h3>Endereço</h3>
                 <Padding />
                 <div className="grid">
@@ -257,16 +264,10 @@ const BeneficiariesEditPage = () => {
         tableStyle={{ minWidth: "50rem" }}
         header={renderHeader}
       >
-        <Column
-          field="classroom.project.name"
-          header="Projeto"
-        ></Column>
+        <Column field="classroom.project.name" header="Projeto"></Column>
         <Column field="classroom.name" header="Turma"></Column>
-        <Column field="status" header="Status"></Column>
-        <Column
-          header="Ações"
-          body={ActionBeneficiariesBody}
-        ></Column>
+        <Column body={StatusBody} header="Status"></Column>
+        <Column header="Ações" body={ActionBeneficiariesBody}></Column>
       </DataTable>
       <ModalCreateRegisterClassroom
         onHide={() => setVisible(false)}

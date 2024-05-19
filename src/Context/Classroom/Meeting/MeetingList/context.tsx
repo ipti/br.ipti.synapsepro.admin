@@ -6,10 +6,10 @@ export const MeetingListContext =
   createContext<MeetingListTypes | null>(null);
 
 const MeetingListProvider = ({ children }: { children: React.ReactNode }) => {
-  const { meetings, isLoading } = MeetingListState();
+  const { meetings, isLoading, DeleteMeeting } = MeetingListState();
 
   return (
-    <MeetingListContext.Provider value={{ meetings, isLoading }}>
+    <MeetingListContext.Provider value={{ meetings, isLoading, DeleteMeeting }}>
       {children}
     </MeetingListContext.Provider>
   );
