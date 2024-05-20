@@ -3,20 +3,25 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { UpdateRegister } from "../../Context/Classroom/Registration/type";
 import styles from "../../Styles";
+import queryClient from "../reactquery";
 import {
   requestDeleteRegistration,
+  requestDeleteRegistrationClassroom,
   requestPreRegistration,
+  requestRegistrationClassroom,
   requestUpdateRegistration,
 } from "./request";
-import { CreatePreRegistration } from "./types";
-import queryClient from "../reactquery";
+import {
+  CreatePreRegistration,
+  CreateRegistrationClassroomType,
+} from "./types";
 
 export const ControllerPreRegistration = () => {
   const history = useNavigate();
   const requestPreRegistrationMutation = useMutation(
     (data: CreatePreRegistration) => requestPreRegistration(data),
     {
-      onError: (error) => {},
+      onError: (error) => { },
       onSuccess: (data) => {
         Swal.fire({
           icon: "success",
@@ -31,7 +36,30 @@ export const ControllerPreRegistration = () => {
     }
   );
 
-  return { requestPreRegistrationMutation };
+  const requestRegistrationMutation = useMutation(
+    (data: CreatePreRegistration) => requestPreRegistration(data),
+    {
+      onError: (error) => { },
+      onSuccess: (data) => {
+        console.log(data);
+        Swal.fire({
+          icon: "success",
+          title: "Registro feito com sucesso!",
+          confirmButtonColor: styles.colors.colorsBaseProductNormal,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            if(data?.user?.id){
+              history("/beneficiarios/" + data?.user?.id);
+            } else {
+              history("/beneficiarios");
+            }
+          }
+        });
+      },
+    }
+  );
+
+  return { requestPreRegistrationMutation, requestRegistrationMutation };
 };
 
 export const ControllerUpdateRegistration = () => {
@@ -39,7 +67,7 @@ export const ControllerUpdateRegistration = () => {
     ({ data, id }: { data: UpdateRegister; id: number }) =>
       requestUpdateRegistration(data, id),
     {
-      onError: (error) => {},
+      onError: (error) => { },
       onSuccess: (data) => {
         Swal.fire({
           icon: "success",
@@ -50,15 +78,69 @@ export const ControllerUpdateRegistration = () => {
     }
   );
 
-  const requestDeleteRegistrationMutation = useMutation(
-    (id: number) => requestDeleteRegistration(id),
+  const requestRegistrationClassroomMutation = useMutation(
+    (data: CreateRegistrationClassroomType) =>
+      requestRegistrationClassroom(data),
     {
-      onError: (error) => {},
+      onError: (error) => { },
       onSuccess: (data) => {
-        queryClient.refetchQueries("useRequestsClassroomRegistration");
+        Swal.fire({
+          icon: "success",
+          title: "Registro feito com sucesso!",
+          confirmButtonColor: styles.colors.colorsBaseProductNormal,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // history("/");
+            queryClient.refetchQueries("useRequestsRegistrationOne");
+          }
+        });
       },
     }
   );
 
-  return { requestPreRegistrationMutation, requestDeleteRegistrationMutation };
+  const requestDeleteRegistrationClassroomMutation = useMutation(
+    (id: number) => requestDeleteRegistrationClassroom(id),
+    {
+      onError: (error) => { },
+      onSuccess: (data) => {
+        Swal.fire({
+          icon: "success",
+          title: " Matricula excluida com sucesso!",
+          confirmButtonColor: styles.colors.colorsBaseProductNormal,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // history("/");
+            queryClient.refetchQueries("useRequestsClassroomRegistration");
+            queryClient.refetchQueries("useRequestsRegistrationOne");
+          }
+        });
+      },
+    }
+  );
+
+  const requestDeleteRegistrationMutation = useMutation(
+    (id: number) => requestDeleteRegistration(id),
+    {
+      onError: (error) => { },
+      onSuccess: (data) => {
+        Swal.fire({
+          icon: "success",
+          title: " Beneficiario excluido com sucesso!",
+          confirmButtonColor: styles.colors.colorsBaseProductNormal,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // history("/");
+            queryClient.refetchQueries("useRequestAllRegistration");
+          }
+        });
+      },
+    }
+  );
+
+  return {
+    requestPreRegistrationMutation,
+    requestDeleteRegistrationClassroomMutation,
+    requestRegistrationClassroomMutation,
+    requestDeleteRegistrationMutation
+  };
 };

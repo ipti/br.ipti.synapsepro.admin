@@ -21,6 +21,15 @@ import FormEditSchedule from "../Pages/Schedule/FormSchedule/edit";
 import ListUsers from "../Pages/Users/ListUsers";
 import CreateUser from "../Pages/Users/CreateUser";
 import EditUser from "../Pages/Users/EditUser";
+import ProjectsList from "../Pages/Projects/ProjectsList";
+import CreateProjectsList from "../Pages/Projects/CreateProjects";
+import TecnologySocial from "../Pages/TecnologySocial/TecnologySocialList";
+import InitialPage from "../Pages/InitialPage";
+import Help from "../Pages/Help";
+import CreateTechnologySocial from "../Pages/TecnologySocial/CreateTechnologySocial";
+import BeneficiariesList from "../Pages/Beneficiaries/BeneficiariesList";
+import BeneficiariesCreate from "../Pages/Beneficiaries/BeneficiariesCreate";
+import BeneficiariesEdit from "../Pages/Beneficiaries/BeneficiariesEdit";
 
 const RoutesApp = () => {
   return (
@@ -34,7 +43,10 @@ const RoutesApp = () => {
           element={<PrivateRoute Component={<ViewForms />} />}
           path="/view/:id"
         />
-        <Route element={<PrivateRoute Component={<ListClassroom />} />} path="/" />
+        <Route
+          element={<PrivateRoute Component={<TecnologySocial />} />}
+          path="/"
+        />
         <Route
           element={<PrivateRoute Component={<ListSchedule />} />}
           path="/cronograma"
@@ -54,7 +66,7 @@ const RoutesApp = () => {
         />
         <Route
           element={<PrivateRoute Component={<FormClassroom />} />}
-          path="/turma/criar"
+          path="/turma/criar/:id"
         />
         <Route
           element={<PrivateRoute Component={<ClassroomOne />} />}
@@ -92,10 +104,38 @@ const RoutesApp = () => {
           element={<PrivateRoute Component={<CreateOrEditForm />} />}
           path="/edit/:id"
         />
-
+        <Route
+          element={<PrivateRoute Component={<BeneficiariesList />} />}
+          path="/beneficiarios"
+        />
+        <Route
+          element={<PrivateRoute Component={<BeneficiariesCreate />} />}
+          path="/beneficiarios/criar"
+        />
+        <Route
+          element={<PrivateRoute Component={<BeneficiariesEdit />} />}
+          path="/beneficiarios/:id"
+        />
         <Route
           element={<PrivateRoute Component={<ListUsers />} />}
           path="/users"
+        />
+        <Route
+          element={<PrivateRoute Component={<ProjectsList />} />}
+          path="/projetos"
+        />
+        <Route element={<PrivateRoute Component={<Help />} />} path="/ajuda" />
+        <Route
+          element={<PrivateRoute Component={<CreateProjectsList />} />}
+          path="/projetos/criar"
+        />
+        <Route
+          element={<PrivateRoute Component={<TecnologySocial />} />}
+          path="/tecnologias"
+        />
+        <Route
+          element={<PrivateRoute Component={<CreateTechnologySocial />} />}
+          path="/tecnologias/criar"
         />
         <Route
           element={<PrivateRoute Component={<CreateUser />} />}
@@ -105,7 +145,6 @@ const RoutesApp = () => {
           element={<PrivateRoute Component={<EditUser />} />}
           path="/users/:id"
         />
-
         <Route element={<SignUp />} path="/register" />
         <Route element={<Login />} path="/login" />
         <Route element={<Register />} path="/matricula" />

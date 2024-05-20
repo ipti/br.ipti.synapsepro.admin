@@ -17,8 +17,8 @@ export interface RegisterTypes {
     dataValues: Registration
     backStep: () => void
     sex: {
-        value: number;
-        label: string;
+        value?: number;
+        label?: string;
     }[]
     CreateRegister: () => void
 }

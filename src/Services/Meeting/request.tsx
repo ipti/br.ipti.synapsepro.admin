@@ -92,3 +92,18 @@ export const requestMeetingList = async (id: string) => {
         });
     }
   };
+
+  export const requestDeleteMeeting = (id: number) => {
+    let path = "/meeting/" + id;
+    return http
+      .delete(path)
+      .then((response) => response.data)
+      .catch((err) => {
+        if (err.response.status === 401) {
+          logout();
+          window.location.reload();
+        }
+        alert(err.response.message);
+        throw err;
+      });
+  };

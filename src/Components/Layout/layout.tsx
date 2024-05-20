@@ -7,7 +7,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const [viewdMenu, setViewdMenu] = useState(true);
 
   useEffect(() => {
-    if (window.innerWidth < 1020) {
+    if (window.innerWidth < 1200) {
       setViewdMenu(false);
     }
   }, []);

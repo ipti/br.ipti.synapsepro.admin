@@ -6,10 +6,10 @@ import { ControllerUpdateRegistration } from "../../../Services/PreRegistration/
 export const RegistrationClassroomState = () => {
     const {id} = useParams()
     const {data: registrationsRequeset, isLoading} = useFetchRequestClassroomRegistration(parseInt(id!))
-    const {requestDeleteRegistrationMutation} = ControllerUpdateRegistration()
+    const {requestDeleteRegistrationClassroomMutation} = ControllerUpdateRegistration()
 
     const DeleteRegistration = (id: number) => {
-        requestDeleteRegistrationMutation.mutate(id)
+        requestDeleteRegistrationClassroomMutation.mutate(id)
     }
 
     const [registrations, setregistrations] = useState<Array<RegistrationType> | undefined>();

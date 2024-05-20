@@ -1,7 +1,7 @@
 import { UpdateRegister } from "../../Context/Classroom/Registration/type";
 import http from "../axios";
 import { getYear, logout } from "../localstorage";
-import { CreatePreRegistration } from "./types";
+import { CreatePreRegistration, CreateRegistrationClassroomType } from "./types";
 
 export const requestPreRegistration = (data: CreatePreRegistration) => {
   return http
@@ -17,9 +17,23 @@ export const requestPreRegistration = (data: CreatePreRegistration) => {
     });
 };
 
+export const requestRegistrationClassroom = (data: CreateRegistrationClassroomType) => {
+  return http
+    .post("/registration-classroom-bff", data)
+    .then(response => response.data)
+    .catch(err => {
+      if (err.response.status === 401) {
+        window.location.reload()
+      }
+      alert(err.response.message)
+
+      throw err;
+    });
+};
+
+
 
 export const requestUpdateRegistration = (data: UpdateRegister, id: number) => {
-  console.log(data)
   return http
     .put("/registration/" + id, { ...data, color_race: data.color_race?.id, sex: data.sex?.id, deficiency: data.deficiency.id, status: data.status?.id })
     .then(response => response.data)
@@ -51,7 +65,7 @@ export const requestProjectsAndClassroom = () => {
 
 
 export const requestClassroomRegistration = (id: number) => {
-  let path = "/registration-token-bff";
+  let path = "/registration-classroom-bff";
   return http
     .get(path, {
       params: {
@@ -69,7 +83,7 @@ export const requestClassroomRegistration = (id: number) => {
 };
 
 export const requestClassroomRegistrationOne = (id: number) => {
-  let path = "/registration-token-bff/one?idRegistrationClassroom=" + id;
+  let path = "/registration-classroom-bff/register-classroom-one?idRegistrationClassroom=" + id;
   return http
     .get(path)
     .then(response => response.data)
@@ -80,6 +94,22 @@ export const requestClassroomRegistrationOne = (id: number) => {
       }
       throw err;
     });
+};
+
+export const requestRegistrationOne = (id?: string) => {
+  if (id) {
+    let path = "/registration-token-bff/one?idRegistration=" + id;
+    return http
+      .get(path)
+      .then(response => response.data)
+      .catch(err => {
+        if (err.response.status === 401) {
+          logout()
+          window.location.reload()
+        }
+        throw err;
+      });
+  }
 };
 
 export const requestRegistrationOneCpf = (cpf?: string) => {
@@ -112,3 +142,19 @@ export const requestDeleteRegistration = (id: number) => {
       throw err;
     });
 };
+
+export const requestDeleteRegistrationClassroom = (id: number) => {
+  let path = "/registration-classroom-bff/" + id;
+  return http
+    .delete(path)
+    .then(response => response.data)
+    .catch(err => {
+      if (err.response.status === 401) {
+        logout()
+        window.location.reload()
+      }
+      alert(err.response.message)
+      throw err;
+    });
+};
+

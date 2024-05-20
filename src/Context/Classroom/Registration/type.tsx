@@ -1,13 +1,5 @@
 export interface RegistrationDetailsTypes {
   registration?: RegistrationType;
-  typesex: {
-    id: number;
-    type: string;
-  }[];
-  color: {
-    id: number;
-    name: string;
-  }[];
   initialValue: UpdateRegister
   handleUpdateRegistration: (data: UpdateRegister, id: number) => void
   isLoading: boolean

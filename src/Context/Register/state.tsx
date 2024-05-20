@@ -50,7 +50,6 @@ export const RegisterState = () => {
   ];
 
   const sex = [
-    { value: 0, label: 'Não Declarada' },
     { value: 1, label: 'Masculino' },
     { value: 2, label: 'Feminino' },
   ];

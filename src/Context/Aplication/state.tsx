@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { Projects, PropsForm } from "../../Types/types";
-import { useFetchRequestProjectLists } from "../../Services/Project/query";
+import { useFetchRequestSocialTechnologyLists } from "../../Services/SocialTechnology/query";
 import { useFetchRequestUsersOne } from "../../Services/Users/query";
-import { GetIdProject, GetIdUser, idProject } from "../../Services/localstorage";
+import { GetIdTs, GetIdUser, idTs } from "../../Services/localstorage";
+import { Projects, PropsForm } from "../../Types/types";
 import { User } from "../Users/type";
 
 const AplicationState = () => {
     const [form, setform] = useState<PropsForm>({ title: "Formulário Sem título", description: "", question: [] })
-    const { data: projects } = useFetchRequestProjectLists()
+    const { data: projects } = useFetchRequestSocialTechnologyLists()
 
     const [project, setproject] = useState<Array<Projects> | undefined>()
     const [user, setuser] = useState<User | undefined>()
@@ -21,9 +21,11 @@ const AplicationState = () => {
         if (projects) {
             setproject(projects)
 
-            if (!GetIdProject()){
-                idProject(projects[0]?.id?.toString())
+            if (!GetIdTs()) {
+                idTs(projects[0]?.id?.toString())
             }
+
+
         }
         if (userRequest) {
             setuser(userRequest)

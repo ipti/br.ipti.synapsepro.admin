@@ -1,11 +1,59 @@
-import { Container } from "../../../Styles/styles";
+import { Button } from "primereact/button";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import CardProject from "../../../Components/Card/CardProject";
+import { AplicationContext } from "../../../Context/Aplication/context";
+import ProjectListProvider, {
+  ProjectListContext,
+} from "../../../Context/Project/ProjectList/context";
+import { ProjectListTypes } from "../../../Context/Project/ProjectList/type";
+import { ROLE } from "../../../Controller/controllerGlobal";
+import { Container, Padding, Row } from "../../../Styles/styles";
+import { PropsAplicationContext } from "../../../Types/types";
 
 const ProjectsList = () => {
-    return(
-        <Container>
+  return (
+    <ProjectListProvider>
+      <ProjectsListPage />
+    </ProjectListProvider>
+  );
+};
 
-        </Container>
-    )
-}
+const ProjectsListPage = () => {
+  const history = useNavigate();
+  const propsAplication = useContext(
+    AplicationContext
+  ) as PropsAplicationContext;
+
+  const props = useContext(ProjectListContext) as ProjectListTypes;
+  return (
+    <Container>
+      <h1>Projetos</h1>
+
+      <Padding padding="16px" />
+
+      {(propsAplication.user?.role === ROLE.ADMIN ||
+        propsAplication.user?.role === ROLE.COORDINATORS) && (
+        <Row id="end" style={{ width: "100%" }}>
+          <Button
+            label="Criar Projeto"
+            icon={"pi pi-plus"}
+            onClick={() => history("/projetos/criar")}
+          />
+        </Row>
+      )}
+      <Padding padding="16px" />
+      <div className="grid">
+        {props.tsOne?.project?.map((item, index) => {
+          return (
+            <div className="col-12 md:col-6 lg:col-4">
+              <CardProject title={item.name} id={item.id} />
+            </div>
+          );
+        })}
+      </div>
+    </Container>
+  );
+};
 
 export default ProjectsList;

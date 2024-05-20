@@ -18,20 +18,35 @@ import DropdownComponent from "../Dropdown";
 import Icon from "../Icon";
 import Item from "./Item";
 import { Container } from "./style";
-import turmas from "../../Assets/images/turmasPessoas.svg"
+import turmasHover from "../../Assets/images/turmasPessoas.svg";
 
-import user from "../../Assets/images/personUser.svg"
+import turmas from "../../Assets/images/peoples.svg";
+import home from "../../Assets/images/iconsMenu/home.svg";
+import homeHover from "../../Assets/images/iconsMenu/home_active.svg";
+
+import tecnologia from "../../Assets/images/iconsMenu/digital_wellbeing.svg";
+
+import tecnologia_hover from "../../Assets/images/iconsMenu/digital_wellbeing_active.svg";
+import projeto from "../../Assets/images/iconsMenu/note_add.svg";
+import projeto_hover from "../../Assets/images/iconsMenu/note_add_active.svg";
+
+// import ajuda from "../../Assets/images/question_mark.svg";
+
+import user from "../../Assets/images/iconsMenu/person.svg";
+import user_hover from "../../Assets/images/iconsMenu/person_active.svg";
 
 const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
   const [active, setActive] = useState(parseInt(getMenuItem()!));
   const [visibleModal, setVisibleModal] = useState(false);
-  const props = useContext(AplicationContext) as PropsAplicationContext
+  const props = useContext(AplicationContext) as PropsAplicationContext;
   return (
     <Container active={viewdMenu}>
+      <Padding padding="4px" />
+
       <Padding padding="16px">
         <Row id="center">
           <Column id="center">
-          <img src={TagLogin} style={{ width: "128px" }} alt=""></img>
+            <img src={TagLogin} style={{ width: "128px" }} alt=""></img>
           </Column>
           <Padding />
           <Column id="center">
@@ -41,7 +56,6 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
                 padding: "8px 16px",
                 borderRadius: "20px",
                 cursor: "pointer",
-
               }}
               onClick={() => setVisibleModal(!visibleModal)}
             >
@@ -51,6 +65,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           </Column>
         </Row>
       </Padding>
+      <Padding padding="8px" />
       {true ? (
         <Padding padding="8px">
           {/* <Item
@@ -63,44 +78,91 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             path={"/cronograma"}
             icon={"pi pi-calendar"}
           /> */}
-          <Padding />
-          <Item
-            text={"Turmas"}
+          {/* <Item
+            text={"Pagina Inicial"}
             funcActiv={() => {
               setActive(1);
               menuItem("1");
             }}
             active={active === 1 ? true : false}
-            path={"/turma"}
-            icon={turmas}
+            path={"/"}
+            icon={active === 1 ? homeHover : home}
           />
-          {/* <Padding />
+          <Padding /> */}
           <Item
-            text={"Formulários"}
+            text={"Tecnologias"}
+            funcActiv={() => {
+              setActive(1);
+              menuItem("1");
+            }}
+            active={active === 1 ? true : false}
+            path={"/tecnologias"}
+            icon={active === 1 ? tecnologia_hover : tecnologia}
+          />
+          <Padding />
+          <Item
+            text={"Projetos"}
             funcActiv={() => {
               setActive(3);
               menuItem("3");
             }}
             active={active === 3 ? true : false}
-            path={"/"}
-            icon={"pi pi-list"}
-          /> */}
+            path={"/projetos"}
+            icon={active === 3 ? projeto_hover : projeto}
+          />
           <Padding />
-          {(props.user?.role === ROLE.ADMIN || props.user?.role === ROLE.COORDINATORS) ? <Item
-            text={"Usuarios"}
+          <Item
+            text={"Turmas"}
             funcActiv={() => {
-              setActive(2);
-              menuItem("2");
+              setActive(4);
+              menuItem("4");
             }}
-            active={active === 2 ? true : false}
-            path={"/users"}
-            icon={user}
-          /> : null}
+            active={active === 4 ? true : false}
+            path={"/turma"}
+            icon={active === 4 ? turmasHover : turmas}
+          />
+          <Padding />
+          <Item
+            text={"Beneficiários"}
+            funcActiv={() => {
+              setActive(5);
+              menuItem("5");
+            }}
+            active={active === 5 ? true : false}
+            path={"/beneficiarios"}
+            icon={active === 5 ? turmasHover : turmas}
+          />
+          <Padding />
+          {props.user?.role === ROLE.ADMIN ||
+          props.user?.role === ROLE.COORDINATORS ? (
+            <Item
+              text={"Usuarios"}
+              funcActiv={() => {
+                setActive(6);
+                menuItem("6");
+              }}
+              active={active === 6 ? true : false}
+              path={"/users"}
+              icon={active === 6 ? user_hover : user}
+            />
+          ) : null}
+          {/* <Padding />
+
+          <Item
+            text={"Ajuda"}
+            funcActiv={() => {
+              setActive(7);
+              menuItem("7");
+            }}
+            active={active === 7 ? true : false}
+            path={"/ajuda"}
+            icon={ajuda}
+          /> */}
         </Padding>
       ) : null}
       <ModalYear
         visible={visibleModal}
-        onHide={() => setVisibleModal(!visibleModal)}
+        onHide={() => setVisibleModal(false)}
       />
     </Container>
   );
@@ -123,8 +185,8 @@ const ModalYear = ({
   const [year, setYearState] = useState<any>();
 
   useEffect(() => {
-    setYearState(parseInt(getYear()!))
-  }, [])
+    setYearState(parseInt(getYear()!));
+  }, []);
 
   return (
     <Dialog

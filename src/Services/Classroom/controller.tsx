@@ -56,7 +56,15 @@ export const ControllerClassroom = () => {
             onError: (error) => {
             },
             onSuccess: (data) => {
-                queryClient.refetchQueries("useRequestsClassroom")
+                Swal.fire({
+                    icon: "success",
+                    title: "Turma excluída com sucesso!",
+                    confirmButtonColor: styles.colors.colorsBaseProductNormal,
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        queryClient.refetchQueries("useRequestsClassroom")
+                    }
+                  });
             },
         }
     );

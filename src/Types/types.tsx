@@ -113,7 +113,7 @@ export interface PropsForm {
 export interface PropsAplicationContext {
     form: PropsForm,
     setform: any,
-    project: any;
+    project: Array<Projects> | undefined;
     user: User | undefined
 }
 

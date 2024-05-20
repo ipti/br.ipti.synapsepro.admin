@@ -66,7 +66,7 @@ const ListUsersPage = () => {
 
   return (
     <Container>
-      <h3>Usuários</h3>
+      <h1>Usuários</h1>
       <Padding padding="16px" />
       <Button label="Criar usuário" onClick={() => history("/users/criar")} />
       <Padding padding="16px" />

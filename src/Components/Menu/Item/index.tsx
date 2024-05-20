@@ -25,10 +25,7 @@ const Item = ({ icon, path, text, active, funcActiv }: Propsitem) => {
                 <Padding />
                 <Text active={active}>
                     <Column id="center">
-                        <div className={`boxQuantity`}>
-                            <img src={icon} alt="" style={{ height: 30 }} />
-                        </div>
-                    </Column>
+                            <img src={icon} alt="" style={{ height: 24 }} />                    </Column>
                     <Padding />
                     <Column id="center">
                         {text}

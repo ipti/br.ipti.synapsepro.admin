@@ -7,7 +7,7 @@ import RegistartionDetailsProvider, {
   RegistrationDetailsContext,
 } from "../../../../../Context/Classroom/Registration/context";
 import { RegistrationDetailsTypes } from "../../../../../Context/Classroom/Registration/type";
-import { Status } from "../../../../../Controller/controllerGlobal";
+import { color_race, Status, typesex } from "../../../../../Controller/controllerGlobal";
 import { Container, Padding } from "../../../../../Styles/styles";
 import { useParams } from "react-router-dom";
 import { useFetchRequestClassroomOne } from "../../../../../Services/Classroom/query";
@@ -89,7 +89,7 @@ const RegistrationPage = () => {
                     <DropdownComponent
                       value={values.sex}
                       optionsLabel="type"
-                      options={props.typesex}
+                      options={typesex}
                       name="sex"
                       onChange={handleChange}
                     />
@@ -112,7 +112,7 @@ const RegistrationPage = () => {
                     <Padding />
                     <DropdownComponent
                       value={values.color_race}
-                      options={props.color}
+                      options={color_race}
                       name="color_race"
                       onChange={handleChange}
                     />{" "}
