@@ -54,7 +54,7 @@ const BeneficiariesListPage = () => {
   return (
     <>
       <Container>
-        <h1>Beneficiarios</h1>
+        <h1>Beneficiários</h1>
         <Padding padding="16px" />
         <DataTable
           value={props.registrations?.content}

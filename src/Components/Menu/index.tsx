@@ -78,7 +78,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             path={"/cronograma"}
             icon={"pi pi-calendar"}
           /> */}
-          <Item
+          {/* <Item
             text={"Pagina Inicial"}
             funcActiv={() => {
               setActive(1);
@@ -88,16 +88,16 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             path={"/"}
             icon={active === 1 ? homeHover : home}
           />
-          <Padding />
+          <Padding /> */}
           <Item
             text={"Tecnologias"}
             funcActiv={() => {
-              setActive(2);
-              menuItem("2");
+              setActive(1);
+              menuItem("1");
             }}
-            active={active === 2 ? true : false}
+            active={active === 1 ? true : false}
             path={"/tecnologias"}
-            icon={active === 2 ? tecnologia_hover : tecnologia}
+            icon={active === 1 ? tecnologia_hover : tecnologia}
           />
           <Padding />
           <Item
@@ -123,7 +123,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           />
           <Padding />
           <Item
-            text={"Beneficiarios"}
+            text={"Beneficiários"}
             funcActiv={() => {
               setActive(5);
               menuItem("5");

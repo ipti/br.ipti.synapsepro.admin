@@ -44,7 +44,7 @@ const RoutesApp = () => {
           path="/view/:id"
         />
         <Route
-          element={<PrivateRoute Component={<InitialPage />} />}
+          element={<PrivateRoute Component={<TecnologySocial />} />}
           path="/"
         />
         <Route
