@@ -48,13 +48,16 @@ const RegistrationListPage = () => {
     <Container>
       <Row id="space-between">
         <h2>{classroom?.name}</h2>
-        <TextInput
-          placeholder="Pesquise pelo nome"
-          onChange={(e) => {
-            setFilter(e.target.value);
-          }}
-          value={filter}
-        />
+        <span className="p-input-icon-left">
+          <i className="pi pi-search" />
+          <TextInput
+            placeholder="Pesquise pelo nome"
+            onChange={(e) => {
+              setFilter(e.target.value);
+            }}
+            value={filter}
+          />
+        </span>
       </Row>
       <Padding padding="16px" />
       {props?.registrations?.length! > 0 ? (
