@@ -7,6 +7,12 @@ export interface BeneficiariesListType {
   DeleteRegistration: (id: number) => void
   page: number;
   limite: number;
+  nameFilter: string | undefined
+  cpfFilter: string | undefined
+  handleFilter: (values: {
+    name: string;
+    cpf: string;
+}) => void
   filter:
     | {
         value: string;

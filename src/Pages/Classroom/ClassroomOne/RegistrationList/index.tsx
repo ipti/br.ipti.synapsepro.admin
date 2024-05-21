@@ -1,16 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import CardRegistration from "../../../../Components/Card/CardRegistration";
 import RegistartionClassroomProvider, {
   RegistrationClassroomContext,
 } from "../../../../Context/Classroom/RegistrationsList/context";
-import {
-  RegistrationClassroomTypes
-} from "../../../../Context/Classroom/RegistrationsList/type";
+import { RegistrationClassroomTypes } from "../../../../Context/Classroom/RegistrationsList/type";
 import { useFetchRequestClassroomOne } from "../../../../Services/Classroom/query";
-import { Container, Padding } from "../../../../Styles/styles";
+import { Container, Padding, Row } from "../../../../Styles/styles";
 import Empty from "../../../../Components/Empty";
 import Loading from "../../../../Components/Loading";
+import TextInput from "../../../../Components/TextInput";
 
 const RegistrationList = () => {
   return (
@@ -24,24 +23,58 @@ const RegistrationListPage = () => {
   const props = useContext(
     RegistrationClassroomContext
   ) as RegistrationClassroomTypes;
-  const {id} = useParams()
-  const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!))
-
+  const { id } = useParams();
+  const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!));
+  const [filter, setFilter] = useState("");
   if (props.isLoading) return <Loading />;
+
+  const up = props.registrations?.filter(
+    (props) => props.registration.name === filter
+  );
+  console.log(up);
+  console.log(filter);
+
+  const search = () => {
+    if (filter !== "") {
+      const buscaLowerCase = filter.toLowerCase();
+      return props.registrations?.filter((props) =>
+        props.registration.name.toLowerCase().includes(buscaLowerCase)
+      );
+    }
+    return props.registrations;
+  };
 
   return (
     <Container>
-      <h2>{classroom?.name}</h2>
+      <Row id="space-between">
+        <h2>{classroom?.name}</h2>
+        <TextInput
+          placeholder="Pesquise pelo nome"
+          onChange={(e) => {
+            setFilter(e.target.value);
+          }}
+          value={filter}
+        />
+      </Row>
       <Padding padding="16px" />
-      {props?.registrations?.length! > 0 ? <div className="grid">
-        {props.registrations?.map((item, index) => {
-          return (
-            <div className="col-12 md:col-6 lg:col-4" key={index}>
-              <CardRegistration title={item.registration.id.toString()} subtitle={item.registration.name} idRegistration={item.id} status={item.status} />
-            </div>
-          );
-        })}
-      </div> : <Empty title="Matriculas" />}
+      {props?.registrations?.length! > 0 ? (
+        <div className="grid">
+          {search()?.map((item, index) => {
+            return (
+              <div className="col-12 md:col-6 lg:col-4" key={index}>
+                <CardRegistration
+                  title={item.registration.id.toString()}
+                  subtitle={item.registration.name}
+                  idRegistration={item.id}
+                  status={item.status}
+                />
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <Empty title="Matriculas" />
+      )}
     </Container>
   );
 };

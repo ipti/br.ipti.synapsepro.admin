@@ -1,4 +1,5 @@
 import { Button } from "primereact/button";
+import { Chip } from "primereact/chip";
 import { Column } from "primereact/column";
 import { ConfirmDialog } from "primereact/confirmdialog";
 import { DataTable } from "primereact/datatable";
@@ -12,6 +13,7 @@ import { BeneficiariesListType } from "../../../Context/Beneficiaries/Beneficiar
 import { somarNumeros } from "../../../Controller/controllerGlobal";
 import color from "../../../Styles/colors";
 import { Container, Padding, Row } from "../../../Styles/styles";
+import ModalFilter from "./ModalFilter";
 
 const BeneficiariesList = () => {
   return (
@@ -23,21 +25,30 @@ const BeneficiariesList = () => {
 
 const BeneficiariesListPage = () => {
   const props = useContext(BeneficiariesListContext) as BeneficiariesListType;
-  const history = useNavigate()
+  const history = useNavigate();
 
   const [visible, setVisible] = useState<any>();
 
+  const [visibleFilter, setVisibleFilter] = useState<any>();
+
   const renderHeader = () => {
     return (
-      <div className="flex justify-content-between" style={{ background: color.colorCard }}>
-        <Button label="Adicionar beneficiario" icon="pi pi-plus" onClick={() => history("criar")} />
-        {/* <Button
-          label="Configurar filtro"
+      <div
+        className="flex justify-content-between"
+        style={{ background: color.colorCard }}
+      >
+        <Button
+          label={window.innerWidth > 800 ? "Adicionar beneficiario" : undefined}
+          icon="pi pi-plus"
+          onClick={() => history("criar")}
+        />
+        <Button
+          label={window.innerWidth > 800 ? "Configurar filtro" : undefined}
           icon="pi pi-filter"
           onClick={() => {
-            setVisible(true);
+            setVisibleFilter(true);
           }}
-        /> */}
+        />
       </div>
     );
   };
@@ -45,8 +56,21 @@ const BeneficiariesListPage = () => {
   const ActionBeneficiariesBody = (rowData: any) => {
     return (
       <Row id="center" style={{ gap: "8px" }}>
-        <Button rounded icon={"pi pi-pencil"} onClick={() => { history(`${rowData.id}`) }} />
-        <Button severity="danger" rounded icon={"pi pi-trash"} onClick={() => { setVisible(rowData) }} />
+        <Button
+          rounded
+          icon={"pi pi-pencil"}
+          onClick={() => {
+            history(`${rowData.id}`);
+          }}
+        />
+        <Button
+          severity="danger"
+          rounded
+          icon={"pi pi-trash"}
+          onClick={() => {
+            setVisible(rowData);
+          }}
+        />
       </Row>
     );
   };
@@ -56,6 +80,25 @@ const BeneficiariesListPage = () => {
       <Container>
         <h1>Beneficiários</h1>
         <Padding padding="16px" />
+        <Row style={{gap: 8}}>
+          {props.nameFilter?.length! > 0 && (
+            <Chip label={"Nome: " + props.nameFilter} />
+          )}
+          {props.cpfFilter?.length! > 0 && (
+            <Chip label={"CPF: " + props.cpfFilter} />
+          )}
+          {(props.cpfFilter?.length! > 0 || props.nameFilter?.length! > 0) && (
+            <Button
+              label="Limpar filtro"
+              text
+              type="button"
+              onClick={() => {
+                props.handleFilter({ name: "", cpf: "" });
+              }}
+            />
+          )}
+        </Row>
+        <Padding padding="8px" />
         <DataTable
           value={props.registrations?.content}
           tableStyle={{ minWidth: "50rem" }}
@@ -88,7 +131,10 @@ const BeneficiariesListPage = () => {
         accept={() => props.DeleteRegistration(visible.id)}
         reject={() => setVisible(false)}
       />
-      {/* <ModalFilter visible={visible} onHide={() => setVisible(false)} /> */}
+      <ModalFilter
+        visible={visibleFilter}
+        onHide={() => setVisibleFilter(false)}
+      />
     </>
   );
 };

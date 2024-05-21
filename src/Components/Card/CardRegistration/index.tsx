@@ -27,13 +27,13 @@ const CardRegistration = ({
 
   const statuGlobal = Status;
 
-  const {id} = useParams()
+  const { id } = useParams();
 
   const props = useContext(
     RegistrationClassroomContext
   ) as RegistrationClassroomTypes;
 
-  console.log(idRegistration)
+  console.log(idRegistration);
   return (
     <>
       <Container
@@ -44,7 +44,7 @@ const CardRegistration = ({
         }}
       >
         <Row id="space-between">
-          <h3>Aluno</h3>
+          <h3>{subtitle}</h3>
           <div
             className="cursor-pointer"
             onClick={(e) => {
@@ -80,7 +80,15 @@ const CardRegistration = ({
               {"Matricula - " + title}
             </div>
             <Padding />
-            <div className={"boxDescriptionScheduleSubtitle"}>{subtitle}</div>
+            <div className={"boxDescriptionScheduleSubtitle"}>
+              {status === statuGlobal.APPROVED
+                ? "Aprovado"
+                : status === statuGlobal.PENDING
+                ? "Pendente"
+                : status === statuGlobal.REPROVED
+                ? "Reprovado"
+                : ""}
+            </div>
           </Column>
         </Row>
       </Container>
