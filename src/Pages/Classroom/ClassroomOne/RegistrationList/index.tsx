@@ -10,6 +10,7 @@ import { Container, Padding, Row } from "../../../../Styles/styles";
 import Empty from "../../../../Components/Empty";
 import Loading from "../../../../Components/Loading";
 import TextInput from "../../../../Components/TextInput";
+import { InputText } from "primereact/inputtext";
 
 const RegistrationList = () => {
   return (
@@ -50,7 +51,7 @@ const RegistrationListPage = () => {
         <h2>{classroom?.name}</h2>
         <span className="p-input-icon-left">
           <i className="pi pi-search" />
-          <TextInput
+          <InputText
             placeholder="Pesquise pelo nome"
             onChange={(e) => {
               setFilter(e.target.value);
