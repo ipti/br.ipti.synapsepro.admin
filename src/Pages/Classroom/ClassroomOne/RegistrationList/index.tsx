@@ -1,16 +1,15 @@
+import { InputText } from "primereact/inputtext";
 import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import CardRegistration from "../../../../Components/Card/CardRegistration";
+import Empty from "../../../../Components/Empty";
+import Loading from "../../../../Components/Loading";
 import RegistartionClassroomProvider, {
   RegistrationClassroomContext,
 } from "../../../../Context/Classroom/RegistrationsList/context";
 import { RegistrationClassroomTypes } from "../../../../Context/Classroom/RegistrationsList/type";
 import { useFetchRequestClassroomOne } from "../../../../Services/Classroom/query";
 import { Container, Padding, Row } from "../../../../Styles/styles";
-import Empty from "../../../../Components/Empty";
-import Loading from "../../../../Components/Loading";
-import TextInput from "../../../../Components/TextInput";
-import { InputText } from "primereact/inputtext";
 
 const RegistrationList = () => {
   return (
@@ -28,12 +27,6 @@ const RegistrationListPage = () => {
   const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!));
   const [filter, setFilter] = useState("");
   if (props.isLoading) return <Loading />;
-
-  const up = props.registrations?.filter(
-    (props) => props.registration.name === filter
-  );
-  console.log(up);
-  console.log(filter);
 
   const search = () => {
     if (filter !== "") {

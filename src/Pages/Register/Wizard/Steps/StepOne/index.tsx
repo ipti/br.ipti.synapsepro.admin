@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import { Column, Padding, Row } from "../../../../../Styles/styles";
 import MaskInput from "../../../../../Components/InputMask";
 import { validaCPF } from "../../../../../Controller/controllerValidCPF";
+import InputsEquals from "../StepTwo/InputsEquals";
 
 const StepOne = () => {
   const props = useContext(RegisterContext) as RegisterTypes;
@@ -18,7 +19,11 @@ const StepOne = () => {
     cpf: props.dataValues.cpf ?? "",
     name: props.dataValues.name ?? "",
     color_race: props.dataValues.color_race ?? "",
-    deficiency: props.dataValues.deficiency ?? null
+    deficiency: props.dataValues.deficiency ?? null,
+    responsable_telephone: props.dataValues.responsable_telephone ?? "",
+    birthday: props.dataValues.birthday ?? "",
+    zone: props.dataValues.zone ?? null,
+    sex: props.dataValues.sex ?? null,
   }
 
   const schema = Yup.object().shape({
@@ -32,7 +37,15 @@ const StepOne = () => {
   const schemaNotCpf = Yup.object().shape({
     name: Yup.string().required('Nome é obrigatório'),
     color_race: Yup.string().required('Raça/cor é obrigatório'),
-    deficiency: Yup.boolean().required('Deficiência é obrigatória')
+    deficiency: Yup.boolean().required('Deficiência é obrigatória'),
+    responsable_telephone: Yup.string().required(
+      "Telefone do responsável é obrigatório"
+    ),
+    birthday: Yup.string()
+      .nullable()
+      .required("Data de nascimento é obrigatória"),
+    zone: Yup.string().nullable().required("Zona é obrigatória"),
+    sex: Yup.string().nullable().required("Sexo é obrigatória"),
   });
 
 
@@ -90,10 +103,15 @@ const StepOne = () => {
                     {errors.deficiency && touched.deficiency ? (
                       <div style={{ color: "red", marginTop: "8px" }}>{errors.deficiency}</div>
                     ) : null}
-                    
+                    {!props.isOverAge && <InputsEquals
+                      errors={errors}
+                      handleChange={handleChange}
+                      touched={touched}
+                      values={values}
+                    />}
                   </div>
                 </Row>
-                <Padding padding={props.padding} />
+                <Padding />
                 <Row id="center" className={"marginTop marginButtom"}>
                   <div className="col-4">
                     <Button

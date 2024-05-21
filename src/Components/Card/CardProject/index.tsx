@@ -1,22 +1,14 @@
 import { ConfirmDialog } from "primereact/confirmdialog";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { ClassroomContext } from "../../../Context/Classroom/context";
 import { ClassroomTypes } from "../../../Context/Classroom/type";
 import { Column, Padding, Row } from "../../../Styles/styles";
-import IconClassroom from "./../../../Assets/images/cardturmas.svg";
+import IconClassroom from "./../../../Assets/images/project_card.svg";
 import { Container } from "./style";
-import Icon from "../../Icon";
-
-import pessoas from "../../../Assets/images/pessoasgray.svg"
-import meeting from "../../../Assets/images/school_teacher.svg"
-import styles from "../../../Styles";
 
 
 const CardProject = ({
   title,
-  meetingCount,
-  registrationCount,
   id,
 }: {
   title: string;
@@ -24,14 +16,13 @@ const CardProject = ({
   registrationCount?: number,
   id: number;
 }) => {
-  const history = useNavigate();
   const [visible, setVisible] = useState(false);
 
   const props = useContext(ClassroomContext) as ClassroomTypes;
 
   return (
     <>
-      <Container className="card" onClick={() => {}}>
+      <Container className="card" onClick={() => { }}>
         <Row id="space-between">
           <Row >
             <div className={`boxQuantity`}>

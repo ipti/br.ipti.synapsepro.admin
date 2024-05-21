@@ -25,7 +25,6 @@ const AplicationState = () => {
                 idTs(projects[0]?.id?.toString())
             }
 
-
         }
         if (userRequest) {
             setuser(userRequest)

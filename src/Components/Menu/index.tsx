@@ -21,14 +21,17 @@ import { Container } from "./style";
 import turmasHover from "../../Assets/images/turmasPessoas.svg";
 
 import turmas from "../../Assets/images/peoples.svg";
-import home from "../../Assets/images/iconsMenu/home.svg";
-import homeHover from "../../Assets/images/iconsMenu/home_active.svg";
+// import home from "../../Assets/images/iconsMenu/home.svg";
+// import homeHover from "../../Assets/images/iconsMenu/home_active.svg";
 
 import tecnologia from "../../Assets/images/iconsMenu/digital_wellbeing.svg";
 
 import tecnologia_hover from "../../Assets/images/iconsMenu/digital_wellbeing_active.svg";
 import projeto from "../../Assets/images/iconsMenu/note_add.svg";
 import projeto_hover from "../../Assets/images/iconsMenu/note_add_active.svg";
+
+import beneficiaries from "../../Assets/images/iconsMenu/diversity_4.svg";
+import beneficiaries_hover from "../../Assets/images/iconsMenu/diversity_hover.svg";
 
 // import ajuda from "../../Assets/images/question_mark.svg";
 
@@ -130,11 +133,11 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 5 ? true : false}
             path={"/beneficiarios"}
-            icon={active === 5 ? turmasHover : turmas}
+            icon={active === 5 ? beneficiaries_hover : beneficiaries}
           />
           <Padding />
           {props.user?.role === ROLE.ADMIN ||
-          props.user?.role === ROLE.COORDINATORS ? (
+            props.user?.role === ROLE.COORDINATORS ? (
             <Item
               text={"Usuarios"}
               funcActiv={() => {
