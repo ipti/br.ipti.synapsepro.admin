@@ -12,7 +12,6 @@ const InputsEquals = ({ values, handleChange, errors, touched }: { values: any, 
     const props = useContext(RegisterContext) as RegisterTypes;
     return (
         <>
-            <Padding />
             <Padding padding={props.padding} />
             <div>
                 <label>Data de Nascimento *</label>

@@ -47,6 +47,7 @@ const RegistrationPage = () => {
           }}
         >
           {({ values, handleChange }) => {
+            console.log(values);
             return (
               <Form>
                 <Button label="Salvar" />
@@ -99,9 +100,9 @@ const RegistrationPage = () => {
                   <div className="col-12 md:col-6">
                     <label>Data de Nascimento</label>
                     <Padding />
-                    <TextInput
+                    <MaskInput
                       value={values.birthday?.toString()}
-                      disabled
+                      mask="99/99/9999"
                       placeholder="Data de Nascimento"
                       name="birthday"
                       onChange={handleChange}
@@ -145,6 +146,19 @@ const RegistrationPage = () => {
                     />
                   </div>
                 </div>{" "}
+                <div className="grid">
+                  <div className="col-12 md:col-6">
+                    <label>Telefone </label>
+                    <Padding />
+                    <MaskInput
+                      value={values.responsable_telephone}
+                      mask="(99) 9 9999-9999"
+                      name="responsable_telephone"
+                      onChange={handleChange}
+                      placeholder="name"
+                    />
+                  </div>
+                </div>{" "}
                 <Padding padding="8px" />
                 <h3>Dados Responsavel</h3>
                 <Padding />
@@ -171,19 +185,7 @@ const RegistrationPage = () => {
                     />
                   </div>
                 </div>{" "}
-                <div className="grid">
-                  <div className="col-12 md:col-6">
-                    <label>Telefone </label>
-                    <Padding />
-                    <MaskInput
-                      value={values.responsable_telephone}
-                      mask="(99) 9 9999-9999"
-                      name="responsable_telephone"
-                      onChange={handleChange}
-                      placeholder="name"
-                    />
-                  </div>
-                </div>{" "}
+
                 <Padding padding="8px" />
                 {/* <h3>Endereço</h3>
                 <Padding />

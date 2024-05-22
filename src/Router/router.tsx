@@ -1,4 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import BeneficiariesCreate from "../Pages/Beneficiaries/BeneficiariesCreate";
+import BeneficiariesEdit from "../Pages/Beneficiaries/BeneficiariesEdit";
+import BeneficiariesList from "../Pages/Beneficiaries/BeneficiariesList";
 import ClassroomOne from "../Pages/Classroom/ClassroomOne";
 import MeetingList from "../Pages/Classroom/ClassroomOne/MeetingList";
 import CreateMeeting from "../Pages/Classroom/ClassroomOne/MeetingList/CreateMeeting";
@@ -11,25 +14,21 @@ import FormClassroom from "../Pages/Classroom/FormClassroom";
 import ListClassroom from "../Pages/Classroom/ListClassroom";
 import CreateOrEditForm from "../Pages/Form/CreateForms";
 import ViewForms from "../Pages/Form/ViewForms";
+import Help from "../Pages/Help";
 import Login from "../Pages/Login/Login";
+import CreateProjectsList from "../Pages/Projects/CreateProjects";
+import ProjectsList from "../Pages/Projects/ProjectsList";
 import Register from "../Pages/Register";
 import FormSchedule from "../Pages/Schedule/FormSchedule";
+import FormEditSchedule from "../Pages/Schedule/FormSchedule/edit";
 import ListSchedule from "../Pages/Schedule/ListSchedule";
 import SignUp from "../Pages/SignUp/SignUp";
-import PrivateRoute from "./privaterouter";
-import FormEditSchedule from "../Pages/Schedule/FormSchedule/edit";
-import ListUsers from "../Pages/Users/ListUsers";
+import CreateTechnologySocial from "../Pages/TecnologySocial/CreateTechnologySocial";
+import TecnologySocial from "../Pages/TecnologySocial/TecnologySocialList";
 import CreateUser from "../Pages/Users/CreateUser";
 import EditUser from "../Pages/Users/EditUser";
-import ProjectsList from "../Pages/Projects/ProjectsList";
-import CreateProjectsList from "../Pages/Projects/CreateProjects";
-import TecnologySocial from "../Pages/TecnologySocial/TecnologySocialList";
-import InitialPage from "../Pages/InitialPage";
-import Help from "../Pages/Help";
-import CreateTechnologySocial from "../Pages/TecnologySocial/CreateTechnologySocial";
-import BeneficiariesList from "../Pages/Beneficiaries/BeneficiariesList";
-import BeneficiariesCreate from "../Pages/Beneficiaries/BeneficiariesCreate";
-import BeneficiariesEdit from "../Pages/Beneficiaries/BeneficiariesEdit";
+import ListUsers from "../Pages/Users/ListUsers";
+import PrivateRoute from "./privaterouter";
 
 const RoutesApp = () => {
   return (

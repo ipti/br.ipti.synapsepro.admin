@@ -6,6 +6,7 @@ import {
 } from "../../../Services/PreRegistration/query";
 import { Registration } from "./type";
 import {
+  converterData,
   formatarData,
   getStatus,
   VerifyColor,
@@ -36,9 +37,9 @@ export const BeneficiariesEditState = () => {
 
   useEffect(() => {
     if (classroomsFetch) {
-        setClassrooms(classroomsFetch)
+      setClassrooms(classroomsFetch)
     }
-}, [classroomsFetch, project])
+  }, [classroomsFetch, project])
 
   useEffect(() => {
     if (registrationsRequests) {
@@ -77,7 +78,7 @@ export const BeneficiariesEditState = () => {
     requestPreRegistrationMutation.mutate({
       data: {
         ...data,
-        birthday: data?.birthday,
+        birthday: converterData(data?.birthday?.toString()!),
         responsable_telephone: data?.responsable_telephone?.replace(
           /[^a-zA-Z0-9]/g,
           ""

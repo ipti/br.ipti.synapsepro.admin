@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { VerifyColor, VerifySex, formatarData, getStatus } from "../../../Controller/controllerGlobal";
+import { VerifyColor, VerifySex, converterData, formatarData, getStatus } from "../../../Controller/controllerGlobal";
 import { ControllerUpdateRegistration } from "../../../Services/PreRegistration/controller";
 import { useFetchRequestClassroomRegistrationOne } from "../../../Services/PreRegistration/query";
 import { RegistrationType, UpdateRegister } from "./type";
@@ -43,7 +43,7 @@ export const RegistrationClassroomState = () => {
       data: {
         ...data,
         registration_classroom_id: registration?.id,
-        birthday: registration?.registration.birthday,
+        birthday: converterData(data.birthday?.toString()!),
         responsable_telephone: data?.responsable_telephone?.replace(
           /[^a-zA-Z0-9]/g,
           ""

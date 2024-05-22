@@ -6,9 +6,8 @@ import MaskInput from "../../../../../../Components/InputMask";
 import TextInput from "../../../../../../Components/TextInput";
 import { RegisterContext } from "../../../../../../Context/Register/context";
 import { RegisterTypes } from "../../../../../../Context/Register/type";
-import { Column, Padding, Row } from "../../../../../../Styles/styles";
-import InputsEquals from "../InputsEquals";
 import { validaCPF } from "../../../../../../Controller/controllerValidCPF";
+import { Column, Padding, Row } from "../../../../../../Styles/styles";
 
 const UnderAge = () => {
   const props = useContext(RegisterContext) as RegisterTypes;
@@ -16,10 +15,7 @@ const UnderAge = () => {
   const initialValue = {
     responsable_cpf: props.dataValues.responsable_cpf ?? "",
     responsable_name: props.dataValues.responsable_name ?? "",
-    responsable_telephone: props.dataValues.responsable_telephone ?? "",
-    birthday: props.dataValues.birthday ?? "",
-    zone: props.dataValues.zone ?? null,
-    sex: props.dataValues.sex ?? null,
+    
   };
 
   const schema = Yup.object().shape({
@@ -29,14 +25,7 @@ const UnderAge = () => {
     responsable_name: Yup.string().required(
       "Nome do responsável é obrigatório"
     ),
-    responsable_telephone: Yup.string().required(
-      "Telefone do responsável é obrigatório"
-    ),
-    birthday: Yup.string()
-      .nullable()
-      .required("Data de nascimento é obrigatória"),
-    zone: Yup.string().nullable().required("Zona é obrigatória"),
-    sex: Yup.string().nullable().required("Sexo é obrigatória"),
+ 
   });
 
   return (
@@ -89,12 +78,7 @@ const UnderAge = () => {
                         {errors.responsable_cpf}
                       </div>
                     ) : null}
-                    <InputsEquals
-                      errors={errors}
-                      handleChange={handleChange}
-                      touched={touched}
-                      values={values}
-                    />
+                    
                     <Padding padding={props.padding} />
                   </div>
                 </Row>

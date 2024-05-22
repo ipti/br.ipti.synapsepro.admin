@@ -11,6 +11,9 @@ import Icon from "../../Icon";
 import pessoas from "../../../Assets/images/pessoasgray.svg"
 import meeting from "../../../Assets/images/school_teacher.svg"
 import styles from "../../../Styles";
+import { AplicationContext } from "../../../Context/Aplication/context";
+import { PropsAplicationContext } from "../../../Types/types";
+import { ROLE } from "../../../Controller/controllerGlobal";
 
 
 const CardClassroom = ({
@@ -27,6 +30,10 @@ const CardClassroom = ({
   const history = useNavigate();
   const [visible, setVisible] = useState(false);
 
+  const propsAplication = useContext(
+    AplicationContext
+  ) as PropsAplicationContext;
+
   const props = useContext(ClassroomContext) as ClassroomTypes;
 
   return (
@@ -42,15 +49,16 @@ const CardClassroom = ({
               <h3>{title}</h3>
             </Column>
           </Row>
-          <div
-            className="cursor-pointer"
-            onClick={(e) => {
-              e.stopPropagation();
-              setVisible(true);
-            }}
-          >
-            <Icon icon="pi pi-trash" color={styles.colors.colorGrayElephant} size="1rem" fontWeight="900" />
-          </div>
+          {(propsAplication.user?.role === ROLE.ADMIN ||
+            propsAplication.user?.role === ROLE.COORDINATORS) && <div
+              className="cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                setVisible(true);
+              }}
+            >
+              <Icon icon="pi pi-trash" color={styles.colors.colorGrayElephant} size="1rem" fontWeight="900" />
+            </div>}
         </Row>
         < Padding padding="8px" />
         <Row style={{ gap: 16 }}>

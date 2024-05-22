@@ -6,10 +6,12 @@ import IconClasMedia from "../../../Assets/images/iconClasMedia.svg";
 import IconNotActive from "../../../Assets/images/notactiveRegistration.svg";
 import { RegistrationClassroomContext } from "../../../Context/Classroom/RegistrationsList/context";
 import { RegistrationClassroomTypes } from "../../../Context/Classroom/RegistrationsList/type";
-import { Status } from "../../../Controller/controllerGlobal";
+import { ROLE, Status } from "../../../Controller/controllerGlobal";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import Icon from "../../Icon";
 import { Container } from "./style";
+import { AplicationContext } from "../../../Context/Aplication/context";
+import { PropsAplicationContext } from "../../../Types/types";
 
 const CardRegistration = ({
   title,
@@ -29,31 +31,38 @@ const CardRegistration = ({
 
   const { id } = useParams();
 
+  const propsAplication = useContext(
+    AplicationContext
+  ) as PropsAplicationContext;
+
   const props = useContext(
     RegistrationClassroomContext
   ) as RegistrationClassroomTypes;
 
-  console.log(idRegistration);
   return (
     <>
       <Container
         className="card cursor-pointer"
         onClick={(e) => {
           e.stopPropagation();
-          history(`/turma/${id}/aluno/${idRegistration}`);
+          if ((propsAplication.user?.role === ROLE.ADMIN ||
+            propsAplication.user?.role === ROLE.COORDINATORS)) {
+            history(`/turma/${id}/aluno/${idRegistration}`);
+          }
         }}
       >
         <Row id="space-between">
           <h3>{subtitle}</h3>
-          <div
-            className="cursor-pointer"
-            onClick={(e) => {
-              e.stopPropagation();
-              setVisible(true);
-            }}
-          >
-            <Icon icon="pi pi-trash" size="1rem" />
-          </div>
+          {(propsAplication.user?.role === ROLE.ADMIN ||
+            propsAplication.user?.role === ROLE.COORDINATORS) && <div
+              className="cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                setVisible(true);
+              }}
+            >
+              <Icon icon="pi pi-trash" size="1rem" />
+            </div>}
         </Row>
         <Padding padding="8px" />
         <Row>
@@ -64,10 +73,10 @@ const CardRegistration = ({
                   status === statuGlobal.APPROVED
                     ? IconActive
                     : status === statuGlobal.PENDING
-                    ? IconClasMedia
-                    : status === statuGlobal.REPROVED
-                    ? IconNotActive
-                    : ""
+                      ? IconClasMedia
+                      : status === statuGlobal.REPROVED
+                        ? IconNotActive
+                        : ""
                 }
                 alt=""
                 style={{ height: 40 }}
@@ -84,10 +93,10 @@ const CardRegistration = ({
               {status === statuGlobal.APPROVED
                 ? "Aprovado"
                 : status === statuGlobal.PENDING
-                ? "Pendente"
-                : status === statuGlobal.REPROVED
-                ? "Reprovado"
-                : ""}
+                  ? "Pendente"
+                  : status === statuGlobal.REPROVED
+                    ? "Reprovado"
+                    : ""}
             </div>
           </Column>
         </Row>

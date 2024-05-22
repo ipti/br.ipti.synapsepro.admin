@@ -17,6 +17,21 @@ export function formatarData(data: string): string {
   return dataEdit;
 }
 
+export function converterData(data: string) {
+  // Divide a string pelo separador "/"
+  const partes = data.split('/');
+  
+  // As partes serão: partes[0] = dia, partes[1] = mês, partes[2] = ano
+  const dia = partes[0];
+  const mes = partes[1];
+  const ano = partes[2];
+  
+  // Reorganiza no formato YYYY-MM-DD
+  const dataFormatada = `${ano}-${mes}-${dia}`;
+  
+  return dataFormatada;
+}
+
 export function somarNumeros(num1: number, num2: number): number {
   console.log(num1 + num2);
   console.log(num1, num2);
