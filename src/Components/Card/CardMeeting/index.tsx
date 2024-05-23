@@ -91,13 +91,13 @@ const CardMeeting = ({
               style={{ height: 16, marginRight: 2 }}
             />
             <Row style={{ fontSize: "14px" }}>
-              Status:{" "}
+              Status: {" "}<Padding padding="2px" />
               {status === Status.PENDING ? (
-                <p style={{ fontWeight: "600" }}>Pendente</p>
+                <p style={{ fontWeight: "600" }}> Pendente</p>
               ) : status === Status.APPROVED ? (
-                <p style={{ fontWeight: "600" }}>Aprovado</p>
+                <p style={{ fontWeight: "600" }}> Aprovado</p>
               ) : status === Status.REPROVED ? (
-                <p style={{ fontWeight: "600" }}>Reprovado</p>
+                <p style={{ fontWeight: "600" }}> Reprovado</p>
               ) : null}
             </Row>
           </Row>
