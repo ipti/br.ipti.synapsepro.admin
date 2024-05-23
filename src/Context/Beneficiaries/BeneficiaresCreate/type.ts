@@ -15,7 +15,8 @@ export interface BeneficiariesCreateType {
     status: string;
     classroom: number;
     zone: number | undefined, 
-    project: number | undefined
+    project: number | undefined,
+    deficiency_description: string | undefined
   };
   tsOne: Tsone | undefined;
   project: any | undefined;

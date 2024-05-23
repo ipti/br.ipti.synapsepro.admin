@@ -2,15 +2,22 @@ import styled from "styled-components";
 import styles from "../../../Styles";
 
 export const Container = styled.div`
-  color: ${styles.colors.grayClear};
-  font-size: ${styles.typography.font.extraSmall};
   justify-content: space-between;
   cursor: pointer;
+
+  border: 1.22px solid rgba(219, 230, 255, 1);
+  background: ${styles.colors.colorCard};
+  
+  border-radius: 16px;
 
   .boxQuantity {
     display: flex;
     color: white;
-    font-size: ${styles.typography.font.extraSmall};
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 4;
   }
   .boxYear {
     border-radius: 25px;
@@ -18,7 +25,5 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-weight: 600;
-    color: ${styles.colors.colorsBaseInkLighterActive};
   }
 `;

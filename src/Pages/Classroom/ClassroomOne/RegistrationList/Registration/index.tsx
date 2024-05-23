@@ -7,7 +7,11 @@ import RegistartionDetailsProvider, {
   RegistrationDetailsContext,
 } from "../../../../../Context/Classroom/Registration/context";
 import { RegistrationDetailsTypes } from "../../../../../Context/Classroom/Registration/type";
-import { color_race, Status, typesex } from "../../../../../Controller/controllerGlobal";
+import {
+  color_race,
+  Status,
+  typesex,
+} from "../../../../../Controller/controllerGlobal";
 import { Container, Padding } from "../../../../../Styles/styles";
 import { useParams } from "react-router-dom";
 import { useFetchRequestClassroomOne } from "../../../../../Services/Classroom/query";
@@ -132,6 +136,19 @@ const RegistrationPage = () => {
                     />
                   </div>
                   <div className="col-12 md:col-6">
+                    <label>Telefone para contato </label>
+                    <Padding />
+                    <MaskInput
+                      value={values.responsable_telephone}
+                      mask="(99) 9 9999-9999"
+                      name="responsable_telephone"
+                      onChange={handleChange}
+                      placeholder="name"
+                    />
+                  </div>
+                </div>{" "}
+                <div className="grid">
+                  <div className="col-12 md:col-6">
                     <label>Deficiente</label>
                     <Padding />
                     <DropdownComponent
@@ -145,19 +162,16 @@ const RegistrationPage = () => {
                       ]}
                     />
                   </div>
-                </div>{" "}
-                <div className="grid">
-                  <div className="col-12 md:col-6">
-                    <label>Telefone </label>
+                  {values.deficiency && <div className="col-12 md:col-6">
+                    <label>Qual deficiência?</label>
                     <Padding />
-                    <MaskInput
-                      value={values.responsable_telephone}
-                      mask="(99) 9 9999-9999"
-                      name="responsable_telephone"
+                    <TextInput
+                      value={values.deficiency_description}
+                      name="deficiency_description"
                       onChange={handleChange}
-                      placeholder="name"
+                      placeholder="Qual deficiência ?"
                     />
-                  </div>
+                  </div>}
                 </div>{" "}
                 <Padding padding="8px" />
                 <h3>Dados Responsavel</h3>
@@ -185,7 +199,6 @@ const RegistrationPage = () => {
                     />
                   </div>
                 </div>{" "}
-
                 <Padding padding="8px" />
                 {/* <h3>Endereço</h3>
                 <Padding />
