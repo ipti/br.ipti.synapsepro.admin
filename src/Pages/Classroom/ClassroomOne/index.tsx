@@ -2,21 +2,22 @@ import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import pessoas from "../../../Assets/images/pessoasgray.svg";
+import meeting from "../../../Assets/images/school_teacher.svg";
 import TextInput from "../../../Components/TextInput";
-import pessoas from "../../../Assets/images/pessoasgray.svg"
-import meeting from "../../../Assets/images/school_teacher.svg"
 
+import Loading from "../../../Components/Loading";
+import { AplicationContext } from "../../../Context/Aplication/context";
 import ClassroomProvider, {
   ClassroomContext,
 } from "../../../Context/Classroom/context";
 import { ClassroomTypes } from "../../../Context/Classroom/type";
+import { ROLE } from "../../../Controller/controllerGlobal";
 import { useFetchRequestClassroomOne } from "../../../Services/Classroom/query";
 import { Column, Container, Padding, Row } from "../../../Styles/styles";
-import CardItensClassrooom from "./CardItensClassroom";
-import { AplicationContext } from "../../../Context/Aplication/context";
 import { PropsAplicationContext } from "../../../Types/types";
-import { ROLE } from "../../../Controller/controllerGlobal";
-import Loading from "../../../Components/Loading";
+import CardItensClassrooom from "./CardItensClassroom";
+import ModalChange from "./ModalChangeClaassroom";
 
 const ClassroomOne = () => {
   return (
@@ -32,6 +33,7 @@ const ClassroomOnePage = () => {
   const props = useContext(ClassroomContext) as ClassroomTypes;
   const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!));
   const [edit, setEdit] = useState(false);
+  const [visible, setVisible] = useState(false)
 
   const propsAplication = useContext(
     AplicationContext
@@ -78,15 +80,22 @@ const ClassroomOnePage = () => {
           ) : null}
         </>
       ) : (
-        <Row>
-          <Column id="center">
-            <h2>{classroom?.name}</h2>
-          </Column>
-          <Padding />
-          {propsAplication.user?.role === (ROLE.ADMIN || ROLE.COORDINATORS) && (
-            <Button text label="Editar" icon="pi pi-pencil" onClick={() => setEdit(true)} />
-          )}
-        </Row>
+        <Column>
+          <Row id="space-between">
+            <Row>
+              <Column id="center">
+                <h2>{classroom?.name}</h2>
+              </Column>
+              <Padding />
+              {propsAplication.user?.role === (ROLE.ADMIN || ROLE.COORDINATORS) && (
+                <Button text label="Editar" icon="pi pi-pencil" onClick={() => setEdit(true)} />
+              )}
+            </Row>
+            {propsAplication.user?.role === (ROLE.ADMIN || ROLE.COORDINATORS) && (
+              <Button text label="Tranferir turma" icon="pi pi-sync" onClick={() => setVisible(true)} />
+            )}
+          </Row>
+        </Column>
       )}
       <Padding padding="16px" />
       <div className="grid">
@@ -115,6 +124,10 @@ const ClassroomOnePage = () => {
         {/* <div className="col-12 md:col-6" onClick={() => history(`/turma/${id}/relatorio`)}>
                     <CardItensClassrooom title="Tabela" description="Relatório entre Alunos e Encontros" icon="pi pi-table" />
                 </div> */}
+        <ModalChange
+          visible={visible}
+          onHide={() => setVisible(false)}
+        />
       </div>
     </Container>
   );
