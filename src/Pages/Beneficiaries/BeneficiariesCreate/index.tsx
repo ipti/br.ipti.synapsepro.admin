@@ -45,9 +45,7 @@ const RegistrationPage = () => {
       }
       return true;
     }),
-    responsable_telephone: Yup.string().required(
-      "Telefone é obrigatório"
-    ),
+    responsable_telephone: Yup.string().required("Telefone é obrigatório"),
     birthday: Yup.string()
       .nullable()
       .required("Data de nascimento é obrigatória"),
@@ -196,36 +194,48 @@ const RegistrationPage = () => {
                       </div>
                     ) : null}
                   </div>
-                  <div>
+                  {values.deficiency && (
                     <div className="col-12 md:col-6">
-                      <label>Zona *</label>
+                      <label>Qual deficiência?</label>
                       <Padding />
-                      <Column id="end">
-                        <Row className="gap-2">
-                          <RadioButtonComponent
-                            value={1}
-                            checked={values.zone === 1}
-                            onChange={handleChange}
-                            name="zone"
-                            label="Rural"
-                          />
-                          <RadioButtonComponent
-                            value={2}
-                            checked={values.zone === 2}
-                            onChange={handleChange}
-                            name="zone"
-                            label="Urbana"
-                          />
-                        </Row>
-                      </Column>
-                      {errors.zone && touched.zone ? (
-                        <div style={{ color: "red", marginTop: "8px" }}>
-                          {errors.zone}
-                        </div>
-                      ) : null}
+                      <TextInput
+                        value={values.deficiency_description}
+                        name="deficiency_description"
+                        onChange={handleChange}
+                        placeholder="Qual deficiência ?"
+                      />
                     </div>
-                  </div>
+                  )}
                 </div>{" "}
+                <div className="grid">
+                  <div className="col-12 md:col-6">
+                    <label>Zona *</label>
+                    <Padding />
+                    <Column id="end">
+                      <Row className="gap-2">
+                        <RadioButtonComponent
+                          value={1}
+                          checked={values.zone === 1}
+                          onChange={handleChange}
+                          name="zone"
+                          label="Rural"
+                        />
+                        <RadioButtonComponent
+                          value={2}
+                          checked={values.zone === 2}
+                          onChange={handleChange}
+                          name="zone"
+                          label="Urbana"
+                        />
+                      </Row>
+                    </Column>
+                    {errors.zone && touched.zone ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.zone}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
                 <Padding padding="8px" />
                 <h3>Dados Responsavel</h3>
                 <Padding />
@@ -292,7 +302,10 @@ const RegistrationPage = () => {
                       value={props.project}
                       placerholder="Selecione o projeto"
                       name="project"
-                      onChange={(e) => {props.setProject(e.target.value); setFieldValue("project", e.target.value)}}
+                      onChange={(e) => {
+                        props.setProject(e.target.value);
+                        setFieldValue("project", e.target.value);
+                      }}
                       options={props.tsOne?.project}
                       optionsLabel="name"
                       optionsValue="id"

@@ -10,6 +10,7 @@ import { MeetingListRegistrationContext } from "../../../../../../Context/Classr
 import { MeetingListRegisterTypes, RegisterClassroom } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/type";
 import styles from "../../../../../../Styles";
 import { Padding, Row } from "../../../../../../Styles/styles";
+import { Status } from "../../../../../../Controller/controllerGlobal";
 
 
 const StyleComponent = styled.div`
@@ -74,7 +75,7 @@ const Beneficiarios = () => {
         <Button
           label="Salvar"
           icon="pi pi-save"
-          disabled={props.meeting?.meeting_archives?.length! === 0}
+          disabled={props.meeting?.meeting_archives?.length! === 0 || props.meeting?.status === Status.APPROVED}
           onClick={() => {
             props.CreateFouls({
               meeting: props.meeting?.id!,

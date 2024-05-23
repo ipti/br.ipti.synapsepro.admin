@@ -36,6 +36,8 @@ export const RegistrationClassroomState = () => {
     responsable_cpf: registration?.registration.responsable_cpf,
     responsable_telephone: registration?.registration.responsable_telephone,
     status: getStatus(registration?.status!),
+    deficiency_description: registration?.registration.deficiency_description
+
   };
 
   const handleUpdateRegistration = (data: UpdateRegister, id: number) => {

@@ -64,6 +64,8 @@ export const BeneficiariesEditState = () => {
     responsable_cpf: registrations?.responsable_cpf,
     responsable_telephone: registrations?.responsable_telephone,
     status: getStatus(registrations?.status!),
+    deficiency_description: registrations?.deficiency_description
+
   };
 
   const CreateRegisterClassroom = (data: CreateRegistrationClassroomType) => {

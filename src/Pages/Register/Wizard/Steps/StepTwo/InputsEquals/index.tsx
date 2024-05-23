@@ -6,6 +6,7 @@ import RadioButtonComponent from "../../../../../../Components/RadioButton"
 import { RegisterContext } from "../../../../../../Context/Register/context"
 import { RegisterTypes } from "../../../../../../Context/Register/type"
 import { Padding, Row } from "../../../../../../Styles/styles"
+import { typesex } from "../../../../../../Controller/controllerGlobal"
 
 const InputsEquals = ({ values, handleChange, errors, touched }: { values: any, handleChange: any, errors: any, touched: any }) => {
 
@@ -25,14 +26,14 @@ const InputsEquals = ({ values, handleChange, errors, touched }: { values: any, 
             <div>
                 <label>Sexo *</label>
                 <Padding />
-                <DropdownComponent placerholder="Sexo *" value={values.sex} options={props.sex} name="sex" onChange={handleChange} optionsLabel="label" />
+                <DropdownComponent placerholder="Sexo *" optionsValue="id" value={values.sex} options={typesex} name="sex" onChange={handleChange} optionsLabel="type" />
             </div>
             {errors.sex && touched.sex ? (
                 <div style={{ color: "red", marginTop: "8px" }}>{errors.sex}</div>
             ) : null}
             <Padding padding={props.padding} />
             <div>
-                <label>Telefone *</label>
+                <label>Telefone para contato*</label>
                 <Padding />
                 <MaskInput mask="(99) 9 9999-9999" placeholder="Telefone *" name="responsable_telephone" onChange={handleChange} value={values.responsable_telephone} />
             </div>
