@@ -4,6 +4,10 @@ import { Dialog } from "primereact/dialog";
 import DropdownComponent from "../../../../Components/Dropdown";
 import { useFetchRequestTsLists } from "../../../../Services/Project/query";
 import { Column, Padding, Row } from "../../../../Styles/styles";
+import { ClassroomContext } from "../../../../Context/Classroom/context";
+import { ClassroomTypes } from "../../../../Context/Classroom/type";
+import { useContext } from "react";
+import { useParams } from "react-router-dom";
 
 const ModalChange = ({
     onHide,
@@ -12,6 +16,9 @@ const ModalChange = ({
     onHide(): void;
     visible?: boolean | undefined;
 }) => {
+    const { id } = useParams();
+
+    const props = useContext(ClassroomContext) as ClassroomTypes;
 
     const { data: tsOneRequest } = useFetchRequestTsLists(undefined)
 
@@ -23,9 +30,10 @@ const ModalChange = ({
         >
             <Formik
                 initialValues={{
-                    name: ""
+                    idProject: ""
                 }}
                 onSubmit={(values) => {
+                    props.ChangeClassroom({idClassroom: id!, idProject: values.idProject})
                     onHide();
                 }}
             >
@@ -37,11 +45,12 @@ const ModalChange = ({
                                     <label>Escolha um projeto</label>
                                     <Padding />
                                     <DropdownComponent
-                                        value={values.name}
+                                        value={values.idProject}
                                         options={tsOneRequest?.project}
                                         placerholder="Digite um nome"
                                         onChange={handleChange}
-                                        name="name"
+                                        optionsValue="id"
+                                        name="idProject"
                                     />
                                 </div>
                             </div>{" "}
