@@ -292,7 +292,7 @@ const RegistrationPage = () => {
                   </div>
                 </div>{" "}
                 <Padding padding="8px" />
-                <h3>Projeto *</h3>
+                <h3>Mtricula *</h3>
                 <Padding padding="8px" />
                 <div className="grid">
                   <div className="col-12 md:col-6">
