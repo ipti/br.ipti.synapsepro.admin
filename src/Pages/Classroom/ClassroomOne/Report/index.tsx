@@ -1,100 +1,108 @@
-import { Tooltip } from "primereact/tooltip"
-import { Container } from "../../../../Styles/styles"
-import { DataTable } from "primereact/datatable"
-import { Column } from "primereact/column"
-import { Button } from "primereact/button"
-import { useRef } from "react"
-import data from "./../../../../Data/students.json"
+import { Tooltip } from "primereact/tooltip";
+import { Container } from "../../../../Styles/styles";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { Button } from "primereact/button";
+import { useRef } from "react";
+import Present from "../../../../Assets/images/status-approved.svg";
+import NotPresent from "../../../../Assets/images/status-desapproved.svg";
+import { useFetchRequestClassroomReport } from "../../../../Services/Classroom/query";
+import { useParams } from "react-router-dom";
 
-
-interface ColumnMeta {
-    field: string;
-    header: string;
-}
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const Report = () => {
-    return (
-        <ReportPage />
-    )
-}
+  return <ReportPage />;
+};
 
 const ReportPage = () => {
+  const { id } = useParams();
 
-    const dt = useRef<any>(null);
+  const contentRef = useRef(null);
 
-    const cols: ColumnMeta[] = [
-        { field: 'category', header: 'Category' },
-        { field: 'quantity', header: 'Quantity' }
-    ];
+  const generatePDF = () => {
+    if (!contentRef.current) return;
 
-    // const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
+    const elementToCapture = contentRef.current;
 
+    html2canvas(elementToCapture).then((canvas) => {
+      const pdf = new jsPDF("p", "mm", "a4");
 
-    // const exportCSV = (selectionOnly: any) => {
-    //     dt.current.exportCSV({ selectionOnly });
-    // };
+      const imgData = canvas.toDataURL("image/png");
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
 
-    const exportPdf = () => {
-        import('jspdf').then((jsPDF) => {
-            import('jspdf-autotable').then(() => {
-                // const doc = new jsPDF.default(0, 0);
+      pdf.save(`Relatorio_turma.pdf`);
+    });
+  };
 
-                // doc.autoTable(exportColumns, products);
-                // doc.save('products.pdf');
-            });
-        });
+  const { data } = useFetchRequestClassroomReport(parseInt(id!));
+
+  const bodyMeeting = (rowData: any, options: any) => {
+    const verifyFouls = () => {
+      const verify = data?.meeting[
+        parseInt(options?.column.props.columnKey)
+      ]?.fouls?.find(
+        (props: any) => props.registration_fk === rowData.registration_fk
+      );
+      return verify;
     };
+    return <img alt="" src={!verifyFouls() ? Present : NotPresent} />;
+  };
 
-    const exportExcel = () => {
-        import('xlsx').then((xlsx) => {
-            const worksheet = xlsx.utils.json_to_sheet(data);
-            const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
-            const excelBuffer = xlsx.write(workbook, {
-                bookType: 'xlsx',
-                type: 'array'
-            });
+  const bodyTotal = (rowData: any) => {
+    const verifyFouls = () => {
+      var count = 0;
+      for (const meeting of data?.meeting) {
+        const verify = meeting?.fouls?.find(
+          (props: any) => props.registration_fk === rowData.registration_fk
+        );
 
-            saveAsExcelFile(excelBuffer, 'products');
-        });
+        if (verify) {
+          count++;
+        }
+      }
+
+      return (count !== 0 ? count / data.meeting.length : 1) * 100;
     };
+    return <h3>{verifyFouls()}%</h3>;
+  };
 
-    const saveAsExcelFile = (buffer: any, fileName: any) => {
-        import('file-saver').then((module) => {
-            if (module && module.default) {
-                let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-                let EXCEL_EXTENSION = '.xlsx';
-                const data = new Blob([buffer], {
-                    type: EXCEL_TYPE
-                });
+  const header = (
+    <div className="flex align-items-center justify-content-end gap-2">
+      <Button
+        type="button"
+        icon="pi pi-file-pdf"
+        severity="danger"
+        rounded
+        onClick={generatePDF}
+        data-pr-tooltip="PDF"
+      />
+    </div>
+  );
+  return (
+    <Container ref={contentRef}>
+      <DataTable
+        value={data?.register_classroom}
+        header={header}
+        tableStyle={{ minWidth: "50rem" }}
+      >
+        <Column field={"registration.name"}  header={"Beneficiário"} />
+        {data?.meeting?.map((item: any, index: number) => (
+          <Column
+            align={"center"}
+            key={index}
+            columnKey={index.toString()}
+            body={bodyMeeting}
+            header={item.name}
+          />
+        ))}
+        <Column body={bodyTotal} header={"Total"} />
+      </DataTable>
+    </Container>
+  );
+};
 
-                module.default.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
-            }
-        });
-    }
-
-    const header = (
-        <div className="flex align-items-center justify-content-end gap-2">
-            {/* <Button type="button" icon="pi pi-file" rounded onClick={() => exportCSV(false)} data-pr-tooltip="CSV" /> */}
-            <Button type="button" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
-            <Button type="button" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" />
-        </div>
-    );
-    return (
-        <Container>
-            <div className="card">
-                <Tooltip target=".export-buttons>button" position="bottom" />
-                <DataTable ref={dt} value={data} header={header} tableStyle={{ minWidth: '50rem' }}>
-                    <Column field={"name"} header={"Nome"} />
-                    {cols.map((col, index) => (
-                        <>
-                            <Column key={index} field={col.field} header={col.header} />
-                        </>
-                    ))}
-                    <Column field={"name"} header={"Total"}  />
-                </DataTable>
-            </div>
-        </Container>
-    )
-}
-
-export default Report
+export default Report;

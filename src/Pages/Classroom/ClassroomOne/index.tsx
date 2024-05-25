@@ -3,6 +3,8 @@ import { Button } from "primereact/button";
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import pessoas from "../../../Assets/images/pessoasgray.svg";
+
+import report from "../../../Assets/images/report-svgrepo-com.svg";
 import meeting from "../../../Assets/images/school_teacher.svg";
 import TextInput from "../../../Components/TextInput";
 
@@ -33,14 +35,13 @@ const ClassroomOnePage = () => {
   const props = useContext(ClassroomContext) as ClassroomTypes;
   const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!));
   const [edit, setEdit] = useState(false);
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
 
   const propsAplication = useContext(
     AplicationContext
   ) as PropsAplicationContext;
 
   if (props.isLoading) return <Loading />;
-
 
   return (
     <Container>
@@ -87,12 +88,24 @@ const ClassroomOnePage = () => {
                 <h2>{classroom?.name}</h2>
               </Column>
               <Padding />
-              {propsAplication.user?.role === (ROLE.ADMIN || ROLE.COORDINATORS) && (
-                <Button text label="Editar" icon="pi pi-pencil" onClick={() => setEdit(true)} />
+              {propsAplication.user?.role ===
+                (ROLE.ADMIN || ROLE.COORDINATORS) && (
+                <Button
+                  text
+                  label="Editar"
+                  icon="pi pi-pencil"
+                  onClick={() => setEdit(true)}
+                />
               )}
             </Row>
-            {propsAplication.user?.role === (ROLE.ADMIN || ROLE.COORDINATORS) && (
-              <Button text label="Tranferir turma" icon="pi pi-sync" onClick={() => setVisible(true)} />
+            {propsAplication.user?.role ===
+              (ROLE.ADMIN || ROLE.COORDINATORS) && (
+              <Button
+                text
+                label="Tranferir turma"
+                icon="pi pi-sync"
+                onClick={() => setVisible(true)}
+              />
             )}
           </Row>
         </Column>
@@ -124,10 +137,20 @@ const ClassroomOnePage = () => {
         {/* <div className="col-12 md:col-6" onClick={() => history(`/turma/${id}/relatorio`)}>
                     <CardItensClassrooom title="Tabela" description="Relatório entre Alunos e Encontros" icon="pi pi-table" />
                 </div> */}
-        <ModalChange
-          visible={visible}
-          onHide={() => setVisible(false)}
-        />
+        <ModalChange visible={visible} onHide={() => setVisible(false)} />
+      </div>
+      <div className="grid">
+        <div
+          className="col-12 md:col-6"
+          onClick={() => history(`/turma/${id}/relatorio`)}
+        >
+          <CardItensClassrooom
+            title="Relatório"
+            description="Acesse o relatório da turma"
+            icon={report}
+            // count={classroom?.register_classroom?.length}
+          />
+        </div>
       </div>
     </Container>
   );
