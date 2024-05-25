@@ -65,7 +65,7 @@ const ReportPage = () => {
         }
       }
 
-      return (count !== 0 ? count / data.meeting.length : 1) * 100;
+      return count / data.meeting.length * 100;
     };
     return <h3>{verifyFouls()}%</h3>;
   };
