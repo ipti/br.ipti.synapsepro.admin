@@ -1,13 +1,12 @@
-import { Tooltip } from "primereact/tooltip";
-import { Container } from "../../../../Styles/styles";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
 import { Button } from "primereact/button";
+import { Column } from "primereact/column";
+import { DataTable } from "primereact/datatable";
 import { useRef } from "react";
+import { useParams } from "react-router-dom";
 import Present from "../../../../Assets/images/status-approved.svg";
 import NotPresent from "../../../../Assets/images/status-desapproved.svg";
 import { useFetchRequestClassroomReport } from "../../../../Services/Classroom/query";
-import { useParams } from "react-router-dom";
+import { Container } from "../../../../Styles/styles";
 
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -65,9 +64,9 @@ const ReportPage = () => {
         }
       }
 
-      return count / data.meeting.length * 100;
+      return data.meeting.length !== 0 ? ((data.meeting.length - count) / data.meeting.length) * 100 : 0;
     };
-    return <h3>{verifyFouls()}%</h3>;
+    return <h3>{verifyFouls().toFixed(2)}%</h3>;
   };
 
   const header = (
