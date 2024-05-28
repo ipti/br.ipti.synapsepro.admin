@@ -1,15 +1,13 @@
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import { useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Present from "../../../../Assets/images/status-approved.svg";
 import NotPresent from "../../../../Assets/images/status-desapproved.svg";
 import { useFetchRequestClassroomReport } from "../../../../Services/Classroom/query";
 import { Container } from "../../../../Styles/styles";
 
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+
 
 const Report = () => {
   return <ReportPage />;
@@ -17,25 +15,9 @@ const Report = () => {
 
 const ReportPage = () => {
   const { id } = useParams();
+  const history = useNavigate();
 
-  const contentRef = useRef(null);
 
-  const generatePDF = () => {
-    if (!contentRef.current) return;
-
-    const elementToCapture = contentRef.current;
-
-    html2canvas(elementToCapture).then((canvas) => {
-      const pdf = new jsPDF("p", "mm", "a4");
-
-      const imgData = canvas.toDataURL("image/png");
-      const imgWidth = 210;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-
-      pdf.save(`Relatorio_turma.pdf`);
-    });
-  };
 
   const { data } = useFetchRequestClassroomReport(parseInt(id!));
 
@@ -76,13 +58,13 @@ const ReportPage = () => {
         icon="pi pi-file-pdf"
         severity="danger"
         rounded
-        onClick={generatePDF}
+        onClick={() => {history('pdf')}}
         data-pr-tooltip="PDF"
       />
     </div>
   );
   return (
-    <Container ref={contentRef}>
+    <Container>
       <DataTable
         value={data?.register_classroom}
         header={header}

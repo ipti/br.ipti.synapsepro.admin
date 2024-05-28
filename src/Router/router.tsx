@@ -29,6 +29,8 @@ import CreateUser from "../Pages/Users/CreateUser";
 import EditUser from "../Pages/Users/EditUser";
 import ListUsers from "../Pages/Users/ListUsers";
 import PrivateRoute from "./privaterouter";
+import ReportClassroom from "../Pages/Classroom/ClassroomOne/Report/Pdf";
+import PrivateRouteNotLayout from "./privaterouternotlayout";
 
 const RoutesApp = () => {
   return (
@@ -74,6 +76,10 @@ const RoutesApp = () => {
         <Route
           element={<PrivateRoute Component={<Report />} />}
           path="/turma/:id/relatorio"
+        />
+        <Route
+          element={<PrivateRouteNotLayout Component={<ReportClassroom />} />}
+          path="/turma/:id/relatorio/pdf"
         />
         <Route
           element={<PrivateRoute Component={<RegistrationList />} />}
