@@ -8,7 +8,9 @@ const PrivateRouteNotLayout = ({ Component }: { Component: React.ReactNode }) =>
 
   return isAuthenticated() ?
     <AplicationProvider>
+      <div style={{overflowY: "auto", height: "100%"}}>
         {Component}
+      </div>
     </AplicationProvider>
     : <Navigate to="/register" />
 }
