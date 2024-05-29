@@ -1,13 +1,11 @@
 import styled from "styled-components";
 import styles from "../../../../../Styles";
 
-
 export const Container = styled.div`
-    font-family: ${styles.typography.types.inter};
-
-   
-        font-size: 3vh;
-    
+  font-family: ${styles.typography.types.inter};
+  width: 100%;
+  height: 100%;
+  font-size: 3vh;
 `;
 
 export const Table = styled.table`
