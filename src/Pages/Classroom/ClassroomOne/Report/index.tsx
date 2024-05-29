@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Present from "../../../../Assets/images/status-approved.svg";
 import NotPresent from "../../../../Assets/images/status-desapproved.svg";
 import { useFetchRequestClassroomReport } from "../../../../Services/Classroom/query";
@@ -15,7 +15,6 @@ const Report = () => {
 
 const ReportPage = () => {
   const { id } = useParams();
-  const history = useNavigate();
 
 
 
@@ -48,7 +47,7 @@ const ReportPage = () => {
 
       return data.meeting.length !== 0 ? ((data.meeting.length - count) / data.meeting.length) * 100 : 0;
     };
-    return <h3>{verifyFouls().toFixed(2)}%</h3>;
+    return <h3>{verifyFouls().toFixed(0)}%</h3>;
   };
 
   const header = (
@@ -58,7 +57,7 @@ const ReportPage = () => {
         icon="pi pi-file-pdf"
         severity="danger"
         rounded
-        onClick={() => {history('pdf')}}
+        onClick={() => {window.open(window.location.href+"/pdf")}}
         data-pr-tooltip="PDF"
       />
     </div>

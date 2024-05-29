@@ -6,12 +6,16 @@ import { AplicationContext } from "../../../Context/Aplication/context";
 import { ROLE } from "../../../Controller/controllerGlobal";
 import { Container, Padding, Row } from "../../../Styles/styles";
 import { PropsAplicationContext } from "../../../Types/types";
+import Loading from "../../../Components/Loading";
+import Empty from "../../../Components/Empty";
 
 const TecnologySocial = () => {
   const history = useNavigate();
   const propsAplication = useContext(
     AplicationContext
   ) as PropsAplicationContext;
+
+  if (!propsAplication.project) return <Loading />;
   return (
     <Container>
       <h1>Tecnologias</h1>
@@ -27,6 +31,7 @@ const TecnologySocial = () => {
         </Row>
       )}
       <Padding padding="16px" />
+      {propsAplication.project.length > 0 ? (
       <div className="grid">
         {propsAplication.project?.map((item, index) => {
           return (
@@ -35,7 +40,9 @@ const TecnologySocial = () => {
             </div>
           );
         })}
-      </div>
+      </div>) : (
+        <Empty title="Tecnologias" />
+      )}
     </Container>
   );
 };

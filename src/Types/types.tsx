@@ -32,6 +32,7 @@ export interface PropsInputNumber {
     disabled?: boolean | undefined,
     onBlur?: FocusEventHandler<HTMLInputElement> | undefined,
     name?: string
+    suffix?: string
 }
 
 export interface PropsInputCalendar {

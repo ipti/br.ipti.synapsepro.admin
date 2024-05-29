@@ -7,6 +7,8 @@ import CreateTsProvider, {
 } from "../../../Context/TecnologySocial/CreateTecnologySocial/context";
 import { CreateTsTypes } from "../../../Context/TecnologySocial/CreateTecnologySocial/type";
 import { Container, Padding, Row } from "../../../Styles/styles";
+import * as Yup from "yup";
+
 
 const CreateTechnologySocial = () => {
   return (
@@ -23,12 +25,18 @@ const CreateTechnologySocialPage = () => {
     name: "",
   };
 
+  const CreateTsSchema = Yup.object().shape({
+    name: Yup.string().required("Campo Obrigatório"),
+   
+  });
+
   return (
     <Container>
       <h1>Criar Tecnologia</h1>
       <Padding padding="16px" />
       <Formik
         initialValues={initialValues}
+        validationSchema={CreateTsSchema}
         onSubmit={(values) => {
           props.CreateTechnology({ name: values.name });
         }}
