@@ -1,13 +1,12 @@
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Present from "../../../../Assets/images/status-approved.svg";
 import NotPresent from "../../../../Assets/images/status-desapproved.svg";
 import { useFetchRequestClassroomReport } from "../../../../Services/Classroom/query";
 import { Container } from "../../../../Styles/styles";
-
-
+import color from "../../../../Styles/colors";
 
 const Report = () => {
   return <ReportPage />;
@@ -15,9 +14,6 @@ const Report = () => {
 
 const ReportPage = () => {
   const { id } = useParams();
-  const history = useNavigate();
-
-
 
   const { data } = useFetchRequestClassroomReport(parseInt(id!));
 
@@ -46,9 +42,27 @@ const ReportPage = () => {
         }
       }
 
-      return data.meeting.length !== 0 ? ((data.meeting.length - count) / data.meeting.length) * 100 : 0;
+      return data.meeting.length !== 0
+        ? ((data.meeting.length - count) / data.meeting.length) * 100
+        : 0;
     };
-    return <h3>{verifyFouls().toFixed(2)}%</h3>;
+
+    return (
+      <div
+        style={{
+          background:
+            data?.project?.approval_percentage < verifyFouls()
+              ? color.green
+              : color.red,
+          padding: 4,
+          borderRadius: 8,
+        }}
+      >
+        <h3 style={{ textAlign: "center", color: "white" }}>
+          {verifyFouls().toFixed(0)}%
+        </h3>
+      </div>
+    );
   };
 
   const header = (
@@ -58,7 +72,9 @@ const ReportPage = () => {
         icon="pi pi-file-pdf"
         severity="danger"
         rounded
-        onClick={() => {history('pdf')}}
+        onClick={() => {
+          window.open(window.location.href + "/pdf");
+        }}
         data-pr-tooltip="PDF"
       />
     </div>
@@ -70,7 +86,7 @@ const ReportPage = () => {
         header={header}
         tableStyle={{ minWidth: "50rem" }}
       >
-        <Column field={"registration.name"}  header={"Beneficiário"} />
+        <Column field={"registration.name"} header={"Beneficiário"} />
         {data?.meeting?.map((item: any, index: number) => (
           <Column
             align={"center"}

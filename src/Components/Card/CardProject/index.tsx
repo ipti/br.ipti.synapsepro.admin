@@ -5,6 +5,7 @@ import { ClassroomTypes } from "../../../Context/Classroom/type";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import IconClassroom from "./../../../Assets/images/project_card.svg";
 import { Container } from "./style";
+import { useNavigate } from "react-router-dom";
 
 
 const CardProject = ({
@@ -17,12 +18,12 @@ const CardProject = ({
   id: number;
 }) => {
   const [visible, setVisible] = useState(false);
-
+  const history = useNavigate()
   const props = useContext(ClassroomContext) as ClassroomTypes;
 
   return (
     <>
-      <Container className="card" onClick={() => { }}>
+      <Container className="card" onClick={() => {history(`${id}`) }}>
         <Row id="space-between">
           <Row >
             <div className={`boxQuantity`}>

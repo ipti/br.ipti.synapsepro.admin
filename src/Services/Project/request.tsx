@@ -1,11 +1,24 @@
-import { CreateProject } from "../../Context/Project/CreateList/type";
+import { CreateProject, UpdateProject } from "../../Context/Project/CreateList/type";
 import http from "../axios";
 import { GetIdTs, GetIdUser, logout } from "../localstorage";
-
 
 export const requestCreateProject = (data: CreateProject) => {
   return http
     .post("/project", data)
+    .then((response) => response.data)
+    .catch((err) => {
+      if (err.response.status === 401) {
+        logout();
+        window.location.reload();
+      }
+      alert(err.response.message);
+      throw err;
+    });
+};
+
+export const requestUpdateProject = (data: UpdateProject, id: number) => {
+  return http
+    .put("/project/"+ id, data)
     .then((response) => response.data)
     .catch((err) => {
       if (err.response.status === 401) {
@@ -23,10 +36,9 @@ export const requestProjectList = async () => {
       .get("/project-user-bff", { params: { userId: GetIdUser() } })
       .then((response) => response.data)
       .catch((err) => {
-
-        if(err.response.status === 401){
-          logout()
-          window.location.reload()
+        if (err.response.status === 401) {
+          logout();
+          window.location.reload();
         }
 
         throw err;
@@ -40,10 +52,9 @@ export const requestTsList = async (id: number | undefined) => {
       .get("/social-technology-bff/one", { params: { stId: id ?? GetIdTs() } })
       .then((response) => response.data)
       .catch((err) => {
-
-        if(err.response.status === 401){
-          logout()
-          window.location.reload()
+        if (err.response.status === 401) {
+          logout();
+          window.location.reload();
         }
 
         throw err;
@@ -51,3 +62,16 @@ export const requestTsList = async (id: number | undefined) => {
   }
 };
 
+export const requestProjectOne = async (id: number) => {
+  return await http
+    .get("/project-bff/one", { params: { idProject: id ?? GetIdTs() } })
+    .then((response) => response.data)
+    .catch((err) => {
+      if (err.response.status === 401) {
+        logout();
+        window.location.reload();
+      }
+
+      throw err;
+    });
+};

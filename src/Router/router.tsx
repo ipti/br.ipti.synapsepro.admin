@@ -31,6 +31,7 @@ import ListUsers from "../Pages/Users/ListUsers";
 import PrivateRoute from "./privaterouter";
 import ReportClassroom from "../Pages/Classroom/ClassroomOne/Report/Pdf";
 import PrivateRouteNotLayout from "./privaterouternotlayout";
+import ProjectOne from "../Pages/Projects/ProjectOne";
 
 const RoutesApp = () => {
   return (
@@ -133,6 +134,10 @@ const RoutesApp = () => {
         <Route
           element={<PrivateRoute Component={<CreateProjectsList />} />}
           path="/projetos/criar"
+        />
+        <Route
+          element={<PrivateRoute Component={<ProjectOne />} />}
+          path="/projetos/:id"
         />
         <Route
           element={<PrivateRoute Component={<TecnologySocial />} />}

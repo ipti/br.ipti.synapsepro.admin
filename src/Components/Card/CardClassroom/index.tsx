@@ -8,13 +8,13 @@ import IconClassroom from "./../../../Assets/images/cardturmas.svg";
 import { Container } from "./style";
 import Icon from "../../Icon";
 
-import pessoas from "../../../Assets/images/pessoasgray.svg"
-import meeting from "../../../Assets/images/school_teacher.svg"
+import pessoas from "../../../Assets/images/pessoasgray.svg";
+import meeting from "../../../Assets/images/school_teacher.svg";
 import styles from "../../../Styles";
 import { AplicationContext } from "../../../Context/Aplication/context";
 import { PropsAplicationContext } from "../../../Types/types";
 import { ROLE } from "../../../Controller/controllerGlobal";
-
+import { menuItem } from "../../../Services/localstorage";
 
 const CardClassroom = ({
   title,
@@ -24,7 +24,7 @@ const CardClassroom = ({
 }: {
   title: string;
   meetingCount?: number;
-  registrationCount?: number,
+  registrationCount?: number;
   id: number;
 }) => {
   const history = useNavigate();
@@ -38,9 +38,15 @@ const CardClassroom = ({
 
   return (
     <>
-      <Container className="card" onClick={() => history(`/turma/${id}`)}>
+      <Container
+        className="card"
+        onClick={() => {
+          menuItem("4");
+          history(`/turma/${id}`);
+        }}
+      >
         <Row id="space-between">
-          <Row >
+          <Row>
             <div className={`boxQuantity`}>
               <img src={IconClassroom} alt="" style={{ height: 32 }} />
             </div>
@@ -50,29 +56,32 @@ const CardClassroom = ({
             </Column>
           </Row>
           {(propsAplication.user?.role === ROLE.ADMIN ||
-            propsAplication.user?.role === ROLE.COORDINATORS) && <div
+            propsAplication.user?.role === ROLE.COORDINATORS) && (
+            <div
               className="cursor-pointer"
               onClick={(e) => {
                 e.stopPropagation();
                 setVisible(true);
               }}
             >
-              <Icon icon="pi pi-trash" color={styles.colors.colorGrayElephant} size="1rem" fontWeight="900" />
-            </div>}
+              <Icon
+                icon="pi pi-trash"
+                color={styles.colors.colorGrayElephant}
+                size="1rem"
+                fontWeight="900"
+              />
+            </div>
+          )}
         </Row>
-        < Padding padding="8px" />
+        <Padding padding="8px" />
         <Row style={{ gap: 16 }}>
           <Row style={{ gap: 8, alignItems: "center" }}>
             <img src={pessoas} alt="" style={{ width: 24 }} />
-            <p>
-              Alunos: {registrationCount}
-            </p>
+            <p>Alunos: {registrationCount}</p>
           </Row>
           <Row style={{ gap: 8, alignItems: "center" }}>
             <img src={meeting} alt="" style={{ width: 19 }} />
-            <p>
-              Encontros: {meetingCount}
-            </p>
+            <p>Encontros: {meetingCount}</p>
           </Row>
         </Row>
       </Container>

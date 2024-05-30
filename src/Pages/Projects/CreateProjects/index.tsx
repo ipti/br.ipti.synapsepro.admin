@@ -8,6 +8,10 @@ import CreateProjectProvider, {
 import { CreateProjectTypes } from "../../../Context/Project/CreateList/type";
 import { GetIdTs } from "../../../Services/localstorage";
 import { Container, Padding, Row } from "../../../Styles/styles";
+import InputNumberComponent from "../../../Components/InputNumber";
+import * as Yup from "yup";
+import Swal from "sweetalert2";
+
 
 const CreateProjects = () => {
   return (
@@ -19,9 +23,14 @@ const CreateProjects = () => {
 
 const CreateProjectsPage = () => {
   const props = useContext(CreateProjectContext) as CreateProjectTypes;
+  const CreateProjectSchema = Yup.object().shape({
+    name: Yup.string().required("Campo Obrigatório"),
+    approval_percentage: Yup.number().required("Campo Obrigatório")
+  });
 
   const initialValues = {
     name: "",
+    approval_percentage: undefined,
   };
 
   return (
@@ -30,11 +39,15 @@ const CreateProjectsPage = () => {
       <Padding padding="16px" />
       <Formik
         initialValues={initialValues}
+        validationSchema={CreateProjectSchema}
         onSubmit={(values) => {
-          props.CreateProject({
+          if(GetIdTs() !== "undefined") {props.CreateProject({
             name: values.name,
+            approval_percentage: values.approval_percentage!,
             socialTechnologyId: parseInt(GetIdTs()!),
-          });
+          });} else {
+            Swal.fire("Crie ou selecione uma Tecnologia")
+          }
         }}
       >
         {({ values, errors, handleChange, touched }) => {
@@ -43,22 +56,42 @@ const CreateProjectsPage = () => {
               <Row id="end">
                 <Button label="Criar" />
               </Row>
-              <div className="col-12 md:col-6">
-                <label>Nome*</label>
-                <Padding />
-                <TextInput
-                  name="name"
-                  onChange={handleChange}
-                  placeholder="Nome*"
-                  value={values.name}
-                />
-              </div>
-              <Padding />
-              {errors.name && touched.name ? (
-                <div style={{ color: "red", marginTop: "8px" }}>
-                  {errors.name}
+              <Padding padding="32px" />
+              <div className="grid">
+                <div className="col-12 md:col-6">
+                  <label>Nome do projeto *</label>
+                  <Padding />
+                  <TextInput
+                    name="name"
+                    onChange={handleChange}
+                    placeholder="Nome do Projeto*"
+                    value={values.name}
+                  />
+                  <Padding />
+                  {errors.name && touched.name ? (
+                    <div style={{ color: "red", marginTop: "8px" }}>
+                      {errors.name}
+                    </div>
+                  ) : null}
                 </div>
-              ) : null}
+                <div className="col-12 md:col-6">
+                  <label>Porcentagem de aprovação do projeto *</label>
+                  <Padding />
+                  <InputNumberComponent
+                    name="approval_percentage"
+                    onChange={handleChange}
+                    suffix="%"
+                    placeholder="Porcentagem de aprovação do projeto *"
+                    value={values.approval_percentage}
+                  />
+                  <Padding />
+                  {errors.approval_percentage && touched.approval_percentage ? (
+                    <div style={{ color: "red", marginTop: "8px" }}>
+                      {errors.approval_percentage}
+                    </div>
+                  ) : null}
+                </div>
+              </div>
               <Padding padding="16px" />
             </Form>
           );

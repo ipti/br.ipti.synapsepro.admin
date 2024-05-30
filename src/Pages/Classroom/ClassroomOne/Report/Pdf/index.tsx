@@ -77,66 +77,73 @@ const ReportClassroom = () => {
           data-pr-tooltip="PDF"
         />
       </Row>
-      <Row ref={contentRef}>
-        <Column className="flex justify-content-end" style={{marginLeft: "16px", marginTop: "256px"}}>
-          <img alt="" src={imgLateral} style={{ width: "80%" }} />
-        </Column>
-        <Container >
-          <Padding padding="16px" />
-          <Row className="flex justify-content-center">
-            <img alt="" src={img} style={{ width: "80%" }} />
-          </Row>
-          <Padding padding="16px" />
-          <Row className="flex justify-content-center">
-            <Column>
-              <h2 style={{ textAlign: "center" }}>THE HUMAN PROJECT - THP </h2>
-              <h2 style={{ textAlign: "center", fontWeight: "400" }}>
-                {report?.project.name.toUpperCase()}
-              </h2>
-            </Column>
-          </Row>
-          <Padding padding="16px" />
-          <Row className="flex justify-content-center">
-            <h3>Relatório de frequência</h3>
-          </Row>
-          <Padding padding="8px" />
-          <Padding padding="0 4%">
-            <Table>
-              <thead>
-                <tr>
-                  <Td style={{ width: "60%" }}>Facilitador: </Td>
-                  <Td style={{ width: "40%" }}>Turma: {report?.name}</Td>
-                </tr>
-              </thead>
-            </Table>
+      <Column ref={contentRef}>
+        <Padding padding="16px" />
+        <Row className="flex justify-content-center">
+          <img alt="" src={img} style={{ width: "80%" }} />
+        </Row>
+        <Row>
+          <Column
+            className="flex justify-content-end"
+            style={{ marginLeft: "32px", marginTop: "256px" }}
+          >
+            <img alt="" src={imgLateral} style={{ width: "80%" }} />
+          </Column>
+          <Container>
+            <Padding padding="16px" />
+            <Row className="flex justify-content-center">
+              <Column>
+                <h2 style={{ textAlign: "center" }}>
+                  {report?.project.social_technology.name}{" "}
+                </h2>
+                <h2 style={{ textAlign: "center", fontWeight: "400" }}>
+                  {report?.project.name.toUpperCase()}
+                </h2>
+              </Column>
+            </Row>
+            <Padding padding="16px" />
+            <Row className="flex justify-content-center">
+              <h3>Relatório de frequência</h3>
+            </Row>
             <Padding padding="8px" />
-            <Table>
-              <thead>
-                <tr>
-                  <Th>Beneficiarios</Th>
-                  <Th>Encontros</Th>
-                  <Th>Faltas</Th>
-                  <Th>Frequência</Th>
-                </tr>
-              </thead>
-              <tbody>
-                {report?.register_classroom?.map(
-                  (item: RegisterClassroom, index: number) => {
-                    return (
-                      <tr key={index}>
-                        <Td>{item.registration.name}</Td>
-                        <Td>{report.meeting.length}</Td>
-                        <Td>{bodyTotal(item).count}</Td>
-                        <Td>{bodyTotal(item).percentage}%</Td>
-                      </tr>
-                    );
-                  }
-                )}
-              </tbody>
-            </Table>
-          </Padding>
-        </Container>
-      </Row>
+            <Padding padding="0 2%">
+              <Table>
+                <thead>
+                  <tr>
+                    <Td style={{ width: "60%" }}>Facilitador: </Td>
+                    <Td style={{ width: "40%" }}>Turma: {report?.name}</Td>
+                  </tr>
+                </thead>
+              </Table>
+              <Padding padding="8px" />
+              <Table>
+                <thead>
+                  <tr>
+                    <Th>Beneficiarios</Th>
+                    <Th>Encontros</Th>
+                    <Th>Faltas</Th>
+                    <Th>Frequência</Th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {report?.register_classroom?.map(
+                    (item: RegisterClassroom, index: number) => {
+                      return (
+                        <tr key={index}>
+                          <Td>{item.registration.name}</Td>
+                          <Td>{report.meeting.length}</Td>
+                          <Td>{bodyTotal(item).count}</Td>
+                          <Td>{bodyTotal(item).percentage}%</Td>
+                        </tr>
+                      );
+                    }
+                  )}
+                </tbody>
+              </Table>
+            </Padding>
+          </Container>
+        </Row>
+      </Column>
 
       <Padding padding="16px" />
     </>
