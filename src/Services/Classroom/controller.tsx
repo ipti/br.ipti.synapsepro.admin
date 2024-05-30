@@ -87,6 +87,7 @@ export const ControllerClassroom = () => {
         }).then((result) => {
           if (result.isConfirmed) {
             queryClient.refetchQueries("useRequestsClassroom");
+            queryClient.refetchQueries("requestProjectOne");
           }
         });
       },

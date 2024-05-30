@@ -1,0 +1,187 @@
+import { Form, Formik } from "formik";
+import { Button } from "primereact/button";
+import { useContext, useState } from "react";
+import { useParams } from "react-router-dom";
+import * as Yup from "yup";
+import CardClassroom from "../../../Components/Card/CardClassroom";
+import CardQuant from "../../../Components/Chart/CardQuant";
+import Empty from "../../../Components/Empty";
+import InputNumberComponent from "../../../Components/InputNumber";
+import Loading from "../../../Components/Loading";
+import TextInput from "../../../Components/TextInput";
+import { AplicationContext } from "../../../Context/Aplication/context";
+import ClassroomProvider from "../../../Context/Classroom/context";
+import ProjectOneProvider, {
+  ProjectOneContext,
+} from "../../../Context/Project/ProjectOne/context";
+import { ProjectOneTypes } from "../../../Context/Project/ProjectOne/type";
+import { ROLE } from "../../../Controller/controllerGlobal";
+import { Column, Container, Padding, Row } from "../../../Styles/styles";
+import { PropsAplicationContext } from "../../../Types/types";
+
+const ProjectOne = () => {
+  return (
+    <ProjectOneProvider>
+      <ClassroomProvider>
+        <ProjectOnePage />
+      </ClassroomProvider>
+    </ProjectOneProvider>
+  );
+};
+
+const ProjectOnePage = () => {
+  const propsAplication = useContext(
+    AplicationContext
+  ) as PropsAplicationContext;
+  const [edit, setEdit] = useState(false);
+
+  const { id } = useParams();
+
+  const props = useContext(ProjectOneContext) as ProjectOneTypes;
+
+  const initialValues = {
+    name: props.project?.name,
+    approval_percentage: props.project?.approval_percentage,
+  };
+
+  if (props.isLoading) return <Loading />;
+  const CreateProjectSchema = Yup.object().shape({
+    name: Yup.string().required("Campo Obrigatório"),
+    approval_percentage: Yup.number().required("Campo Obrigatório"),
+  });
+
+  return (
+    <Container>
+      {edit ? (
+        <Formik
+          initialValues={initialValues}
+          validationSchema={CreateProjectSchema}
+          onSubmit={(values) => {
+            props.updateProject(
+              {
+                approval_percentage: values.approval_percentage!,
+                name: values.name!,
+              },
+              parseInt(id!)
+            );
+            setEdit(!edit);
+          }}
+        >
+          {({ values, errors, handleChange, touched }) => {
+            return (
+              <Form>
+                <Row id="end">
+                  <Button label="Salvar" />
+                  <Padding />
+                  <Button
+                    label="Cancelar"
+                    severity="secondary"
+                    type="button"
+                    onClick={() => setEdit(false)}
+                  />
+                </Row>
+                <Padding padding="32px" />
+                <div className="grid">
+                  <div className="col-12 md:col-6">
+                    <label>Nome do projeto *</label>
+                    <Padding />
+                    <TextInput
+                      name="name"
+                      onChange={handleChange}
+                      placeholder="Nome do Projeto*"
+                      value={values.name}
+                    />
+                    <Padding />
+                    {errors.name && touched.name ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.name}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div className="col-12 md:col-6">
+                    <label>Porcentagem de aprovação do projeto *</label>
+                    <Padding />
+                    <InputNumberComponent
+                      name="approval_percentage"
+                      onChange={handleChange}
+                      suffix="%"
+                      placeholder="Porcentagem de aprovação do projeto *"
+                      value={values.approval_percentage}
+                    />
+                    <Padding />
+                    {errors.approval_percentage &&
+                    touched.approval_percentage ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.approval_percentage}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+                <Padding padding="16px" />
+              </Form>
+            );
+          }}
+        </Formik>
+      ) : (
+        <Column>
+          <Row id="space-between">
+            <Row>
+              <Column id="center">
+                <h2>{props.project?.name}</h2>
+              </Column>
+              <Padding />
+              {propsAplication.user?.role ===
+                (ROLE.ADMIN || ROLE.COORDINATORS) && (
+                <Button
+                  text
+                  label="Editar"
+                  icon="pi pi-pencil"
+                  onClick={() => setEdit(true)}
+                />
+              )}
+            </Row>
+          </Row>
+        </Column>
+      )}
+      <Padding padding="16px" />
+      <div className="grid">
+        <div className="col-12 md:col-6">
+          <CardQuant
+            quant={props.project?.approval_percentage + "%"}
+            title="Porcentagem de aprovação"
+          />
+        </div>
+        <div className="col-12 md:col-6">
+          <CardQuant
+            quant={props.project?.classrooms.length!}
+            title="Total de turmas"
+          />
+        </div>
+      </div>
+      <Padding padding="16px" />
+      <h3>Turmas</h3>
+      <Padding padding="16px" />
+
+      {props?.project?.classrooms?.length! > 0 ? (
+        <div className="grid">
+          {props.project?.classrooms?.map((item: any, index: number) => {
+            return (
+              <div className="col-12 md:col-6 lg:col-4">
+                <CardClassroom
+                  title={item.name}
+                  meetingCount={item._count.meeting}
+                  registrationCount={item._count.register_classroom}
+                  id={item.id}
+                />
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <Empty title="Turmas" />
+      )}
+    </Container>
+  );
+};
+
+export default ProjectOne;

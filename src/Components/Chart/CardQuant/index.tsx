@@ -1,6 +1,6 @@
 import { Row } from "../../../Styles/styles";
 
-const CardQuant = ({ title, quant }: { title: string; quant: number }) => {
+const CardQuant = ({ title, quant }: { title: string; quant: number | string }) => {
   return (
     <div className="card">
       <Row id="space-between">
