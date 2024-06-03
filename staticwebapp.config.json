@@ -15,7 +15,7 @@
 
       "rewrite": "/index.html",
   
-      "exclude": ["/src/Assets/images/**/*.{png,jpg,gif}", "/src/Assets/css/*", "/src/Assets/font/*"]
+      "exclude": ["/src/Assets/images/*.{png,jpg,gif}","/src/Assets/images/iconsMenu/*.{png,jpg,gif}", "/src/Assets/css/*", "/src/Assets/font/*"]
   
     }
   }
