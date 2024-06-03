@@ -28,23 +28,54 @@ const ReportClassroom = () => {
   }, [data]);
 
   const contentRef = useRef(null);
-
-  const generatePDF = () => {
+  
+  const generatePDF = async () => {
     if (!contentRef.current) return;
+    const input: any = contentRef.current;
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+    const footerHeight = 20; // Altura do rodapé
+    let position = 0;
 
-    const elementToCapture = contentRef.current;
+    // Função para adicionar o rodapé
+    const addFooter = (pdf: any, pageNumber: any) => {
+      pdf.setFontSize(10);
+      pdf.text(`Página ${pageNumber}`, pdfWidth - 30, pdfHeight - 10); // Ajuste a posição e o conteúdo do rodapé
+    };
 
-    html2canvas(elementToCapture).then((canvas) => {
-      const pdf = new jsPDF("p", "mm", "a4");
+    // Capturar e dividir o conteúdo em múltiplas páginas
+    const pages = [];
+    let currentPage = 1;
+    let canvasHeightLeft = input.offsetHeight;
 
-      const imgData = canvas.toDataURL("image/png");
-      const imgWidth = 210;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+    while (canvasHeightLeft > 0) {
+      const canvas = await html2canvas(input, {
+        scrollY: -position,
+        height: pdfHeight,
+      });
+      const imgData = canvas.toDataURL('image/png');
 
-      pdf.save(`Relatorio_${report?.name}.pdf`);
+      pages.push({
+        image: imgData,
+        pageNumber: currentPage,
+      });
+
+      position += pdfHeight - footerHeight;
+      canvasHeightLeft -= pdfHeight - footerHeight;
+      currentPage++;
+    }
+
+    // Adicionar cada página ao PDF
+    pages.forEach((page, index) => {
+      if (index > 0) pdf.addPage();
+      pdf.addImage(page.image, 'PNG', 0, 0, pdfWidth, pdfHeight - footerHeight);
+      addFooter(pdf, page.pageNumber);
     });
+
+    pdf.save('document.pdf');
   };
+
 
   const bodyTotal = (rowData: RegisterClassroom) => {
     var count = 0;
@@ -80,7 +111,7 @@ const ReportClassroom = () => {
       <Column ref={contentRef}>
         <Padding padding="16px" />
         <Row className="flex justify-content-center">
-          <img alt="" src={img} style={{ width: "80%" }} />
+          <img alt="" src={img} style={{ width: 720 }} />
         </Row>
         <Row>
           <Column
