@@ -1,6 +1,6 @@
 import { CreateProject, UpdateProject } from "../../Context/Project/CreateList/type";
 import http from "../axios";
-import { GetIdTs, GetIdUser, logout } from "../localstorage";
+import { GetIdTs, GetIdUser, getYear, logout } from "../localstorage";
 
 export const requestCreateProject = (data: CreateProject) => {
   return http
@@ -64,7 +64,7 @@ export const requestTsList = async (id: number | undefined) => {
 
 export const requestProjectOne = async (id: number) => {
   return await http
-    .get("/project-bff/one", { params: { idProject: id ?? GetIdTs() } })
+    .get("/project-bff/one", { params: { idProject: id ?? GetIdTs(), year: getYear() } })
     .then((response) => response.data)
     .catch((err) => {
       if (err.response.status === 401) {
