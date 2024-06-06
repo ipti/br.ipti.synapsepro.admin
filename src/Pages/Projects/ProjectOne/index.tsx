@@ -40,8 +40,8 @@ const ProjectOnePage = () => {
   const props = useContext(ProjectOneContext) as ProjectOneTypes;
 
   const initialValues = {
-    name: props.project?.name,
-    approval_percentage: props.project?.approval_percentage,
+    name: props.project?.project.name,
+    approval_percentage: props.project?.project?.approval_percentage,
   };
 
   if (props.isLoading) return <Loading />;
@@ -99,13 +99,13 @@ const ProjectOnePage = () => {
                     ) : null}
                   </div>
                   <div className="col-12 md:col-6">
-                    <label>Porcentagem de aprovação do projeto *</label>
+                    <label>Parâmetro para aprovação do projeto *</label>
                     <Padding />
                     <InputNumberComponent
                       name="approval_percentage"
                       onChange={handleChange}
                       suffix="%"
-                      placeholder="Porcentagem de aprovação do projeto *"
+                      placeholder="Parâmetro para aprovação do projeto *"
                       value={values.approval_percentage}
                     />
                     <Padding />
@@ -127,7 +127,7 @@ const ProjectOnePage = () => {
           <Row id="space-between">
             <Row>
               <Column id="center">
-                <h2>{props.project?.name}</h2>
+                <h2>{props.project?.project.name}</h2>
               </Column>
               <Padding />
               {propsAplication.user?.role ===
@@ -147,14 +147,20 @@ const ProjectOnePage = () => {
       <div className="grid">
         <div className="col-12 md:col-6">
           <CardQuant
-            quant={props.project?.approval_percentage + "%"}
-            title="Porcentagem de aprovação"
+            quant={props.project?.project.approval_percentage + "%"}
+            title="Parâmetro para aprovação do projeto"
           />
         </div>
         <div className="col-12 md:col-6">
           <CardQuant
-            quant={props.project?.classrooms.length!}
-            title="Total de turmas"
+            quant={props.project?.project.classrooms.length!}
+            title="Total de Turmas"
+          />
+        </div>
+        <div className="col-12 md:col-6">
+          <CardQuant
+            quant={props.project?.register_count!}
+            title="Total de Matriculas"
           />
         </div>
       </div>
@@ -162,9 +168,9 @@ const ProjectOnePage = () => {
       <h3>Turmas</h3>
       <Padding padding="16px" />
 
-      {props?.project?.classrooms?.length! > 0 ? (
+      {props?.project?.project.classrooms?.length! > 0 ? (
         <div className="grid">
-          {props.project?.classrooms?.map((item: any, index: number) => {
+          {props.project?.project.classrooms?.map((item: any, index: number) => {
             return (
               <div className="col-12 md:col-6 lg:col-4">
                 <CardClassroom

@@ -16,9 +16,9 @@ export interface ReportClassroomType {
     name: string
     meeting_date: string
     status: string
-    description: string
+    description: any
     theme: string
-    justification: string
+    justification: any
     classroom_fk: number
     createdAt: string
     updatedAt: string
@@ -34,6 +34,7 @@ export interface ReportClassroomType {
     id: number
     name: string
     active: boolean
+    approval_percentage: number
     avartar_url: any
     social_technology_id: number
     createdAt: string
