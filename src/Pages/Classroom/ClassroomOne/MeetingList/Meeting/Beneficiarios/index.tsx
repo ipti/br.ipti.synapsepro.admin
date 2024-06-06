@@ -1,16 +1,22 @@
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import { TDocumentDefinitions } from "pdfmake/interfaces";
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import { useContext, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import imgLateral from "../../../../../../Assets/images/logoleftpdf.png";
+import img from "../../../../../../Assets/images/logothp.png";
 import Present from "../../../../../../Assets/images/status-approved.svg";
 import NotPresent from "../../../../../../Assets/images/status-desapproved.svg";
 import { MeetingListRegistrationContext } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/context";
 import { MeetingListRegisterTypes, RegisterClassroom } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/type";
+import { Status, loadImageFileAsBase64 } from "../../../../../../Controller/controllerGlobal";
 import styles from "../../../../../../Styles";
 import { Padding, Row } from "../../../../../../Styles/styles";
-import { Status } from "../../../../../../Controller/controllerGlobal";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 
 
 const StyleComponent = styled.div`
@@ -24,6 +30,11 @@ const Beneficiarios = () => {
   const props = useContext(
     MeetingListRegistrationContext
   ) as MeetingListRegisterTypes;
+
+
+  const [logoBase64, setLogoBase64] = useState<string | null>(null);
+  const [logoBaseLeft64, setLogoBaseLeft64] = useState<string | null>(null);
+
   const FilterRegistration = (fouls: any) => {
     const array = [];
     for (const foul of fouls) {
@@ -31,11 +42,39 @@ const Beneficiarios = () => {
     }
     return array;
   };
+
+
+
   const [selectedProducts, setSelectedProducts] = useState<any>(
     FilterRegistration(props.meeting?.fouls)
   );
   const [rowClick] = useState(true);
-  const history = useNavigate();
+  useEffect(() => {
+    const loadLogo = async () => {
+      try {
+        const base64 = await loadImageFileAsBase64(img);
+        setLogoBase64(base64);
+      } catch (error) {
+        console.error("Error loading logo image:", error);
+      }
+    };
+
+    loadLogo();
+  }, []);
+
+
+  useEffect(() => {
+    const loadLogo = async () => {
+      try {
+        const base64 = await loadImageFileAsBase64(imgLateral);
+        setLogoBaseLeft64(base64);
+      } catch (error) {
+        console.error("Error loading logo image:", error);
+      }
+    };
+
+    loadLogo();
+  }, []);
 
   const FilterId = (fouls: any) => {
     const array = [];
@@ -66,7 +105,91 @@ const Beneficiarios = () => {
     );
   };
 
-  const { id, idMeeting } = useParams();
+  const generatePDF = () => {
+    const docDefinition: TDocumentDefinitions = {
+      content: [
+        {
+          text: `${props.meeting?.classroom.project.name}`,
+          style: "header",
+          alignment: "center",
+          bold: true,
+          marginTop: 16,
+        },
+        {
+          text: `${props.meeting?.name}`,
+          style: "header",
+          alignment: "center",
+          fontSize: 14,
+        },
+        {
+          text: "Lista de Presença",
+          style: "header",
+          alignment: "center",
+          fontSize: 12,
+          marginTop: 32,
+        },
+        {
+          style: "tableExample",
+          marginTop: 16,
+          table: {
+            widths: ["*", "*"],
+            body: [["Data: ", `Turma: ${props.meeting?.classroom?.name}`]],
+          },
+        },
+        {
+          style: "tableExample",
+          marginTop: 16,
+          table: {
+            widths: ["3%", "50%", "47%"],
+            body: [
+              ["Nº ", "NOME COMPLETO", "ASSINATURA"],
+              ...props.meeting?.classroom.register_classroom.map((item, index) => {
+                return [
+                  index + 1,
+                  item.registration.name,
+                  ""
+                ];
+              })!,
+            ],
+          },
+        },
+        {
+          image: logoBaseLeft64 || '',
+          width: 16,
+          absolutePosition: { x: 8, y: 600 },
+          style: "fixedText",
+        },
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 0, 0, 10],
+        },
+      },
+      header: [
+        {
+          image: logoBase64 || "",
+          width: 480,
+          alignment: "center",
+          marginTop: 32,
+          marginBottom: 128
+        },
+      ],
+      footer: (currentPage: number, pageCount: number) => {
+        return {
+          text: `${currentPage} de ${pageCount}`,
+          alignment: "center",
+          margin: [0, 0, 20, 0],
+        };
+      },
+      pageMargins: [40, 60, 40, 60],
+    };
+
+    pdfMake.createPdf(docDefinition).open();
+  };
+
+
   return (
     <div className="card">
       <h3>Lista de presença</h3>
@@ -86,9 +209,7 @@ const Beneficiarios = () => {
         <Button
           label={window.innerWidth > 600 ? "Gerar Lista de presença" : ""}
           icon="pi pi-download"
-          onClick={() => {
-            history(`/turma/${id}/encontros/${idMeeting}/generate`);
-          }}
+          onClick={generatePDF}
         />
       </Row>
       <Padding padding="16px" />
@@ -103,10 +224,6 @@ const Beneficiarios = () => {
             tableStyle={{ minWidth: "50rem" }}
             emptyMessage="Não há alunos registrados"
           >
-            {/* <Column
-              selectionMode="multiple"
-              headerStyle={{ width: "3rem" }}
-            ></Column> */}
             <Column field="registration.name" align="center" header="Nome"></Column>
             <Column
               body={bodyRegisterFouls}

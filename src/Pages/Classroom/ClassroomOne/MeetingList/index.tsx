@@ -10,11 +10,14 @@ import { MeetingListTypes } from "../../../../Context/Classroom/Meeting/MeetingL
 import { useFetchRequestClassroomOne } from "../../../../Services/Classroom/query";
 import Empty from "../../../../Components/Empty";
 import Loading from "../../../../Components/Loading";
+import ProjectListProvider from "../../../../Context/Project/ProjectList/context";
 
 const MeetingList = () => {
   return (
     <MeetingListProvider>
-      <MeetingListPage />
+      <ProjectListProvider>
+        <MeetingListPage />
+      </ProjectListProvider>
     </MeetingListProvider>
   );
 };
