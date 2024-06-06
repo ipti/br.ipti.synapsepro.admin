@@ -7,6 +7,7 @@ import NotPresent from "../../../../Assets/images/status-desapproved.svg";
 import { useFetchRequestClassroomReport } from "../../../../Services/Classroom/query";
 import { Container } from "../../../../Styles/styles";
 import color from "../../../../Styles/colors";
+import { ReportClassroom } from "./Pdf";
 
 const Report = () => {
   return <ReportPage />;
@@ -16,6 +17,8 @@ const ReportPage = () => {
   const { id } = useParams();
 
   const { data } = useFetchRequestClassroomReport(parseInt(id!));
+
+  const { generatePDF } = ReportClassroom();
 
   const bodyMeeting = (rowData: any, options: any) => {
     const verifyFouls = () => {
@@ -72,9 +75,7 @@ const ReportPage = () => {
         icon="pi pi-file-pdf"
         severity="danger"
         rounded
-        onClick={() => {
-          window.open(window.location.href + "/pdf");
-        }}
+        onClick={generatePDF}
         data-pr-tooltip="PDF"
       />
     </div>

@@ -17,6 +17,7 @@ import ViewForms from "../Pages/Form/ViewForms";
 import Help from "../Pages/Help";
 import Login from "../Pages/Login/Login";
 import CreateProjectsList from "../Pages/Projects/CreateProjects";
+import ProjectOne from "../Pages/Projects/ProjectOne";
 import ProjectsList from "../Pages/Projects/ProjectsList";
 import Register from "../Pages/Register";
 import FormSchedule from "../Pages/Schedule/FormSchedule";
@@ -29,9 +30,6 @@ import CreateUser from "../Pages/Users/CreateUser";
 import EditUser from "../Pages/Users/EditUser";
 import ListUsers from "../Pages/Users/ListUsers";
 import PrivateRoute from "./privaterouter";
-import ReportClassroom from "../Pages/Classroom/ClassroomOne/Report/Pdf";
-import PrivateRouteNotLayout from "./privaterouternotlayout";
-import ProjectOne from "../Pages/Projects/ProjectOne";
 
 const RoutesApp = () => {
   return (
@@ -78,10 +76,10 @@ const RoutesApp = () => {
           element={<PrivateRoute Component={<Report />} />}
           path="/turma/:id/relatorio"
         />
-        <Route
+        {/* <Route
           element={<PrivateRouteNotLayout Component={<ReportClassroom />} />}
           path="/turma/:id/relatorio/pdf"
-        />
+        /> */}
         <Route
           element={<PrivateRoute Component={<RegistrationList />} />}
           path="/turma/:id/alunos"
