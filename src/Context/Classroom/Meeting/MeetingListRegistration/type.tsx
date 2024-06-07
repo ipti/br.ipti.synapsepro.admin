@@ -27,7 +27,18 @@ export interface Meeting {
 export interface Classroom {
   name: string
   register_classroom: RegisterClassroom[]
+  project: Project
 }
+
+export interface Project {
+  project: Project
+}
+
+export interface Project {
+  name: string
+  id: number
+}
+
 
 export interface RegisterClassroom {
   id: number
