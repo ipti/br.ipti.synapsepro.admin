@@ -117,7 +117,7 @@ const ClassroomOnePage = () => {
           onClick={() => history(`/turma/${id}/alunos`)}
         >
           <CardItensClassrooom
-            title="Alunos"
+            title="Matriculas"
             description="Acesse para gerenciar seus alunos"
             icon={pessoas}
             count={classroom?.register_classroom?.length}

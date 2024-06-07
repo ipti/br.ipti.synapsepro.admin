@@ -6,18 +6,24 @@ import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+// import imgRegua from "../../../../../../Assets/images/logoleftpdf.png";
+
 import imgLateral from "../../../../../../Assets/images/logoleftpdf.png";
 import img from "../../../../../../Assets/images/logothp.png";
 import Present from "../../../../../../Assets/images/status-approved.svg";
 import NotPresent from "../../../../../../Assets/images/status-desapproved.svg";
 import { MeetingListRegistrationContext } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/context";
-import { MeetingListRegisterTypes, RegisterClassroom } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/type";
-import { Status, loadImageFileAsBase64 } from "../../../../../../Controller/controllerGlobal";
+import {
+  MeetingListRegisterTypes,
+  RegisterClassroom,
+} from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/type";
+import {
+  Status,
+  loadImageFileAsBase64,
+} from "../../../../../../Controller/controllerGlobal";
 import styles from "../../../../../../Styles";
 import { Padding, Row } from "../../../../../../Styles/styles";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
-
 
 const StyleComponent = styled.div`
   .p-datatable .p-datatable-tbody > tr > td {
@@ -31,7 +37,6 @@ const Beneficiarios = () => {
     MeetingListRegistrationContext
   ) as MeetingListRegisterTypes;
 
-
   const [logoBase64, setLogoBase64] = useState<string | null>(null);
   const [logoBaseLeft64, setLogoBaseLeft64] = useState<string | null>(null);
 
@@ -42,8 +47,6 @@ const Beneficiarios = () => {
     }
     return array;
   };
-
-
 
   const [selectedProducts, setSelectedProducts] = useState<any>(
     FilterRegistration(props.meeting?.fouls)
@@ -61,7 +64,6 @@ const Beneficiarios = () => {
 
     loadLogo();
   }, []);
-
 
   useEffect(() => {
     const loadLogo = async () => {
@@ -87,25 +89,48 @@ const Beneficiarios = () => {
   const bodyRegisterFouls = (dataRow: RegisterClassroom) => {
     return (
       <Row id="center">
-        {!selectedProducts.find((props: any) => props.id === dataRow.registration.id) ? <img alt="" style={{ cursor: "pointer" }} src={Present} onClick={() => {
-          setSelectedProducts((prevArray: any) =>
-            prevArray.concat(dataRow.registration)
-          );
-        }} /> : <img alt="" style={{ cursor: "pointer" }} src={NotPresent} onClick={() => {
-          const novoArray = selectedProducts.filter(
-            (obj: any) => obj.id !== dataRow.registration.id
-          );
-          setSelectedProducts(novoArray);
-        }} />}
-
-
-
-
+        {!selectedProducts.find(
+          (props: any) => props.id === dataRow.registration.id
+        ) ? (
+          <img
+            alt=""
+            style={{ cursor: "pointer" }}
+            src={Present}
+            onClick={() => {
+              setSelectedProducts((prevArray: any) =>
+                prevArray.concat(dataRow.registration)
+              );
+            }}
+          />
+        ) : (
+          <img
+            alt=""
+            style={{ cursor: "pointer" }}
+            src={NotPresent}
+            onClick={() => {
+              const novoArray = selectedProducts.filter(
+                (obj: any) => obj.id !== dataRow.registration.id
+              );
+              setSelectedProducts(novoArray);
+            }}
+          />
+        )}
       </Row>
     );
   };
-
   const generatePDF = () => {
+    const registrations = props.meeting?.classroom.register_classroom || [];
+    const pageSize = 20;
+
+    const createTableBody = (registrationsSubset: any, startIndex: any) => {
+      return [
+        ["Nº ", "NOME COMPLETO", "ASSINATURA"],
+        ...registrationsSubset.map((item: any, index: number) => {
+          return [startIndex + index + 1, item.registration.name, ""];
+        }),
+      ];
+    };
+
     const docDefinition: TDocumentDefinitions = {
       content: [
         {
@@ -117,13 +142,13 @@ const Beneficiarios = () => {
         },
         {
           text: `${props.meeting?.name}`,
-          style: "header",
+          style: "subheader",
           alignment: "center",
           fontSize: 14,
         },
         {
           text: "Lista de Presença",
-          style: "header",
+          style: "subheader",
           alignment: "center",
           fontSize: 12,
           marginTop: 32,
@@ -136,29 +161,24 @@ const Beneficiarios = () => {
             body: [["Data: ", `Turma: ${props.meeting?.classroom?.name}`]],
           },
         },
-        {
-          style: "tableExample",
-          marginTop: 16,
-          table: {
-            widths: ["3%", "50%", "47%"],
-            body: [
-              ["Nº ", "NOME COMPLETO", "ASSINATURA"],
-              ...props.meeting?.classroom.register_classroom.map((item, index) => {
-                return [
-                  index + 1,
-                  item.registration.name,
-                  ""
-                ];
-              })!,
-            ],
-          },
-        },
-        {
-          image: logoBaseLeft64 || '',
-          width: 16,
-          absolutePosition: { x: 8, y: 600 },
-          style: "fixedText",
-        },
+        ...registrations.reduce((acc: any, curr, index) => {
+          if (index % pageSize === 0) {
+            acc.push({
+              style: "tableExample",
+              marginTop: 16,
+              table: {
+                widths: ["3%", "50%", "47%"],
+                body: createTableBody(
+                  registrations.slice(index, index + pageSize),
+                  index
+                ),
+              },
+              
+              pageBreak: index === 0 ? undefined : "before",
+            });
+          }
+          return acc;
+        }, []),
       ],
       styles: {
         header: {
@@ -166,16 +186,67 @@ const Beneficiarios = () => {
           bold: true,
           margin: [0, 0, 0, 10],
         },
-      },
-      header: [
-        {
-          image: logoBase64 || "",
-          width: 480,
-          alignment: "center",
-          marginTop: 32,
-          marginBottom: 128
+        subheader: {
+          fontSize: 14,
+          margin: [0, 0, 0, 10],
         },
-      ],
+        tableExample: {
+          margin: [0, 5, 0, 15],
+        },
+      },
+      header: (currentPage: number, pageCount: number) => {
+        return [
+          {
+            image: logoBase64 || "",
+            width: 480,
+            alignment: "center",
+            marginTop: 32,
+            marginBottom: 128,
+          },
+          {
+            text: `${props.meeting?.classroom.project.name}`,
+            style: "header",
+            alignment: "center",
+            bold: true,
+            marginTop: 16,
+          },
+          {
+            text: `${props.meeting?.name}`,
+            style: "subheader",
+            alignment: "center",
+            fontSize: 14,
+          },
+          {
+            text: "Lista de Presença",
+            style: "subheader",
+            alignment: "center",
+            fontSize: 12,
+            marginTop: 32,
+          },
+        ];
+      },
+      // footer: (currentPage: number, pageCount: number) => {
+      //   return {
+      //     columns: [
+      //       {
+      //         width: '*',
+      //         text: '' // empty column to center the image
+      //       },
+      //       {
+      //         image: logoBaseLeft64 || "",
+      //         width: 400,
+      //         alignment: "center",
+      //       },
+      //       {
+      //         width: '*',
+      //         height: 16,
+      //         text: '' // empty column to center the image
+      //       }
+      //     ],
+      //     margin: [0, 0, 0, 64],
+      //     alignment: 'center'
+      //   };
+      // },
       footer: (currentPage: number, pageCount: number) => {
         return {
           text: `${currentPage} de ${pageCount}`,
@@ -183,12 +254,18 @@ const Beneficiarios = () => {
           margin: [0, 0, 20, 0],
         };
       },
-      pageMargins: [40, 60, 40, 60],
+      pageMargins: [40, 100, 40, 60],
+      background: (currentPage, pageCount) => {
+        return {
+          image: logoBaseLeft64 || '',
+          width: 16,
+          absolutePosition: { x: 8, y: 600 }
+        };
+      }
     };
 
     pdfMake.createPdf(docDefinition).open();
   };
-
 
   return (
     <div className="card">
@@ -198,7 +275,10 @@ const Beneficiarios = () => {
         <Button
           label="Salvar"
           icon="pi pi-save"
-          disabled={props.meeting?.meeting_archives?.length! === 0 || props.meeting?.status === Status.APPROVED}
+          disabled={
+            props.meeting?.meeting_archives?.length! === 0 ||
+            props.meeting?.status === Status.APPROVED
+          }
           onClick={() => {
             props.CreateFouls({
               meeting: props.meeting?.id!,
@@ -224,7 +304,11 @@ const Beneficiarios = () => {
             tableStyle={{ minWidth: "50rem" }}
             emptyMessage="Não há alunos registrados"
           >
-            <Column field="registration.name" align="center" header="Nome"></Column>
+            <Column
+              field="registration.name"
+              align="center"
+              header="Nome"
+            ></Column>
             <Column
               body={bodyRegisterFouls}
               align="center"

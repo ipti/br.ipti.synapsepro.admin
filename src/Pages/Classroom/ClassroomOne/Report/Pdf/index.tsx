@@ -9,8 +9,6 @@ import {
 
 import imgLateral from "../../../../../Assets/images/logoleftpdf.png";
 
-
-
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { TDocumentDefinitions } from "pdfmake/interfaces";
@@ -24,8 +22,6 @@ export const ReportClassroom = () => {
   const [logoBase64, setLogoBase64] = useState<string | null>(null);
   const [logoBaseLeft64, setLogoBaseLeft64] = useState<string | null>(null);
   // const [logoBaseRegua64, setLogoBaseRegua64] = useState<string | null>(null);
-
-
 
   const [report, setReport] = useState<ReportClassroomType | undefined>();
 
@@ -76,9 +72,6 @@ export const ReportClassroom = () => {
   //   loadLogo();
   // }, []);
 
-  
-
-
   // const contentRef = useRef(null);
 
   // const generatePDF = () => {
@@ -99,6 +92,27 @@ export const ReportClassroom = () => {
   // };
 
   const generatePDF = () => {
+    const pageSize = 20; // Define the number of rows per page
+
+    // Function to generate the table body for a specific subset of registrations
+    const createTableBody = (registrationsSubset: any, startIndex: number) => {
+      return [
+        ["Nº ", "NOME COMPLETO", "FALTAS", "FREQUÊNCIA", "STATUS"],
+        ...registrationsSubset.map((item: any, index: number) => {
+          return [
+            startIndex + index + 1,
+            item.registration.name,
+            bodyTotal(item).count,
+            bodyTotal(item).percentage + "%",
+            parseInt(bodyTotal(item).percentage) >
+            report?.project?.approval_percentage!
+              ? "Aprovado"
+              : "Reprovado",
+          ];
+        }),
+      ];
+    };
+
     const docDefinition: TDocumentDefinitions = {
       content: [
         {
@@ -106,7 +120,7 @@ export const ReportClassroom = () => {
           style: "header",
           alignment: "center",
           bold: true,
-          marginTop:8,
+          marginTop: 16,
         },
         {
           text: `${report?.project.name}`,
@@ -129,42 +143,37 @@ export const ReportClassroom = () => {
             body: [["Filiação: ", `Turma: ${report?.name}`]],
           },
         },
-        {
-          style: "tableExample",
-          marginTop: 16,
-          table: {
-            widths: ["3%", "52%", "10%", "20%", "15%"],
-            body: [
-              ["Nº ", "NOME COMPLETO", "FALTAS", "FREQUÊNCIA", "STATUS"],
-              ...report?.register_classroom.map((item, index) => {
-                return [
-                  index + 1,
-                  item.registration.name,
-                  bodyTotal(item).count,
-                  bodyTotal(item).percentage + "%",
-                  parseInt(bodyTotal(item).percentage) >
-                  report?.project?.approval_percentage
-                    ? "Aprovado"
-                    : "Reprovado",
-                ];
-              })!,
-            ],
-          },
-        },
-        {
-            style: "tableExample",
-            marginTop: 16,
-            table: {
-              widths: ["*"],
-              body: [[`Critério Mínimo de Aprovação: ${report?.project?.approval_percentage}%    Quantidade de Encontros: ${report?.meeting.length}    Quantidade de Alunos: ${report?.register_classroom?.length}`]],
-            },
-        },
-        {
-          image: logoBaseLeft64 || '',
-          width: 16,
-          absolutePosition: { x: 8, y: 600 },
-          style: "fixedText",
-        },
+        ...report?.register_classroom.reduce((acc: any, curr, index) => {
+          if (index % pageSize === 0) {
+            acc.push(
+              {
+                style: "tableExample",
+                marginTop: 32,
+                table: {
+                  widths: ["3%", "52%", "10%", "20%", "15%"],
+                  body: createTableBody(
+                    report.register_classroom.slice(index, index + pageSize),
+                    index
+                  ),
+                },
+                pageBreak: index === 0 ? undefined : "before",
+              },
+              {
+                style: "tableExample",
+                marginTop: 16,
+                table: {
+                  widths: ["*"],
+                  body: [
+                    [
+                      `Critério Mínimo de Aprovação: ${report?.project?.approval_percentage}%    Quantidade de Encontros: ${report?.meeting.length}    Quantidade de Alunos: ${report?.register_classroom?.length}`,
+                    ],
+                  ],
+                },
+              }
+            );
+          }
+          return acc;
+        }, []),
       ],
       styles: {
         header: {
@@ -173,21 +182,23 @@ export const ReportClassroom = () => {
           margin: [0, 0, 0, 10],
         },
       },
-      header: [
-        {
-          image: logoBase64 || "",
-          width: 480,
-          style: "header",
-          alignment: "center",
-          marginTop: 32,
-          marginBottom: 32
-        },
-        {
-          margin: [32, 10, 0, 10],
-          marginTop: 16,
-          text: "Relatório de Presença",
-        },
-      ],
+      header: (currentPage, pageCount) => {
+        return [
+          {
+            image: logoBase64 || "",
+            width: 480,
+            style: "header",
+            alignment: "center",
+            marginTop: 32,
+            marginBottom: 128,
+          },
+          {
+            margin: [32, 10, 0, 10],
+            marginTop: 16,
+            text: "Relatório de Presença",
+          },
+        ];
+      },
       footer: (currentPage: number, pageCount: number) => {
         return {
           text: `${currentPage} de ${pageCount}`,
@@ -196,6 +207,13 @@ export const ReportClassroom = () => {
         };
       },
       pageMargins: [40, 60, 40, 60],
+      background: (currentPage, pageCount) => {
+        return {
+          image: logoBaseLeft64 || "",
+          width: 16,
+          absolutePosition: { x: 8, y: 600 },
+        };
+      },
     };
 
     pdfMake.createPdf(docDefinition).open();
@@ -221,7 +239,7 @@ export const ReportClassroom = () => {
     return { percentage: verifyFouls().toFixed(0), count: count };
   };
 
-  return { generatePDF}
+  return { generatePDF };
   // (
   //   <>
   //     <Row className="flex justify-content-end p-4">
@@ -306,4 +324,3 @@ export const ReportClassroom = () => {
   //   </>
   // );
 };
-
