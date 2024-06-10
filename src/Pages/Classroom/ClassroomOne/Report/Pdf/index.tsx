@@ -91,29 +91,175 @@ export const ReportClassroom = () => {
   //   });
   // };
 
-  const generatePDF = () => {
-    const pageSize = 20; // Define the number of rows per page
+  // const generatePDF = () => {
+  //   const pageSize = 20; // Define the number of rows per page
 
+  //   // Function to generate the table body for a specific subset of registrations
+  //   const createTableBody = (registrationsSubset: any, startIndex: number) => {
+  //     return [
+  //       ["Nº ", "NOME COMPLETO", "FALTAS", "FREQUÊNCIA", "STATUS"],
+  //       ...registrationsSubset.map((item: any, index: number) => {
+  //         return [
+  //           startIndex + index + 1,
+  //           item.registration.name,
+  //           bodyTotal(item).count,
+  //           bodyTotal(item).percentage + "%",
+  //           parseInt(bodyTotal(item).percentage) >
+  //           report?.project?.approval_percentage!
+  //             ? "Aprovado"
+  //             : "Reprovado",
+  //         ];
+  //       }),
+  //     ];
+  //   };
+
+  //   const docDefinition: TDocumentDefinitions = {
+  //     content: [
+  //       {
+  //         text: `${report?.project.social_technology.name}`,
+  //         style: "header",
+  //         alignment: "center",
+  //         bold: true,
+  //         marginTop: 16,
+  //       },
+  //       {
+  //         text: `${report?.project.name}`,
+  //         style: "header",
+  //         alignment: "center",
+  //         fontSize: 14,
+  //       },
+  //       {
+  //         text: "Relatório de Presença",
+  //         style: "header",
+  //         alignment: "center",
+  //         fontSize: 12,
+  //         marginTop: 32,
+  //       },
+  //       {
+  //         style: "tableExample",
+  //         marginTop: 16,
+  //         table: {
+  //           widths: ["*", "*"],
+  //           body: [["Filiação: ", `Turma: ${report?.name}`]],
+  //         },
+  //       },
+  //       ...report?.register_classroom.reduce((acc: any, curr, index) => {
+  //         if (index % pageSize === 0) {
+  //           acc.push(
+  //             {
+  //               style: "tableExample",
+  //               marginTop: 32,
+  //               table: {
+  //                 widths: ["3%", "52%", "10%", "20%", "15%"],
+  //                 body: createTableBody(
+  //                   report.register_classroom.slice(index, index + pageSize),
+  //                   index
+  //                 ),
+  //               },
+  //               pageBreak: index === 0 ? undefined : "before",
+  //             },
+  //             {
+  //               style: "tableExample",
+  //               marginTop: 16,
+  //               table: {
+  //                 widths: ["*"],
+  //                 body: [
+  //                   [
+  //                     `Critério Mínimo de Aprovação: ${report?.project?.approval_percentage}%    Quantidade de Encontros: ${report?.meeting.length}    Quantidade de Alunos: ${report?.register_classroom?.length}`,
+  //                   ],
+  //                 ],
+  //               },
+  //             }
+  //           );
+  //         }
+  //         return acc;
+  //       }, []),
+  //     ],
+  //     styles: {
+  //       header: {
+  //         fontSize: 18,
+  //         bold: true,
+  //         margin: [0, 0, 0, 10],
+  //       },
+  //     },
+  //     header: (currentPage, pageCount) => {
+  //       return [
+  //         {
+  //           image: logoBase64 || "",
+  //           width: 480,
+  //           style: "header",
+  //           alignment: "center",
+  //           marginTop: 32,
+  //           marginBottom: 128,
+  //         },
+  //         {
+  //           margin: [32, 10, 0, 10],
+  //           marginTop: 16,
+  //           text: "Relatório de Presença",
+  //         },
+  //       ];
+  //     },
+  //     footer: (currentPage: number, pageCount: number) => {
+  //       return {
+  //         text: `${currentPage} de ${pageCount}`,
+  //         alignment: "center",
+  //         margin: [0, 0, 20, 0],
+  //       };
+  //     },
+  //     pageMargins: [40, 60, 40, 60],
+  //     background: (currentPage, pageCount) => {
+  //       return {
+  //         image: logoBaseLeft64 || "",
+  //         width: 16,
+  //         absolutePosition: { x: 8, y: 600 },
+  //       };
+  //     },
+  //   };
+
+  //   pdfMake.createPdf(docDefinition).open();
+  // };
+
+  const bodyMeeting = (rowData: any, meeting: any) => {
+    const verifyFouls = () => {
+      const verify = meeting.fouls?.find(
+        (props: any) => props.registration_fk === rowData.registration_fk
+      );
+      return verify;
+    };
+    return !verifyFouls() ? "P" : "F";
+  };
+
+
+  const generatePDF = () => {
+    const pageSize = 10; // Define the number of rows per page
+  
     // Function to generate the table body for a specific subset of registrations
     const createTableBody = (registrationsSubset: any, startIndex: number) => {
-      return [
-        ["Nº ", "NOME COMPLETO", "FALTAS", "FREQUÊNCIA", "STATUS"],
-        ...registrationsSubset.map((item: any, index: number) => {
-          return [
-            startIndex + index + 1,
-            item.registration.name,
-            bodyTotal(item).count,
-            bodyTotal(item).percentage + "%",
-            parseInt(bodyTotal(item).percentage) >
-            report?.project?.approval_percentage!
-              ? "Aprovado"
-              : "Reprovado",
-          ];
-        }),
+      // Create the header row
+      const headerRow = [
+        "Nº",
+        "NOME COMPLETO",
+        ...report?.meeting.map((item: any) => item.name)!,
+        "FREQUÊNCIA",
+        "STATUS",
       ];
+  
+      // Create the body rows
+      const bodyRows = registrationsSubset.map((item: any, index: number) => {
+        return [
+          startIndex + index + 1,
+          item.registration.name,
+          ...report?.meeting.map((meeting: any) => bodyMeeting(item, meeting))!,
+          bodyTotal(item).percentage + "%",
+          parseInt(bodyTotal(item).percentage) > report?.project?.approval_percentage! ? "Aprovado" : "Reprovado",
+        ];
+      });
+  
+      return [headerRow, ...bodyRows];
     };
-
+  
     const docDefinition: TDocumentDefinitions = {
+      pageOrientation: "landscape",
       content: [
         {
           text: `${report?.project.social_technology.name}`,
@@ -150,7 +296,13 @@ export const ReportClassroom = () => {
                 style: "tableExample",
                 marginTop: 32,
                 table: {
-                  widths: ["3%", "52%", "10%", "20%", "15%"],
+                  widths: [
+                    "3%",
+                    "30%",
+                    ...report?.meeting.map(() => "*"),
+                    "11%",
+                    "10%",
+                  ],
                   body: createTableBody(
                     report.register_classroom.slice(index, index + pageSize),
                     index
@@ -215,9 +367,10 @@ export const ReportClassroom = () => {
         };
       },
     };
-
+  
     pdfMake.createPdf(docDefinition).open();
   };
+  
 
   const bodyTotal = (rowData: RegisterClassroom) => {
     var count = 0;
