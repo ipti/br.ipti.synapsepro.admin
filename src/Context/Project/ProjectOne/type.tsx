@@ -18,6 +18,7 @@ export interface Project {
   active: boolean
   approval_percentage: number
   avartar_url: any
+  ruler_url: string
   social_technology_id: number
   createdAt: string
   updatedAt: string

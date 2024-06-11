@@ -12,7 +12,7 @@ import imgLateral from "../../../../../Assets/images/logoleftpdf.png";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { TDocumentDefinitions } from "pdfmake/interfaces";
-import { loadImageFileAsBase64 } from "../../../../../Controller/controllerGlobal";
+import { convertImageUrlToBase64, loadImageFileAsBase64 } from "../../../../../Controller/controllerGlobal";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -21,7 +21,7 @@ export const ReportClassroom = () => {
 
   const [logoBase64, setLogoBase64] = useState<string | null>(null);
   const [logoBaseLeft64, setLogoBaseLeft64] = useState<string | null>(null);
-  // const [logoBaseRegua64, setLogoBaseRegua64] = useState<string | null>(null);
+  const [logoBaseRegua64, setLogoBaseRegua64] = useState<string | null>(null);
 
   const [report, setReport] = useState<ReportClassroomType | undefined>();
 
@@ -58,6 +58,24 @@ export const ReportClassroom = () => {
 
     loadLogo();
   }, []);
+
+  useEffect(() => {
+    const loadLogo = async () => {
+      try {
+        if (report?.project.ruler_url) {
+          const base64 = await convertImageUrlToBase64(report?.project.ruler_url);
+
+          setLogoBaseRegua64(base64);
+        }
+
+      } catch (error) {
+        console.error("Error loading logo image:", error);
+      }
+    };
+
+    loadLogo();
+  }, [report]);
+
 
   // useEffect(() => {
   //   const loadLogo = async () => {
@@ -232,7 +250,7 @@ export const ReportClassroom = () => {
 
   const generatePDF = () => {
     const pageSize = 10; // Define the number of rows per page
-  
+
     // Function to generate the table body for a specific subset of registrations
     const createTableBody = (registrationsSubset: any, startIndex: number) => {
       // Create the header row
@@ -243,7 +261,7 @@ export const ReportClassroom = () => {
         "FREQUÊNCIA",
         "STATUS",
       ];
-  
+
       // Create the body rows
       const bodyRows = registrationsSubset.map((item: any, index: number) => {
         return [
@@ -254,10 +272,10 @@ export const ReportClassroom = () => {
           parseInt(bodyTotal(item).percentage) > report?.project?.approval_percentage! ? "Aprovado" : "Reprovado",
         ];
       });
-  
+
       return [headerRow, ...bodyRows];
     };
-  
+
     const docDefinition: TDocumentDefinitions = {
       pageOrientation: "landscape",
       content: [
@@ -351,11 +369,12 @@ export const ReportClassroom = () => {
           },
         ];
       },
-      footer: (currentPage: number, pageCount: number) => {
+      footer: (currentPage, pageCount) => {
         return {
-          text: `${currentPage} de ${pageCount}`,
+          image: logoBaseRegua64 || '',
           alignment: "center",
-          margin: [0, 0, 20, 0],
+          margin: [0, 0, 20, 20], // Ensure there is enough bottom margin to prevent cutoff
+          fit: [500, 500] // Adjust the size to fit within the footer area
         };
       },
       pageMargins: [40, 60, 40, 60],
@@ -367,10 +386,10 @@ export const ReportClassroom = () => {
         };
       },
     };
-  
+
     pdfMake.createPdf(docDefinition).open();
   };
-  
+
 
   const bodyTotal = (rowData: RegisterClassroom) => {
     var count = 0;

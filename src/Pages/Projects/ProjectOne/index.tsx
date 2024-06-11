@@ -19,7 +19,6 @@ import { ROLE } from "../../../Controller/controllerGlobal";
 import { Column, Container, Padding, Row } from "../../../Styles/styles";
 import { PropsAplicationContext } from "../../../Types/types";
 
-import img from "../../../Assets/images/regua.png"
 
 const ProjectOne = () => {
   return (
@@ -115,7 +114,7 @@ const ProjectOnePage = () => {
                     />
                     <Padding />
                     {errors.approval_percentage &&
-                    touched.approval_percentage ? (
+                      touched.approval_percentage ? (
                       <div style={{ color: "red", marginTop: "8px" }}>
                         {errors.approval_percentage}
                       </div>
@@ -153,19 +152,21 @@ const ProjectOnePage = () => {
               <Padding />
               {propsAplication.user?.role ===
                 (ROLE.ADMIN || ROLE.COORDINATORS) && (
-                <Button
-                  text
-                  label="Editar"
-                  icon="pi pi-pencil"
-                  onClick={() => setEdit(true)}
-                />
-              )}
+                  <Button
+                    text
+                    label="Editar"
+                    icon="pi pi-pencil"
+                    onClick={() => setEdit(true)}
+                  />
+                )}
             </Row>
           </Row>
-          <Padding />
-          <h4>Régua do projeto</h4>
-          <Padding />
-          <img alt="" src={img} />
+          {props.project?.project.ruler_url && <div>
+            <Padding />
+            <h4>Régua do projeto</h4>
+            <Padding />
+            <img alt="" src={props.project?.project.ruler_url} />
+          </div>}
         </Column>
       )}
       <Padding padding="16px" />

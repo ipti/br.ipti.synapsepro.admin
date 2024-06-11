@@ -19,6 +19,7 @@ import {
 } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/type";
 import {
   Status,
+  convertImageUrlToBase64,
   loadImageFileAsBase64,
 } from "../../../../../../Controller/controllerGlobal";
 import styles from "../../../../../../Styles";
@@ -39,6 +40,8 @@ const Beneficiarios = () => {
 
   const [logoBase64, setLogoBase64] = useState<string | null>(null);
   const [logoBaseLeft64, setLogoBaseLeft64] = useState<string | null>(null);
+  const [logoBaseRegua64, setLogoBaseRegua64] = useState<string | null>(null);
+
 
   const FilterRegistration = (fouls: any) => {
     const array = [];
@@ -70,6 +73,20 @@ const Beneficiarios = () => {
       try {
         const base64 = await loadImageFileAsBase64(imgLateral);
         setLogoBaseLeft64(base64);
+      } catch (error) {
+        console.error("Error loading logo image:", error);
+      }
+    };
+
+    loadLogo();
+  }, []);
+
+
+  useEffect(() => {
+    const loadLogo = async () => {
+      try {
+        const base64 = "";
+        setLogoBaseRegua64(base64);
       } catch (error) {
         console.error("Error loading logo image:", error);
       }
