@@ -8,7 +8,8 @@ export const ProjectOneState = () => {
   const { id } = useParams();
   const { data, isLoading } = useFetchRequestProjectOne(parseInt(id!));
   const [project, setProject] = useState();
-  const { requestUpdateprojectMutation } = ProjectController();
+  const { requestUpdateprojectMutation, requestRulerprojectMutation } =
+    ProjectController();
 
   useEffect(() => {
     if (data) {
@@ -17,13 +18,20 @@ export const ProjectOneState = () => {
   }, [data]);
 
   const updateProject = (data: UpdateProject, id: number) => {
-    console.log(id)
     requestUpdateprojectMutation.mutate({ data: data, id: id });
+  };
+
+  const rulerProject = (file: File, id: number) => {
+    const formData = new FormData();
+
+    formData.append("file", file);
+    requestRulerprojectMutation.mutate({ data: formData, id: id });
   };
 
   return {
     project,
     isLoading,
     updateProject,
+    rulerProject
   };
 };

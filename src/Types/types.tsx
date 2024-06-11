@@ -3,7 +3,7 @@ import { InputMaskChangeEvent } from "primereact/inputmask";
 import { InputNumberValueChangeEvent } from "primereact/inputnumber";
 import { RadioButtonChangeEvent } from "primereact/radiobutton";
 import { SelectItemOptionsType } from "primereact/selectitem";
-import { ChangeEventHandler, Dispatch, FocusEventHandler, SetStateAction } from "react";
+import { ChangeEventHandler, Dispatch, FocusEventHandler, HTMLInputTypeAttribute, SetStateAction } from "react";
 import { User } from "../Context/Users/type";
 
 export interface PropsInputText {
@@ -13,6 +13,7 @@ export interface PropsInputText {
     disabled?: boolean | undefined,
     onBlur?: FocusEventHandler<HTMLInputElement> | undefined,
     name?: string
+    type?: HTMLInputTypeAttribute | undefined
 }
 
 export interface PropsInputMask {

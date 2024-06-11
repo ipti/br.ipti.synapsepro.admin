@@ -1,4 +1,7 @@
-import { CreateProject, UpdateProject } from "../../Context/Project/CreateList/type";
+import {
+  CreateProject,
+  UpdateProject,
+} from "../../Context/Project/CreateList/type";
 import http from "../axios";
 import { GetIdTs, GetIdUser, getYear, logout } from "../localstorage";
 
@@ -18,7 +21,35 @@ export const requestCreateProject = (data: CreateProject) => {
 
 export const requestUpdateProject = (data: UpdateProject, id: number) => {
   return http
-    .put("/project/"+ id, data)
+    .put("/project/" + id, data)
+    .then((response) => response.data)
+    .catch((err) => {
+      if (err.response.status === 401) {
+        logout();
+        window.location.reload();
+      }
+      alert(err.response.message);
+      throw err;
+    });
+};
+
+export const requestRulerProject = (file: FormData, id: number) => {
+  return http
+    .put("/archive-project-bff?projectId="+id, file)
+    .then((response) => response.data)
+    .catch((err) => {
+      if (err.response.status === 401) {
+        logout();
+        window.location.reload();
+      }
+      alert(err.response.message);
+      throw err;
+    });
+};
+
+export const requestRemoveRulerProject = (id: number) => {
+  return http
+    .put("/archive-project-bff/remove?projectId="+id)
     .then((response) => response.data)
     .catch((err) => {
       if (err.response.status === 401) {
@@ -64,7 +95,9 @@ export const requestTsList = async (id: number | undefined) => {
 
 export const requestProjectOne = async (id: number) => {
   return await http
-    .get("/project-bff/one", { params: { idProject: id ?? GetIdTs(), year: getYear() } })
+    .get("/project-bff/one", {
+      params: { idProject: id ?? GetIdTs(), year: getYear() },
+    })
     .then((response) => response.data)
     .catch((err) => {
       if (err.response.status === 401) {

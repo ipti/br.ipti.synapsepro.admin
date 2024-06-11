@@ -19,6 +19,8 @@ import { ROLE } from "../../../Controller/controllerGlobal";
 import { Column, Container, Padding, Row } from "../../../Styles/styles";
 import { PropsAplicationContext } from "../../../Types/types";
 
+import img from "../../../Assets/images/regua.png"
+
 const ProjectOne = () => {
   return (
     <ProjectOneProvider>
@@ -42,6 +44,7 @@ const ProjectOnePage = () => {
   const initialValues = {
     name: props.project?.project.name,
     approval_percentage: props.project?.project?.approval_percentage,
+    file: undefined,
   };
 
   if (props.isLoading) return <Loading />;
@@ -64,10 +67,12 @@ const ProjectOnePage = () => {
               },
               parseInt(id!)
             );
+            console.log(values.file)
+            if (values.file) props.rulerProject(values.file, parseInt(id!));
             setEdit(!edit);
           }}
         >
-          {({ values, errors, handleChange, touched }) => {
+          {({ values, errors, handleChange, touched, setFieldValue }) => {
             return (
               <Form>
                 <Row id="end">
@@ -116,6 +121,22 @@ const ProjectOnePage = () => {
                       </div>
                     ) : null}
                   </div>
+                  <div className="col-12 md:col-6">
+                    <label>Adicionar ou mudar Régua do projeto</label>
+                    <Padding />
+                    <TextInput
+                      onChange={(e) => setFieldValue("file", e.target?.files![0])}
+                      name="file"
+                      placeholder="Régua do projeto*"
+                      type="file"
+                    />
+                    <Padding />
+                    {errors.file && touched.file ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.file}
+                      </div>
+                    ) : null}
+                  </div>
                 </div>
                 <Padding padding="16px" />
               </Form>
@@ -141,6 +162,10 @@ const ProjectOnePage = () => {
               )}
             </Row>
           </Row>
+          <Padding />
+          <h4>Régua do projeto</h4>
+          <Padding />
+          <img alt="" src={img} />
         </Column>
       )}
       <Padding padding="16px" />
@@ -170,18 +195,20 @@ const ProjectOnePage = () => {
 
       {props?.project?.project.classrooms?.length! > 0 ? (
         <div className="grid">
-          {props.project?.project.classrooms?.map((item: any, index: number) => {
-            return (
-              <div className="col-12 md:col-6 lg:col-4">
-                <CardClassroom
-                  title={item.name}
-                  meetingCount={item._count.meeting}
-                  registrationCount={item._count.register_classroom}
-                  id={item.id}
-                />
-              </div>
-            );
-          })}
+          {props.project?.project.classrooms?.map(
+            (item: any, index: number) => {
+              return (
+                <div className="col-12 md:col-6 lg:col-4">
+                  <CardClassroom
+                    title={item.name}
+                    meetingCount={item._count.meeting}
+                    registrationCount={item._count.register_classroom}
+                    id={item.id}
+                  />
+                </div>
+              );
+            }
+          )}
         </div>
       ) : (
         <Empty title="Turmas" />
