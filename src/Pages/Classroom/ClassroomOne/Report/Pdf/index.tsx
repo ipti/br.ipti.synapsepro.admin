@@ -374,7 +374,7 @@ export const ReportClassroom = () => {
           image: logoBaseRegua64 || '',
           alignment: "center",
           margin: [0, 0, 20, 20], // Ensure there is enough bottom margin to prevent cutoff
-          fit: [500, 500] // Adjust the size to fit within the footer area
+          fit: [400, 400] // Adjust the size to fit within the footer area
         };
       },
       pageMargins: [40, 60, 40, 60],
