@@ -123,6 +123,8 @@ const ProjectOnePage = () => {
                   <div className="col-12 md:col-6">
                     <label>Adicionar ou mudar Régua do projeto</label>
                     <Padding />
+                    <label>* Imagem para adicionar aos relatórios</label>
+                    <Padding />
                     <TextInput
                       onChange={(e) => setFieldValue("file", e.target?.files![0])}
                       name="file"
@@ -163,9 +165,13 @@ const ProjectOnePage = () => {
           </Row>
           {props.project?.project.ruler_url && <div>
             <Padding />
-            <h4>Régua do projeto</h4>
+            <h4>Régua de marca do projeto</h4>
             <Padding />
-            <img alt="" src={props.project?.project.ruler_url} />
+            <Column>
+              <label>* Imagem para adicionar aos relatórios</label>
+              <Padding />
+              <img alt="" src={props.project?.project.ruler_url} />
+            </Column>
           </div>}
         </Column>
       )}

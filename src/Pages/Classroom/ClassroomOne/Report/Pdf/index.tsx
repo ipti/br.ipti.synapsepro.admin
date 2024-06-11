@@ -370,13 +370,17 @@ export const ReportClassroom = () => {
         ];
       },
       footer: (currentPage, pageCount) => {
-        return {
+        return logoBaseRegua64 ? {
           image: logoBaseRegua64 || '',
           alignment: "center",
-          margin: [0, 0, 20, 20], // Ensure there is enough bottom margin to prevent cutoff
-          fit: [400, 400] // Adjust the size to fit within the footer area
-        };
-      },
+          margin: [0, 0, 20, 20], 
+          fit: [400, 400]
+        } : {
+            text: `${currentPage} de ${pageCount}`,
+            alignment: "center",
+            margin: [0, 0, 20, 0],
+          }
+        },
       pageMargins: [40, 60, 40, 60],
       background: (currentPage, pageCount) => {
         return {
