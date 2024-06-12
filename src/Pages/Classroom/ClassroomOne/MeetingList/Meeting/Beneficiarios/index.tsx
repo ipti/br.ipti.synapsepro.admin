@@ -19,6 +19,7 @@ import {
 } from "../../../../../../Context/Classroom/Meeting/MeetingListRegistration/type";
 import {
   Status,
+  convertImageUrlToBase64,
   loadImageFileAsBase64,
 } from "../../../../../../Controller/controllerGlobal";
 import styles from "../../../../../../Styles";
@@ -39,6 +40,8 @@ const Beneficiarios = () => {
 
   const [logoBase64, setLogoBase64] = useState<string | null>(null);
   const [logoBaseLeft64, setLogoBaseLeft64] = useState<string | null>(null);
+  const [logoBaseRegua64, setLogoBaseRegua64] = useState<string | null>(null);
+
 
   const FilterRegistration = (fouls: any) => {
     const array = [];
@@ -77,6 +80,24 @@ const Beneficiarios = () => {
 
     loadLogo();
   }, []);
+
+
+  useEffect(() => {
+    const loadLogo = async () => {
+      try {
+        if (props.meeting?.classroom.project.ruler_url) {
+          const base64 = await convertImageUrlToBase64(props.meeting?.classroom.project.ruler_url);
+
+          setLogoBaseRegua64(base64);
+        }
+
+      } catch (error) {
+        console.error("Error loading logo image:", error);
+      }
+    };
+
+    loadLogo();
+  }, [props.meeting]);
 
   const FilterId = (fouls: any) => {
     const array = [];
@@ -247,13 +268,18 @@ const Beneficiarios = () => {
       //     alignment: 'center'
       //   };
       // },
-      footer: (currentPage: number, pageCount: number) => {
-        return {
-          text: `${currentPage} de ${pageCount}`,
+      footer: (currentPage, pageCount) => {
+        return logoBaseRegua64 ? {
+          image: logoBaseRegua64 || '',
           alignment: "center",
-          margin: [0, 0, 20, 0],
-        };
-      },
+          margin: [0, 0, 20, 20], 
+          fit: [400, 400]
+        } : {
+            text: `${currentPage} de ${pageCount}`,
+            alignment: "center",
+            margin: [0, 0, 20, 0],
+          }
+        },
       pageMargins: [40, 100, 40, 60],
       background: (currentPage, pageCount) => {
         return {

@@ -19,6 +19,7 @@ import { ROLE } from "../../../Controller/controllerGlobal";
 import { Column, Container, Padding, Row } from "../../../Styles/styles";
 import { PropsAplicationContext } from "../../../Types/types";
 
+
 const ProjectOne = () => {
   return (
     <ProjectOneProvider>
@@ -42,6 +43,7 @@ const ProjectOnePage = () => {
   const initialValues = {
     name: props.project?.project.name,
     approval_percentage: props.project?.project?.approval_percentage,
+    file: undefined,
   };
 
   if (props.isLoading) return <Loading />;
@@ -64,10 +66,12 @@ const ProjectOnePage = () => {
               },
               parseInt(id!)
             );
+            console.log(values.file)
+            if (values.file) props.rulerProject(values.file, parseInt(id!));
             setEdit(!edit);
           }}
         >
-          {({ values, errors, handleChange, touched }) => {
+          {({ values, errors, handleChange, touched, setFieldValue }) => {
             return (
               <Form>
                 <Row id="end">
@@ -110,9 +114,27 @@ const ProjectOnePage = () => {
                     />
                     <Padding />
                     {errors.approval_percentage &&
-                    touched.approval_percentage ? (
+                      touched.approval_percentage ? (
                       <div style={{ color: "red", marginTop: "8px" }}>
                         {errors.approval_percentage}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div className="col-12 md:col-6">
+                    <label>Adicionar ou mudar Régua do projeto</label>
+                    <Padding />
+                    <label>* Imagem para adicionar aos relatórios</label>
+                    <Padding />
+                    <TextInput
+                      onChange={(e) => setFieldValue("file", e.target?.files![0])}
+                      name="file"
+                      placeholder="Régua do projeto*"
+                      type="file"
+                    />
+                    <Padding />
+                    {errors.file && touched.file ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.file}
                       </div>
                     ) : null}
                   </div>
@@ -132,15 +154,25 @@ const ProjectOnePage = () => {
               <Padding />
               {propsAplication.user?.role ===
                 (ROLE.ADMIN || ROLE.COORDINATORS) && (
-                <Button
-                  text
-                  label="Editar"
-                  icon="pi pi-pencil"
-                  onClick={() => setEdit(true)}
-                />
-              )}
+                  <Button
+                    text
+                    label="Editar"
+                    icon="pi pi-pencil"
+                    onClick={() => setEdit(true)}
+                  />
+                )}
             </Row>
           </Row>
+          {props.project?.project.ruler_url && <div>
+            <Padding />
+            <h4>Régua de marca do projeto</h4>
+            <Padding />
+            <Column>
+              <label>* Imagem para adicionar aos relatórios</label>
+              <Padding />
+              <img alt="" src={props.project?.project.ruler_url} />
+            </Column>
+          </div>}
         </Column>
       )}
       <Padding padding="16px" />
@@ -170,18 +202,20 @@ const ProjectOnePage = () => {
 
       {props?.project?.project.classrooms?.length! > 0 ? (
         <div className="grid">
-          {props.project?.project.classrooms?.map((item: any, index: number) => {
-            return (
-              <div className="col-12 md:col-6 lg:col-4">
-                <CardClassroom
-                  title={item.name}
-                  meetingCount={item._count.meeting}
-                  registrationCount={item._count.register_classroom}
-                  id={item.id}
-                />
-              </div>
-            );
-          })}
+          {props.project?.project.classrooms?.map(
+            (item: any, index: number) => {
+              return (
+                <div className="col-12 md:col-6 lg:col-4">
+                  <CardClassroom
+                    title={item.name}
+                    meetingCount={item._count.meeting}
+                    registrationCount={item._count.register_classroom}
+                    id={item.id}
+                  />
+                </div>
+              );
+            }
+          )}
         </div>
       ) : (
         <Empty title="Turmas" />

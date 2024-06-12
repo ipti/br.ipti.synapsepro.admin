@@ -37,6 +37,7 @@ export interface ReportClassroomType {
     approval_percentage: number
     avartar_url: any
     social_technology_id: number
+    ruler_url: string
     createdAt: string
     updatedAt: string
     social_technology: SocialTechnology

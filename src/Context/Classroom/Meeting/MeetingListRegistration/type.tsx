@@ -37,6 +37,7 @@ export interface Project {
 export interface Project {
   name: string
   id: number
+  ruler_url: string
 }
 
 

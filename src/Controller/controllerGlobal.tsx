@@ -1,3 +1,7 @@
+import axios from "axios";
+import { Buffer } from 'buffer'; 
+
+
 export const gerarIdAleatorio = (tamanho: number) => {
   const caracteres =
     "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -98,4 +102,16 @@ export const loadImageFileAsBase64 = (imagePath: string): Promise<string> => {
       })
       .catch(reject);
   });
+};
+
+
+export const convertImageUrlToBase64 = async (imageUrl: string): Promise<string> => {
+  try {
+    const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+    const base64 = Buffer.from(response.data, 'binary').toString('base64');
+    const mimeType = response.headers['content-type'];
+    return `data:${mimeType};base64,${base64}`;
+  } catch (error: any) {
+    throw new Error(`Failed to convert image to Base64: ${error.message}`);
+  }
 };

@@ -4,6 +4,7 @@ export interface ProjectOneTypes {
   project: ApiProject | undefined;
   isLoading: boolean;
   updateProject: (data: UpdateProject, id: number) => void;
+  rulerProject: (file: File, id: number) => void
 }
 
 export interface ApiProject {
@@ -17,6 +18,7 @@ export interface Project {
   active: boolean
   approval_percentage: number
   avartar_url: any
+  ruler_url: string
   social_technology_id: number
   createdAt: string
   updatedAt: string
