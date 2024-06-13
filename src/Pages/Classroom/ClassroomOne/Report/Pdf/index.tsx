@@ -373,20 +373,46 @@ export const ReportClassroom = () => {
         return logoBaseRegua64 ? {
           image: logoBaseRegua64 || '',
           alignment: "center",
-          margin: [0, 0, 20, 20], 
+          margin: [0, 0, 20, 20],
           fit: [400, 400]
         } : {
-            text: `${currentPage} de ${pageCount}`,
-            alignment: "center",
-            margin: [0, 0, 20, 0],
-          }
-        },
+          image: logoBase64 || '',
+          alignment: "center",
+          margin: [0, 0, 20, 20],
+          fit: [400, 400]
+        }
+      },
       pageMargins: [40, 60, 40, 60],
       background: (currentPage, pageCount) => {
+        if (currentPage > 1) {
+          return [
+            {
+              text: `${report?.project.social_technology.name}`,
+              fontSize: 10,
+              italics: true,
+              alignment: "right",
+              opacity: 0.5,
+              margin: [0, 10, 10, 0], // Adjust the margins as needed
+            },
+            {
+              text: `${report?.project.name}`,
+              fontSize: 10,
+              italics: true,
+              alignment: "right",
+              opacity: 0.5,
+              margin: [0, 10, 10, 0], // Adjust the margins as needed
+            },
+            {
+              image: logoBaseLeft64 || "",
+              width: 16,
+              absolutePosition: { x: 8, y: 360 },
+            }
+          ];
+        }
         return {
           image: logoBaseLeft64 || "",
           width: 16,
-          absolutePosition: { x: 8, y: 600 },
+          absolutePosition: { x: 8, y: 360 },
         };
       },
     };
