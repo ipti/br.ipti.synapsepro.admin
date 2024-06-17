@@ -51,7 +51,6 @@ const RegistrationPage = () => {
           }}
         >
           {({ values, handleChange }) => {
-            console.log(values);
             return (
               <Form>
                 <Button label="Salvar" />

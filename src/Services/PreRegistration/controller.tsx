@@ -41,7 +41,6 @@ export const ControllerPreRegistration = () => {
     {
       onError: (error) => { },
       onSuccess: (data) => {
-        console.log(data);
         Swal.fire({
           icon: "success",
           title: "Registro feito com sucesso!",

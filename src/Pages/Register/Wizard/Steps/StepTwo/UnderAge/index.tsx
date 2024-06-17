@@ -36,7 +36,6 @@ const UnderAge = () => {
           validationSchema={schema}
           onSubmit={(values) => {
             props.NextStep(values);
-            console.log(values)
           }}
         >
           {({ values, handleChange, errors, touched }) => {

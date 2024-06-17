@@ -21,8 +21,8 @@ import { Container } from "./style";
 import turmasHover from "../../Assets/images/turmasPessoas.svg";
 
 import turmas from "../../Assets/images/peoples.svg";
-// import home from "../../Assets/images/iconsMenu/home.svg";
-// import homeHover from "../../Assets/images/iconsMenu/home_active.svg";
+import home from "../../Assets/images/iconsMenu/home.svg";
+import homeHover from "../../Assets/images/iconsMenu/home_active.svg";
 
 import tecnologia from "../../Assets/images/iconsMenu/digital_wellbeing.svg";
 
@@ -81,7 +81,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             path={"/cronograma"}
             icon={"pi pi-calendar"}
           /> */}
-          {/* <Item
+          <Item
             text={"Pagina Inicial"}
             funcActiv={() => {
               setActive(1);
@@ -91,16 +91,16 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             path={"/"}
             icon={active === 1 ? homeHover : home}
           />
-          <Padding /> */}
+          <Padding />
           <Item
             text={"Tecnologias"}
             funcActiv={() => {
-              setActive(1);
-              menuItem("1");
+              setActive(2);
+              menuItem("2");
             }}
-            active={active === 1 ? true : false}
+            active={active === 2 ? true : false}
             path={"/tecnologias"}
-            icon={active === 1 ? tecnologia_hover : tecnologia}
+            icon={active === 2 ? tecnologia_hover : tecnologia}
           />
           <Padding />
           <Item

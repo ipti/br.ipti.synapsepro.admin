@@ -66,7 +66,6 @@ const ProjectOnePage = () => {
               },
               parseInt(id!)
             );
-            console.log(values.file)
             if (values.file) props.rulerProject(values.file, parseInt(id!));
             setEdit(!edit);
           }}
@@ -181,18 +180,21 @@ const ProjectOnePage = () => {
           <CardQuant
             quant={props.project?.project.approval_percentage + "%"}
             title="Parâmetro para aprovação do projeto"
+            color="navy_blue"
           />
         </div>
         <div className="col-12 md:col-6">
           <CardQuant
             quant={props.project?.project.classrooms.length!}
             title="Total de Turmas"
+            color="blue"
           />
         </div>
         <div className="col-12 md:col-6">
           <CardQuant
             quant={props.project?.register_count!}
             title="Total de Matriculas"
+            color="orange"
           />
         </div>
       </div>
