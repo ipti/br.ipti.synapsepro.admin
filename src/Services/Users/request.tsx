@@ -1,9 +1,24 @@
 import { CreateUser } from "../../Context/Users/type";
 import http from "../axios";
-import { logout } from "../localstorage";
+import { getYear, logout } from "../localstorage";
 
 export const requestUsers = () => {
   let path = "/user-bff";
+
+  return http
+    .get(path)
+    .then((response) => response.data)
+    .catch((err) => {
+      if (err.response.status === 401) {
+        logout();
+        window.location.reload();
+      }
+      throw err;
+    });
+};
+
+export const requestUsersChart = () => {
+  let path = "/user-bff/chart?year="+ getYear() ?? 2024;
 
   return http
     .get(path)

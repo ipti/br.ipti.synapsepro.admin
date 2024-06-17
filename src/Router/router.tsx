@@ -30,6 +30,7 @@ import CreateUser from "../Pages/Users/CreateUser";
 import EditUser from "../Pages/Users/EditUser";
 import ListUsers from "../Pages/Users/ListUsers";
 import PrivateRoute from "./privaterouter";
+import InitialPage from "../Pages/InitialPage";
 
 const RoutesApp = () => {
   return (
@@ -44,7 +45,7 @@ const RoutesApp = () => {
           path="/view/:id"
         />
         <Route
-          element={<PrivateRoute Component={<TecnologySocial />} />}
+          element={<PrivateRoute Component={<InitialPage />} />}
           path="/"
         />
         <Route
