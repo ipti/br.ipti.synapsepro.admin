@@ -22,6 +22,8 @@ const BeneficiariesListProvider = ({
     DeleteRegistration,
     cpfFilter,
     nameFilter,
+    allFilter,
+    setallFilter
   } = BeneficiariesListState();
 
   return (
@@ -38,6 +40,8 @@ const BeneficiariesListProvider = ({
         DeleteRegistration,
         cpfFilter,
         nameFilter,
+        allFilter,
+        setallFilter
       }}
     >
       {children}

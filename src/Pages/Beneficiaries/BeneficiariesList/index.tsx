@@ -3,6 +3,7 @@ import { Chip } from "primereact/chip";
 import { Column } from "primereact/column";
 import { ConfirmDialog } from "primereact/confirmdialog";
 import { DataTable } from "primereact/datatable";
+import { InputText } from "primereact/inputtext";
 import { Paginator } from "primereact/paginator";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +11,10 @@ import BeneficiariesListProvider, {
   BeneficiariesListContext,
 } from "../../../Context/Beneficiaries/BeneficiariesList/context";
 import { BeneficiariesListType } from "../../../Context/Beneficiaries/BeneficiariesList/type";
-import { somarNumeros } from "../../../Controller/controllerGlobal";
+import {
+  formatarData,
+  somarNumeros,
+} from "../../../Controller/controllerGlobal";
 import color from "../../../Styles/colors";
 import { Container, Padding, Row } from "../../../Styles/styles";
 import ModalFilter from "./ModalFilter";
@@ -42,13 +46,21 @@ const BeneficiariesListPage = () => {
           icon="pi pi-plus"
           onClick={() => history("criar")}
         />
-        <Button
+        <span className="p-input-icon-left">
+          <i className="pi pi-search" />
+          <InputText
+            value={props.allFilter}
+            placeholder="Pesquisar..."
+            onChange={(e) => props.setallFilter(e.target.value)}
+          />
+        </span>
+        {/* <Button
           label={window.innerWidth > 800 ? "Configurar filtro" : undefined}
           icon="pi pi-filter"
           onClick={() => {
             setVisibleFilter(true);
           }}
-        />
+        /> */}
       </div>
     );
   };
@@ -80,7 +92,7 @@ const BeneficiariesListPage = () => {
       <Container>
         <h1>Beneficiários</h1>
         <Padding padding="16px" />
-        <Row style={{gap: 8}}>
+        <Row style={{ gap: 8 }}>
           {props.nameFilter?.length! > 0 && (
             <Chip label={"Nome: " + props.nameFilter} />
           )}
@@ -111,6 +123,12 @@ const BeneficiariesListPage = () => {
             header="Nome do responsável"
           ></Column>
           <Column field="cpf" header="CPF"></Column>
+          <Column
+            body={(rowData) => {
+              return <>{formatarData(rowData.createdAt)}</>;
+            }}
+            header="Data de criação"
+          ></Column>
           <Column header="Ações" body={ActionBeneficiariesBody}></Column>
         </DataTable>
         <Paginator

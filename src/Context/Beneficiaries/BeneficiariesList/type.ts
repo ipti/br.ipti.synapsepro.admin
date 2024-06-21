@@ -9,6 +9,8 @@ export interface BeneficiariesListType {
   limite: number;
   nameFilter: string | undefined
   cpfFilter: string | undefined
+  allFilter: string | undefined
+  setallFilter: Dispatch<SetStateAction<string | undefined>>
   handleFilter: (values: {
     name: string;
     cpf: string;
