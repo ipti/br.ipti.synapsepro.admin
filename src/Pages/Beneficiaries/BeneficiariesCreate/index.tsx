@@ -193,6 +193,23 @@ const RegistrationPage = () => {
                         {errors.deficiency}
                       </div>
                     ) : null}
+                    <div className="col-12 md:col-6">
+                      <label>Telefone para contato *</label>
+                      <Padding />
+                      <MaskInput
+                        value={values.responsable_telephone}
+                        mask="(99) 9 9999-9999"
+                        name="responsable_telephone"
+                        onChange={handleChange}
+                        placeholder="name"
+                      />
+                      {errors.responsable_telephone &&
+                      touched.responsable_telephone ? (
+                        <div style={{ color: "red", marginTop: "8px" }}>
+                          {errors.responsable_telephone}
+                        </div>
+                      ) : null}
+                    </div>
                   </div>
                   {values.deficiency && (
                     <div className="col-12 md:col-6">
@@ -236,25 +253,6 @@ const RegistrationPage = () => {
                     ) : null}
                   </div>
                 </div>
-                <div className="grid">
-                  <div className="col-12 md:col-6">
-                    <label>Telefone para contato *</label>
-                    <Padding />
-                    <MaskInput
-                      value={values.responsable_telephone}
-                      mask="(99) 9 9999-9999"
-                      name="responsable_telephone"
-                      onChange={handleChange}
-                      placeholder="name"
-                    />
-                    {errors.responsable_telephone &&
-                    touched.responsable_telephone ? (
-                      <div style={{ color: "red", marginTop: "8px" }}>
-                        {errors.responsable_telephone}
-                      </div>
-                    ) : null}
-                  </div>
-                </div>{" "}
                 <Padding padding="8px" />
                 <h3>Dados Responsavel</h3>
                 <Padding />
