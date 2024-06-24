@@ -9,6 +9,7 @@ export const BeneficiariesListState = () => {
   const [nameFilter, setnameFilter] = useState<string | undefined>();
 
   const [cpfFilter, setcpfFilter] = useState<string | undefined>();
+  const [allFilter, setallFilter] = useState<string | undefined>("");
   const [filter, setFilter] = useState<
     { value: string; content: string }[] | undefined
   >();
@@ -17,6 +18,7 @@ export const BeneficiariesListState = () => {
     page: Math.floor(page / 10 + 1),
     name: nameFilter !== "" ? nameFilter : undefined,
     cpf: cpfFilter !== "" ? cpfFilter?.replace(/[^a-zA-Z0-9]/g, '') : undefined,
+    allFilter: allFilter !== "" ? allFilter : undefined
   });
 
   const handleFilter = (values: { name: string; cpf: string }) => {
@@ -47,5 +49,7 @@ export const BeneficiariesListState = () => {
     handleFilter,
     nameFilter,
     cpfFilter,
+    allFilter,
+    setallFilter
   };
 };

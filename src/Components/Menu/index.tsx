@@ -33,7 +33,7 @@ import projeto_hover from "../../Assets/images/iconsMenu/note_add_active.svg";
 import beneficiaries from "../../Assets/images/iconsMenu/diversity_4.svg";
 import beneficiaries_hover from "../../Assets/images/iconsMenu/diversity_hover.svg";
 
-// import ajuda from "../../Assets/images/question_mark.svg";
+import ajuda from "../../Assets/images/question_mark.svg";
 
 import user from "../../Assets/images/iconsMenu/person.svg";
 import user_hover from "../../Assets/images/iconsMenu/person_active.svg";
@@ -149,7 +149,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
               icon={active === 6 ? user_hover : user}
             />
           ) : null}
-          {/* <Padding />
+          <Padding />
 
           <Item
             text={"Ajuda"}
@@ -160,7 +160,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             active={active === 7 ? true : false}
             path={"/ajuda"}
             icon={ajuda}
-          /> */}
+          />
         </Padding>
       ) : null}
       <ModalYear
