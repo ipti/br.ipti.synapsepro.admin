@@ -110,7 +110,7 @@ const RegistrationPage = () => {
                     <Padding />
                     <TextInput
                       value={values.name}
-                      placeholder="name"
+                      placeholder="Nome"
                       onChange={handleChange}
                       name="name"
                     />
@@ -202,7 +202,7 @@ const RegistrationPage = () => {
                       mask="(99) 9 9999-9999"
                       name="responsable_telephone"
                       onChange={handleChange}
-                      placeholder="name"
+                      placeholder="Telefone para contato"
                     />
                     {errors.responsable_telephone &&
                     touched.responsable_telephone ? (

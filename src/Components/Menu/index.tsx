@@ -34,6 +34,7 @@ import beneficiaries from "../../Assets/images/iconsMenu/diversity_4.svg";
 import beneficiaries_hover from "../../Assets/images/iconsMenu/diversity_hover.svg";
 
 import ajuda from "../../Assets/images/question_mark.svg";
+import ajuda_hover from "../../Assets/images/iconsMenu/question_mark_active.svg";
 
 import user from "../../Assets/images/iconsMenu/person.svg";
 import user_hover from "../../Assets/images/iconsMenu/person_active.svg";
@@ -137,7 +138,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           />
           <Padding />
           {props.user?.role === ROLE.ADMIN ||
-            props.user?.role === ROLE.COORDINATORS ? (
+          props.user?.role === ROLE.COORDINATORS ? (
             <Item
               text={"Usuarios"}
               funcActiv={() => {
@@ -159,14 +160,11 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 7 ? true : false}
             path={"/ajuda"}
-            icon={ajuda}
+            icon={active === 7 ? ajuda_hover : ajuda}
           />
         </Padding>
       ) : null}
-      <ModalYear
-        visible={visibleModal}
-        onHide={() => setVisibleModal(false)}
-      />
+      <ModalYear visible={visibleModal} onHide={() => setVisibleModal(false)} />
     </Container>
   );
 };

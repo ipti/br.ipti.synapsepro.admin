@@ -31,7 +31,7 @@ const Help = () => {
         {help.map((item, key) => {
           return (
             <div key={key} className="col-12 md:col-6">
-              <CardHelp title={item.name} link={item.help_url} />
+              <CardHelp title={item.name} index={key + 1} link={item.help_url} />
             </div>
           );
         })}
