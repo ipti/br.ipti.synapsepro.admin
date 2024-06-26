@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import CardQuant from "../../Components/Chart/CardQuant";
+import ContentPage from "../../Components/ContentPage";
 import Loading from "../../Components/Loading";
-import { useFetchRequestUsersChart } from "../../Services/Users/query";
-import { Container, Padding } from "../../Styles/styles";
 import { AplicationContext } from "../../Context/Aplication/context";
+import { useFetchRequestUsersChart } from "../../Services/Users/query";
+import { Padding } from "../../Styles/styles";
 import { PropsAplicationContext } from "../../Types/types";
 
 export interface Chart {
@@ -33,9 +34,9 @@ const InitialPage = () => {
 
   if (props.isLoading) return <Loading />;
   return (
-    <Container>
+    <ContentPage title={"Bem vindo, " + propsAplication.user?.name + "!"} description="Visualização dos dados gerais do meuBen.">
       <Padding />
-      <h1>Bem vindo, {propsAplication.user?.name}!</h1>
+      <h1> </h1>
       <Padding padding="16px" />
       <div className="grid">
         <div className="col-12 md:col-4 lg:col-4">
@@ -60,7 +61,7 @@ const InitialPage = () => {
           <CardQuant title="Total de encontros" quant={props.chart?.totalMeetings!} color="blue" />
         </div>
       </div>
-    </Container>
+    </ContentPage>
   );
 };
 

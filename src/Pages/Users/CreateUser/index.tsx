@@ -1,9 +1,10 @@
 import { Formik } from "formik";
 import { useContext } from "react";
 import * as Yup from "yup";
+import ContentPage from "../../../Components/ContentPage";
 import UsersProvider, { UsersContext } from "../../../Context/Users/context";
 import { UsersTypes } from "../../../Context/Users/type";
-import { Container, Padding } from "../../../Styles/styles";
+import { Padding } from "../../../Styles/styles";
 import InputsUser from "../Inputs";
 
 const CreateUser = () => {
@@ -30,8 +31,7 @@ const CreateUserPage = () => {
   });
 
   return (
-    <Container>
-      <h1>Criar usuários</h1>
+    <ContentPage title="Criar usuários" description="Criar usuário no meuBen.">
       <Padding />
       <Formik
         initialValues={{
@@ -53,7 +53,7 @@ const CreateUserPage = () => {
           );
         }}
       </Formik>
-    </Container>
+    </ContentPage>
   );
 };
 

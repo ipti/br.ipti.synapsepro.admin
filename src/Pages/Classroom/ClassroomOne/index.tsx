@@ -8,6 +8,7 @@ import report from "../../../Assets/images/report-svgrepo-com.svg";
 import meeting from "../../../Assets/images/school_teacher.svg";
 import TextInput from "../../../Components/TextInput";
 
+import ContentPage from "../../../Components/ContentPage";
 import Loading from "../../../Components/Loading";
 import { AplicationContext } from "../../../Context/Aplication/context";
 import ClassroomProvider, {
@@ -16,7 +17,7 @@ import ClassroomProvider, {
 import { ClassroomTypes } from "../../../Context/Classroom/type";
 import { ROLE } from "../../../Controller/controllerGlobal";
 import { useFetchRequestClassroomOne } from "../../../Services/Classroom/query";
-import { Column, Container, Padding, Row } from "../../../Styles/styles";
+import { Column, Padding, Row } from "../../../Styles/styles";
 import { PropsAplicationContext } from "../../../Types/types";
 import CardItensClassrooom from "./CardItensClassroom";
 import ModalChange from "./ModalChangeClaassroom";
@@ -44,7 +45,7 @@ const ClassroomOnePage = () => {
   if (props.isLoading) return <Loading />;
 
   return (
-    <Container>
+    <ContentPage title={classroom?.name} description="Detalhes da sua turma.">
       {edit ? (
         <>
           {classroom ? (
@@ -82,11 +83,8 @@ const ClassroomOnePage = () => {
         </>
       ) : (
         <Column>
-          <Row id="space-between">
+          <Row id="end">
             <Row>
-              <Column id="center">
-                <h2>{classroom?.name}</h2>
-              </Column>
               <Padding />
               {propsAplication.user?.role ===
                 (ROLE.ADMIN || ROLE.COORDINATORS) && (
@@ -152,7 +150,7 @@ const ClassroomOnePage = () => {
           />
         </div>
       </div>
-    </Container>
+    </ContentPage>
   );
 };
 

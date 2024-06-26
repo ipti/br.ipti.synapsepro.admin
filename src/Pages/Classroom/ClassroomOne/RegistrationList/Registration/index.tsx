@@ -1,22 +1,23 @@
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
 import { useContext } from "react";
+import { useParams } from "react-router-dom";
+import ContentPage from "../../../../../Components/ContentPage";
 import DropdownComponent from "../../../../../Components/Dropdown";
+import MaskInput from "../../../../../Components/InputMask";
+import Loading from "../../../../../Components/Loading";
 import TextInput from "../../../../../Components/TextInput";
 import RegistartionDetailsProvider, {
   RegistrationDetailsContext,
 } from "../../../../../Context/Classroom/Registration/context";
 import { RegistrationDetailsTypes } from "../../../../../Context/Classroom/Registration/type";
 import {
-  color_race,
   Status,
+  color_race,
   typesex,
 } from "../../../../../Controller/controllerGlobal";
-import { Container, Padding } from "../../../../../Styles/styles";
-import { useParams } from "react-router-dom";
 import { useFetchRequestClassroomOne } from "../../../../../Services/Classroom/query";
-import MaskInput from "../../../../../Components/InputMask";
-import Loading from "../../../../../Components/Loading";
+import { Padding } from "../../../../../Styles/styles";
 
 const Registration = () => {
   return (
@@ -37,8 +38,7 @@ const RegistrationPage = () => {
   if (props.isLoading) return <Loading />;
 
   return (
-    <Container>
-      <h2>{classroom?.name}</h2>
+    <ContentPage title={classroom?.name} description="Detalhes da matricula do beneficiário">
       <Padding padding="16px" />
       {props.registration ? (
         <Formik
@@ -246,7 +246,7 @@ const RegistrationPage = () => {
           }}
         </Formik>
       ) : null}
-    </Container>
+    </ContentPage>
   );
 };
 export default Registration;

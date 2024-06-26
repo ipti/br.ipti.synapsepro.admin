@@ -10,7 +10,7 @@ import AttendanceListGenerate from "../Pages/Classroom/ClassroomOne/MeetingList/
 import RegistrationList from "../Pages/Classroom/ClassroomOne/RegistrationList";
 import Registration from "../Pages/Classroom/ClassroomOne/RegistrationList/Registration";
 import Report from "../Pages/Classroom/ClassroomOne/Report";
-import FormClassroom from "../Pages/Classroom/FormClassroom";
+import FormClassroom from "../Pages/Classroom/ClassroomCriar";
 import ListClassroom from "../Pages/Classroom/ListClassroom";
 import CreateOrEditForm from "../Pages/Form/CreateForms";
 import ViewForms from "../Pages/Form/ViewForms";

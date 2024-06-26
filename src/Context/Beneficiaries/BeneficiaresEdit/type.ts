@@ -32,6 +32,7 @@ export interface Registration {
   createdAt: string;
   updatedAt: string;
   register_classroom: RegisterClassroom[];
+  kinship: string
 }
 
 export interface RegisterClassroom {

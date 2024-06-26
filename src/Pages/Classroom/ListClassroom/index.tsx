@@ -1,19 +1,20 @@
 import { Button } from "primereact/button";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import CardClassroom from "../../../Components/Card/CardClassroom";
-import { Column, Container, Padding, Row } from "../../../Styles/styles";
+import ContentPage from "../../../Components/ContentPage";
+import DropdownComponent from "../../../Components/Dropdown";
+import Empty from "../../../Components/Empty";
+import Loading from "../../../Components/Loading";
+import { AplicationContext } from "../../../Context/Aplication/context";
 import ClassroomProvider, {
   ClassroomContext,
 } from "../../../Context/Classroom/context";
-import { useContext } from "react";
 import { ClassroomTypes } from "../../../Context/Classroom/type";
-import { AplicationContext } from "../../../Context/Aplication/context";
-import { PropsAplicationContext } from "../../../Types/types";
 import { ROLE } from "../../../Controller/controllerGlobal";
-import Empty from "../../../Components/Empty";
-import Loading from "../../../Components/Loading";
-import DropdownComponent from "../../../Components/Dropdown";
 import { idProject } from "../../../Services/localstorage";
+import { Column, Padding, Row } from "../../../Styles/styles";
+import { PropsAplicationContext } from "../../../Types/types";
 
 const ListClassroom = () => {
   return (
@@ -34,9 +35,7 @@ const ListClassroomPage = () => {
   if (props.isLoading) return <Loading />;
 
   return (
-    <Container>
-
-      <h1>Turmas</h1>
+    <ContentPage title="Turmas" description="Visualização das turmas.">
       <Padding padding="16px" />
       <Row id="space-between">
         <Column>
@@ -76,7 +75,7 @@ const ListClassroomPage = () => {
       ) : (
         <Empty title="Turmas" />
       )}
-    </Container>
+    </ContentPage>
   );
 };
 

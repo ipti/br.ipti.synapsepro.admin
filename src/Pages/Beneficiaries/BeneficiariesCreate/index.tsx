@@ -1,20 +1,21 @@
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
 import { useContext } from "react";
+import * as Yup from "yup";
+import CalendarComponent from "../../../Components/Calendar";
+import ContentPage from "../../../Components/ContentPage";
 import DropdownComponent from "../../../Components/Dropdown";
 import MaskInput from "../../../Components/InputMask";
 import Loading from "../../../Components/Loading";
+import RadioButtonComponent from "../../../Components/RadioButton";
 import TextInput from "../../../Components/TextInput";
 import BeneficiariesCreateProvider, {
   BeneficiariesCreateContext,
 } from "../../../Context/Beneficiaries/BeneficiaresCreate/context";
 import { BeneficiariesCreateType } from "../../../Context/Beneficiaries/BeneficiaresCreate/type";
-import { color_race, typesex } from "../../../Controller/controllerGlobal";
-import { Column, Container, Padding, Row } from "../../../Styles/styles";
-import CalendarComponent from "../../../Components/Calendar";
-import * as Yup from "yup";
+import { color_race, kinship, typesex } from "../../../Controller/controllerGlobal";
 import { validaCPF } from "../../../Controller/controllerValidCPF";
-import RadioButtonComponent from "../../../Components/RadioButton";
+import { Column, Padding, Row } from "../../../Styles/styles";
 
 const BeneficiariesCreate = () => {
   return (
@@ -59,8 +60,7 @@ const RegistrationPage = () => {
   if (false) return <Loading />;
 
   return (
-    <Container>
-      <h1>Criar Beneficiario</h1>
+    <ContentPage title="Criar Beneficiario" description="Criar novo beneficiário.">
       <Padding padding="16px" />
       {true ? (
         <Formik
@@ -205,7 +205,7 @@ const RegistrationPage = () => {
                       placeholder="Telefone para contato"
                     />
                     {errors.responsable_telephone &&
-                    touched.responsable_telephone ? (
+                      touched.responsable_telephone ? (
                       <div style={{ color: "red", marginTop: "8px" }}>
                         {errors.responsable_telephone}
                       </div>
@@ -285,6 +285,25 @@ const RegistrationPage = () => {
                     {errors.responsable_cpf && touched.responsable_cpf ? (
                       <div style={{ color: "red", marginTop: "8px" }}>
                         {errors.responsable_cpf}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div className="col-12 md:col-6">
+                    <Row id="center">
+                      <div className="col-12 md:col-4">
+                        <DropdownComponent
+                          placerholder="Parantesco"
+                          onChange={handleChange}
+                          options={kinship}
+                          optionsValue="id"
+                          optionsLabel="name"
+                          value={values.kinship}
+                        />
+                      </div>
+                    </Row>
+                    {errors.kinship && touched.kinship ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.kinship}
                       </div>
                     ) : null}
                   </div>
@@ -381,7 +400,7 @@ const RegistrationPage = () => {
           }}
         </Formik>
       ) : null}
-    </Container>
+    </ContentPage>
   );
 };
 export default BeneficiariesCreate;

@@ -8,6 +8,8 @@ import { RegisterContext } from "../../../../../../Context/Register/context";
 import { RegisterTypes } from "../../../../../../Context/Register/type";
 import { validaCPF } from "../../../../../../Controller/controllerValidCPF";
 import { Column, Padding, Row } from "../../../../../../Styles/styles";
+import DropdownComponent from "../../../../../../Components/Dropdown";
+import { kinship } from "../../../../../../Controller/controllerGlobal";
 
 const UnderAge = () => {
   const props = useContext(RegisterContext) as RegisterTypes;
@@ -15,7 +17,7 @@ const UnderAge = () => {
   const initialValue = {
     responsable_cpf: props.dataValues.responsable_cpf ?? "",
     responsable_name: props.dataValues.responsable_name ?? "",
-    
+    kinship: props.dataValues.kinship ?? ""
   };
 
   const schema = Yup.object().shape({
@@ -25,7 +27,10 @@ const UnderAge = () => {
     responsable_name: Yup.string().required(
       "Nome do responsável é obrigatório"
     ),
- 
+    kinship: Yup.string().required(
+      "Parentesco é obrigatório"
+    ),
+
   });
 
   return (
@@ -39,7 +44,6 @@ const UnderAge = () => {
           }}
         >
           {({ values, handleChange, errors, touched }) => {
-            console.log(errors);
             return (
               <Form>
                 <Row id="center">
@@ -77,7 +81,23 @@ const UnderAge = () => {
                         {errors.responsable_cpf}
                       </div>
                     ) : null}
-                    
+                    <Row id="center">
+                      <div className="col-12 md:col-4">
+                        <DropdownComponent
+                          placerholder="Parantesco"
+                          onChange={handleChange}
+                          options={kinship}
+                          optionsValue="id"
+                          optionsLabel="name"
+                          value={values.kinship}
+                        />
+                      </div>
+                    </Row>
+                    {errors.kinship && touched.kinship ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.kinship}
+                      </div>
+                    ) : null}
                     <Padding padding={props.padding} />
                   </div>
                 </Row>
@@ -89,7 +109,7 @@ const UnderAge = () => {
                       // onClick={onButton}
                       className="t-button-primary"
                       label="Finalizar"
-                      // disabled={!isValid}
+                    // disabled={!isValid}
                     />
                   </div>
                 </Row>

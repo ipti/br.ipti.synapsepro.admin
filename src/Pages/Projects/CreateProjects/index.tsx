@@ -1,16 +1,17 @@
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
 import { useContext } from "react";
+import Swal from "sweetalert2";
+import * as Yup from "yup";
+import ContentPage from "../../../Components/ContentPage";
+import InputNumberComponent from "../../../Components/InputNumber";
 import TextInput from "../../../Components/TextInput";
 import CreateProjectProvider, {
   CreateProjectContext,
 } from "../../../Context/Project/CreateList/context";
 import { CreateProjectTypes } from "../../../Context/Project/CreateList/type";
 import { GetIdTs } from "../../../Services/localstorage";
-import { Container, Padding, Row } from "../../../Styles/styles";
-import InputNumberComponent from "../../../Components/InputNumber";
-import * as Yup from "yup";
-import Swal from "sweetalert2";
+import { Padding, Row } from "../../../Styles/styles";
 
 
 const CreateProjects = () => {
@@ -34,8 +35,7 @@ const CreateProjectsPage = () => {
   };
 
   return (
-    <Container>
-      <h1>Criar projeto</h1>
+    <ContentPage title="Criar projeto" description="Criar um novo projeto.">
       <Padding padding="16px" />
       <Formik
         initialValues={initialValues}
@@ -97,7 +97,7 @@ const CreateProjectsPage = () => {
           );
         }}
       </Formik>
-    </Container>
+    </ContentPage>
   );
 };
 

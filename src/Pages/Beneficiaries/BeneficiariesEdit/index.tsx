@@ -15,6 +15,7 @@ import { BeneficiariesEditType } from "../../../Context/Beneficiaries/Beneficiar
 import {
   color_race,
   getStatus,
+  kinship,
   typesex,
 } from "../../../Controller/controllerGlobal";
 import color from "../../../Styles/colors";
@@ -220,6 +221,19 @@ const BeneficiariesEditPage = () => {
                       onChange={handleChange}
                     />
                   </div>
+                  <div className="col-12 md:col-6">
+                    <label>Parentesco</label>
+                    <Padding />
+                    <DropdownComponent
+                      placerholder="Parantesco"
+                      onChange={handleChange}
+                      options={kinship}
+                      optionsValue="id"
+                      optionsLabel="name"
+                      value={values.kinship}
+                    />
+                  </div>
+
                 </div>{" "}
                 <Padding padding="8px" />
                 <h3>Matriculas</h3>

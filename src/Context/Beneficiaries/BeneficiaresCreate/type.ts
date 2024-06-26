@@ -17,6 +17,7 @@ export interface BeneficiariesCreateType {
     zone: number | undefined, 
     project: number | undefined,
     deficiency_description: string | undefined
+    kinship: string
   };
   tsOne: Tsone | undefined;
   project: any | undefined;

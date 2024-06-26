@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import * as Yup from "yup";
 import CardClassroom from "../../../Components/Card/CardClassroom";
 import CardQuant from "../../../Components/Chart/CardQuant";
+import ContentPage from "../../../Components/ContentPage";
 import Empty from "../../../Components/Empty";
 import InputNumberComponent from "../../../Components/InputNumber";
 import Loading from "../../../Components/Loading";
@@ -16,7 +17,7 @@ import ProjectOneProvider, {
 } from "../../../Context/Project/ProjectOne/context";
 import { ProjectOneTypes } from "../../../Context/Project/ProjectOne/type";
 import { ROLE } from "../../../Controller/controllerGlobal";
-import { Column, Container, Padding, Row } from "../../../Styles/styles";
+import { Column, Padding, Row } from "../../../Styles/styles";
 import { PropsAplicationContext } from "../../../Types/types";
 
 
@@ -53,7 +54,7 @@ const ProjectOnePage = () => {
   });
 
   return (
-    <Container>
+    <ContentPage title={props.project?.project.name!} description="Detalhes do seu projeto">
       {edit ? (
         <Formik
           initialValues={initialValues}
@@ -145,11 +146,8 @@ const ProjectOnePage = () => {
         </Formik>
       ) : (
         <Column>
-          <Row id="space-between">
-            <Row>
-              <Column id="center">
-                <h2>{props.project?.project.name}</h2>
-              </Column>
+          <Row id="end">
+            <Row id="end">
               <Padding />
               {propsAplication.user?.role ===
                 (ROLE.ADMIN || ROLE.COORDINATORS) && (
@@ -222,7 +220,7 @@ const ProjectOnePage = () => {
       ) : (
         <Empty title="Turmas" />
       )}
-    </Container>
+    </ContentPage>
   );
 };
 
