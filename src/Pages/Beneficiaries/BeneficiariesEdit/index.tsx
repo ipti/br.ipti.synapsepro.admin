@@ -228,6 +228,7 @@ const BeneficiariesEditPage = () => {
                       placerholder="Parantesco"
                       onChange={handleChange}
                       options={kinship}
+                      name="kinship"
                       optionsValue="id"
                       optionsLabel="name"
                       value={values.kinship}

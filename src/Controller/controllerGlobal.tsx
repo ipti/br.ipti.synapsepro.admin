@@ -88,12 +88,12 @@ export const ROLE = {
 };
 
 export const kinship = [
+  { id: "PAI", name: 'Pai' },
+  { id: "MAE", name: 'Mãe' },
   { id: "CONJUGE", name: 'Cônjuge' },
   { id: "FILHO_A", name: 'Filho(a)' },
   { id: "ENTEADO_A", name: 'Enteado(a)' },
   { id: "NETO_A", name: 'Neto(a)' },
-  { id: "PAI", name: 'Pai' },
-  { id: "MAE", name: 'Mãe' },
   { id: "SOGRO_A", name: 'Sogro(a)' },
   { id: "IRMAO_A", name: 'Irmão(a)' },
   { id: "GENRO", name: 'Genro' },

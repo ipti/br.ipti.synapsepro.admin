@@ -13,7 +13,11 @@ import BeneficiariesCreateProvider, {
   BeneficiariesCreateContext,
 } from "../../../Context/Beneficiaries/BeneficiaresCreate/context";
 import { BeneficiariesCreateType } from "../../../Context/Beneficiaries/BeneficiaresCreate/type";
-import { color_race, kinship, typesex } from "../../../Controller/controllerGlobal";
+import {
+  color_race,
+  kinship,
+  typesex,
+} from "../../../Controller/controllerGlobal";
 import { validaCPF } from "../../../Controller/controllerValidCPF";
 import { Column, Padding, Row } from "../../../Styles/styles";
 
@@ -60,7 +64,10 @@ const RegistrationPage = () => {
   if (false) return <Loading />;
 
   return (
-    <ContentPage title="Criar Beneficiario" description="Criar novo beneficiário.">
+    <ContentPage
+      title="Criar Beneficiario"
+      description="Criar novo beneficiário."
+    >
       <Padding padding="16px" />
       {true ? (
         <Formik
@@ -205,7 +212,7 @@ const RegistrationPage = () => {
                       placeholder="Telefone para contato"
                     />
                     {errors.responsable_telephone &&
-                      touched.responsable_telephone ? (
+                    touched.responsable_telephone ? (
                       <div style={{ color: "red", marginTop: "8px" }}>
                         {errors.responsable_telephone}
                       </div>
@@ -289,18 +296,18 @@ const RegistrationPage = () => {
                     ) : null}
                   </div>
                   <div className="col-12 md:col-6">
-                    <Row id="center">
-                      <div className="col-12 md:col-4">
-                        <DropdownComponent
-                          placerholder="Parantesco"
-                          onChange={handleChange}
-                          options={kinship}
-                          optionsValue="id"
-                          optionsLabel="name"
-                          value={values.kinship}
-                        />
-                      </div>
-                    </Row>
+                    <label>Parentesco</label>
+                    <Padding />
+                    <DropdownComponent
+                      placerholder="Parantesco"
+                      onChange={handleChange}
+                      options={kinship}
+                      name="kinship"
+                      optionsValue="id"
+                      optionsLabel="name"
+                      value={values.kinship}
+                    />
+
                     {errors.kinship && touched.kinship ? (
                       <div style={{ color: "red", marginTop: "8px" }}>
                         {errors.kinship}
