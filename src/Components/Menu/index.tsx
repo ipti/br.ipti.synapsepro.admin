@@ -135,10 +135,20 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             active={active === 5 ? true : false}
             path={"/beneficiarios"}
             icon={active === 5 ? beneficiaries_hover : beneficiaries}
+          /><Padding />
+          <Item
+            text={"Reaplicadores"}
+            funcActiv={() => {
+              setActive(8);
+              menuItem("8");
+            }}
+            active={active === 8 ? true : false}
+            path={"/reaplicadores"}
+            icon={active === 8 ? turmasHover : turmas}
           />
           <Padding />
           {props.user?.role === ROLE.ADMIN ||
-          props.user?.role === ROLE.COORDINATORS ? (
+            props.user?.role === ROLE.COORDINATORS ? (
             <Item
               text={"Usuarios"}
               funcActiv={() => {
@@ -150,6 +160,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
               icon={active === 6 ? user_hover : user}
             />
           ) : null}
+
           <Padding />
 
           <Item

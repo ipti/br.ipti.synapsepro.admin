@@ -50,6 +50,8 @@ export const BeneficiariesCreateState = () => {
     deficiency_description: "",
     kinship: ""
   };
+
+  
   return {
     initialValue,
     tsOne,

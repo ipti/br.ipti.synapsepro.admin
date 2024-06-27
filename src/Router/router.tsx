@@ -31,6 +31,7 @@ import EditUser from "../Pages/Users/EditUser";
 import ListUsers from "../Pages/Users/ListUsers";
 import PrivateRoute from "./privaterouter";
 import InitialPage from "../Pages/InitialPage";
+import ReapplicatorsList from "../Pages/Reapplicators/ReapplicatorsList";
 
 const RoutesApp = () => {
   return (
@@ -145,6 +146,10 @@ const RoutesApp = () => {
         <Route
           element={<PrivateRoute Component={<CreateTechnologySocial />} />}
           path="/tecnologias/criar"
+        />
+        <Route
+          element={<PrivateRoute Component={<ReapplicatorsList />} />}
+          path="/reaplicadores"
         />
         <Route
           element={<PrivateRoute Component={<CreateUser />} />}
