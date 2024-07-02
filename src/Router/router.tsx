@@ -10,7 +10,7 @@ import AttendanceListGenerate from "../Pages/Classroom/ClassroomOne/MeetingList/
 import RegistrationList from "../Pages/Classroom/ClassroomOne/RegistrationList";
 import Registration from "../Pages/Classroom/ClassroomOne/RegistrationList/Registration";
 import Report from "../Pages/Classroom/ClassroomOne/Report";
-import FormClassroom from "../Pages/Classroom/FormClassroom";
+import FormClassroom from "../Pages/Classroom/ClassroomCriar";
 import ListClassroom from "../Pages/Classroom/ListClassroom";
 import CreateOrEditForm from "../Pages/Form/CreateForms";
 import ViewForms from "../Pages/Form/ViewForms";
@@ -31,6 +31,7 @@ import EditUser from "../Pages/Users/EditUser";
 import ListUsers from "../Pages/Users/ListUsers";
 import PrivateRoute from "./privaterouter";
 import InitialPage from "../Pages/InitialPage";
+import ReapplicatorsList from "../Pages/Reapplicators/ReapplicatorsList";
 
 const RoutesApp = () => {
   return (
@@ -145,6 +146,10 @@ const RoutesApp = () => {
         <Route
           element={<PrivateRoute Component={<CreateTechnologySocial />} />}
           path="/tecnologias/criar"
+        />
+        <Route
+          element={<PrivateRoute Component={<ReapplicatorsList />} />}
+          path="/reaplicadores"
         />
         <Route
           element={<PrivateRoute Component={<CreateUser />} />}

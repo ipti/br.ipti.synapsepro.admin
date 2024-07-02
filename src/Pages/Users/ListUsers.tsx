@@ -4,6 +4,8 @@ import { ConfirmDialog } from "primereact/confirmdialog";
 import { DataTable } from "primereact/datatable";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ContentPage from "../../Components/ContentPage";
+
 import Loading from "../../Components/Loading";
 import UsersProvider, { UsersContext } from "../../Context/Users/context";
 import { UsersTypes } from "../../Context/Users/type";
@@ -66,7 +68,7 @@ const ListUsersPage = () => {
 
   return (
     <Container>
-      <h1>Usuários</h1>
+    <ContentPage title="Usuários" description="Lista usuários do MeuBen.">
       <Padding padding="16px" />
       <Button label="Criar usuário" onClick={() => history("/users/criar")} />
       <Padding padding="16px" />
@@ -78,6 +80,7 @@ const ListUsersPage = () => {
         <Column field="actions" body={ActionsUserBody} header="Ações"></Column>
 
       </DataTable>
+    </ContentPage>
       <ConfirmDialog
         visible={visible}
         onHide={() => setVisible(false)}

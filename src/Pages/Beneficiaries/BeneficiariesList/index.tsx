@@ -7,6 +7,7 @@ import { InputText } from "primereact/inputtext";
 import { Paginator } from "primereact/paginator";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ContentPage from "../../../Components/ContentPage";
 import BeneficiariesListProvider, {
   BeneficiariesListContext,
 } from "../../../Context/Beneficiaries/BeneficiariesList/context";
@@ -16,7 +17,7 @@ import {
   somarNumeros,
 } from "../../../Controller/controllerGlobal";
 import color from "../../../Styles/colors";
-import { Container, Padding, Row } from "../../../Styles/styles";
+import { Padding, Row } from "../../../Styles/styles";
 import ModalFilter from "./ModalFilter";
 
 const BeneficiariesList = () => {
@@ -89,8 +90,7 @@ const BeneficiariesListPage = () => {
 
   return (
     <>
-      <Container>
-        <h1>Beneficiários</h1>
+      <ContentPage title="Beneficiários" description="Visualização dos beneficiários da tecnologia.">
         <Padding padding="16px" />
         <Row style={{ gap: 8 }}>
           {props.nameFilter?.length! > 0 && (
@@ -139,7 +139,7 @@ const BeneficiariesListPage = () => {
           }}
           rows={props.limite}
         />
-      </Container>
+      </ContentPage>
       <ConfirmDialog
         visible={visible}
         onHide={() => setVisible(false)}

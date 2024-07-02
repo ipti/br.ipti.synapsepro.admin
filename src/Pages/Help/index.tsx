@@ -1,8 +1,9 @@
 import CardHelp from "../../Components/Card/CardHelp";
+import ContentPage from "../../Components/ContentPage";
 import Empty from "../../Components/Empty";
 import Loading from "../../Components/Loading";
 import { useFetchRequestHelp } from "../../Services/Help/query";
-import { Container, Padding } from "../../Styles/styles";
+import { Padding } from "../../Styles/styles";
 
 export type HelpType = HelpT[];
 
@@ -24,8 +25,7 @@ const Help = () => {
   var help: HelpType = data;
 
   return (
-    <Container>
-      <h1>Ajuda</h1>
+    <ContentPage title="Ajuda" description="Visualização dos manuais de como o nosso sistema funciona.">
       <Padding padding="16px" />
       <div className="grid">
         {help.map((item, key) => {
@@ -37,7 +37,7 @@ const Help = () => {
         })}
       </div>
       {help?.length === 0 && <Empty title="Ajuda"/>}
-    </Container>
+    </ContentPage>
   );
 };
 

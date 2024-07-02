@@ -38,7 +38,7 @@ const ModalCreateRegisterClassroom = ({
             <Form>
               <div className="grid">
                 <div className="col-12">
-                  <label>Matricula</label>
+                  <label>Projeto</label>
                   <Padding />
                   <DropdownComponent
                     value={props.project}

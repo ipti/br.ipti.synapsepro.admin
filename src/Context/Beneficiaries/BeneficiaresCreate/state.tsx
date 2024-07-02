@@ -47,8 +47,11 @@ export const BeneficiariesCreateState = () => {
     project: undefined,
     status: "",
     classroom: 0,
-    deficiency_description: ""
+    deficiency_description: "",
+    kinship: ""
   };
+
+  
   return {
     initialValue,
     tsOne,

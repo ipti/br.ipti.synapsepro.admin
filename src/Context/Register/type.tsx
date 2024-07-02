@@ -35,6 +35,7 @@ export interface Registration {
     responsable_name?: string;
     responsable_cpf?: string;
     responsable_telephone?: string;
+    kinship?: string;
     zone: number | null;
 }
 

@@ -1,13 +1,14 @@
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
 import { useContext } from "react";
+import * as Yup from "yup";
+import ContentPage from "../../../Components/ContentPage";
 import TextInput from "../../../Components/TextInput";
 import CreateTsProvider, {
   CreateTsContext,
 } from "../../../Context/TecnologySocial/CreateTecnologySocial/context";
 import { CreateTsTypes } from "../../../Context/TecnologySocial/CreateTecnologySocial/type";
-import { Container, Padding, Row } from "../../../Styles/styles";
-import * as Yup from "yup";
+import { Padding, Row } from "../../../Styles/styles";
 
 
 const CreateTechnologySocial = () => {
@@ -31,8 +32,7 @@ const CreateTechnologySocialPage = () => {
   });
 
   return (
-    <Container>
-      <h1>Criar Tecnologia</h1>
+    <ContentPage title="Criar Tecnologia" description="Crie sua tecnologia social.">
       <Padding padding="16px" />
       <Formik
         initialValues={initialValues}
@@ -68,7 +68,7 @@ const CreateTechnologySocialPage = () => {
           );
         }}
       </Formik>
-    </Container>
+    </ContentPage>
   );
 };
 

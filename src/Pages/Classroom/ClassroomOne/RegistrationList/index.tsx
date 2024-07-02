@@ -2,6 +2,7 @@ import { InputText } from "primereact/inputtext";
 import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import CardRegistration from "../../../../Components/Card/CardRegistration";
+import ContentPage from "../../../../Components/ContentPage";
 import Empty from "../../../../Components/Empty";
 import Loading from "../../../../Components/Loading";
 import RegistartionClassroomProvider, {
@@ -9,7 +10,7 @@ import RegistartionClassroomProvider, {
 } from "../../../../Context/Classroom/RegistrationsList/context";
 import { RegistrationClassroomTypes } from "../../../../Context/Classroom/RegistrationsList/type";
 import { useFetchRequestClassroomOne } from "../../../../Services/Classroom/query";
-import { Container, Padding, Row } from "../../../../Styles/styles";
+import { Padding, Row } from "../../../../Styles/styles";
 
 const RegistrationList = () => {
   return (
@@ -39,9 +40,8 @@ const RegistrationListPage = () => {
   };
 
   return (
-    <Container>
+    <ContentPage title={classroom?.name} description="Visualização das matriculas realizadas na turma.">
       <Row id="space-between">
-        <h2>{classroom?.name}</h2>
         <span className="p-input-icon-left">
           <i className="pi pi-search" />
           <InputText
@@ -72,7 +72,7 @@ const RegistrationListPage = () => {
       ) : (
         <Empty title="Matriculas" />
       )}
-    </Container>
+    </ContentPage>
   );
 };
 
