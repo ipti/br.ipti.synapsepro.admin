@@ -1,8 +1,8 @@
 import { useQuery } from "react-query";
 import { requestUsers, requestUsersChart, requestUsersOne } from "./request";
 
-export const useFetchRequestUsers = () => {
-    return useQuery(["useRequestsUsers"], () => requestUsers());
+export const useFetchRequestUsers = (role: string | undefined) => {
+    return useQuery(["useRequestsUsers", role], () => requestUsers(role));
   };
 
   export const useFetchRequestUsersChart = () => {

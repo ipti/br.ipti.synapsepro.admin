@@ -2,8 +2,12 @@ import { CreateUser } from "../../Context/Users/type";
 import http from "../axios";
 import { getYear, logout } from "../localstorage";
 
-export const requestUsers = () => {
+export const requestUsers = (role: string | undefined) => {
   let path = "/user-bff";
+
+  if(role && role !== "TODOS"){
+    path = path + "?role="+role
+  }
 
   return http
     .get(path)
