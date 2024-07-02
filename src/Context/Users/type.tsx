@@ -12,6 +12,12 @@ export interface CreateUser {
     password?: string;
     project: number[];
     role?: {name: string, id: string}
+    email?: string,
+    phone?: string,
+    sex: number,
+    color_race: number,
+    initial_date: string,
+    birthday: string
   }
 
   export interface User {

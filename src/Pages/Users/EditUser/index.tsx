@@ -48,7 +48,7 @@ const EditUserPage = () => {
           confirmPassword: "",
         }}
         onSubmit={(values) => {
-          props.UpdateUser(values, parseInt(id!));
+          // props.UpdateUser(values, parseInt(id!));
         }}
         validationSchema={CreateUserSchema}
       >
