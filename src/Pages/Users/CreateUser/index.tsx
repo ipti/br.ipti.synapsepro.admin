@@ -21,15 +21,10 @@ const CreateUserPage = () => {
   const props = useContext(UsersContext) as UsersTypes;
 
   const CreateUserSchema = Yup.object().shape({
-    name: Yup.string()
-      .required("Campo Obrigatório")
-      .min(16, "Nome deve ter pelo menos 16 caracteres"),
-    username: Yup.string()
-      .required("Campo Obrigatório")
-      .min(8, "Nome do usuário deve ter pelo menos 8 caracteres"),
-    password: Yup.string()
-      .required("Campo Obrigatório")
-      .min(8, "Senha deve ter pelo menos 8 caracteres"),
+
+    name: Yup.string().required("Campo Obrigatório").min(8, "Nome deve ter pelo menos 8 caracteres"),
+    username: Yup.string().required("Campo Obrigatório").min(8, "Nome do usuário deve ter pelo menos 8 caracteres"),
+    password: Yup.string().required("Campo Obrigatório").min(8, "Senha deve ter pelo menos 8 caracteres"),
     role: Yup.object().required("Campo Obrigatório"),
     project: Yup.array().required("Campo Obrigatório"),
     initial_date: Yup.string().required("Campo Obrigatório"),

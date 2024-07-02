@@ -52,7 +52,7 @@ export const ControllerUser = () => {
       onSuccess: (data) => {
         Swal.fire({
           icon: "success",
-          title: "Registro feito com sucesso!",
+          title: "Usuário excluido com sucesso!",
           confirmButtonColor: styles.colors.colorsBaseProductNormal,
         }).then((result) => {
           queryClient.refetchQueries("useRequestsUsers")
