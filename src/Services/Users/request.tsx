@@ -5,8 +5,8 @@ import { getYear, logout } from "../localstorage";
 export const requestUsers = (role: string | undefined) => {
   let path = "/user-bff";
 
-  if(role && role !== "TODOS"){
-    path = path + "?role="+role
+  if (role && role !== "TODOS") {
+    path = path + "?role=" + role
   }
 
   return http
@@ -21,19 +21,36 @@ export const requestUsers = (role: string | undefined) => {
     });
 };
 
-export const requestUsersChart = () => {
-  let path = "/user-bff/chart?year="+ getYear() ?? 2024;
+export const requestUsersChart = (id?: string) => {
 
-  return http
-    .get(path)
-    .then((response) => response.data)
-    .catch((err) => {
-      if (err.response.status === 401) {
-        logout();
-        window.location.reload();
-      }
-      throw err;
-    });
+
+  let path = "/user-bff/chart?year=" + getYear() ?? 2024;
+
+  console.log(id)
+
+  if (id) {
+    return http.get("/user-bff/chart-ts?year=" + (getYear() ?? 2024) + "&tsId=" + id).then((response) => response.data)
+      .catch((err) => {
+        if (err.response.status === 401) {
+          logout();
+          window.location.reload();
+        }
+        throw err;
+      });
+  } else {
+
+
+    return http
+      .get(path)
+      .then((response) => response.data)
+      .catch((err) => {
+        if (err.response.status === 401) {
+          logout();
+          window.location.reload();
+        }
+        throw err;
+      });
+  }
 };
 
 export const requestCreateUsers = (data: CreateUser) => {
