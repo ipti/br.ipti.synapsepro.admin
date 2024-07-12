@@ -75,7 +75,7 @@ const BeneficiariesEditPage = () => {
 
   return (
     <Container>
-      <h1>Editar Beneficiario</h1>
+      <h1>Editar Aluno</h1>
       <Padding padding="16px" />
       {props.registrations ? (
         <Formik

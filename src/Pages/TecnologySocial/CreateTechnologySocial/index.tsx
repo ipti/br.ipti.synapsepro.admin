@@ -32,7 +32,7 @@ const CreateTechnologySocialPage = () => {
   });
 
   return (
-    <ContentPage title="Criar Tecnologia" description="Crie sua tecnologia social.">
+    <ContentPage title="Criar Escola" description="Crie sua escola.">
       <Padding padding="16px" />
       <Formik
         initialValues={initialValues}

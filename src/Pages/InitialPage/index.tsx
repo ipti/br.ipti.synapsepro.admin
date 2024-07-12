@@ -40,7 +40,7 @@ const InitialPage = () => {
   return (
     <ContentPage title={"Bem vindo, " + propsAplication.user?.name + "!"} description="Visualização dos dados gerais do meuBen.">
       <Padding padding="8px" />
-      {propsAplication.project && <Row id="end"><DropdownComponent options={[...propsAplication.project, { id: undefined, name: "Todos" }]} optionsLabel="name" optionsValue="id" value={props.ts} onChange={(e) => props.setTs(e.target.value)} placerholder="Filtrar por Tecnologia" /></Row>
+      {propsAplication.project && <Row id="end"><DropdownComponent options={[...propsAplication.project, { id: undefined, name: "Todos" }]} optionsLabel="name" optionsValue="id" value={props.ts} onChange={(e) => props.setTs(e.target.value)} placerholder="Filtrar por Escola" /></Row>
       }      <Padding padding="16px" />
       <div className="grid">
         <div className="col-12 md:col-4 lg:col-4">

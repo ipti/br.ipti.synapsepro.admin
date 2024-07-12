@@ -124,7 +124,7 @@ export const ControllerUpdateRegistration = () => {
       onSuccess: (data) => {
         Swal.fire({
           icon: "success",
-          title: " Beneficiario excluido com sucesso!",
+          title: " Aluno excluido com sucesso!",
           confirmButtonColor: styles.colors.colorsBaseProductNormal,
         }).then((result) => {
           if (result.isConfirmed) {

@@ -45,8 +45,8 @@ const ListClassroomPage = () => {
             <DropdownComponent placerholder="Escolha o projeto" options={props.tsOne?.project} optionsLabel="name" optionsValue="id" value={props.project} onChange={(e) => { console.log(e.value); props.setProject(e.value); idProject(e.value) }} />
           </div>
         </Column>
-        {(propsAplication.user?.role === ROLE.ADMIN ||
-          propsAplication.user?.role === ROLE.COORDINATORS) && (
+        {(1 === ROLE.ADMIN ||
+          1 === ROLE.Coordenador) && (
             <Column id="end">
               <Button
                 label="Criar turma"

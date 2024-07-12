@@ -43,7 +43,7 @@ const BeneficiariesListPage = () => {
         style={{ background: color.colorCard }}
       >
         <Button
-          label={window.innerWidth > 800 ? "Adicionar beneficiario" : undefined}
+          label={window.innerWidth > 800 ? "Adicionar alunos" : undefined}
           icon="pi pi-plus"
           onClick={() => history("criar")}
         />
@@ -90,7 +90,7 @@ const BeneficiariesListPage = () => {
 
   return (
     <>
-      <ContentPage title="Beneficiários" description="Visualização dos beneficiários da tecnologia.">
+      <ContentPage title="Alunos" description="Visualização dos alunos da escolas.">
         <Padding padding="16px" />
         <Row style={{ gap: 8 }}>
           {props.nameFilter?.length! > 0 && (

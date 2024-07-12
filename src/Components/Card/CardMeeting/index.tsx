@@ -55,8 +55,8 @@ const CardMeeting = ({
               <h3>{title}</h3>
             </Column>
           </Row>
-          {(propsAplication.user?.role === ROLE.ADMIN ||
-            propsAplication.user?.role === ROLE.COORDINATORS) && (
+          {(1 === ROLE.ADMIN ||
+            2 === ROLE.Coordenador) && (
             <div
               className="cursor-pointer"
               onClick={(e) => {

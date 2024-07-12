@@ -26,7 +26,6 @@ export const requestUsersChart = (id?: string) => {
 
   let path = "/user-bff/chart?year=" + getYear() ?? 2024;
 
-  console.log(id)
 
   if (id) {
     return http.get("/user-bff/chart-ts?year=" + (getYear() ?? 2024) + "&tsId=" + id).then((response) => response.data)

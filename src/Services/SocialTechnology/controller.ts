@@ -18,7 +18,7 @@ export const TechnologySocialController = () => {
             onSuccess: (data) => {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Tecnologia criada com sucesso!',
+                    title: 'Escola criada com sucesso!',
                     confirmButtonColor: styles.colors.colorsBaseProductNormal,
                 }).then((result) => {
                     queryClient.refetchQueries("useRequestSocialTechnologyList")

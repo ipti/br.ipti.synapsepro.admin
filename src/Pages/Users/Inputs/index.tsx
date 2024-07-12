@@ -29,7 +29,6 @@ const InputsUser = ({
   const { data: projects } = useFetchRequestSocialTechnologyLists();
 
   const props = useContext(AplicationContext) as PropsAplicationContext;
-  console.log(errors);
   return (
     <Form>
       <div className="grid">
@@ -80,16 +79,18 @@ const InputsUser = ({
             value={values.role}
             onChange={handleChange}
             options={
-              props.user?.role === ROLE.ADMIN
+              1 === ROLE.ADMIN
                 ? [
-                    { id: ROLE.ADMIN, name: "Admin" },
-                    { id: ROLE.COORDINATORS, name: "Coordenador" },
-                    { id: ROLE.REAPPLICATORS, name: "Reaplicador" },
-                  ]
+                  { id: ROLE.ADMIN, name: "Admin" },
+                  { id: ROLE.Conteudista, name: "Conteudista" },
+                  { id: ROLE.Coordenador, name: "Coordenador" },
+                  { id: ROLE.Teacher, name: "Professor" },
+                  { id: ROLE.Student, name: "Aluno" },
+                ]
                 : [
-                    { id: ROLE.COORDINATORS, name: "Coordenador" },
-                    { id: ROLE.REAPPLICATORS, name: "Reaplicador" },
-                  ]
+                  { id: ROLE.Coordenador, name: "Coordenador" },
+                  { id: ROLE.Student, name: "Reaplicador" },
+                ]
             }
           />
           <Padding />
@@ -101,7 +102,7 @@ const InputsUser = ({
           ) : null}
         </div>
         <div className="col-12 md:col-6">
-          <label>Projetos</label>
+          <label>Escolas</label>
           <Padding />
           <MultiSelect
             options={projects}
@@ -120,110 +121,6 @@ const InputsUser = ({
               {errors.project}
               <Padding />
             </div>
-          ) : null}
-        </div>
-      </div>
-      <div className="grid">
-        <div className="col-12 md:col-6">
-          <div>
-            <label>Cor/Raça *</label>
-            <Padding />
-            <DropdownComponent
-              placerholder="Cor/Raça *"
-              value={values.color_race}
-              onChange={handleChange}
-              name="color_race"
-              optionsValue="id"
-              optionsLabel="name"
-              options={color_race}
-            />
-          </div>
-          {errors.color_race && touched.color_race ? (
-            <div style={{ color: "red", marginTop: "8px" }}>
-              {errors.color_race}
-            </div>
-          ) : null}
-        </div>
-
-        <div className="col-12 md:col-6">
-          <div>
-            <label>Data de Nascimento *</label>
-            <Padding />
-            <CalendarComponent
-              placeholder="Data de Nascimento *"
-              name="birthday"
-              dateFormat="dd/mm/yy"
-              value={values.birthday}
-              onChange={handleChange}
-            />
-          </div>
-          {errors.birthday && touched.birthday ? (
-            <div style={{ color: "red", marginTop: "8px" }}>
-              {errors.birthday}
-            </div>
-          ) : null}
-        </div>
-      </div>{" "}
-      <div className="grid">
-        <div className="col-12 md:col-6">
-          <label>Sexo *</label>
-          <Padding />
-          <DropdownComponent
-            placerholder="Sexo *"
-            optionsValue="id"
-            value={values.sex}
-            options={typesex}
-            name="sex"
-            onChange={handleChange}
-            optionsLabel="type"
-          />
-          {errors.sex && touched.sex ? (
-            <div style={{ color: "red", marginTop: "8px" }}>{errors.sex}</div>
-          ) : null}
-        </div>
-        <div className="col-12 md:col-6">
-          <label>Data de inicio *</label>
-          <Padding />
-          <CalendarComponent
-            placeholder="Data de inicio *"
-            name="initial_date"
-            dateFormat="dd/mm/yy"
-            value={values.initial_date}
-            onChange={handleChange}
-          />
-          {errors.initial_date && touched.initial_date ? (
-            <div style={{ color: "red", marginTop: "8px" }}>
-              {errors.initial_date}
-            </div>
-          ) : null}
-        </div>
-      </div>
-      <div className="grid">
-        <div className="col-12 md:col-6">
-          <label>Email *</label>
-          <Padding />
-          <TextInput
-            placeholder="Email"
-            value={values.email}
-            onChange={handleChange}
-            name="email"
-          />
-          {errors.email && touched.email ? (
-            <div style={{ color: "red", marginTop: "8px" }}>{errors.email}</div>
-          ) : null}
-        </div>
-        <div className="col-12 md:col-6">
-          <label>Telefone para contato*</label>
-          <Padding />
-          <MaskInput
-            mask="(99) 9 9999-9999"
-            placeholder="Telefone *"
-            name="phone"
-            onChange={handleChange}
-            value={values.phone}
-          />
-          {errors.phone && touched.phone ? (
-            <div style={{ color: "red", marginTop: "8px" }}>{errors.phone}</div>
           ) : null}
         </div>
       </div>

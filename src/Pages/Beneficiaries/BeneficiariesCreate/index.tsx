@@ -65,8 +65,8 @@ const RegistrationPage = () => {
 
   return (
     <ContentPage
-      title="Criar Beneficiario"
-      description="Criar novo beneficiário."
+      title="Criar Aluno"
+      description="Criar novo aluno."
     >
       <Padding padding="16px" />
       {true ? (

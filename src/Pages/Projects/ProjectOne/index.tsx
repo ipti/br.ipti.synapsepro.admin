@@ -149,8 +149,8 @@ const ProjectOnePage = () => {
           <Row id="end">
             <Row id="end">
               <Padding />
-              {propsAplication.user?.role ===
-                (ROLE.ADMIN || ROLE.COORDINATORS) && (
+              {1 ===
+                (ROLE.ADMIN || ROLE.Coordenador) && (
                   <Button
                     text
                     label="Editar"

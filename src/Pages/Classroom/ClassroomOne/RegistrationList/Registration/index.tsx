@@ -38,7 +38,7 @@ const RegistrationPage = () => {
   if (props.isLoading) return <Loading />;
 
   return (
-    <ContentPage title={classroom?.name} description="Detalhes da matricula do beneficiário">
+    <ContentPage title={classroom?.name} description="Detalhes da matricula do aluno">
       <Padding padding="16px" />
       {props.registration ? (
         <Formik

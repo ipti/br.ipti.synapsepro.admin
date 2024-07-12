@@ -100,8 +100,8 @@ const DataMeeting = () => {
               </div>
             </div>
             <Padding padding="16px" />
-            {(propsAplication.user?.role === ROLE.ADMIN ||
-              propsAplication.user?.role === ROLE.COORDINATORS) && (
+            {(1 === ROLE.ADMIN ||
+              1 === ROLE.Coordenador) && (
                 <>
                   <div className="grid">
                     <div className="col-12 md:col-6">

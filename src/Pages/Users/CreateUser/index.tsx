@@ -26,14 +26,6 @@ const CreateUserPage = () => {
     username: Yup.string().required("Campo Obrigatório").min(8, "Nome do usuário deve ter pelo menos 8 caracteres"),
     password: Yup.string().required("Campo Obrigatório").min(8, "Senha deve ter pelo menos 8 caracteres"),
     role: Yup.object().required("Campo Obrigatório"),
-    project: Yup.array().required("Campo Obrigatório"),
-    initial_date: Yup.string().required("Campo Obrigatório"),
-    birthday: Yup.string().required("Campo Obrigatório"),
-
-    phone: Yup.string(),
-    email: Yup.string(),
-    sex: Yup.string().required("Campo Obrigatório"),
-    color_race: Yup.string().required("Campo Obrigatório"),
     confirmPassword: Yup.string()
       .label("Confirmar senha")
       .required("Campo Obrigatório")
@@ -50,19 +42,11 @@ const CreateUserPage = () => {
           role: undefined,
           password: "",
           project: [],
-          initial_date: "",
-          phone: "",
-          email: "",
-          color_race: "",
-          sex: "",
-          birthday: "",
           confirmPassword: "",
         }}
         onSubmit={(values) => {
           props.CreateUser({
-            ...values,
-            sex: parseInt(values.sex),
-            color_race: parseInt(values.color_race),
+            ...values, 
           });
         }}
         validationSchema={CreateUserSchema}

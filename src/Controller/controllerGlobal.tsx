@@ -81,10 +81,11 @@ export const Status = {
 };
 
 export const ROLE = {
-  ADMIN: "ADMIN",
-  USER: "USER",
-  REAPPLICATORS: "REAPPLICATORS",
-  COORDINATORS: "COORDINATORS",
+  "ADMIN": 1,
+  "Conteudista": 3,
+  "Coordenador": 2,
+  "Student": 5,
+  "Teacher": 4,
 };
 
 export const kinship = [

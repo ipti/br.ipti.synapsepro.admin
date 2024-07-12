@@ -65,7 +65,7 @@ const MeetingPage = () => {
               </div>
             </Column>
             {props.meeting.justification &&
-              propsAplication.user?.role === ROLE.REAPPLICATORS && (
+              1 === ROLE.Student && (
                 <div className="col-12 md:col-6">
                   <label>Justificativa</label>
                   <Padding />
@@ -93,7 +93,7 @@ const MeetingPage = () => {
           <Padding padding="16px" />
           {!(
             props.meeting.status === Status.APPROVED &&
-            propsAplication.user?.role === ROLE.REAPPLICATORS
+            1 === ROLE.Student
           ) && (
             <div className="grid">
               <div className="col-12 md:col-6">

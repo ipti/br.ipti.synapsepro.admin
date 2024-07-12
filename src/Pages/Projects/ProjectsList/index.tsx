@@ -33,8 +33,8 @@ const ProjectsListPage = () => {
   return (
     <ContentPage title="Projetos" description="Visualização dos projetos.">
       <Padding padding="16px" />
-      {(propsAplication.user?.role === ROLE.ADMIN ||
-        propsAplication.user?.role === ROLE.COORDINATORS) && (
+      {(1 === ROLE.ADMIN ||
+        2 === ROLE.Coordenador) && (
         <Row id="end" style={{ width: "100%" }}>
           <Button
             label="Criar Projeto"
@@ -53,7 +53,7 @@ const ProjectsListPage = () => {
           );
         })}
       </div>) : (
-        <Empty title="Tecnologias" />
+        <Empty title="Escolas" />
       )}
     </ContentPage>
   );

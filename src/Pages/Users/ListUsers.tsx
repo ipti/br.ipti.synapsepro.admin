@@ -12,7 +12,7 @@ import { AplicationContext } from "../../Context/Aplication/context";
 import UsersProvider, { UsersContext } from "../../Context/Users/context";
 import { UsersTypes } from "../../Context/Users/type";
 import { ROLE } from "../../Controller/controllerGlobal";
-import { Container, Padding } from "../../Styles/styles";
+import { Padding } from "../../Styles/styles";
 import { PropsAplicationContext } from "../../Types/types";
 
 const ListUsers = () => {
@@ -45,10 +45,10 @@ const ListUsersPage = () => {
       <p>
         {rowData.role === ROLE.ADMIN
           ? "Admin"
-          : rowData.role === ROLE.COORDINATORS
+          : rowData.role === ROLE.Coordenador
             ? "Coordenador"
-            : rowData.role === ROLE.REAPPLICATORS
-              ? "Reaplicador"
+            : rowData.role === ROLE.Teacher
+              ? "Aluno"
               : null}
       </p>
     );
@@ -74,23 +74,27 @@ const ListUsersPage = () => {
     return (
       <div
         className="flex justify-content-between"
-        // style={{ background: color.colorCard }}
+      // style={{ background: color.colorCard }}
       >
         <Button label="Criar usuário" onClick={() => history("/users/criar")} />
 
         <div>
-          <DropdownComponent optionsLabel="name" value={props.role} onChange={(e) => props.setRole(e.target.value)} optionsValue="id" placerholder="Filtrar tipo de usuário" options={propsAplication.user?.role === ROLE.ADMIN
-
+          <DropdownComponent optionsLabel="name" value={props.role} onChange={(e) => props.setRole(e.target.value)} optionsValue="id" placerholder="Filtrar tipo de usuário" options={1 === ROLE.ADMIN
             ? [
               { id: "TODOS", name: "Todos" },
               { id: ROLE.ADMIN, name: "Admin" },
-              { id: ROLE.COORDINATORS, name: "Coordenador" },
-              { id: ROLE.REAPPLICATORS, name: "Reaplicador" },
+              { id: ROLE.Conteudista, name: "Conteudista" },
+              { id: ROLE.Coordenador, name: "Coordenador" },
+              { id: ROLE.Teacher, name: "Professor" },
+              { id: ROLE.Student, name: "Aluno" },
             ]
             : [
               { id: "TODOS", name: "Todos" },
-              { id: ROLE.COORDINATORS, name: "Coordenador" },
-              { id: ROLE.REAPPLICATORS, name: "Reaplicador" },
+              { id: ROLE.ADMIN, name: "Admin" },
+              { id: ROLE.Conteudista, name: "Conteudista" },
+              { id: ROLE.Coordenador, name: "Coordenador" },
+              { id: ROLE.Teacher, name: "Professor" },
+              { id: ROLE.Student, name: "Aluno" },
             ]
           } />
         </div>
@@ -101,7 +105,7 @@ const ListUsersPage = () => {
 
 
   return (
-    <Container>
+    <>
       <ContentPage title="Usuários" description="Lista usuários do MeuBen.">
         <Padding padding="16px" />
         <DataTable value={props.users} header={renderHeader} paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: "50rem" }}>
@@ -122,7 +126,7 @@ const ListUsersPage = () => {
         accept={() => props.DeleteUser(visible?.id)}
         reject={() => setVisible(false)}
       />
-    </Container>
+    </>
   );
 };
 

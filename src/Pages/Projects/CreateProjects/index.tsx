@@ -46,7 +46,7 @@ const CreateProjectsPage = () => {
             approval_percentage: values.approval_percentage!,
             socialTechnologyId: parseInt(GetIdTs()!),
           });} else {
-            Swal.fire("Crie ou selecione uma Tecnologia")
+            Swal.fire("Crie ou selecione uma escola")
           }
         }}
       >

@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import TagLogin from "../../Assets/images/logo.svg";
+import turmasHover from "../../Assets/images/turmasPessoas.svg";
 import { AplicationContext } from "../../Context/Aplication/context";
 import { ROLE } from "../../Controller/controllerGlobal";
 import {
@@ -18,23 +19,16 @@ import DropdownComponent from "../Dropdown";
 import Icon from "../Icon";
 import Item from "./Item";
 import { Container } from "./style";
-import turmasHover from "../../Assets/images/turmasPessoas.svg";
 
 import turmas from "../../Assets/images/peoples.svg";
-import home from "../../Assets/images/iconsMenu/home.svg";
-import homeHover from "../../Assets/images/iconsMenu/home_active.svg";
 
 import tecnologia from "../../Assets/images/iconsMenu/digital_wellbeing.svg";
 
 import tecnologia_hover from "../../Assets/images/iconsMenu/digital_wellbeing_active.svg";
-import projeto from "../../Assets/images/iconsMenu/note_add.svg";
-import projeto_hover from "../../Assets/images/iconsMenu/note_add_active.svg";
 
 import beneficiaries from "../../Assets/images/iconsMenu/diversity_4.svg";
 import beneficiaries_hover from "../../Assets/images/iconsMenu/diversity_hover.svg";
 
-import ajuda from "../../Assets/images/question_mark.svg";
-import ajuda_hover from "../../Assets/images/iconsMenu/question_mark_active.svg";
 
 import user from "../../Assets/images/iconsMenu/person.svg";
 import user_hover from "../../Assets/images/iconsMenu/person_active.svg";
@@ -81,7 +75,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             path={"/cronograma"}
             icon={"pi pi-calendar"}
           /> */}
-          <Item
+          {/* <Item
             text={"Pagina Inicial"}
             funcActiv={() => {
               setActive(1);
@@ -90,10 +84,10 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             active={active === 1 ? true : false}
             path={"/"}
             icon={active === 1 ? homeHover : home}
-          />
-          <Padding />
+          /> */}
+          {/* <Padding /> */}
           <Item
-            text={"Tecnologias"}
+            text={"Escolas"}
             funcActiv={() => {
               setActive(2);
               menuItem("2");
@@ -102,18 +96,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             path={"/tecnologias"}
             icon={active === 2 ? tecnologia_hover : tecnologia}
           />
-          <Padding />
-          <Item
-            text={"Projetos"}
-            funcActiv={() => {
-              setActive(3);
-              menuItem("3");
-            }}
-            active={active === 3 ? true : false}
-            path={"/projetos"}
-            icon={active === 3 ? projeto_hover : projeto}
-          />
-          <Padding />
+          <Padding /> 
           <Item
             text={"Turmas"}
             funcActiv={() => {
@@ -126,7 +109,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           />
           <Padding />
           <Item
-            text={"Beneficiários"}
+            text={"Alunos"}
             funcActiv={() => {
               setActive(5);
               menuItem("5");
@@ -146,8 +129,8 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             icon={active === 8 ? turmasHover : turmas}
           /> */}
           
-          {props.user?.role === ROLE.ADMIN ||
-            props.user?.role === ROLE.COORDINATORS ? (
+          {1 === ROLE.ADMIN ||
+            2 === ROLE.Coordenador ? (
             <Item
               text={"Usuarios"}
               funcActiv={() => {
@@ -162,7 +145,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
 
           <Padding />
 
-          <Item
+          {/* <Item
             text={"Ajuda"}
             funcActiv={() => {
               setActive(7);
@@ -171,7 +154,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             active={active === 7 ? true : false}
             path={"/ajuda"}
             icon={active === 7 ? ajuda_hover : ajuda}
-          />
+          /> */}
         </Padding>
       ) : null}
       <ModalYear visible={visibleModal} onHide={() => setVisibleModal(false)} />

@@ -18,13 +18,13 @@ const TecnologySocial = () => {
 
   if (!propsAplication.project) return <Loading />;
   return (
-    <ContentPage title="Tecnologias" description="Visualização das tecnologias sociais.">
+    <ContentPage title="Escolas" description="Visualização das escolas.">
       <Padding padding="16px" />
 
-      {propsAplication.user?.role === ROLE.ADMIN && (
+      {1 === ROLE.ADMIN && (
         <Row id="end" style={{ width: "100%" }}>
           <Button
-            label="Criar Tecnologia Social"
+            label="Criar Escola"
             icon={"pi pi-plus"}
             onClick={() => history("/tecnologias/criar")}
           />
@@ -41,7 +41,7 @@ const TecnologySocial = () => {
           );
         })}
       </div>) : (
-        <Empty title="Tecnologias" />
+        <Empty title="Escolas" />
       )}
     </ContentPage>
   );

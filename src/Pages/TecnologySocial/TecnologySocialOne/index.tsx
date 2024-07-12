@@ -24,11 +24,11 @@ const TecnologySocial = () => {
     AplicationContext
   ) as PropsAplicationContext;
   return (
-    <ContentPage title="Tecnologia" description="Tecnologia">
-      {propsAplication.user?.role === ROLE.ADMIN && (
+    <ContentPage title="Escola" description="Escola">
+      {1 === ROLE.ADMIN && (
         <Row id="end" style={{ width: "100%" }}>
           <Button
-            label="Criar Tecnologia Social"
+            label="Criar Escola"
             icon={"pi pi-plus"}
             onClick={() => history("/projetos/criar")}
           />

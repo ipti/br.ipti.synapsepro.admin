@@ -45,16 +45,16 @@ const CardRegistration = ({
         className="card cursor-pointer"
         onClick={(e) => {
           e.stopPropagation();
-          if ((propsAplication.user?.role === ROLE.ADMIN ||
-            propsAplication.user?.role === ROLE.COORDINATORS)) {
+          if ((1 === ROLE.ADMIN ||
+            2 === ROLE.Coordenador)) {
             history(`/turma/${id}/aluno/${idRegistration}`);
           }
         }}
       >
         <Row id="space-between">
           <h3>{subtitle}</h3>
-          {(propsAplication.user?.role === ROLE.ADMIN ||
-            propsAplication.user?.role === ROLE.COORDINATORS) && <div
+          {(1 === ROLE.ADMIN ||
+            2 === ROLE.Coordenador) && <div
               className="cursor-pointer"
               onClick={(e) => {
                 e.stopPropagation();
