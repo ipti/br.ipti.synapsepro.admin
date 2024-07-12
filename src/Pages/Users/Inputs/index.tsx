@@ -1,15 +1,11 @@
 import { Form } from "formik";
 import { MultiSelect } from "primereact/multiselect";
 import { useContext } from "react";
-import CalendarComponent from "../../../Components/Calendar";
 import DropdownComponent from "../../../Components/Dropdown";
-import MaskInput from "../../../Components/InputMask";
 import TextInput from "../../../Components/TextInput";
 import { AplicationContext } from "../../../Context/Aplication/context";
 import {
-  color_race,
-  ROLE,
-  typesex,
+  ROLE
 } from "../../../Controller/controllerGlobal";
 import { useFetchRequestSocialTechnologyLists } from "../../../Services/SocialTechnology/query";
 import { Padding } from "../../../Styles/styles";
@@ -20,11 +16,13 @@ const InputsUser = ({
   handleChange,
   errors,
   touched,
+  isStudent
 }: {
   values: any;
   handleChange: any;
   errors: any;
   touched: any;
+  isStudent?: boolean
 }) => {
   const { data: projects } = useFetchRequestSocialTechnologyLists();
 
@@ -73,11 +71,13 @@ const InputsUser = ({
           <label>Tipo de usuário</label>
           <Padding />
           <DropdownComponent
-            name="role"
+            name="user_type_id"
             placerholder="Tipo de usuário"
             optionsLabel="name"
-            value={values.role}
+            optionsValue="id"
+            value={values.user_type_id}
             onChange={handleChange}
+            disabled={isStudent}
             options={
               1 === ROLE.ADMIN
                 ? [
@@ -94,9 +94,9 @@ const InputsUser = ({
             }
           />
           <Padding />
-          {errors.role && touched.role ? (
+          {errors.user_type_id && touched.user_type_id ? (
             <div style={{ color: "red" }}>
-              {errors.role}
+              {errors.user_type_id}
               <Padding />
             </div>
           ) : null}

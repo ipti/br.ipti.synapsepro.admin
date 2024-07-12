@@ -23,10 +23,10 @@ export const UsersState = () => {
   const CreateUser = (data: CreateUser) => {
     const body = {
       name: data.name,
-      username: data.username,
+      user_name: data.user_name,
       password: data.password,
-      role: data.role,
-      project: GetId(data.project)
+      user_type_id: data.user_type_id,
+      school_id: 2
     }
     props.requestUserMutation.mutate(body);
   };
@@ -34,9 +34,9 @@ export const UsersState = () => {
   const UpdateUser = (data: CreateUser, id: number) => {
     const body = {
       name: data.name,
-      username: data.username,
-      role: data.role,
-      project: GetId(data.project)
+      user_name: data.user_name,
+      user_type_id: data.user_type_id,
+      school_id: data.school_id
     }
     props.requestUpdateUserMutation.mutate({ data: body, id: id });
   };

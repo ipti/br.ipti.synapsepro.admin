@@ -8,24 +8,30 @@ import { Padding } from "../../../Styles/styles";
 import InputsUser from "../Inputs";
 import PasswordInput from "../../../Components/TextPassword";
 import { Button } from "primereact/button";
+import { ROLE } from "../../../Controller/controllerGlobal";
 
 const CreateUser = () => {
   return (
     <UsersProvider>
-      <CreateUserPage />
+      <CreateUserPage isStudent={false} />
     </UsersProvider>
   );
 };
 
-const CreateUserPage = () => {
+export const CreateUserPage = ({ isStudent }: { isStudent: boolean }) => {
   const props = useContext(UsersContext) as UsersTypes;
 
   const CreateUserSchema = Yup.object().shape({
-
-    name: Yup.string().required("Campo Obrigatório").min(8, "Nome deve ter pelo menos 8 caracteres"),
-    username: Yup.string().required("Campo Obrigatório").min(8, "Nome do usuário deve ter pelo menos 8 caracteres"),
-    password: Yup.string().required("Campo Obrigatório").min(8, "Senha deve ter pelo menos 8 caracteres"),
-    role: Yup.object().required("Campo Obrigatório"),
+    name: Yup.string()
+      .required("Campo Obrigatório")
+      .min(8, "Nome deve ter pelo menos 8 caracteres"),
+    username: Yup.string()
+      .required("Campo Obrigatório")
+      .min(8, "Nome do usuário deve ter pelo menos 8 caracteres"),
+    password: Yup.string()
+      .required("Campo Obrigatório")
+      .min(8, "Senha deve ter pelo menos 8 caracteres"),
+    user_type_id: Yup.number().required("Campo Obrigatório"),
     confirmPassword: Yup.string()
       .label("Confirmar senha")
       .required("Campo Obrigatório")
@@ -33,20 +39,20 @@ const CreateUserPage = () => {
   });
 
   return (
-    <ContentPage title="Criar usuários" description="Criar usuário no meuBen.">
+    <ContentPage title="Criar usuários" description="Criar usuário.">
       <Padding />
       <Formik
         initialValues={{
           name: "",
-          username: "",
-          role: undefined,
+          user_name: "",
+          user_type_id: isStudent ? ROLE.Student : undefined,
           password: "",
-          project: [],
+          school_id: undefined,
           confirmPassword: "",
         }}
         onSubmit={(values) => {
           props.CreateUser({
-            ...values, 
+            ...values,
           });
         }}
         validationSchema={CreateUserSchema}
@@ -59,6 +65,7 @@ const CreateUserPage = () => {
                 handleChange={handleChange}
                 touched={touched}
                 values={values}
+                isStudent={isStudent}
               />
               <div className="grid">
                 <div className="col-12 md:col-6">

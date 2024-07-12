@@ -12,10 +12,10 @@ export interface UsersTypes {
 
 export interface CreateUser {
   name: string;
-  username: string;
+  user_name: string;
   password?: string;
-  project: number[];
-  role?: { name: string, id: string }
+  school_id?: number;
+  user_type_id?: number
 }
 
 export interface User {

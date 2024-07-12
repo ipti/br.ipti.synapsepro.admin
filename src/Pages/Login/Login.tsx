@@ -38,7 +38,7 @@ const LoginPage = () => {
 
   const LoginSchema = Yup.object().shape({
     password: Yup.string().required("Campo Obrigatório"),
-    username: Yup.string().required("Campo Obrigatório"),
+    user_name: Yup.string().required("Campo Obrigatório"),
   });
 
   useEffect(() => {
@@ -109,15 +109,15 @@ const LoginPage = () => {
                           <label>Usuário</label>
                           <Padding />
                           <TextInput
-                            name="username"
-                            value={values.username}
+                            name="user_name"
+                            value={values.user_name}
                             onChange={handleChange}
                             placeholder="Usuário"
                           />
                           <Padding />
-                          {errors.username && touched.username ? (
+                          {errors.user_name && touched.user_name ? (
                             <div style={{ color: "red", marginTop: "8px" }}>
-                              {errors.username}
+                              {errors.user_name}
                             </div>
                           ) : null}
                         </div>

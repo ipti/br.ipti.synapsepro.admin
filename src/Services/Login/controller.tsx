@@ -1,10 +1,10 @@
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { idProject, idUser, login, logout, menuItem } from "../localstorage";
-import { LoginRequest } from "./request";
-import { LoginTypes } from "./types";
 import Swal from "sweetalert2";
 import styles from "../../Styles";
+import { idUser, login, logout, menuItem } from "../localstorage";
+import { LoginRequest, LoginSystemRequest } from "./request";
+import { LoginTypes } from "./types";
 
 export const LoginController = ({ setError }: { setError: any, }) => {
   const history = useNavigate();
@@ -21,14 +21,8 @@ export const LoginController = ({ setError }: { setError: any, }) => {
         setError(error.response.data.message)
       },
       onSuccess: (data) => {
-        logout()
-        login(data.data.access_token);
-        idUser(data.data.userRegistered.id);
-        // ProjectLogin(data.data.user.schools)
-        if (data.data.userRegistered.user_social_technology[0]?.social_technology_fk) {
-          idProject(data.data.userRegistered.user_social_technology[0]?.social_technology_fk);
-        }
-
+        idUser(JSON.stringify(data.data));
+       
         history("/");
         menuItem("1");
         window.location.reload();
@@ -37,7 +31,30 @@ export const LoginController = ({ setError }: { setError: any, }) => {
     }
   );
 
+  const LoginSystemRequestMutation = useMutation(
+    (data: LoginTypes) => LoginSystemRequest(data),
+    {
+      onError: (error: any) => {
+        Swal.fire({
+          icon: 'error',
+          title: error.response.data.message,
+          confirmButtonColor: styles.colors.colorsBaseProductNormal,
+        })
+        setError(error.response.data.message)
+      },
+      onSuccess: (data, variables) => {
+        logout()
+        login(data.data.token);
+
+        LoginRequestMutation.mutate({user_name: variables.user_name, password: variables.password})
+        
+      },
+
+    }
+  );
+
   return {
-    LoginRequestMutation
+    LoginRequestMutation,
+    LoginSystemRequestMutation
   }
 }

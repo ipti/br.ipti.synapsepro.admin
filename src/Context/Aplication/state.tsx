@@ -7,29 +7,32 @@ import { User } from "../Users/type";
 
 const AplicationState = () => {
     const [form, setform] = useState<PropsForm>({ title: "Formulário Sem título", description: "", question: [] })
-    const { data: projects } = useFetchRequestSocialTechnologyLists();
+    // const { data: projects } = useFetchRequestSocialTechnologyLists();
 
     const [project, setproject] = useState<Array<Projects> | undefined>();
     const [user, setuser] = useState<User | undefined>();
 
 
-    const { data: userRequest } = useFetchRequestUsersOne(parseInt(GetIdUser()!));
+    // const { data: userRequest } = useFetchRequestUsersOne(parseInt(GetIdUser()!));
 
 
 
     useEffect(() => {
-        if (projects) {
-            setproject(projects)
+        // if (projects) {
+        //     setproject(projects)
 
-            if (!GetIdTs()) {
-                idTs(projects[0]?.id?.toString())
-            }
+        //     if (!GetIdTs()) {
+        //         idTs(projects[0]?.id?.toString())
+        //     }
 
+        // }
+        if (GetIdUser()) {
+            const storedObject = JSON.parse(GetIdUser()!);
+            setuser(storedObject)
         }
-        if (userRequest) {
-            setuser(userRequest)
-        }
-    }, [projects, userRequest])
+    }, [])
+
+    console.log(user)
 
     return {
         form, setform, project, user

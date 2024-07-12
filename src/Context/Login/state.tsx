@@ -5,14 +5,14 @@ import { LoginTypes } from "../../Services/Login/types"
 export const LoginState = () => {
     const [error, setError] = useState(false)
     const initialValue: LoginTypes = {
-        username: "",
+        user_name: "",
         password: ""
     }
 
-    const { LoginRequestMutation } = LoginController({ setError })
+    const { LoginSystemRequestMutation } = LoginController({ setError })
 
     const Login = (body: LoginTypes) => {
-        LoginRequestMutation.mutate(body)
+        LoginSystemRequestMutation.mutate(body)
     }
     return { initialValue, Login, error }
 }
