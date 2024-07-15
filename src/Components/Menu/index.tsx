@@ -39,7 +39,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
         <Row id="center">
           <Column id="center">
             <h2 style={{ fontFamily: styles.typography.types.bold }}>
-              Synasep
+            Synapse
             </h2>
           </Column>
           <Padding />

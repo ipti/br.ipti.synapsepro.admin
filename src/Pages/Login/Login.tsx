@@ -61,7 +61,7 @@ const LoginPage = () => {
                 {/* <div className={classes.marginMobile20} /> */}
                 <Row style={{ justifyContent: "center" }}>
                   <Column>
-                    <h1>Synasep</h1>
+                    <h1>Synapse</h1>
                     <h4>Entre com suas crendencias</h4>
                   </Column>
                 </Row>
