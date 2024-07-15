@@ -2,9 +2,24 @@ import http from "../axios";
 import { GetIdUser } from "../localstorage";
 
 export const requestSocialTechnologytList = async () => {
+  console.log(GetIdUser())
+  if (false) {
+    return await http
+      .get("/user/teacher-school/" + GetIdUser().id)
+      .then((response) => response.data)
+      .catch((err) => {
+        // if(err.response.status === 401){
+        //   logout()
+        //   window.location.reload()
+        // }
+
+        throw err;
+      });
+  }
+
   if (GetIdUser()) {
     return await http
-      .get("/social-technology-bff/user", { params: { userId: GetIdUser() } })
+      .get("/school")
       .then((response) => response.data)
       .catch((err) => {
         // if(err.response.status === 401){
@@ -35,9 +50,9 @@ export const requestSocialTechnologyOne = async () => {
 };
 
 
-export const requestCreateSocialTechnology = async (body: {name: string}) => {
+export const requestCreateSocialTechnology = async (body: {name: string, uf: string}) => {
     return await http
-      .post("/social-technology-bff", body)
+      .post("/school", body)
       .then((response) => response.data)
       .catch((err) => {
         // if(err.response.status === 401){

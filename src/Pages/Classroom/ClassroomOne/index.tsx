@@ -10,7 +10,6 @@ import TextInput from "../../../Components/TextInput";
 
 import ContentPage from "../../../Components/ContentPage";
 import Loading from "../../../Components/Loading";
-import { AplicationContext } from "../../../Context/Aplication/context";
 import ClassroomProvider, {
   ClassroomContext,
 } from "../../../Context/Classroom/context";
@@ -18,9 +17,7 @@ import { ClassroomTypes } from "../../../Context/Classroom/type";
 import { ROLE } from "../../../Controller/controllerGlobal";
 import { useFetchRequestClassroomOne } from "../../../Services/Classroom/query";
 import { Column, Padding, Row } from "../../../Styles/styles";
-import { PropsAplicationContext } from "../../../Types/types";
 import CardItensClassrooom from "./CardItensClassroom";
-import ModalChange from "./ModalChangeClaassroom";
 
 const ClassroomOne = () => {
   return (
@@ -36,11 +33,6 @@ const ClassroomOnePage = () => {
   const props = useContext(ClassroomContext) as ClassroomTypes;
   const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!));
   const [edit, setEdit] = useState(false);
-  const [visible, setVisible] = useState(false);
-
-  const propsAplication = useContext(
-    AplicationContext
-  ) as PropsAplicationContext;
 
   if (props.isLoading) return <Loading />;
 
@@ -96,15 +88,6 @@ const ClassroomOnePage = () => {
                 />
               )}
             </Row>
-            {1 ===
-              (ROLE.ADMIN || ROLE.Coordenador) && (
-              <Button
-                text
-                label="Tranferir turma"
-                icon="pi pi-sync"
-                onClick={() => setVisible(true)}
-              />
-            )}
           </Row>
         </Column>
       )}
@@ -132,10 +115,6 @@ const ClassroomOnePage = () => {
             count={classroom?.meeting?.length}
           />
         </div>
-        {/* <div className="col-12 md:col-6" onClick={() => history(`/turma/${id}/relatorio`)}>
-                    <CardItensClassrooom title="Tabela" description="Relatório entre Alunos e Encontros" icon="pi pi-table" />
-                </div> */}
-        <ModalChange visible={visible} onHide={() => setVisible(false)} />
       </div>
       <div className="grid">
         <div

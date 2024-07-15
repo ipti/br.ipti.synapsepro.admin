@@ -7,18 +7,9 @@ export const UsersState = () => {
   const [users, setusers] = useState<any>();
   const [role, setRole] = useState<string | undefined>()
 
-  const { data: userRequest, isLoading } = useFetchRequestUsers(role);
+  const { data: userRequest, isLoading, error } = useFetchRequestUsers(role);
 
   const props = ControllerUser();
-
-  const GetId = (data: any) => {
-    const array = [];
-    for (const project of data) {
-      array.push(project.id);
-    }
-
-    return array;
-  };
 
   const CreateUser = (data: CreateUser) => {
     const body = {
@@ -55,5 +46,5 @@ export const UsersState = () => {
     }
   }, [userRequest, role]);
 
-  return { users, CreateUser, DeleteUser, UpdateUser, isLoading, role, setRole };
+  return { users, CreateUser, DeleteUser, UpdateUser, isLoading, error };
 };

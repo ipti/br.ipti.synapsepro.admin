@@ -6,14 +6,10 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ContentPage from "../../Components/ContentPage";
 
-import DropdownComponent from "../../Components/Dropdown";
 import Loading from "../../Components/Loading";
-import { AplicationContext } from "../../Context/Aplication/context";
 import UsersProvider, { UsersContext } from "../../Context/Users/context";
 import { UsersTypes } from "../../Context/Users/type";
-import { ROLE } from "../../Controller/controllerGlobal";
 import { Padding } from "../../Styles/styles";
-import { PropsAplicationContext } from "../../Types/types";
 
 const ListUsers = () => {
   return (
@@ -26,12 +22,10 @@ const ListUsers = () => {
 const ListUsersPage = () => {
   const props = useContext(UsersContext) as UsersTypes;
   const history = useNavigate();
-  const propsAplication = useContext(AplicationContext) as PropsAplicationContext;
 
 
-  const [visible, setVisible] = useState<any>(false)
+  const [visible, setVisible] = useState<any>(false);
   // const actionBodyTemplate = (rowData: any) => {
-
   //     return (
   //         <Row id='end'>
   //             {/* <Button icon="pi pi-pencil" rounded className="mr-2" onClick={() => { history("/users/" + rowData.id) }} /> */}
@@ -40,35 +34,14 @@ const ListUsersPage = () => {
   //     );
   // };
 
-  const typeUserBody = (rowData: any) => {
-    return (
-      <p>
-        {rowData.role === ROLE.ADMIN
-          ? "Admin"
-          : rowData.role === ROLE.Coordenador
-            ? "Coordenador"
-            : rowData.role === ROLE.Teacher
-              ? "Aluno"
-              : null}
-      </p>
-    );
-  };
 
-  const ActiveUserBody = (rowData: any) => {
-    return (
-      <p>
-        {rowData.active ? "Ativo" : "Desativado"}
-      </p>
-    );
-  };
+  // const ActionsUserBody = (rowData: any) => {
+  //   return (
+  //     <Button severity="danger" rounded icon={"pi pi-trash"} onClick={() => { setVisible(rowData) }} />
+  //   );
+  // };
 
-  const ActionsUserBody = (rowData: any) => {
-    return (
-      <Button severity="danger" rounded icon={"pi pi-trash"} onClick={() => { setVisible(rowData) }} />
-    );
-  };
-
-  if (props.isLoading) return <Loading />;
+  if (props.isLoading && !props.error) return <Loading />;
 
   const renderHeader = () => {
     return (
@@ -78,7 +51,7 @@ const ListUsersPage = () => {
       >
         <Button label="Criar usuário" onClick={() => history("/users/criar")} />
 
-        <div>
+        {/* <div>
           <DropdownComponent optionsLabel="name" value={props.role} onChange={(e) => props.setRole(e.target.value)} optionsValue="id" placerholder="Filtrar tipo de usuário" options={1 === ROLE.ADMIN
             ? [
               { id: "TODOS", name: "Todos" },
@@ -97,7 +70,7 @@ const ListUsersPage = () => {
               { id: ROLE.Student, name: "Aluno" },
             ]
           } />
-        </div>
+        </div> */}
 
       </div>
     );
@@ -109,12 +82,8 @@ const ListUsersPage = () => {
       <ContentPage title="Usuários" description="Lista usuários do MeuBen.">
         <Padding padding="16px" />
         <DataTable value={props.users} header={renderHeader} paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: "50rem" }}>
+        <Column field="id" header=""></Column>
           <Column field="name" header="Nome"></Column>
-          <Column field="username" header="Usuário"></Column>
-          <Column field="role" body={typeUserBody} header="Tipo"></Column>
-          <Column field="active" body={ActiveUserBody} header="Ativo"></Column>
-          <Column field="actions" body={ActionsUserBody} header="Ações"></Column>
-
         </DataTable>
       </ContentPage>
       <ConfirmDialog

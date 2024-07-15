@@ -1,32 +1,25 @@
 import { Form } from "formik";
-import { MultiSelect } from "primereact/multiselect";
-import { useContext } from "react";
 import DropdownComponent from "../../../Components/Dropdown";
 import TextInput from "../../../Components/TextInput";
-import { AplicationContext } from "../../../Context/Aplication/context";
-import {
-  ROLE
-} from "../../../Controller/controllerGlobal";
+import { ROLE } from "../../../Controller/controllerGlobal";
 import { useFetchRequestSocialTechnologyLists } from "../../../Services/SocialTechnology/query";
 import { Padding } from "../../../Styles/styles";
-import { PropsAplicationContext } from "../../../Types/types";
 
 const InputsUser = ({
   values,
   handleChange,
   errors,
   touched,
-  isStudent
+  isStudent,
 }: {
   values: any;
   handleChange: any;
   errors: any;
   touched: any;
-  isStudent?: boolean
+  isStudent?: boolean;
 }) => {
   const { data: projects } = useFetchRequestSocialTechnologyLists();
 
-  const props = useContext(AplicationContext) as PropsAplicationContext;
   return (
     <Form>
       <div className="grid">
@@ -53,14 +46,14 @@ const InputsUser = ({
           <Padding />
           <TextInput
             placeholder="Usuário"
-            value={values.username}
+            value={values.user_name}
             onChange={handleChange}
-            name="username"
+            name="user_name"
           />
           <Padding />
-          {errors.username && touched.username ? (
+          {errors.user_name && touched.user_name ? (
             <div style={{ color: "red" }}>
-              {errors.username}
+              {errors.user_name}
               <Padding />
             </div>
           ) : null}
@@ -81,16 +74,16 @@ const InputsUser = ({
             options={
               1 === ROLE.ADMIN
                 ? [
-                  { id: ROLE.ADMIN, name: "Admin" },
-                  { id: ROLE.Conteudista, name: "Conteudista" },
-                  { id: ROLE.Coordenador, name: "Coordenador" },
-                  { id: ROLE.Teacher, name: "Professor" },
-                  { id: ROLE.Student, name: "Aluno" },
-                ]
+                    { id: ROLE.ADMIN, name: "Admin" },
+                    { id: ROLE.Conteudista, name: "Conteudista" },
+                    { id: ROLE.Coordenador, name: "Coordenador" },
+                    { id: ROLE.Teacher, name: "Professor" },
+                    { id: ROLE.Student, name: "Aluno" },
+                  ]
                 : [
-                  { id: ROLE.Coordenador, name: "Coordenador" },
-                  { id: ROLE.Student, name: "Reaplicador" },
-                ]
+                    { id: ROLE.Coordenador, name: "Coordenador" },
+                    { id: ROLE.Student, name: "Reaplicador" },
+                  ]
             }
           />
           <Padding />
@@ -104,21 +97,19 @@ const InputsUser = ({
         <div className="col-12 md:col-6">
           <label>Escolas</label>
           <Padding />
-          <MultiSelect
+          <DropdownComponent
             options={projects}
-            optionLabel="name"
-            name="project"
-            value={values.project}
+            optionsLabel="name"
+            optionsValue="id"
+            name="school_id"
+            value={values.school_id}
             onChange={handleChange}
-            filter
-            placeholder="Projetos"
-            maxSelectedLabels={3}
-            className="w-full"
+            placerholder="Escolha a escola"
           />
           <Padding />
-          {errors.project && touched.project ? (
+          {errors.school_id && touched.school_id ? (
             <div style={{ color: "red" }}>
-              {errors.project}
+              {errors.school_id}
               <Padding />
             </div>
           ) : null}

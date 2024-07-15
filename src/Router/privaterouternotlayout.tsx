@@ -12,7 +12,7 @@ const PrivateRouteNotLayout = ({ Component }: { Component: React.ReactNode }) =>
         {Component}
       </div>
     </AplicationProvider>
-    : <Navigate to="/register" />
+    : <Navigate to="/login" />
 }
 
 

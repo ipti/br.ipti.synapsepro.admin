@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 
 export interface UsersTypes {
   users: any;
@@ -6,8 +5,7 @@ export interface UsersTypes {
   DeleteUser: (id: number) => void
   UpdateUser: (data: CreateUser, id: number) => void
   isLoading: boolean,
-  role?: string,
-  setRole: Dispatch<SetStateAction<string | undefined>>
+  error: unknown
 }
 
 export interface CreateUser {

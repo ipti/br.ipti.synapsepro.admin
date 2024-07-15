@@ -1,28 +1,11 @@
 import http from "../axios";
 import { GetIdTs, logout } from "../localstorage";
 
-export const requestAllRegistration = ({
-  page,
-  limite,
-  cpf,
-  name,
-  allFilter
-}: {
-  page: number;
-  limite: number;
-  name?: string,
-  cpf?: string,
-  allFilter?: string
-}) => {
-  const nameFilter = name ? "&nameFilter=" + name : ""
-  const cpfFilter = cpf ? "&cpfFilter=" + cpf : ""
-  const allFilterRequest = allFilter ? "&allFilter=" + allFilter : ""
+export const requestAllRegistration = () => {
+ 
 
   let path =
-    "/registration-token-bff/registration-all?page=" +
-    page +
-    "&limit=" +
-    limite + "&idTs="+ GetIdTs() + nameFilter + cpfFilter + allFilterRequest;
+    "/user/teacher-classrooms/" + GetIdTs();
   return http
     .get(path)
     .then((response) => response.data)

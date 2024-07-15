@@ -5,9 +5,9 @@ import { UsersState } from "./state";
 export const UsersContext = createContext<UsersTypes | null>(null);
 
 const UsersProvider = ({ children }: { children: React.ReactNode }) => {
-    const { users, CreateUser, DeleteUser, UpdateUser, isLoading, role, setRole } = UsersState()
+    const { users, CreateUser, DeleteUser, UpdateUser, isLoading, error } = UsersState()
     return (
-        <UsersContext.Provider value={{ users, CreateUser, DeleteUser, UpdateUser, isLoading, role, setRole }}>
+        <UsersContext.Provider value={{ users, CreateUser, DeleteUser, UpdateUser, isLoading, error }}>
             {children}
         </UsersContext.Provider>
     )

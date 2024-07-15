@@ -25,13 +25,14 @@ export const CreateUserPage = ({ isStudent }: { isStudent: boolean }) => {
     name: Yup.string()
       .required("Campo Obrigatório")
       .min(8, "Nome deve ter pelo menos 8 caracteres"),
-    username: Yup.string()
+    user_name: Yup.string()
       .required("Campo Obrigatório")
       .min(8, "Nome do usuário deve ter pelo menos 8 caracteres"),
     password: Yup.string()
       .required("Campo Obrigatório")
       .min(8, "Senha deve ter pelo menos 8 caracteres"),
     user_type_id: Yup.number().required("Campo Obrigatório"),
+    school_id: Yup.number().required("Campo Obrigatório"),
     confirmPassword: Yup.string()
       .label("Confirmar senha")
       .required("Campo Obrigatório")
@@ -51,6 +52,7 @@ export const CreateUserPage = ({ isStudent }: { isStudent: boolean }) => {
           confirmPassword: "",
         }}
         onSubmit={(values) => {
+
           props.CreateUser({
             ...values,
           });
@@ -58,6 +60,8 @@ export const CreateUserPage = ({ isStudent }: { isStudent: boolean }) => {
         validationSchema={CreateUserSchema}
       >
         {({ values, handleChange, errors, touched }) => {
+
+          console.log(errors)
           return (
             <Form>
               <InputsUser

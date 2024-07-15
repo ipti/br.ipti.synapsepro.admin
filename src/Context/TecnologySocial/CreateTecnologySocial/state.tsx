@@ -3,7 +3,7 @@ import { TechnologySocialController } from "../../../Services/SocialTechnology/c
 export const CreateTsState = () => {
 
     const {requestCreateprojectMutation} = TechnologySocialController()
-    const CreateTechnology = (body: {name: string}) => {
+    const CreateTechnology = (body: {name: string, uf: string}) => {
         requestCreateprojectMutation.mutate(body)
     }
 

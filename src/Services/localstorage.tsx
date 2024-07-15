@@ -64,7 +64,9 @@ export const GetIdTs = () => {
 };
 
 export const GetIdUser = () => {
-  return localStorage.getItem(id_key);
+  const user = localStorage.getItem(id_key);
+  const parsedObject = JSON.parse(user!);
+  return parsedObject
 };
 export const menuItem = (id: string) => {
   localStorage.setItem(menu_key, id);

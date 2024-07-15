@@ -12,36 +12,15 @@ const BeneficiariesListProvider = ({
 }) => {
   const {
     registrations,
-    limite,
-    handleFilter,
-    page,
-    setLimite,
-    setPage,
-    filter,
-    setFilter,
     DeleteRegistration,
-    cpfFilter,
-    nameFilter,
-    allFilter,
-    setallFilter
+   
   } = BeneficiariesListState();
 
   return (
     <BeneficiariesListContext.Provider
       value={{
         registrations,
-        handleFilter,
-        limite,
-        page,
-        setLimite,
-        setPage,
-        filter,
-        setFilter,
         DeleteRegistration,
-        cpfFilter,
-        nameFilter,
-        allFilter,
-        setallFilter
       }}
     >
       {children}

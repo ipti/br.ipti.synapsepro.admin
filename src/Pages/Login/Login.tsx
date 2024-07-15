@@ -1,19 +1,21 @@
 import { Form, Formik } from "formik";
-import { Link } from "react-router-dom";
 
-import TagImage from "../../Assets/images/logo.svg";
 
 import { Button } from "primereact/button";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import * as Yup from "yup";
-import DropdownComponent from "../../Components/Dropdown";
+import imageRight from "../../Assets/images/personagem_comemorando_CELESTE_cie.png";
+import imageLeft from "../../Assets/images/personagem_comemorando_MATEUS_mat.png";
 import TextInput from "../../Components/TextInput";
 import PasswordInput from "../../Components/TextPassword";
 import LoginProvider, { LoginContext } from "../../Context/Login/context";
 import { LoginContextText } from "../../Context/Login/types";
-import { setYear } from "../../Services/localstorage";
-import { Padding, Row } from "../../Styles/styles";
-import { ContainerLogin } from "./styles";
+import { Column, Padding, Row } from "../../Styles/styles";
+import {
+  BackgroundBottomRight,
+  BackgroundTopLeft,
+  ContainerLogin,
+} from "./styles";
 
 const Login = () => {
   return (
@@ -26,55 +28,23 @@ const Login = () => {
 const LoginPage = () => {
   const props = useContext(LoginContext) as LoginContextText;
 
-  const years = [
-    { value: 2024 },
-    { value: 2023 },
-    { value: 2022 },
-    { value: 2021 },
-  ];
-
-
-  const [year, setYearState] = useState<any>();
-
   const LoginSchema = Yup.object().shape({
     password: Yup.string().required("Campo Obrigatório"),
     user_name: Yup.string().required("Campo Obrigatório"),
   });
 
-  useEffect(() => {
-    setYear("2024");
-    setYearState(2024);
-  }, []);
-
   return (
-    <ContainerLogin>
-      <div className="grid h-full">
-
-
-        <div
-          // style={{
-          //   display: "flex",
-          //   flexDirection: "column",
-          //   justifyContent: "center",
-          //   alignItems: "center",
-          //   height: "100%",
-          //   width: "100%",
-          //   position: "relative",
-          // }}
-          className="col-12 lg:col-5"
-        >
-          <Row style={{justifyContent: "center"}}>
-
-            <div className="resetPassword textCenter">
-              <div className="buttonLogin">
-                Faça sua matricula
-                <Link className="link" to="/register">
-                  clique aqui
-                </Link>
-              </div>
-            </div>
-          </Row>
+    <>
+      <BackgroundTopLeft>
+        <img src={imageLeft} alt="" />
+      </BackgroundTopLeft>
+      <BackgroundBottomRight>
+        <img src={imageRight} alt="" />
+      </BackgroundBottomRight>
+      <ContainerLogin>
+        <div className="grid h-full">
           <div
+            className="col-12 lg:col-7"
             style={{
               display: "flex",
               flexDirection: "column",
@@ -83,126 +53,98 @@ const LoginPage = () => {
               height: "100%",
               width: "100%",
               position: "relative",
-              overflowY: "auto"
+              overflowY: "auto",
             }}
           >
-            <div className="col-11 md:col-9">
-              {/* <div className={classes.marginMobile20} /> */}
-              <Row style={{ justifyContent: "center" }}>
-                <img src={TagImage} alt=""></img>
-              </Row>
-              {/* <div className={classes.marginMobile} /> */}
-              <div className="p-4" />
-              <Formik
-                initialValues={props.initialValue}
-                onSubmit={(values) => {
-                  props.Login(values);
-                }}
-                validationSchema={LoginSchema}
-                validateOnChange={false}
-              >
-                {({ values, errors, handleChange, touched }) => {
-                  return (
-                    <Form>
-                      <div>
-                        <div>
-                          <label>Usuário</label>
-                          <Padding />
-                          <TextInput
-                            name="user_name"
-                            value={values.user_name}
-                            onChange={handleChange}
-                            placeholder="Usuário"
-                          />
-                          <Padding />
-                          {errors.user_name && touched.user_name ? (
-                            <div style={{ color: "red", marginTop: "8px" }}>
-                              {errors.user_name}
-                            </div>
-                          ) : null}
-                        </div>
-                      </div>
-                      <div className="p-2" />
-                      <div>
-                        <div>
-                          <label>Senha</label>
-                          <Padding />
-                          <PasswordInput
-                            name="password"
-                            placeholder="Senha"
-                            onChange={handleChange}
-                            value={values.password}
-                          />
-                          <Padding />
-                          {errors.password && touched.password ? (
-                            <div style={{ color: "red", marginTop: "8px" }}>
-                              {errors.password}
-                            </div>
-                          ) : null}
-                        </div>
-                      </div>
-                      <Padding />
-                      <div>
-                        <div>
-                          <label>Ano</label>
-                          <Padding />
-                          <DropdownComponent
-                            options={years}
-                            placerholder="Ano"
-                            onChange={(e) => {
-                              setYearState(e.target.value);
-                              setYear(e.target.value.toString());
-                            }}
-                            optionsLabel="value"
-                            optionsValue="value"
-                            value={year}
-                          />
-                        </div>
-                      </div>
-                      <Padding />
-
-                      {props.error ? (
+            <div>
+              <div className="col-12 md:col-12">
+                {/* <div className={classes.marginMobile20} /> */}
+                <Row style={{ justifyContent: "center" }}>
+                  <Column>
+                    <h1>Synasep</h1>
+                    <h4>Entre com suas crendencias</h4>
+                  </Column>
+                </Row>
+                {/* <div className={classes.marginMobile} /> */}
+                <div className="p-4" />
+                <Formik
+                  initialValues={props.initialValue}
+                  onSubmit={(values) => {
+                    props.Login(values);
+                  }}
+                  validationSchema={LoginSchema}
+                  validateOnChange={false}
+                >
+                  {({ values, errors, handleChange, touched }) => {
+                    return (
+                      <Form>
                         <div>
                           <div>
-                            {!props.error ? "Usuário ou senha inválido" : ""}
+                            <label>Usuário</label>
+                            <Padding />
+                            <TextInput
+                              name="user_name"
+                              value={values.user_name}
+                              onChange={handleChange}
+                              placeholder="Usuário"
+                            />
+                            <Padding />
+                            {errors.user_name && touched.user_name ? (
+                              <div style={{ color: "red", marginTop: "8px" }}>
+                                {errors.user_name}
+                              </div>
+                            ) : null}
                           </div>
                         </div>
-                      ) : null}
-                      <div className="p-2" />
-                      <div>
+                        <div className="p-2" />
                         <div>
-                          <Button
-                            className={"t-button-primary"}
-                            type="submit"
-                            label="Entrar"
-                          />
+                          <div>
+                            <label>Senha</label>
+                            <Padding />
+                            <PasswordInput
+                              name="password"
+                              placeholder="Senha"
+                              onChange={handleChange}
+                              value={values.password}
+                            />
+                            <Padding />
+                            {errors.password && touched.password ? (
+                              <div style={{ color: "red", marginTop: "8px" }}>
+                                {errors.password}
+                              </div>
+                            ) : null}
+                          </div>
                         </div>
-                      </div>
-                      <div className="p-2" />
-                    </Form>
-                  );
-                }}
-              </Formik>
-            </div>
-          </div>
-        </div>
-        <div className="col-0 lg:col-7 w-auto"
-        >
-          <div className="imgBack">
-            <div className="divBlue" />
-            <div className="formSignUp">
-              <div className="TextLarge">
-                Maximizando Eficiência <br />e Transparência
+                        <Padding />
+
+                        {props.error ? (
+                          <div>
+                            <div>
+                              {!props.error ? "Usuário ou senha inválido" : ""}
+                            </div>
+                          </div>
+                        ) : null}
+                        <div className="p-2" />
+                        <div>
+                          <div>
+                            <Button
+                              className={"t-button-primary"}
+                              type="submit"
+                              label="Entrar"
+                            />
+                          </div>
+                        </div>
+                        <div className="p-2" />
+                      </Form>
+                    );
+                  }}
+                </Formik>
               </div>
-              <Padding padding="8px" />
-              <Row id="center" style={{ width: "65%" }}>
-                <p className="pLogin">Solução completa para otimizar a distribuição de benefícios, promover a transparência e fortalecer a confiança das comunidades nos programas do THP.</p>
-              </Row>
             </div>
           </div>
         </div>
-      </div>
-    </ContainerLogin>
+      </ContainerLogin>
+    </>
   );
 };
 

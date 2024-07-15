@@ -10,7 +10,7 @@ export const TechnologySocialController = () => {
     const history = useNavigate()
 
     const requestCreateprojectMutation = useMutation(
-        (data: {name: string}) => requestCreateSocialTechnology(data),
+        (data: {name: string, uf: string}) => requestCreateSocialTechnology(data),
         {
             onError: (error: any) => {
                 alert(error?.response.data.message);
@@ -23,7 +23,7 @@ export const TechnologySocialController = () => {
                 }).then((result) => {
                     queryClient.refetchQueries("useRequestSocialTechnologyList")
                     if (result.isConfirmed) {
-                        history('/tecnologias')
+                        history('/escolas')
                     }
                 })
             },

@@ -10,7 +10,9 @@ on:
       - main
 
 env:
-  REACT_APP_API_PATH: https://br-ipti-beneficiarios.azurewebsites.net
+  REACT_APP_API_PATH: https://synapsepro.azurewebsites.net/
+  REACT_APP_API_PATH_USERNAME: editor
+  REACT_APP_API_PATH_PASSWORD: iptisynpaseeditor2022
 
 jobs:
   build_and_deploy_job:

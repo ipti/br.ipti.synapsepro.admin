@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import TagLogin from "../../Assets/images/logo.svg";
 import turmasHover from "../../Assets/images/turmasPessoas.svg";
-import { AplicationContext } from "../../Context/Aplication/context";
 import { ROLE } from "../../Controller/controllerGlobal";
 import {
   getMenuItem,
@@ -14,7 +12,6 @@ import {
 } from "../../Services/localstorage";
 import styles from "../../Styles";
 import { Column, Padding, Row } from "../../Styles/styles";
-import { PropsAplicationContext } from "../../Types/types";
 import DropdownComponent from "../Dropdown";
 import Icon from "../Icon";
 import Item from "./Item";
@@ -29,21 +26,21 @@ import tecnologia_hover from "../../Assets/images/iconsMenu/digital_wellbeing_ac
 import beneficiaries from "../../Assets/images/iconsMenu/diversity_4.svg";
 import beneficiaries_hover from "../../Assets/images/iconsMenu/diversity_hover.svg";
 
-
 import user from "../../Assets/images/iconsMenu/person.svg";
 import user_hover from "../../Assets/images/iconsMenu/person_active.svg";
 
 const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
   const [active, setActive] = useState(parseInt(getMenuItem()!));
   const [visibleModal, setVisibleModal] = useState(false);
-  const props = useContext(AplicationContext) as PropsAplicationContext;
   return (
     <Container active={viewdMenu}>
       <Padding padding="4px" />
       <Padding padding="16px">
         <Row id="center">
           <Column id="center">
-            <img src={TagLogin} style={{ width: "128px" }} alt=""></img>
+            <h2 style={{ fontFamily: styles.typography.types.bold }}>
+              Synasep
+            </h2>
           </Column>
           <Padding />
           <Column id="center">
@@ -89,14 +86,14 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           <Item
             text={"Escolas"}
             funcActiv={() => {
-              setActive(2);
-              menuItem("2");
+              setActive(1);
+              menuItem("1");
             }}
-            active={active === 2 ? true : false}
-            path={"/tecnologias"}
-            icon={active === 2 ? tecnologia_hover : tecnologia}
+            active={active === 1 ? true : false}
+            path={"/escolas"}
+            icon={active === 1 ? tecnologia_hover : tecnologia}
           />
-          <Padding /> 
+          <Padding />
           <Item
             text={"Turmas"}
             funcActiv={() => {
@@ -117,7 +114,8 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             active={active === 5 ? true : false}
             path={"/beneficiarios"}
             icon={active === 5 ? beneficiaries_hover : beneficiaries}
-          /><Padding />
+          />
+          <Padding />
           {/* <Item
             text={"Reaplicadores"}
             funcActiv={() => {
@@ -128,9 +126,8 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             path={"/reaplicadores"}
             icon={active === 8 ? turmasHover : turmas}
           /> */}
-          
-          {1 === ROLE.ADMIN ||
-            2 === ROLE.Coordenador ? (
+
+          {1 === ROLE.ADMIN || 2 === ROLE.Coordenador ? (
             <Item
               text={"Usuarios"}
               funcActiv={() => {

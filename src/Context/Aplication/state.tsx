@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useFetchRequestSocialTechnologyLists } from "../../Services/SocialTechnology/query";
-import { useFetchRequestUsersOne } from "../../Services/Users/query";
 import { GetIdTs, GetIdUser, idTs } from "../../Services/localstorage";
 import { Projects, PropsForm } from "../../Types/types";
 import { User } from "../Users/type";
 
 const AplicationState = () => {
     const [form, setform] = useState<PropsForm>({ title: "Formulário Sem título", description: "", question: [] })
-    // const { data: projects } = useFetchRequestSocialTechnologyLists();
+    const { data: projects } = useFetchRequestSocialTechnologyLists();
 
     const [project, setproject] = useState<Array<Projects> | undefined>();
     const [user, setuser] = useState<User | undefined>();
@@ -18,22 +17,19 @@ const AplicationState = () => {
 
 
     useEffect(() => {
-        // if (projects) {
-        //     setproject(projects)
+        if (projects) {
+            setproject(projects)
 
-        //     if (!GetIdTs()) {
-        //         idTs(projects[0]?.id?.toString())
-        //     }
+            if (!GetIdTs()) {
+                idTs(projects[0]?.id?.toString())
+            }
 
-        // }
+        }
         if (GetIdUser()) {
-            const storedObject = JSON.parse(GetIdUser()!);
+            const storedObject = GetIdUser();
             setuser(storedObject)
         }
-    }, [])
-
-    console.log(user)
-
+    }, [projects])
     return {
         form, setform, project, user
     }
