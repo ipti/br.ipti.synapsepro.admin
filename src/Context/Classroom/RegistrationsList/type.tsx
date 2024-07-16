@@ -1,39 +1,23 @@
-import { Status } from "../../../Controller/controllerGlobal";
 
 export interface RegistrationClassroomTypes {
-  registrations?: RegistrationsList;
+  registrations?: RegistrationsList | undefined;
   DeleteRegistration: (id: number) => void
   isLoading: boolean
 }
 
-export type RegistrationsList = RegistrationType[];
+export type RegistrationsList = Root;
 
 
 
-export interface RegistrationType {
-  id: number
-  registration_fk: number
-  classroom_fk: number
-  createdAt: string
-  updatedAt: string
-  registration: Registration,
-  status: string
-}
-
-export interface Registration {
+export interface Root {
   id: number
   name: string
-  birthday: string
-  cpf: string
-  sex: number
-  color_race: number
-  deficiency: boolean
-  deficiency_description: any
-  responsable_name: string
-  responsable_cpf: string
-  responsable_telephone: string
-  zone: number
-  status: string
-  createdAt: string
-  updatedAt: string
+  students: Student[]
+}
+
+export interface Student {
+  id: number
+  name: string
+  created_at: string
+  updated_at: string
 }

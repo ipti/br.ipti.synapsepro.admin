@@ -13,7 +13,6 @@ import {
 import styles from "../../Styles";
 import { Column, Padding, Row } from "../../Styles/styles";
 import DropdownComponent from "../Dropdown";
-import Icon from "../Icon";
 import Item from "./Item";
 import { Container } from "./style";
 
@@ -39,10 +38,10 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
         <Row id="center">
           <Column id="center">
             <h2 style={{ fontFamily: styles.typography.types.bold }}>
-            Synapse
+              Synapse
             </h2>
           </Column>
-          <Padding />
+          {/* <Padding />
           <Column id="center">
             <div
               style={{
@@ -56,7 +55,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
               {getYear() ? getYear() : "Sem ano"}
               <Icon icon="pi pi-angle-down" size="0.8rem" />
             </div>
-          </Column>
+          </Column> */}
         </Row>
       </Padding>
       <Padding padding="8px" />

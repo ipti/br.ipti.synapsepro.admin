@@ -65,13 +65,9 @@ export const requestProjectsAndClassroom = () => {
 
 
 export const requestClassroomRegistration = (id: number) => {
-  let path = "/registration-classroom-bff";
+  let path = "/classroom/"+id;
   return http
-    .get(path, {
-      params: {
-        idClassroom: id
-      }
-    })
+    .get(path)
     .then(response => response.data)
     .catch(err => {
       if (err.response.status === 401) {

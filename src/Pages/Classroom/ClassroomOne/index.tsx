@@ -4,8 +4,6 @@ import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import pessoas from "../../../Assets/images/pessoasgray.svg";
 
-import report from "../../../Assets/images/report-svgrepo-com.svg";
-import meeting from "../../../Assets/images/school_teacher.svg";
 import TextInput from "../../../Components/TextInput";
 
 import ContentPage from "../../../Components/ContentPage";
@@ -14,7 +12,6 @@ import ClassroomProvider, {
   ClassroomContext,
 } from "../../../Context/Classroom/context";
 import { ClassroomTypes } from "../../../Context/Classroom/type";
-import { ROLE } from "../../../Controller/controllerGlobal";
 import { useFetchRequestClassroomOne } from "../../../Services/Classroom/query";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import CardItensClassrooom from "./CardItensClassroom";
@@ -76,7 +73,7 @@ const ClassroomOnePage = () => {
       ) : (
         <Column>
           <Row id="end">
-            <Row>
+            {/* <Row>
               <Padding />
               {1 ===
                 (ROLE.ADMIN || ROLE.Coordenador) && (
@@ -87,7 +84,7 @@ const ClassroomOnePage = () => {
                   onClick={() => setEdit(true)}
                 />
               )}
-            </Row>
+            </Row> */}
           </Row>
         </Column>
       )}
@@ -101,10 +98,10 @@ const ClassroomOnePage = () => {
             title="Matriculas"
             description="Acesse para gerenciar seus alunos"
             icon={pessoas}
-            count={classroom?.register_classroom?.length}
+            count={classroom?.students?.length}
           />
         </div>
-        <div
+        {/* <div
           className="col-12 md:col-6"
           onClick={() => history(`/turma/${id}/encontros`)}
         >
@@ -114,9 +111,9 @@ const ClassroomOnePage = () => {
             icon={meeting}
             count={classroom?.meeting?.length}
           />
-        </div>
+        </div> */}
       </div>
-      <div className="grid">
+      {/* <div className="grid">
         <div
           className="col-12 md:col-6"
           onClick={() => history(`/turma/${id}/relatorio`)}
@@ -128,7 +125,7 @@ const ClassroomOnePage = () => {
             // count={classroom?.register_classroom?.length}
           />
         </div>
-      </div>
+      </div> */}
     </ContentPage>
   );
 };

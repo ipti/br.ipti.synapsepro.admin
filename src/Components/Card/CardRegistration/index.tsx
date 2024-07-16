@@ -1,40 +1,21 @@
 import { ConfirmDialog } from "primereact/confirmdialog";
 import { useContext, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import IconActive from "../../../Assets/images/activeRegistration.svg";
-import IconClasMedia from "../../../Assets/images/iconClasMedia.svg";
-import IconNotActive from "../../../Assets/images/notactiveRegistration.svg";
 import { RegistrationClassroomContext } from "../../../Context/Classroom/RegistrationsList/context";
 import { RegistrationClassroomTypes } from "../../../Context/Classroom/RegistrationsList/type";
-import { ROLE, Status } from "../../../Controller/controllerGlobal";
 import { Column, Padding, Row } from "../../../Styles/styles";
-import Icon from "../../Icon";
 import { Container } from "./style";
-import { AplicationContext } from "../../../Context/Aplication/context";
-import { PropsAplicationContext } from "../../../Types/types";
 
 const CardRegistration = ({
   title,
   subtitle,
-  idRegistration,
-  status,
+  idRegistration
 }: {
   title: string;
   subtitle: string;
   idRegistration: number;
-  status: string;
 }) => {
   const [visible, setVisible] = useState(false);
-  const history = useNavigate();
-
-  const statuGlobal = Status;
-
-  const { id } = useParams();
-
-  const propsAplication = useContext(
-    AplicationContext
-  ) as PropsAplicationContext;
-
   const props = useContext(
     RegistrationClassroomContext
   ) as RegistrationClassroomTypes;
@@ -43,17 +24,17 @@ const CardRegistration = ({
     <>
       <Container
         className="card cursor-pointer"
-        onClick={(e) => {
-          e.stopPropagation();
-          if ((1 === ROLE.ADMIN ||
-            2 === ROLE.Coordenador)) {
-            history(`/turma/${id}/aluno/${idRegistration}`);
-          }
-        }}
+        // onClick={(e) => {
+        //   e.stopPropagation();
+        //   if ((1 === ROLE.ADMIN ||
+        //     2 === ROLE.Coordenador)) {
+        //     history(`/turma/${id}/aluno/${idRegistration}`);
+        //   }
+        // }}
       >
         <Row id="space-between">
           <h3>{subtitle}</h3>
-          {(1 === ROLE.ADMIN ||
+          {/* {(1 === ROLE.ADMIN ||
             2 === ROLE.Coordenador) && <div
               className="cursor-pointer"
               onClick={(e) => {
@@ -62,21 +43,14 @@ const CardRegistration = ({
               }}
             >
               <Icon icon="pi pi-trash" size="1rem" />
-            </div>}
+            </div>} */}
         </Row>
         <Padding padding="8px" />
         <Row>
           <div className={`boxQuantity`}>
             <Column id="center">
               <img
-                src={
-                  status === statuGlobal.APPROVED
-                    ? IconActive
-                    : status === statuGlobal.PENDING
-                      ? IconClasMedia
-                      : status === statuGlobal.REPROVED
-                        ? IconNotActive
-                        : ""
+                src={ IconActive
                 }
                 alt=""
                 style={{ height: 40 }}
@@ -84,19 +58,9 @@ const CardRegistration = ({
             </Column>
           </div>
           <Padding />
-          <Column>
+          <Column id="center">
             <div className={"boxDescriptionSchedule"}>
               {"Matricula - " + title}
-            </div>
-            <Padding />
-            <div className={"boxDescriptionScheduleSubtitle"}>
-              {status === statuGlobal.APPROVED
-                ? "Aprovado"
-                : status === statuGlobal.PENDING
-                  ? "Pendente"
-                  : status === statuGlobal.REPROVED
-                    ? "Reprovado"
-                    : ""}
             </div>
           </Column>
         </Row>

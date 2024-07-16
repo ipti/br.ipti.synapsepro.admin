@@ -4,13 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { ClassroomContext } from "../../../Context/Classroom/context";
 import { ClassroomTypes } from "../../../Context/Classroom/type";
 import { Column, Padding, Row } from "../../../Styles/styles";
-import Icon from "../../Icon";
 import IconClassroom from "./../../../Assets/images/cardturmas.svg";
 import { Container } from "./style";
 
-import { ROLE } from "../../../Controller/controllerGlobal";
 import { menuItem } from "../../../Services/localstorage";
-import styles from "../../../Styles";
 
 const CardClassroom = ({
   title,
@@ -45,7 +42,7 @@ const CardClassroom = ({
               <h3>{title}</h3>
             </Column>
           </Row>
-          {(1 === ROLE.ADMIN ||
+          {/* {(1 === ROLE.ADMIN ||
             2 === ROLE.Coordenador) && (
             <div
               className="cursor-pointer"
@@ -61,7 +58,7 @@ const CardClassroom = ({
                 fontWeight="900"
               />
             </div>
-          )}
+          )} */}
         </Row>
         <Padding padding="8px" />
       </Container>

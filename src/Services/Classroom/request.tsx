@@ -1,6 +1,6 @@
 import { ChangeClassroom, CreateClassroom } from "../../Context/Classroom/type";
 import http from "../axios";
-import { logout } from "../localstorage";
+import { GetIdTs, GetIdUser, logout } from "../localstorage";
 
 export const requestCreateClassroom = (data: CreateClassroom) => {
   return http
@@ -17,7 +17,8 @@ export const requestCreateClassroom = (data: CreateClassroom) => {
 };
 
 export const requestClassroom = (idProject: number) => {
-  let path = "/classroom/by_teacher_id/3";
+  if (GetIdUser().teacher.id) {
+    let path = "/classroom/by-school-id/" + GetIdTs();
     return http
       .get(path)
       .then((response) => response.data)
@@ -28,13 +29,25 @@ export const requestClassroom = (idProject: number) => {
         }
         throw err;
       });
-  
+  }
+
+  let path = "/classroom/by_teacher_id/" + GetIdTs();
+  return http
+    .get(path)
+    .then((response) => response.data)
+    .catch((err) => {
+      if (err.response.status === 401) {
+        logout();
+        window.location.reload();
+      }
+      throw err;
+    });
 };
 
 export const requestClassroomOne = (id: number) => {
-  let path = "/classroom-bff/one";
+  let path = "/classroom/"+ id;
   return http
-    .get(path, { params: { idClassroom: id } })
+    .get(path)
     .then((response) => response.data)
     .catch((err) => {
       if (err.response.status === 401) {
@@ -92,13 +105,9 @@ export const requestChangeClassroom = (data: ChangeClassroom) => {
 };
 
 export const requestClassroomRegistration = (id: number) => {
-  let path = "/registration-classroom-bff";
+  let path = "/classroom/"+ id;
   return http
-    .get(path, {
-      params: {
-        idClassroom: id,
-      },
-    })
+    .get(path)
     .then((response) => response.data)
     .catch((err) => {
       if (err.response.status === 401) {

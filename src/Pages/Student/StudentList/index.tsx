@@ -2,7 +2,6 @@ import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { ConfirmDialog } from "primereact/confirmdialog";
 import { DataTable } from "primereact/datatable";
-import { InputText } from "primereact/inputtext";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ContentPage from "../../../Components/ContentPage";
@@ -11,7 +10,7 @@ import BeneficiariesListProvider, {
 } from "../../../Context/Beneficiaries/BeneficiariesList/context";
 import { BeneficiariesListType } from "../../../Context/Beneficiaries/BeneficiariesList/type";
 import color from "../../../Styles/colors";
-import { Padding, Row } from "../../../Styles/styles";
+import { Padding } from "../../../Styles/styles";
 
 const BeneficiariesList = () => {
   return (
@@ -38,12 +37,6 @@ const BeneficiariesListPage = () => {
           icon="pi pi-plus"
           onClick={() => history("criar")}
         />
-        <span className="p-input-icon-left">
-          <i className="pi pi-search" />
-          <InputText
-          
-          />
-        </span>
         {/* <Button
           label={window.innerWidth > 800 ? "Configurar filtro" : undefined}
           icon="pi pi-filter"
@@ -55,27 +48,27 @@ const BeneficiariesListPage = () => {
     );
   };
 
-  const ActionBeneficiariesBody = (rowData: any) => {
-    return (
-      <Row id="center" style={{ gap: "8px" }}>
-        <Button
-          rounded
-          icon={"pi pi-pencil"}
-          onClick={() => {
-            history(`${rowData.id}`);
-          }}
-        />
-        <Button
-          severity="danger"
-          rounded
-          icon={"pi pi-trash"}
-          onClick={() => {
-            setVisible(rowData);
-          }}
-        />
-      </Row>
-    );
-  };
+  // const ActionBeneficiariesBody = (rowData: any) => {
+  //   return (
+  //     <Row id="center" style={{ gap: "8px" }}>
+  //       <Button
+  //         rounded
+  //         icon={"pi pi-pencil"}
+  //         onClick={() => {
+  //           history(`${rowData.id}`);
+  //         }}
+  //       />
+  //       <Button
+  //         severity="danger"
+  //         rounded
+  //         icon={"pi pi-trash"}
+  //         onClick={() => {
+  //           setVisible(rowData);
+  //         }}
+  //       />
+  //     </Row>
+  //   );
+  // };
 
   return (
     <>
@@ -96,7 +89,7 @@ const BeneficiariesListPage = () => {
             header="Escola"
           ></Column>
           <Column field="classroom_name" header="Turma"></Column>
-          <Column header="Ações" body={ActionBeneficiariesBody}></Column>
+          {/* <Column header="Ações" body={ActionBeneficiariesBody}></Column> */}
         </DataTable>
       </ContentPage>
       <ConfirmDialog

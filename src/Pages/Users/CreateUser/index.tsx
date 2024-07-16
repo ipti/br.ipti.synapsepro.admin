@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import ContentPage from "../../../Components/ContentPage";
 import UsersProvider, { UsersContext } from "../../../Context/Users/context";
 import { UsersTypes } from "../../../Context/Users/type";
-import { Padding } from "../../../Styles/styles";
+import { Column, Padding, Row } from "../../../Styles/styles";
 import InputsUser from "../Inputs";
 import PasswordInput from "../../../Components/TextPassword";
 import { Button } from "primereact/button";
@@ -52,7 +52,6 @@ export const CreateUserPage = ({ isStudent }: { isStudent: boolean }) => {
           confirmPassword: "",
         }}
         onSubmit={(values) => {
-
           props.CreateUser({
             ...values,
           });
@@ -60,8 +59,7 @@ export const CreateUserPage = ({ isStudent }: { isStudent: boolean }) => {
         validationSchema={CreateUserSchema}
       >
         {({ values, handleChange, errors, touched }) => {
-
-          console.log(errors)
+          console.log(errors);
           return (
             <Form>
               <InputsUser
@@ -108,7 +106,11 @@ export const CreateUserPage = ({ isStudent }: { isStudent: boolean }) => {
                 </div>
               </div>{" "}
               <Padding padding="16px" />
-              <Button label="Criar" />
+              <Column>
+                <Row id="end">
+                  <Button label="Criar" />
+                </Row>
+              </Column>
             </Form>
           );
         }}
