@@ -17,7 +17,7 @@ export const UsersState = () => {
       user_name: data.user_name,
       password: data.password,
       user_type_id: data.user_type_id,
-      school_id: 2
+      school_id: data.school_id
     }
     props.requestUserMutation.mutate(body);
   };

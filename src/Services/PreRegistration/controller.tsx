@@ -48,9 +48,9 @@ export const ControllerPreRegistration = () => {
         }).then((result) => {
           if (result.isConfirmed) {
             if(data?.user?.id){
-              history("/beneficiarios/" + data?.user?.id);
+              history("/aluno/" + data?.user?.id);
             } else {
-              history("/beneficiarios");
+              history("/aluno");
             }
           }
         });

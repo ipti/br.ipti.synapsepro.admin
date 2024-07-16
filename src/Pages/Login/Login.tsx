@@ -54,10 +54,11 @@ const LoginPage = () => {
               width: "100%",
               position: "relative",
               overflowY: "auto",
+
             }}
           >
-            <div>
-              <div className="col-12 md:col-12">
+            <div style={{zIndex: 200, position: "absolute"}}>
+              <div className="col-12 md:col-12" >
                 {/* <div className={classes.marginMobile20} /> */}
                 <Row style={{ justifyContent: "center" }}>
                   <Column>

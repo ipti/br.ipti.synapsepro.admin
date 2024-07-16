@@ -67,7 +67,7 @@ export const ContainerLogin = styled.div`
   background-repeat: no-repeat;
   background-position: right top;
   position: fixed;
-
+  z-index: 200;
   h1 {
     font-family: ${styles.typography.types.bold};
     text-align: center;

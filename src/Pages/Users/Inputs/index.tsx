@@ -70,7 +70,7 @@ const InputsUser = ({
             optionsValue="id"
             value={values.user_type_id}
             onChange={handleChange}
-            disabled={isStudent}
+            disabled
             options={
               1 === ROLE.ADMIN
                 ? [

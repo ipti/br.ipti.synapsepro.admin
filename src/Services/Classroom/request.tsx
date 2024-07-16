@@ -1,4 +1,4 @@
-import { ChangeClassroom, CreateClassroom } from "../../Context/Classroom/type";
+import { AddClassroom, ChangeClassroom, CreateClassroom } from "../../Context/Classroom/type";
 import http from "../axios";
 import { GetIdTs, GetIdUser, logout } from "../localstorage";
 
@@ -15,6 +15,21 @@ export const requestCreateClassroom = (data: CreateClassroom) => {
       throw err;
     });
 };
+
+export const requestAddClassroom = (data: AddClassroom) => {
+  return http
+    .post("/classroom/add-student", data)
+    .then((response) => response.data)
+    .catch((err) => {
+      if (err.response.status === 401) {
+        logout();
+        window.location.reload();
+      }
+      alert(err.response.message);
+      throw err;
+    });
+};
+
 
 export const requestClassroom = (idProject: number) => {
   if (GetIdUser().teacher.id) {

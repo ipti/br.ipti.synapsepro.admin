@@ -55,15 +55,15 @@ const RoutesApp = () => {
         />
         <Route
           element={<PrivateRoute Component={<BeneficiariesList />} />}
-          path="/beneficiarios"
+          path="/alunos"
         />
         <Route
           element={<PrivateRoute Component={<BeneficiariesCreate />} />}
-          path="/beneficiarios/criar"
+          path="/alunos/criar"
         />
         <Route
           element={<PrivateRoute Component={<BeneficiariesEdit />} />}
-          path="/beneficiarios/:id"
+          path="/alunos/:id"
         />
         <Route
           element={<PrivateRoute Component={<ListUsers />} />}

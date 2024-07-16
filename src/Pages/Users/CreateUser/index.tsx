@@ -40,13 +40,13 @@ export const CreateUserPage = ({ isStudent }: { isStudent: boolean }) => {
   });
 
   return (
-    <ContentPage title="Criar usuários" description="Criar usuário.">
+    <ContentPage title="Criar professor" description="Crie o professor.">
       <Padding />
       <Formik
         initialValues={{
           name: "",
           user_name: "",
-          user_type_id: isStudent ? ROLE.Student : undefined,
+          user_type_id: isStudent ? ROLE.Student : ROLE.Teacher,
           password: "",
           school_id: undefined,
           confirmPassword: "",

@@ -11,6 +11,7 @@ import BeneficiariesListProvider, {
 import { BeneficiariesListType } from "../../../Context/Beneficiaries/BeneficiariesList/type";
 import color from "../../../Styles/colors";
 import { Padding } from "../../../Styles/styles";
+import { formatarData } from "../../../Controller/controllerGlobal";
 
 const BeneficiariesList = () => {
   return (
@@ -70,6 +71,15 @@ const BeneficiariesListPage = () => {
   //   );
   // };
 
+  const BodyCreated = (value: any) => {
+    return(
+      <p>
+        {formatarData(value.created_at)}
+      </p>
+    )
+
+  }
+
   return (
     <>
       <ContentPage title="Alunos" description="Visualização dos alunos da escolas.">
@@ -83,12 +93,12 @@ const BeneficiariesListPage = () => {
           paginator
           rows={10}
         >
-          <Column field="student_name" header="Nome"></Column>
+          <Column field="id" header=""></Column>
           <Column
-            field="school_name"
-            header="Escola"
+            field="name"
+            header="Nome"
           ></Column>
-          <Column field="classroom_name" header="Turma"></Column>
+          <Column body={BodyCreated} header="Data de criação"></Column>
           {/* <Column header="Ações" body={ActionBeneficiariesBody}></Column> */}
         </DataTable>
       </ContentPage>

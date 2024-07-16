@@ -12,14 +12,19 @@ export const ControllerUser = () => {
     (data: CreateUser) => requestCreateUsers(data),
     {
       onError: (error) => { },
-      onSuccess: (data) => {
+      onSuccess: (data, variables) => {
         Swal.fire({
           icon: "success",
           title: "Registro feito com sucesso!",
           confirmButtonColor: styles.colors.colorsBaseProductNormal,
         }).then((result) => {
           if (result.isConfirmed) {
-            history("/users");
+            if (variables.user_type_id === 5) {
+              history("/alunos");
+            } else {
+              history("/users");
+
+            }
           }
         });
       },
@@ -27,7 +32,7 @@ export const ControllerUser = () => {
   );
 
   const requestUpdateUserMutation = useMutation(
-    ({data, id}: {data: CreateUser, id: number}) => requestUpdateUsers(id, data),
+    ({ data, id }: { data: CreateUser, id: number }) => requestUpdateUsers(id, data),
     {
       onError: (error) => { },
       onSuccess: (data) => {

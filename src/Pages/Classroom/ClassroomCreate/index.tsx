@@ -6,7 +6,7 @@ import DropdownComponent from "../../../Components/Dropdown";
 import Loading from "../../../Components/Loading";
 import TextInput from "../../../Components/TextInput";
 import ClassroomProvider, {
-    ClassroomContext,
+  ClassroomContext,
 } from "../../../Context/Classroom/context";
 import { ClassroomTypes } from "../../../Context/Classroom/type";
 import { useFetchRequestAllYear } from "../../../Services/Classroom/query";
@@ -45,18 +45,18 @@ const FormClassroomPage = () => {
   const initialValues = {
     name: "",
     year_id: undefined,
-    teacher_id: GetIdUser().teacher ? GetIdUser().id : undefined
+    teacher_id: GetIdUser().teacher ? GetIdUser().teacher.id : undefined
   };
 
-  const {data: yearRequest} = useFetchRequestAllYear()
+  const { data: yearRequest } = useFetchRequestAllYear()
 
   const { data: userRequest } = useFetchRequestUsers(undefined);
 
 
 
-const year: YearType | undefined = yearRequest
+  const year: YearType | undefined = yearRequest
 
-const teacher: TeacherType | undefined = userRequest
+  const teacher: TeacherType | undefined = userRequest
 
   const props = useContext(ClassroomContext) as ClassroomTypes;
 
@@ -75,8 +75,6 @@ const teacher: TeacherType | undefined = userRequest
         }}
       >
         {({ values, errors, handleChange, touched }) => {
-
-            console.log(values)
           return (
             <Form>
               <div className="grid">
@@ -97,8 +95,8 @@ const teacher: TeacherType | undefined = userRequest
                   ) : null}
                 </div>
                 <div className="col-12 md:col-6">
-                <label>Ano *</label>
-                <Padding />
+                  <label>Ano *</label>
+                  <Padding />
                   <DropdownComponent
                     name="year_id"
                     placerholder="Escolha o ano *"
@@ -107,13 +105,13 @@ const teacher: TeacherType | undefined = userRequest
                     value={values.year_id}
                     onChange={handleChange}
                     options={
-                        year
+                      year
                     }
                   />
                 </div>
                 <div className="col-12 md:col-6">
-                <label>Professor *</label>
-                <Padding />
+                  <label>Professor *</label>
+                  <Padding />
                   <DropdownComponent
                     name="teacher_id"
                     placerholder="Escolha o professor da turma *"
@@ -123,7 +121,7 @@ const teacher: TeacherType | undefined = userRequest
                     disabled={GetIdUser().teacher}
                     onChange={handleChange}
                     options={
-                        teacher
+                      teacher
                     }
                   />
                 </div>

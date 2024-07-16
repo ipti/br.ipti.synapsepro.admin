@@ -31,8 +31,13 @@ export interface Classroom {
 export interface CreateClassroom {
   name: string;
   school_id?: number,
-    teacher_id?: number,
-    year_id?: number
+  teacher_id?: number,
+  year_id?: number
+}
+
+export interface AddClassroom {
+  classroom_id: number,
+  student_id: number
 }
 
 export interface ChangeClassroom {

@@ -111,7 +111,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
               menuItem("5");
             }}
             active={active === 5 ? true : false}
-            path={"/beneficiarios"}
+            path={"/alunos"}
             icon={active === 5 ? beneficiaries_hover : beneficiaries}
           />
           <Padding />
@@ -128,7 +128,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
 
           {1 === ROLE.ADMIN || 2 === ROLE.Coordenador ? (
             <Item
-              text={"Usuarios"}
+              text={"Professores"}
               funcActiv={() => {
                 setActive(6);
                 menuItem("6");

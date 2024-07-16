@@ -1,8 +1,10 @@
+import { AddClassroom } from "../type";
 
 export interface RegistrationClassroomTypes {
   registrations?: RegistrationsList | undefined;
   DeleteRegistration: (id: number) => void
   isLoading: boolean
+  AddStudentClassroom: (data: AddClassroom) => void
 }
 
 export type RegistrationsList = Root;

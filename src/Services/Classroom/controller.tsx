@@ -3,12 +3,13 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import styles from "../../Styles";
 import {
+  requestAddClassroom,
   requestChangeClassroom,
   requestCreateClassroom,
   requestDeleteClassroom,
   requestUpdateClassroom,
 } from "./request";
-import { ChangeClassroom, CreateClassroom } from "../../Context/Classroom/type";
+import { AddClassroom, ChangeClassroom, CreateClassroom } from "../../Context/Classroom/type";
 import queryClient from "../reactquery";
 
 export const ControllerClassroom = () => {
@@ -27,6 +28,26 @@ export const ControllerClassroom = () => {
         }).then((result) => {
           if (result.isConfirmed) {
             history("/turma");
+          }
+        });
+      },
+    }
+  );
+
+  const requestAddClassroomMutation = useMutation(
+    (data: AddClassroom) => requestAddClassroom(data),
+    {
+      onError: (error: any) => {
+        alert(error?.response.data.message);
+      },
+      onSuccess: (data) => {
+        Swal.fire({
+          icon: "success",
+          title: "Aluno adicionado com sucesso!",
+          confirmButtonColor: styles.colors.colorsBaseProductNormal,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            queryClient.refetchQueries("")
           }
         });
       },
@@ -98,5 +119,6 @@ export const ControllerClassroom = () => {
     requestChangeClassroomMutation,
     requestUpdateClassroomMutation,
     requestDeleteClassroomMutation,
+    requestAddClassroomMutation
   };
 };

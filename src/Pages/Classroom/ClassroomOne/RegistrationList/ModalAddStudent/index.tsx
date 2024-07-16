@@ -5,10 +5,12 @@ import { useParams } from "react-router-dom";
 import DropdownComponent from "../../../../../Components/Dropdown";
 import { Column, Padding, Row } from "../../../../../Styles/styles";
 import { RadioButton } from "primereact/radiobutton";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import UsersProvider from "../../../../../Context/Users/context";
 import { CreateUserPage } from "../../../../Users/CreateUser";
 import { useFetchRequestAllRegistration } from "../../../../../Services/Beneficiaries/query";
+import { RegistrationClassroomContext } from "../../../../../Context/Classroom/RegistrationsList/context";
+import { RegistrationClassroomTypes } from "../../../../../Context/Classroom/RegistrationsList/type";
 
 const ModalAddStudent = ({
   onHide,
@@ -18,6 +20,11 @@ const ModalAddStudent = ({
   visible?: boolean | undefined;
 }) => {
   const { id } = useParams();
+
+  const props = useContext(
+    RegistrationClassroomContext
+  ) as RegistrationClassroomTypes;
+
 
   const [isNew, setIsNew] = useState(false);
 
@@ -29,7 +36,6 @@ const ModalAddStudent = ({
     student_id: ""
   }
 
-  console.log(registrationsRequests)
 
   return (
     <Dialog
@@ -69,6 +75,7 @@ const ModalAddStudent = ({
         <Formik
           initialValues={initialValues}
           onSubmit={(values) => {
+            props.AddStudentClassroom({ student_id: parseInt(values.student_id), classroom_id: parseInt(id!) })
             onHide();
           }}
         >
@@ -82,8 +89,8 @@ const ModalAddStudent = ({
                     value={values.student_id}
                     placerholder="Selecione o aluno"
                     name="student_id"
-                    optionsValue="student_id"
-                    optionsLabel="student_name"
+                    optionsValue="id"
+                    optionsLabel="name"
                     onChange={handleChange}
                     options={registrationsRequests}
                   />
