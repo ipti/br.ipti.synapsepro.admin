@@ -31,7 +31,7 @@ const RoutesApp = () => {
         />
         <Route
           element={<PrivateRoute Component={<FormClassroom />} />}
-          path="/turma/criar/:id"
+          path="/turma/criar"
         />
         <Route
           element={<PrivateRoute Component={<ClassroomOne />} />}

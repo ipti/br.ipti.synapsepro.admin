@@ -8,6 +8,7 @@ import { RadioButton } from "primereact/radiobutton";
 import { useState } from "react";
 import UsersProvider from "../../../../../Context/Users/context";
 import { CreateUserPage } from "../../../../Users/CreateUser";
+import { useFetchRequestAllRegistration } from "../../../../../Services/Beneficiaries/query";
 
 const ModalAddStudent = ({
   onHide,
@@ -19,6 +20,16 @@ const ModalAddStudent = ({
   const { id } = useParams();
 
   const [isNew, setIsNew] = useState(false);
+
+
+  const { data: registrationsRequests } = useFetchRequestAllRegistration();
+
+  const initialValues = {
+    classroom_id: id,
+    student_id: ""
+  }
+
+  console.log(registrationsRequests)
 
   return (
     <Dialog
@@ -56,7 +67,7 @@ const ModalAddStudent = ({
         </UsersProvider>
       ) : (
         <Formik
-          initialValues={{ classroom: "", registration: id, project: "" }}
+          initialValues={initialValues}
           onSubmit={(values) => {
             onHide();
           }}
@@ -68,23 +79,24 @@ const ModalAddStudent = ({
                   <label>Alunos</label>
                   <Padding />
                   <DropdownComponent
-                    value={values.classroom}
+                    value={values.student_id}
                     placerholder="Selecione o aluno"
-                    name="classroom"
-                    optionsValue="id"
+                    name="student_id"
+                    optionsValue="student_id"
+                    optionsLabel="student_name"
                     onChange={handleChange}
-                    options={[]}
+                    options={registrationsRequests}
                   />
-                  {errors.classroom && touched.classroom ? (
+                  {errors.student_id && touched.student_id ? (
                     <div style={{ color: "red", marginTop: "8px" }}>
-                      {errors.classroom}
+                      {errors.student_id}
                     </div>
                   ) : null}
                 </div>
                 <Padding padding="16px" />
                 <Column style={{ width: "100%" }}>
                   <Row id="end">
-                    <Button label="Adicionar" />
+                    <Button label="Adicionar" type="submit" />
                   </Row>
                 </Column>
               </Form>

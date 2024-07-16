@@ -30,6 +30,9 @@ export interface Classroom {
 
 export interface CreateClassroom {
   name: string;
+  school_id?: number,
+    teacher_id?: number,
+    year_id?: number
 }
 
 export interface ChangeClassroom {
@@ -43,11 +46,5 @@ export interface Event {
   id: number;
   start_date: string;
   end_date: string;
-  year: number;
-}
-
-export interface CreateClassroom {
-  name: string;
-  project: number;
   year: number;
 }

@@ -44,7 +44,7 @@ const ListClassroomPage = () => {
               <Button
                 label="Criar turma"
                 icon={"pi pi-plus"}
-                onClick={() => history("/turma/criar/" + props.project)}
+                onClick={() => history("/turma/criar")}
               />
             </Column>
           )}

@@ -5,7 +5,7 @@ export const requestAllRegistration = () => {
  
 
   let path =
-    "/user/teacher-classrooms/" + GetIdTs();
+    "/school/students/" + GetIdTs();
   return http
     .get(path)
     .then((response) => response.data)
