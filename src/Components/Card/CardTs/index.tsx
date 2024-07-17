@@ -6,6 +6,7 @@ import { Column, Padding, Row } from "../../../Styles/styles";
 import IconClassroom from "./../../../Assets/images/ts_card.svg";
 import { Container } from "./style";
 import { useNavigate } from "react-router-dom";
+import { idTs } from "../../../Services/localstorage";
 
 
 
@@ -26,7 +27,7 @@ const CardTs = ({
   const history = useNavigate()
   return (
     <>
-      <Container className="card" onClick={() => { history("/turma") }}>
+      <Container className="card" onClick={() => { idTs(id.toString()); history("/turma"); }}>
         <Row id="space-between">
           <Row >
             <div className={`boxQuantity`}>
