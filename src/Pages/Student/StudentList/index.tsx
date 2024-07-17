@@ -89,7 +89,6 @@ const BeneficiariesListPage = () => {
           value={props.registrations}
           tableStyle={{ minWidth: "50rem" }}
           header={renderHeader}
-          showGridlines
           paginator
           rows={10}
         >

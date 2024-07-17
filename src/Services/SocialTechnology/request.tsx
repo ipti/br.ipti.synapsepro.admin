@@ -1,8 +1,7 @@
 import http from "../axios";
-import { GetIdUser } from "../localstorage";
+import { GetIdUser, logout } from "../localstorage";
 
 export const requestSocialTechnologytList = async () => {
-  console.log(GetIdUser())
   if (false) {
     return await http
       .get("/user/teacher-school/" + GetIdUser().id)
@@ -22,10 +21,11 @@ export const requestSocialTechnologytList = async () => {
       .get("/school")
       .then((response) => response.data)
       .catch((err) => {
-        // if(err.response.status === 401){
-        //   logout()
-        //   window.location.reload()
-        // }
+
+        if(err.response.status === 401){
+          logout()
+          window.location.reload()
+        }
 
         throw err;
       });
@@ -55,10 +55,10 @@ export const requestCreateSocialTechnology = async (body: {name: string, uf: str
       .post("/school", body)
       .then((response) => response.data)
       .catch((err) => {
-        // if(err.response.status === 401){
-        //   logout()
-        //   window.location.reload()
-        // }
+        if(err.response.status === 401){
+          logout()
+          window.location.reload()
+        }
 
         throw err;
       });

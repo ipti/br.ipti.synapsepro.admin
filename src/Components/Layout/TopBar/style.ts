@@ -11,7 +11,7 @@ export const Container = styled.div`
    padding: 10px;
 
    .iconResponsive {
-      @media screen and (min-width: 750px) {
+      @media screen and (min-width: 1080px) {
         display: none ;
     }
    }

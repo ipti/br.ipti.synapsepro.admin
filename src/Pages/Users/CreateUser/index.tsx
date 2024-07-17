@@ -40,7 +40,7 @@ export const CreateUserPage = ({ isStudent }: { isStudent: boolean }) => {
   });
 
   return (
-    <ContentPage title="Criar professor" description="Crie o professor.">
+    <ContentPage title={isStudent ? "Criar Aluno" : "Criar Professor"} description={isStudent ? "Crie o Aluno." : "Crie o Professor."}>
       <Padding />
       <Formik
         initialValues={{
@@ -59,7 +59,6 @@ export const CreateUserPage = ({ isStudent }: { isStudent: boolean }) => {
         validationSchema={CreateUserSchema}
       >
         {({ values, handleChange, errors, touched }) => {
-          console.log(errors);
           return (
             <Form>
               <InputsUser

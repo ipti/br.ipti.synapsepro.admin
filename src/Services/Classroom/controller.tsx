@@ -47,7 +47,7 @@ export const ControllerClassroom = () => {
           confirmButtonColor: styles.colors.colorsBaseProductNormal,
         }).then((result) => {
           if (result.isConfirmed) {
-            queryClient.refetchQueries("")
+            queryClient.refetchQueries("useRequestsClassroomRegistration")
           }
         });
       },

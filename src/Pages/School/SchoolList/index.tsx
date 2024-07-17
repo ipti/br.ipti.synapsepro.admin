@@ -35,7 +35,7 @@ const TecnologySocial = () => {
       <div className="grid">
         {propsAplication.project?.map((item, index) => {
           return (
-            <div className="col-12 md:col-6 lg:col-4">
+            <div key={index} className="col-12 md:col-6 lg:col-4">
               <CardTs title={item.name} id={item.id} />
             </div>
           );
