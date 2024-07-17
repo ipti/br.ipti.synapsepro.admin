@@ -5,6 +5,7 @@ import { ClassroomTypes } from "../../../Context/Classroom/type";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import IconClassroom from "./../../../Assets/images/ts_card.svg";
 import { Container } from "./style";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -21,9 +22,11 @@ const CardTs = ({
 
   const props = useContext(ClassroomContext) as ClassroomTypes;
 
+
+  const history = useNavigate()
   return (
     <>
-      <Container className="card" onClick={() => { }}>
+      <Container className="card" onClick={() => { history("/turma") }}>
         <Row id="space-between">
           <Row >
             <div className={`boxQuantity`}>

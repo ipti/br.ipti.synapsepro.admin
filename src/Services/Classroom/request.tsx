@@ -1,6 +1,6 @@
 import { AddClassroom, ChangeClassroom, CreateClassroom } from "../../Context/Classroom/type";
 import http from "../axios";
-import { GetIdTs, GetIdUser, logout } from "../localstorage";
+import { GetIdTs, logout } from "../localstorage";
 
 export const requestCreateClassroom = (data: CreateClassroom) => {
   return http
@@ -32,7 +32,7 @@ export const requestAddClassroom = (data: AddClassroom) => {
 
 
 export const requestClassroom = (idProject: number) => {
-  if (GetIdUser().teacher.id) {
+  if (GetIdTs()) {
     let path = "/classroom/by-school-id/" + GetIdTs();
     return http
       .get(path)

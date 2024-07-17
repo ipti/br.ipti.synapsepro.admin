@@ -26,6 +26,8 @@ const RegistrationListPage = () => {
   const props = useContext(
     RegistrationClassroomContext
   ) as RegistrationClassroomTypes;
+
+  
   const [visible, setVisible] = useState<any>()
   const { id } = useParams();
   const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!));
