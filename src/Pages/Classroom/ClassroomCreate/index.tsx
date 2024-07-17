@@ -45,7 +45,7 @@ const FormClassroomPage = () => {
   const initialValues = {
     name: "",
     year_id: undefined,
-    teacher_id: GetIdUser().teacher ? GetIdUser().teacher.id : undefined
+    teacher_id: GetIdUser()?.teacher?.id ? GetIdUser()?.teacher?.id : undefined
   };
 
   const { data: yearRequest } = useFetchRequestAllYear()
@@ -109,7 +109,7 @@ const FormClassroomPage = () => {
                     }
                   />
                 </div>
-                <div className="col-12 md:col-6">
+               {!GetIdUser()?.teacher?.id && <div className="col-12 md:col-6">
                   <label>Professor *</label>
                   <Padding />
                   <DropdownComponent
@@ -124,7 +124,7 @@ const FormClassroomPage = () => {
                       teacher
                     }
                   />
-                </div>
+                </div>}
               </div>
               <Padding padding="16px" />
               <Row id="end">
