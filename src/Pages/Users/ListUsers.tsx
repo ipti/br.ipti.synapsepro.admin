@@ -10,6 +10,8 @@ import Loading from "../../Components/Loading";
 import UsersProvider, { UsersContext } from "../../Context/Users/context";
 import { UsersTypes } from "../../Context/Users/type";
 import { Padding } from "../../Styles/styles";
+import { AplicationContext } from "../../Context/Aplication/context";
+import { PropsAplicationContext } from "../../Types/types";
 
 const ListUsers = () => {
   return (
@@ -22,6 +24,8 @@ const ListUsers = () => {
 const ListUsersPage = () => {
   const props = useContext(UsersContext) as UsersTypes;
   const history = useNavigate();
+
+  const propsAplication = useContext(AplicationContext) as PropsAplicationContext;
 
 
   const [visible, setVisible] = useState<any>(false);
@@ -81,7 +85,7 @@ const ListUsersPage = () => {
     <>
       <ContentPage title="Professores" description="Lista Professores cadastrados.">
         <Padding padding="16px" />
-        <DataTable value={props.users} header={renderHeader} paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: "50rem" }}>
+        <DataTable value={props.users} header={!propsAplication.user?.teacher?.id ? renderHeader : null} paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: "50rem" }}>
         <Column field="id" header=""></Column>
           <Column field="name" header="Nome"></Column>
         </DataTable>

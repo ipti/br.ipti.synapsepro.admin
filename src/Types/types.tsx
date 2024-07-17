@@ -116,7 +116,7 @@ export interface PropsAplicationContext {
     form: PropsForm,
     setform: any,
     project: Array<Projects> | undefined;
-    user: User | undefined
+    user: any | undefined
 }
 
 export interface FormsJson {
