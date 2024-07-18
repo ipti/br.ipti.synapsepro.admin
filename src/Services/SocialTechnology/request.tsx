@@ -2,36 +2,34 @@ import http from "../axios";
 import { GetIdUser, logout } from "../localstorage";
 
 export const requestSocialTechnologytList = async () => {
-  if (false) {
-    return await http
-      .get("/user/teacher-school/" + GetIdUser().id)
-      .then((response) => response.data)
-      .catch((err) => {
-        // if(err.response.status === 401){
-        //   logout()
-        //   window.location.reload()
-        // }
-
-        throw err;
-      });
-  }
-
   if (GetIdUser()) {
+    if (GetIdUser()?.teacher?.id) {
+      return await http
+        .get("/user/school-by-teacher/" + GetIdUser().teacher.id)
+        .then((response) => response.data)
+        .catch((err) => {
+          // if(err.response.status === 401){
+          //   logout()
+          //   window.location.reload()
+          // }
+
+          throw err;
+        });
+    }
+
     return await http
       .get("/school")
       .then((response) => response.data)
       .catch((err) => {
-
-        if(err.response.status === 401){
-          logout()
-          window.location.reload()
+        if (err.response.status === 401) {
+          logout();
+          window.location.reload();
         }
 
         throw err;
       });
   }
 };
-
 
 export const requestSocialTechnologyOne = async () => {
   if (GetIdUser()) {
@@ -49,17 +47,19 @@ export const requestSocialTechnologyOne = async () => {
   }
 };
 
+export const requestCreateSocialTechnology = async (body: {
+  name: string;
+  uf: string;
+}) => {
+  return await http
+    .post("/school", body)
+    .then((response) => response.data)
+    .catch((err) => {
+      if (err.response.status === 401) {
+        logout();
+        window.location.reload();
+      }
 
-export const requestCreateSocialTechnology = async (body: {name: string, uf: string}) => {
-    return await http
-      .post("/school", body)
-      .then((response) => response.data)
-      .catch((err) => {
-        if(err.response.status === 401){
-          logout()
-          window.location.reload()
-        }
-
-        throw err;
-      });
+      throw err;
+    });
 };

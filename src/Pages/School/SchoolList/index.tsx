@@ -6,7 +6,6 @@ import ContentPage from "../../../Components/ContentPage";
 import Empty from "../../../Components/Empty";
 import Loading from "../../../Components/Loading";
 import { AplicationContext } from "../../../Context/Aplication/context";
-import { ROLE } from "../../../Controller/controllerGlobal";
 import { Padding, Row } from "../../../Styles/styles";
 import { PropsAplicationContext } from "../../../Types/types";
 
@@ -21,7 +20,7 @@ const TecnologySocial = () => {
     <ContentPage title="Escolas" description="Visualização das escolas.">
       <Padding padding="16px" />
 
-      {1 === ROLE.ADMIN && (
+      {!propsAplication?.user?.teacher?.id && (
         <Row id="end" style={{ width: "100%" }}>
           <Button
             label="Criar Escola"
