@@ -10,8 +10,9 @@ import BeneficiariesListProvider, {
 } from "../../../Context/Beneficiaries/BeneficiariesList/context";
 import { BeneficiariesListType } from "../../../Context/Beneficiaries/BeneficiariesList/type";
 import color from "../../../Styles/colors";
-import { Padding } from "../../../Styles/styles";
+import { Padding, Row } from "../../../Styles/styles";
 import { formatarData } from "../../../Controller/controllerGlobal";
+import http from "../../../Services/axios";
 
 const BeneficiariesList = () => {
   return (
@@ -49,30 +50,41 @@ const BeneficiariesListPage = () => {
     );
   };
 
-  // const ActionBeneficiariesBody = (rowData: any) => {
-  //   return (
-  //     <Row id="center" style={{ gap: "8px" }}>
-  //       <Button
-  //         rounded
-  //         icon={"pi pi-pencil"}
-  //         onClick={() => {
-  //           history(`${rowData.id}`);
-  //         }}
-  //       />
-  //       <Button
-  //         severity="danger"
-  //         rounded
-  //         icon={"pi pi-trash"}
-  //         onClick={() => {
-  //           setVisible(rowData);
-  //         }}
-  //       />
-  //     </Row>
-  //   );
-  // };
+  const downloadCSV = async (row: any) => {
+
+    try {
+      const response = await http.get('/performance/report-one-line-student/' + row.id)
+
+      // Criar um link para download
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'synapse-' + row.name + '.csv'); // Nome do arquivo
+      document.body.appendChild(link);
+      link.click();
+
+      // Remover o link
+    } catch (error) {
+      console.error('Erro ao baixar o arquivo:', error);
+    }
+  };
+
+  const ActionBeneficiariesBody = (rowData: any) => {
+    return (
+      <Row id="center" style={{ gap: "8px" }}>
+        <Button
+          rounded
+          icon={"pi pi-download"}
+          onClick={() => {
+            downloadCSV(rowData);
+          }}
+        />
+      </Row>
+    );
+  };
 
   const BodyCreated = (value: any) => {
-    return(
+    return (
       <p>
         {formatarData(value.created_at)}
       </p>
@@ -98,7 +110,7 @@ const BeneficiariesListPage = () => {
             header="Nome"
           ></Column>
           <Column body={BodyCreated} header="Data de criação"></Column>
-          {/* <Column header="Ações" body={ActionBeneficiariesBody}></Column> */}
+          <Column header="Ações" body={ActionBeneficiariesBody}></Column>
         </DataTable>
       </ContentPage>
       <ConfirmDialog
