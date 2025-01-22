@@ -52,7 +52,7 @@ const RoutesApp = () => {
         />
         <Route
           element={<PrivateRoute Component={<ClassesList />} />}
-          path="/turma/:id/aulas"
+          path="/aulas"
         />
         <Route
           element={<PrivateRoute Component={<Registration />} />}

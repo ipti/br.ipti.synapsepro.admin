@@ -59,6 +59,15 @@ const ListClassroomPage = () => {
             <DropdownComponent placerholder="Escolha o projeto" options={[{name: "Todas",},...propsAplication.project!]} optionsLabel="name" optionsValue="id" value={props.project} onChange={(e) => { console.log(e.value); props.setProject(e.value); idProject(e.value) }} />
           </div>
         </Column> */}
+         {(
+            <Column id="end">
+              <Button
+                label="Gerar Relatório de lições"
+                icon={"pi pi-file-export"}
+                onClick={() => history("/aulas")}
+              />
+            </Column>
+          )}
         {(1 === ROLE.ADMIN ||
           1 === ROLE.Coordenador) && (
             <Column id="end">

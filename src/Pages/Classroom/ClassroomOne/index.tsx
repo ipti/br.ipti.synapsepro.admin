@@ -3,7 +3,6 @@ import { Button } from "primereact/button";
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import pessoas from "../../../Assets/images/pessoasgray.svg";
-import meeting from "../../../Assets/images/question_mark.svg";
 
 import TextInput from "../../../Components/TextInput";
 
@@ -102,7 +101,7 @@ const ClassroomOnePage = () => {
             count={classroom?.students?.length}
           />
         </div>
-        <div
+        {/* <div
           className="col-12 md:col-6"
           onClick={() => history(`/turma/${id}/aulas`)}
         >
@@ -111,7 +110,7 @@ const ClassroomOnePage = () => {
             description="Acesse para visualizar suas aulas"
             icon={meeting}
           />
-        </div>
+        </div> */}
         {/* <div
           className="col-12 md:col-6"
           onClick={() => history(`/turma/${id}/encontros`)}
