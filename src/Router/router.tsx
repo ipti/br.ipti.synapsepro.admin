@@ -16,6 +16,7 @@ import BeneficiariesList from "../Pages/Student/StudentList";
 import CreateUser from "../Pages/Users/CreateUser";
 import ListUsers from "../Pages/Users/ListUsers";
 import PrivateRoute from "./privaterouter";
+import ClassesList from "../Pages/Classroom/ClassroomOne/ClassesList";
 
 const RoutesApp = () => {
   return (
@@ -48,6 +49,10 @@ const RoutesApp = () => {
         <Route
           element={<PrivateRoute Component={<RegistrationList />} />}
           path="/turma/:id/alunos"
+        />
+        <Route
+          element={<PrivateRoute Component={<ClassesList />} />}
+          path="/turma/:id/aulas"
         />
         <Route
           element={<PrivateRoute Component={<Registration />} />}

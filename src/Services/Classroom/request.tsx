@@ -162,6 +162,20 @@ export const requestClassroomRegistrationOne = (id: number) => {
     });
 };
 
+export const requestClassroomClasses = (id: number) => {
+  let path = "/block/by_teacher_id_in_current_year/" + id;
+  return http
+    .get(path)
+    .then((response) => response.data)
+    .catch((err) => {
+      if (err.response.status === 401) {
+        logout();
+        window.location.reload();
+      }
+      throw err;
+    });
+};
+
 export const requestDeleteClassroom = (id: number) => {
   let path = "/classroom/" + id;
   return http

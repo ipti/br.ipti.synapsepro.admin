@@ -3,6 +3,7 @@ import { Button } from "primereact/button";
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import pessoas from "../../../Assets/images/pessoasgray.svg";
+import meeting from "../../../Assets/images/question_mark.svg";
 
 import TextInput from "../../../Components/TextInput";
 
@@ -99,6 +100,16 @@ const ClassroomOnePage = () => {
             description="Acesse para gerenciar seus alunos"
             icon={pessoas}
             count={classroom?.students?.length}
+          />
+        </div>
+        <div
+          className="col-12 md:col-6"
+          onClick={() => history(`/turma/${id}/aulas`)}
+        >
+          <CardItensClassrooom
+            title="Lições"
+            description="Acesse para visualizar suas aulas"
+            icon={meeting}
           />
         </div>
         {/* <div
