@@ -23,7 +23,7 @@ export const requestCreateClassroom = (data: CreateClassroom) => {
 
 export const requestChangeTeachInClassroom = (data: ChangeTeachInClassroom) => {
   return http
-    .patch('/classroom/teacher', data)
+    .put('/classroom/teacher', data)
     .then(response => response.data)
     .catch(err => {
       if (err.response.status === 401) {
