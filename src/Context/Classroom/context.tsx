@@ -1,8 +1,8 @@
-import { createContext } from "react";
-import { ClassroomState } from "./state";
-import { ClassroomTypes } from "./type";
+import { createContext } from 'react'
+import { ClassroomState } from './state'
+import { ClassroomTypes } from './type'
 
-export const ClassroomContext = createContext<ClassroomTypes | null>(null);
+export const ClassroomContext = createContext<ClassroomTypes | null>(null)
 
 const ClassroomProvider = ({ children }: { children: React.ReactNode }) => {
   const {
@@ -15,7 +15,8 @@ const ClassroomProvider = ({ children }: { children: React.ReactNode }) => {
     project,
     setProject,
     ChangeClassroom,
-  } = ClassroomState();
+    ChangeTeachInClassroom
+  } = ClassroomState()
 
   return (
     <ClassroomContext.Provider
@@ -29,11 +30,12 @@ const ClassroomProvider = ({ children }: { children: React.ReactNode }) => {
         project,
         setProject,
         ChangeClassroom,
+        ChangeTeachInClassroom
       }}
     >
       {children}
     </ClassroomContext.Provider>
-  );
-};
+  )
+}
 
-export default ClassroomProvider;
+export default ClassroomProvider

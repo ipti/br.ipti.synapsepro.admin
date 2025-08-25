@@ -1,20 +1,21 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react'
 
 export interface ClassroomTypes {
-  CreateClassroom: (body: CreateClassroom) => void;
-  initialValue: any;
-  classrooms: Classroom[] | undefined;
+  CreateClassroom: (body: CreateClassroom) => void
+  initialValue: any
+  classrooms: Classroom[] | undefined
   UpdateClassroom: (
     body: {
-      name: string;
+      name: string
     },
     id: number
-  ) => void;
-  DeleteClassroom: (id: number) => void;
-  isLoading: boolean;
-  project: number | undefined;
-  setProject: Dispatch<SetStateAction<number | undefined>>;
+  ) => void
+  DeleteClassroom: (id: number) => void
+  isLoading: boolean
+  project: number | undefined
+  setProject: Dispatch<SetStateAction<number | undefined>>
   ChangeClassroom: (body: ChangeClassroom) => void
+  ChangeTeachInClassroom: (body: ChangeTeachInClassroom) => void
 }
 
 export interface Classroom {
@@ -27,29 +28,33 @@ export interface Classroom {
   updated_at: string
 }
 
-
 export interface CreateClassroom {
-  name: string;
-  school_id?: number,
-  teacher_id?: number,
+  name: string
+  school_id?: number
+  teacher_id?: number
   year_id?: number
 }
 
 export interface AddClassroom {
-  classroom_id: number,
+  classroom_id: number
   student_id: number
 }
 
 export interface ChangeClassroom {
-  idProject: string;
-  idClassroom: string;
+  idProject: string
+  idClassroom: string
 }
 
-export type Events = Event[];
+export type Events = Event[]
 
 export interface Event {
-  id: number;
-  start_date: string;
-  end_date: string;
-  year: number;
+  id: number
+  start_date: string
+  end_date: string
+  year: number
+}
+
+export interface ChangeTeachInClassroom {
+  teacher_id: number
+  classroom_id: number
 }

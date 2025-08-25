@@ -1,37 +1,60 @@
-import { Form, Formik } from "formik";
-import { Button } from "primereact/button";
-import { useContext, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import pessoas from "../../../Assets/images/pessoasgray.svg";
+import { Form, Formik } from 'formik'
+import { Button } from 'primereact/button'
+import { useContext, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import pessoas from '../../../Assets/images/pessoasgray.svg'
 
-import TextInput from "../../../Components/TextInput";
+import TextInput from '../../../Components/TextInput'
 
-import ContentPage from "../../../Components/ContentPage";
-import Loading from "../../../Components/Loading";
+import ContentPage from '../../../Components/ContentPage'
+import Loading from '../../../Components/Loading'
 import ClassroomProvider, {
-  ClassroomContext,
-} from "../../../Context/Classroom/context";
-import { ClassroomTypes } from "../../../Context/Classroom/type";
-import { useFetchRequestClassroomOne } from "../../../Services/Classroom/query";
-import { Column, Padding, Row } from "../../../Styles/styles";
-import CardItensClassrooom from "./CardItensClassroom";
+  ClassroomContext
+} from '../../../Context/Classroom/context'
+import { ClassroomTypes } from '../../../Context/Classroom/type'
+import { useFetchRequestClassroomOne } from '../../../Services/Classroom/query'
+import { Column, Padding, Row } from '../../../Styles/styles'
+import CardItensClassrooom from './CardItensClassroom'
+import DropdownComponent from '../../../Components/Dropdown'
+import { useFetchRequestUsers } from '../../../Services/Users/query'
 
 const ClassroomOne = () => {
   return (
     <ClassroomProvider>
       <ClassroomOnePage />
     </ClassroomProvider>
-  );
-};
-
+  )
+}
+type ITeacherData = {
+  id: number
+  user_id: number
+  name: string
+}
 const ClassroomOnePage = () => {
-  const history = useNavigate();
-  const { id } = useParams();
-  const props = useContext(ClassroomContext) as ClassroomTypes;
-  const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!));
-  const [edit, setEdit] = useState(false);
+  const history = useNavigate()
+  const { id } = useParams()
+  const props = useContext(ClassroomContext) as ClassroomTypes
+  const { data: classroom } = useFetchRequestClassroomOne(parseInt(id!))
+  const { data: teachers } = useFetchRequestUsers('')
+  const [edit, setEdit] = useState(false)
 
-  if (props.isLoading) return <Loading />;
+  const [teacher, setTeacher] = useState<ITeacherData>({} as ITeacherData)
+  const [changeTeacher, setChangeTeacher] = useState<boolean>(false)
+
+  const handleSelectTeacher = (e: any) => {
+    const selectedTeacherId = e.value
+    setTeacher(e.value)
+    const data = {
+      classroom_id: parseInt(id!),
+      teacher_id: selectedTeacherId
+    }
+    props.ChangeTeachInClassroom(data)
+    setTimeout(() => {
+      setChangeTeacher(false)
+    }, 1000)
+  }
+
+  if (props.isLoading) return <Loading />
 
   return (
     <ContentPage title={classroom?.name} description="Detalhes da sua turma.">
@@ -40,9 +63,9 @@ const ClassroomOnePage = () => {
           {classroom ? (
             <Formik
               initialValues={{ name: classroom?.name }}
-              onSubmit={(values) => {
-                props.UpdateClassroom(values, parseInt(id!));
-                setEdit(false);
+              onSubmit={values => {
+                props.UpdateClassroom(values, parseInt(id!))
+                setEdit(false)
               }}
             >
               {({ values, handleChange }) => {
@@ -55,7 +78,7 @@ const ClassroomOnePage = () => {
                         value={values.name}
                       />
                       <Padding />
-                      <Button label="Salvar" icon={"pi pi-save"} />
+                      <Button label="Salvar" icon={'pi pi-save'} />
                       <Padding />
                       <Button
                         label="Cancelar"
@@ -65,7 +88,7 @@ const ClassroomOnePage = () => {
                       />
                     </Row>
                   </Form>
-                );
+                )
               }}
             </Formik>
           ) : null}
@@ -73,18 +96,25 @@ const ClassroomOnePage = () => {
       ) : (
         <Column>
           <Row id="end">
-            {/* <Row>
-              <Padding />
-              {1 ===
-                (ROLE.ADMIN || ROLE.Coordenador) && (
-                <Button
-                  text
-                  label="Editar"
-                  icon="pi pi-pencil"
-                  onClick={() => setEdit(true)}
-                />
-              )}
-            </Row> */}
+            {changeTeacher ? (
+              <DropdownComponent
+                options={teachers}
+                optionsLabel={'name'}
+                optionsValue={'id'}
+                name={teacher.name}
+                onChange={handleSelectTeacher}
+                placerholder="Selecione um Professor"
+                value={teacher}
+              />
+            ) : (
+              <Button
+                onClick={() => {
+                  !changeTeacher && setChangeTeacher(prev => !prev)
+                }}
+              >
+                Atualizar professor resposavel
+              </Button>
+            )}
           </Row>
         </Column>
       )}
@@ -101,43 +131,9 @@ const ClassroomOnePage = () => {
             count={classroom?.students?.length}
           />
         </div>
-        {/* <div
-          className="col-12 md:col-6"
-          onClick={() => history(`/turma/${id}/aulas`)}
-        >
-          <CardItensClassrooom
-            title="Lições"
-            description="Acesse para visualizar suas aulas"
-            icon={meeting}
-          />
-        </div> */}
-        {/* <div
-          className="col-12 md:col-6"
-          onClick={() => history(`/turma/${id}/encontros`)}
-        >
-          <CardItensClassrooom
-            title="Encontros"
-            description="Acesse para Gerenciar seus encontros"
-            icon={meeting}
-            count={classroom?.meeting?.length}
-          />
-        </div> */}
       </div>
-      {/* <div className="grid">
-        <div
-          className="col-12 md:col-6"
-          onClick={() => history(`/turma/${id}/relatorio`)}
-        >
-          <CardItensClassrooom
-            title="Relatório"
-            description="Acesse o relatório da turma"
-            icon={report}
-            // count={classroom?.register_classroom?.length}
-          />
-        </div>
-      </div> */}
     </ContentPage>
-  );
-};
+  )
+}
 
-export default ClassroomOne;
+export default ClassroomOne
