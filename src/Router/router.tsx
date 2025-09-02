@@ -17,6 +17,7 @@ import CreateUser from "../Pages/Users/CreateUser";
 import ListUsers from "../Pages/Users/ListUsers";
 import PrivateRoute from "./privaterouter";
 import ClassesList from "../Pages/Classroom/ClassroomOne/ClassesList";
+import ClassesPerformance from "../Pages/Classroom/ClassroomOne/ClassesPerfomance";
 
 const RoutesApp = () => {
   return (
@@ -53,6 +54,10 @@ const RoutesApp = () => {
         <Route
           element={<PrivateRoute Component={<ClassesList />} />}
           path="/aulas"
+        />
+        <Route
+          element={<PrivateRoute Component={<ClassesPerformance />} />}
+          path="/aulas/performance"
         />
         <Route
           element={<PrivateRoute Component={<Registration />} />}
