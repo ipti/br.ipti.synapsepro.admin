@@ -198,3 +198,17 @@ export interface Projects {
     data: number[]
   }
   
+
+  export interface UserType {
+  id: number
+  name: string
+  user_name: string
+  user_type_id: number
+  teacher: Teacher
+}
+
+export interface Teacher {
+  id: number
+  user_id: number
+  school_id: number
+}

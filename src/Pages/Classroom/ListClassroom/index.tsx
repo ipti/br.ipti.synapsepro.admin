@@ -1,5 +1,5 @@
 import { Button } from "primereact/button";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CardClassroom from "../../../Components/Card/CardClassroom";
 import ContentPage from "../../../Components/ContentPage";
@@ -11,6 +11,8 @@ import ClassroomProvider, {
 import { ClassroomTypes } from "../../../Context/Classroom/type";
 import { ROLE } from "../../../Controller/controllerGlobal";
 import { Column, Padding, Row } from "../../../Styles/styles";
+import { UserType } from "../../../Types/types";
+import { GetIdUser } from "../../../Services/localstorage";
 
 const ListClassroom = () => {
   return (
@@ -23,7 +25,17 @@ const ListClassroom = () => {
 const ListClassroomPage = () => {
   const history = useNavigate();
 
+  const [user, setUser] = useState<UserType | undefined>()
+
   const props = useContext(ClassroomContext) as ClassroomTypes;
+
+   useEffect(() => {
+          
+          if (GetIdUser()) {
+              const storedObject = GetIdUser();
+              setUser(storedObject)
+          }
+      }, [])
 
   if (props.isLoading) return <Loading />;
 
@@ -38,7 +50,7 @@ const ListClassroomPage = () => {
             <DropdownComponent placerholder="Escolha o projeto" options={[{name: "Todas",},...propsAplication.project!]} optionsLabel="name" optionsValue="id" value={props.project} onChange={(e) => { console.log(e.value); props.setProject(e.value); idProject(e.value) }} />
           </div>
         </Column> */}
-         {(
+         {user?.teacher &&(
             <Column id="end">
               <Button
                 label="Gerar Relatório de lições"
@@ -47,8 +59,7 @@ const ListClassroomPage = () => {
               />
             </Column>
           )}
-        {(1 === ROLE.ADMIN ||
-          1 === ROLE.Coordenador) && (
+        {user?.teacher && (
             <Column id="end">
               <Button
                 label="Gerar Relatório"

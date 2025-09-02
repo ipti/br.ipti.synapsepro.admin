@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik'
 import { Button } from 'primereact/button'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import pessoas from '../../../Assets/images/pessoasgray.svg'
 
@@ -41,12 +41,19 @@ const ClassroomOnePage = () => {
   const [teacher, setTeacher] = useState<ITeacherData>({} as ITeacherData)
   const [changeTeacher, setChangeTeacher] = useState<boolean>(false)
 
+  useEffect(() => {
+    if(classroom){
+      setTeacher({id: classroom?.id_teacher, name: classroom?.user_name, user_id: classroom?.id})
+    }
+  }, [classroom])
+  
+
   const handleSelectTeacher = (e: any) => {
     const selectedTeacherId = e.value
     setTeacher(e.value)
     const data = {
       classroom_id: parseInt(id!),
-      teacher_id: selectedTeacherId
+      teacher_id: selectedTeacherId.id
     }
     props.ChangeTeachInClassroom(data)
     setTimeout(() => {
@@ -58,6 +65,7 @@ const ClassroomOnePage = () => {
 
   return (
     <ContentPage title={classroom?.name} description="Detalhes da sua turma.">
+     
       {edit ? (
         <>
           {classroom ? (
@@ -96,12 +104,10 @@ const ClassroomOnePage = () => {
       ) : (
         <Column>
           <Row id="end">
-            {changeTeacher ? (
+            {changeTeacher && classroom ? (
               <DropdownComponent
                 options={teachers}
                 optionsLabel={'name'}
-                optionsValue={'id'}
-                name={teacher.name}
                 onChange={handleSelectTeacher}
                 placerholder="Selecione um Professor"
                 value={teacher}
@@ -118,6 +124,10 @@ const ClassroomOnePage = () => {
           </Row>
         </Column>
       )}
+      {!changeTeacher &&<>
+      <Padding />
+       <p>Professor responsável: {teacher.name}</p>
+      </>}
       <Padding padding="16px" />
       <div className="grid">
         <div
